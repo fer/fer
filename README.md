@@ -2,6 +2,10 @@
 
 ### Hi there 👋
 
+<div class="alert alert-primary" role="alert">
+  This repo is heavily under progress!
+</div>
+
 <!--
 **fer/fer** is a ✨ _special_ ✨ repository because its `README.md` (this file) appears on your GitHub profile.
 
