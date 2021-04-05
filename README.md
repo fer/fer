@@ -1,10 +1,11 @@
-<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+## Hello World! 👋
 
-### Hi there 👋
-<div class="text-center">
-    <img src="https://avatars.githubusercontent.com/u/21882?v=4" class="avatar" width="100" />
-</div>
+I'm **fer**, another human being stuck to screens since 1988.
 
-<div class="alert alert-primary" role="alert">
-  This site is heavily under progress!
-</div>
+Here by I take some of [my notes](notes).
+
+## Want to talk?
+
+[<img alt="Protonmail" src="https://img.shields.io/badge/ProtonMail-8B89CC?style=for-the-badge&logo=protonmail&logoColor=white" />](mailto:seeyoudowntheroad@pm.me)
+[<img alt="Telegram" src="https://img.shields.io/badge/Telegram-2CA5E0?style=for-the-badge&logo=telegram&logoColor=white" />](https://t.me/my_name_is_fer) [<img alt="Discord" src="https://img.shields.io/badge/DISCORD%20-%237289DA.svg?&style=for-the-badge&logo=discord&logoColor=white"/>](https://discordapp.com/users/725078473059598458/)
+
