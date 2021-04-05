@@ -2,6 +2,12 @@
 
 I'm **fer**, another human being stuck to screens since 1988.
 
+I develop stuff sometimes and I normally this is the philosophy I follow:
+
+1. Plan ahead, but don't implement for the future,
+2. If it isn't broken, don't fix it.
+3. Dead/commented code is zombie code and will always infect your the system.
+
 Here by I take some of [my notes](notes).
 
 ## Want to talk?
