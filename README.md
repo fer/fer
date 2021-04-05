@@ -2,7 +2,7 @@
 
 I'm **fer**, another human being stuck to screens since 1988.
 
-I develop stuff sometimes and I normally this is the philosophy I follow:
+I develop stuff sometimes. This is the philosophy I usually follow:
 
 1. Plan ahead, but don't implement for the future,
 2. If it isn't broken, don't fix it.
