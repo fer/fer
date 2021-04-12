@@ -4,8 +4,9 @@ A note archive I can maintain.
 
 ## `nmap`
 
-[Perform Host Discovery with `nmap`](nmap/perform-host-discovery.md)
+- [Perform Host Discovery with `nmap`](nmap/perform-host-discovery.md)
 
 ## Linux
 
-[Bash keyboard shortcuts](linux/bash-keyboard-shortcuts.md)
+- [Bash Keyboard Shortcuts](linux/bash-keyboard-shortcuts.md)
+- [History Manipulation](linux/history-manipulation.md)

@@ -1,4 +1,4 @@
-# Bash keyboard shortcuts
+# Bash Keyboard Shortcuts
 
 | Category      | Command           | Description                                                                   | Example                |
 |:--------------|:------------------|:------------------------------------------------------------------------------|:-----------------------|
