@@ -3,6 +3,7 @@
 # My CTF aliases
 
 # Get network interface currently in use
+
 getCurrentNetworkInterface() {
    ip addr | awk '/state UP/ {print $2}' | sed 's/.$//'
 }

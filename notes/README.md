@@ -4,7 +4,7 @@ A note archive I can maintain.
 
 ## Tools
 
-- [cURL](tools/curl.md)
+- [`cURL`](tools/curl.md)
 - [`git`](tools/git.md)
 - [`nmap`](tools/nmap.md)
 
