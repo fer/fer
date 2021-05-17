@@ -1,6 +1,0 @@
-# CTF aliases
-
-# Obtain tun0 ip address
-iptun0() {
-   ifconfig tun0 | grep 'inet ' | awk {'print $2'}
-}
