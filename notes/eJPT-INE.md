@@ -390,7 +390,7 @@ To forward a packet...
 
 ##### Ports
 
-> <IP>:<Port>: identify a single network process on a machine
+> `<IP>`:`<Port>`: identify a single network process on a machine
 
 - Well-known: 0-1023
 
@@ -554,10 +554,123 @@ Fundamental aspects:
 
 #### (2/11) HTTP Protocol Basics - Study Guide
 
+HTTP works on top of TCP protocol, so when the connection is established, the client sends a request and waits for the answer. The server processes the request and sends back its answer, along with status code and data:
+- Client -> HTTP req -> Server
+- Client <- HTTP res <- Server
+
+HTTP Protocol Basics
+
+- Client -> SYN -> Server
+- Client <- SYN/ACK <- Server
+- Client -> ACK + GET /html -> Server
+- Client <- HTML resp + Close connetion <- Server
+
+The format of an HTTP message is:
+
+```
+Headers\r\n
+\r\n
+Message Body\r\n
+```
+
+where:
+
+```
+\r # carriage return
+\n newline
+```
 
 
-#### (3/11) HTTP(s) Protocol Basics
-#### (4/11) HTTP Cookies - Study Guide
+Verbs: PUT, TRACE, HEAD, POST.
+
+Some status codes:
+
+| Status code               | Meaning                                                       |
+|:--------------------------|:--------------------------------------------------------------|
+| 200 OK                    | the resource is found                                         |
+| 301 Moved Permanently     | the requested resource has been assigned a new permanent URI  |
+| 302 Found                 | the resource is temporarily under another URI                 |
+| 403 Forbidden             | the client doesn't have enough privileges, server refuses req.|
+| 404 Not Found             | the server cannot find the resource matching the request      |
+| 500 Internal Server Error | the server does not support the functionality required        |
+##### HTTP Request
+
+```
+GET / HTTP/1.1                                    # VERB path protocol version
+Host: www.elarnsecurity.com                       # Specifies the internet hostname and port number, obtained from the URI of the resource
+User-Agent: Mozilla/5.0 (X11; Linux x86_64 ...)   # Tells the server what client software is issuing the request
+Accept: text/html                                 # Specifies which document type is expected in the response
+Accept-Language: en-US,en;q=0.5                   # Browser can as for a specific human language in the response
+Accept-Encoding: gzip, deflate                    # Restricts the content encoding
+Connection: keep-alive                            # Future communications with the server will reuse the current connection
+\r\n\r\n
+< PAGE CONTENT > ...
+```
+
+##### HTTP Response
+
+```
+HTTP/1.1 200 OK                                   # Status-Line: protocol version + status code + textual meaning
+Date: Wed, 19 Nov 2020 10:10:10 GNT               # Time at which the message was originated
+Cache-Control: private, max-age=0                 # Using cached content saves bandwidth
+Content-Type: text/html; charset=UTF=8            # Lets the client know how to interpret the body of the message
+Content-Encoding: gzip                            # The message body is compressed with gzip
+Server: Apache/2.2.15 (CentOS)                    # (optional) header of the server that generated the content
+Content-Length: 99043                             # length in bytes of the message body
+
+
+< PAGE CONTENT > ...
+```
+
+##### HTTPS: How to protect HTTP using an encryption layer
+
+- HTTPS: HTTP over SSL/TLS is a method to run HTTP which is a clear-text protocol over SSL/TLS, a cryptographic protocol
+- Provides: Confidentiality, Integrity Protection and Authentication to the HTTP protocol
+- An attacker cannot sniff the application layer communication
+- An attacker cannot alter the application layer data
+- The client can tell the real identity of the server and, sometimes, vice-versa
+- Traffic can be sniffed, but any adjacent user will not know req/resp headers, req/resp body, req target domain
+- When inspecting HTTPS, one cannot know what domain is contacted and what data is exchanged
+- HTTPS does not protect against web application flaws
+- All the attacks against an application happen regardless of SSL/TLS
+  - Such as XSS and SQL injection will still work
+
+#### <span style="color:red"> VIDEO (3/11) HTTP(s) Protocol Basics</span>
+
+#### (4/11) HTTP Cookies (1994 - Netscape) - Study Guide
+- HTTP is a stateless protocol
+- HTTP cannot keep the state of a visit across different HTTP requests
+- HTTP requests are unrelated to the preceding and following ones
+- Often exploits rely on stealing cookies
+- Cookies / Cookie jar, just textual information installed by a website into a web browser
+
+
+A server can set a cookie via `Set-Cookie` HTTP header field in a response message.
+
+```
+HTTP/1.1 200 OK
+Date: Wed, 19 Nov 2020 10:10:10 GNT
+Cache-Control: private, max-age=0
+Content-Type: text/html; charset=UTF=8
+Content-Encoding: gzip
+Server: Apache/2.2.15 (CentOS)
+Set-Cookie: ID=Vallue; expires=Thu, 21-May-2015 15:25:20 GMT; path=/; domain=.example.site #
+Content-Length: 99043
+
+
+< PAGE CONTENT > ...
+```
+
+A cookie contains the following attributes:
+- The actual content
+- An expiration date
+- A path
+- The domain
+- Optional flags
+  - Http only flag
+  - Secure flag
+
+
 #### (5/11) Sessions - Study Guide
 #### (6/11) HTTP(s) Cookies and Sessions
 #### (7/11) Same Origin Policy - Study Guide
