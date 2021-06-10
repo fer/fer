@@ -654,7 +654,7 @@ Cache-Control: private, max-age=0
 Content-Type: text/html; charset=UTF=8
 Content-Encoding: gzip
 Server: Apache/2.2.15 (CentOS)
-Set-Cookie: ID=Vallue; expires=Thu, 21-May-2015 15:25:20 GMT; path=/; domain=.example.site #
+Set-Cookie: ID=Value; expires=Thu, 21-May-2015 15:25:20 GMT; path=/; domain=.example.site; Http
 Content-Length: 99043
 
 
@@ -670,19 +670,174 @@ A cookie contains the following attributes:
   - Http only flag
   - Secure flag
 
+##### Cookie format
+|||
+|:--------------------------|:-----------------------------------------|
+| Cookie Content            | ID=Value;                                |
+| Expiration Date           | expires=Thu, 21-May-2015 15:25:20 GMT;   |
+| Path                      | path=/;                                  |
+| Domain                    | domain=.example.site                     |
+| Flag-setting Attribute    | HttpOnly                                 |
+
+- Browsers use domain, path, expires and flags attributes to choose whether or not to send a cookie in request.
+- Cookies are sent only to the valid domain/path when they are not expired and according totheir flags.
+- The domain field and the path field set the scope of the cookie.
+- The browser sends the cookie only if the request is for the right domain.
+- When a web server installs a cookie, it sets the domain field.
+- Then the browser will use the cookie for every request sent to that domain and *all its subdomains*.
+- If the server does not specify the domain attribute, the browser will automatically set the domain as the server domain and set the cookie 'host-only' flag,meaning that this cookie will be sent only to that precise hostname.
+- Respectively, when a cookie has the path attribute set, the browser will send the cookie to the right domain and to the resolurces in that path *and not any other*
+- A browser will not send an expired cookie tothe server, session cookies will expire with the HTTP session.
+- `http-only` flag is a mechanism that prevents JavaScript or any other non-HTML technology from reading the cookie (preventing a XSS robbery)
+- `Secure` flag creates secure cookies that will only be sent over an HTTPS connection
 
 #### (5/11) Sessions - Study Guide
-#### (6/11) HTTP(s) Cookies and Sessions
+
+- Sometimes the web developer prefers to store some information on the server side
+- This avoids the back and forth data transmission and hides the application logic
+- Sessions are a mechanism that lets the website store variables specific for a given visit on the server side
+- Each session is identified by a session id
+- The client presents this ID for each subsequent request
+- With that ID, the server is able to retrieve the state of the client
+
+##### Session cookies
+
+Session cookies allow to install a session ID on a web browser
+
+```
+SESSION=0mwerj234w
+PHPSESSID=1992maiwr2H     # PHP
+JSESSIONID=W8234mSfsw3    # JSP
+```
+
+- The browser then uses the cookie in subsequent requests.
+- A session could contain multiple variables, so sending a small cookie keeps the bandwidth usage low.
+- The browser will send back the cookie according to the cookie protocol,thus sending the session ID.
+- Session IDs can also be transmitted via GET requests.
+
+#### <span style="color: red">VIDEO - (6/11) HTTP(s) Cookies and Sessions</span>
+
 #### (7/11) Same Origin Policy - Study Guide
+
+- SOP / Same Origin Policy is a critical point of web application security.
+- Prevents JavaScript code from getting/setting properties on a resource coming from a different origin.
+- To determine if JS can access a resource, hostname, port and protocol *must match*.
+- SOP only applies to the actual code of a script.
+- It is still possible to include external resources by using HTML, like IMG, script, iFrame... 
+- If a script on Domain A was able to read content on Domain B, it would be possible to steal clients' information and mount a number of dangerous attacks.
+
 #### (8/11) Burp Suite - Study Guide
-#### (9/11) Burpsuite
-#### (10/11) Burp Suite Basics
-#### (11/11) Burp Suite
+
+- Any web application contains many objects like scripts, images, stylesheets, client and server-side intelligence.
+- Having tools that help inthe study and analysis of web application behavior is critical.
+- An *intercepting proxy* is a tool that lets you analyze and modify any request and any response exchanged between an HTTP client and a server.
+- Intercepting proxy != web proxy (as Squid)
+
+BurpSuite will let you:
+- Intercept request/responses between your browser and web server.
+- Build requests manually.
+- Crawl a website by automatically visiting every page in a website.
+- Fuzz webapps by sending them patterns of a valid and invalid inputs to test their behavior.
+- You can modify the header and the body of a message by hand or automatically.
+
+> Learn how to configure your browser's proxy to work with Burp Suite
+
+- Burp Repeater lets you manually build raw HTTP requests.
+- Same can be achieved with `nc` or `telnet`.
+
+#### <span style="color: red">VIDEO - (9/11) Burpsuite</span>
+#### <span style="color: red">LAB - (10/11) Burp Suite Basics</span>
+#### <span style="color: red">LAB - (11/11) Burp Suite</span>
 
 ### Penetration Testing (2 items)
 
 #### (1/2) Penetration Testing Introduction - Study Guide
+
+- A penetration tester performs a deep investigation of a remote system's security flaws.
+- Penetration testers must test for any and all vulnerabilities, not just the ones that may grant them root access.
+- Penetration testing is not about getting `root`!
+- Penetration testers cannot destroy their client's infrastructure, professional pentesting requires a thorough understanding of attack vectors and their potential
+
 #### (2/2) Lifecycle of a Penetration Tester - Study Guide
+
+- Pentester activity must guarantee that the least impact possible on the production systems and services.
+- Avoid overloading client's systems and networks.
+- Communicate to client what steps to take, just in case anything goes wrong during the pentest.
+- Pentesting is a process that ensures that every potential vulnerability or security weakness gets tested with the lowest possible overhead.
+
+##### Engagement
+
+Details about the pentest are established during the Engagement phase.
+
+Quotation:
+- Fee establishment for the job to be accomplished.
+- Fee will vary according to:
+  - Type of engagement: black box, gray box, etc.
+  - How time-consuming the engagement is.
+  - The complexity of the applications and services in scope.
+  - The number of targets (IP addresses, domains, etc.)
+- Evaluation and quoting these aspects requires experience.
+- If you are not able to quantify the amount of work required by an engagement, you can provide an hourly fee.
+
+Proposal Submittal:
+- The best way to win a job is by providing a sound and targeted proposal.
+- You should write the proposal keeping in mind the client's needs and infrastructure.
+- Must include:
+  - Your understanding of the customer's requirements.
+  - Approach & Methodology
+    - Automated scanning tools
+    - Manual testing
+    - Onsite testing
+    - Any other
+  - Value the pentest will bring to business
+  - Risks & Benefits
+    - Business continuity
+    - Improved confidentiality
+    - Avoidance of money and reputation loss
+  - Estimate of the time / price
+  - Type: 
+    - Penetration test
+    - Vulnerability assessment
+    - Remote / Onsite
+  - Scope
+    - IP addresses
+    - Network blocks
+    - Domain names
+    - Etc.
+
+Scope:
+
+- Make sure that the target of your engagement is the property of your client.
+- Shared hosting: You must not conduct an assessment on targets unless you are given written permission from the hosting provider.
+- Check country laws
+
+Incident Handling:
+
+- Unplanned and unwanted situation that affects the client's environment and disrupts its services.
+- Even when sticking to best practices,there's a possibility to damage the tested assets.
+- Aim not to damage the target.
+- In case of planning some insensitive or risk test, communicate with the customer.
+- Have a 'Incident Handling Procedure':
+  - Set of instructions that need to be executed by both you and your customer on how to proceed when a incident occurs.
+  - Have an emergency contact.
+  - Add an statement to the rules of engagement.
+
+Legal work:
+
+- Sometimes you will need to involve a lawyer as information security laws vary a lot from country to country
+- Sometimes a professional insurance is required
+- NDA can be signed. Keep data private and encrypted on your PC.
+- Outline what you can and you cannot do.
+- Rules of engagement is another document that will define the scope of engagement and will put on paper what you are entitled to do and when, this includes the time window for your tests and your contacts in the client's organizations
+
+##### Information Gathering
+
+
+
+##### Footprinting and Scanning
+##### Vulnerability Assessment 
+##### Exploitation
+##### Reporting
 
 ## (2/3) Penetration Testing: Preliminary Skills & Programming
 
