@@ -723,7 +723,7 @@ JSESSIONID=W8234mSfsw3    # JSP
 - Prevents JavaScript code from getting/setting properties on a resource coming from a different origin.
 - To determine if JS can access a resource, hostname, port and protocol *must match*.
 - SOP only applies to the actual code of a script.
-- It is still possible to include external resources by using HTML, like IMG, script, iFrame... 
+- It is still possible to include external resources by using HTML, like IMG, script, iFrame...
 - If a script on Domain A was able to read content on Domain B, it would be possible to steal clients' information and mount a number of dangerous attacks.
 
 #### (8/11) Burp Suite - Study Guide
@@ -795,7 +795,7 @@ Proposal Submittal:
     - Improved confidentiality
     - Avoidance of money and reputation loss
   - Estimate of the time / price
-  - Type: 
+  - Type:
     - Penetration test
     - Vulnerability assessment
     - Remote / Onsite
@@ -832,31 +832,337 @@ Legal work:
 
 ##### Information Gathering
 
+- Fundamental stage for a successful penetration test.
+- Starts once the legal paperwork is complete, and not before.
+- You investigate and harvest info about the client's company
 
+Extremely useful information if Social Engineering is allowed by the rules of the engagement:
+  - Emails and addresses
+    - Board of directors
+    - Investors
+    - Managers and employees
+  - Branch location and addresses
+
+- Identify risks in the client's critical infrastructure.
+- Having an understanding of the business is a key aspect in understanding what is important for your client.
+- Understanding the business allows us to rate the risks associated with a successful attack.
+
+Infrastructure Information Gathering:
+
+- After understanding the business
+- Transform the IP addresses or the domains in scope into actionable information about servers, OSs, etc.
+- If the scope is defined as a list of IP addresses, you can move on to the next step.
+- If the scope is the whole company or some of their domains, you will have to harvest the relevant IP blocks by using `WHOIS` and other *DNS information*.
+- Give meaning to every IP address in scope, determining the following in order to focus your efforts/attacks and select the riht tools for the exploitation phase:
+  - if there's a live host or server using it
+  - if there are one or more websites using that IP address
+  - What OS is running on the host or the server
+
+Web Applications:
+
+- Harvest Domains
+- Harvest subdomains
+- Harvest Pages (website crawling)
+- Harvest Technologies in use, like PHP, Java, .NET
+- Harvest Frameworks and CMS in use
+- Treat webapps as completely separate entities
 
 ##### Footprinting and Scanning
-##### Vulnerability Assessment 
+
+Here you deepen your knowledge of the in-scope servers and services.
+
+Fingerprinting the OS:
+
+- Gives you info about the OS
+- Helps to narrow down the number of potential vulnerabilities
+- Some tools use exploits to some singularities you can find the network stack implementation
+
+Port Scanning:
+
+- Once you know the live hosts, you can determine which ports are open on a remote system
+- Any mistake made here will impact next steps
+- `nmap` uses different scanning techniques to reveal open, closed and filtered ports
+
+
+Detecting Services:
+
+- Act of knowing what service which service is listening on that port.
+- Knowing the port number isn't enough, there's the need to discover the service that is running behind.
+- `nmap` can be used to fingerprint ports.
+
+By knowing the services running, we can know:
+
+- OS
+- Purpose of a particular IP address (server/client)
+- Relevance of the host in the infrastructure
+
+##### Vulnerability Assessment
+
+- Aims to build a list of the present vulnerabilities on the target systems.
+- The pentester will carry out a vulnerability assessment on each target discovered in the previous steps
+- The bigger the list, the more chances we'll have when exploiting the systems in scope.
+
+Vulnerability assessments can be carried out:
+- Manually
+- Using automated tools, as scanners that will send probes to the target systems to detect whether a host has some well-known vulnerabilities
+  - Extremely important to properly configure them, you might crash targets if not
+  - Their output is a report that the pentester can use in the exploitation phase
+
 ##### Exploitation
+
+- Phase where we verify the vulnerabilities really exist.
+- During this phase, a pentester checks and validates a vulnerability and also widens and increases the privileges on the target systems and networks.
+- A penetration test is a cyclic process:
+- The process finishes when there are no more systems and services in-scope to exploit.
+
+> Information Gathering -> Scanning -> Vulnerability Assessment -> Exploiting
+
 ##### Reporting
+
+- This step is as important as the rest of the phases, as it delivers the results to executives, IT staff and development team.
+- This report must address:
+  - Techniques used
+  - Vulnerabilities found
+  - Exploits used
+  - Impact and risk analysis for each vulnerability
+  - Remediation tips (of real value for the client, as they can be used to resolve their security issues)
+
+Consultancy:
+
+- Pentester are often asked to provide some hours of consultancy after delivering the report.
+- The initial engagement is closed and the pentester must keep the report encrypted in a safe place, or even destroy it.
 
 ## (2/3) Penetration Testing: Preliminary Skills & Programming
 
 ### Introduction to Programming (4 items)
 
 #### (1/4) What is Programming - Study Guide
+
+Set of instructions that a computer may follow. It can be used to automate tasks, leaving specific things to be done by a machine instead of a human.
+
+Syntax and usage requirements are specific per language, but purpose keeps on being the same.
+
 #### (2/4) Low and High-Level Languages - Study Guide
+
+Level can tell how close these languages are to the hardware.
+
+Low level:
+
+- More complicated, more prone to create vulnerabilities
+- Can do anything with them, as they are so closed to the machine
+- Deep understanding is required
+- Assembly
+
+High level:
+
+- Ease of development
+- Less flexible
+- Writing custom functionality from scratch can be difficult
+- Java, Python
+- They can't run on a bare OS, will need some kind of software already running
+
 #### (3/4) Programming and Scripting - Study Guide
+
+Programming and Scripting Languages are both high-level languages.
+
+Programming Languages:
+
+- Programming languages require a compiler.
+- A compiler will convert your plain-text program file into something readable by the language environment.
+
+Scripting Languages:
+
+- Interpreted
+- Software environment install on your computer can read a plain-text program file
+
 #### (4/4) Basic Concepts - Study Guide
+
+- Each programming language has its own syntax, which may require some instructions to use certain characters at the end of each statement while in another language this may not be needed.
+- Variables might have different types depending on the programming language.
+- Functions are normally allowed to be created. These are pieces of code responsible for some repeatable tasks. Might use arguments and return a value.
+- Conditional statements are part of a programming language syntax.
+- Loops are a set of instructions that need to be executed numerous times.
 
 ### C++ (10 items)
 
 #### (1/10) C++ IDE - Study Guide
+
+> Skipped
+
 #### (2/10) Structure of C++ Programs - Study Guide
+
+`Hello World` example where we make use of:
+- Comments
+- Directives
+- Namespaces
+- Terminators (;)
+- `main` function + body
+
+```
+// This is my first program in C++
+#include <iostream>
+using namespace std;
+
+int main() {
+  cout << "Hello World";
+
+  // system("PAUSE");
+  // cin.ignore();
+
+  return 0;  // program has completed its execution without any errors
+}
+```
+
 #### (3/10) Variables and Types - Study Guide
+
+Variables can be 'global' or 'local'.
+
+```
+int a = 0;
+int b = 2;
+int sum = a + b;
+```
+
+| | |
+|:--------|:----------|
+| short / short int | short integer (2 bytes) |
+| int | integer (4 bytes) |
+| long / long int | long integer (4 bytes) |
+| bool | boolean (1 byte) |
+| float | floating point number (4 bytes) |
+| double | double precision floating point number (8 bytes) |
+| char | Character (1 byte) |
+
 #### (4/10) Input / Output - Study Guide
+
+```
+int uservalue;
+cout << "The value of variable sum is " << sum << endl;
+cin >> uservalue;
+```
+
 #### (5/10) Operators - Study Guide
+
+In C++ there are four main classes of operators:
+
+- Arithmetic
+- Relational
+- Logical
+- Bitwise
+
+```
+variable_name = expression;
+```
+
+Also:
+
+```
+x++;
+x--;
+```
+
+Relational Operators:
+
+They define a relationship between two values:
+
+```
+>, >=, <, <=, ==, !=
+```
+
+Logical Operators:
+
+They define how previous relationships must be connected.
+
+```
+&&, ||, !
+```
+
+- Expressions that use relational or logical operators return 0 or false and 1 for true.
+- 0 value converts to false
+- non-zero values automatically converts to true
+
+Bitwise operators:
+
+Refer to testing, setting or shifting the actual bits in a byte or word.
+
+```
+&, |, ^, ~, >>, <<
+```
+
 #### (6/10) Iteration and Conditional Structures - Study Guide
+
+- Useful to instruct the program to execute or to repeat a specific operation when some condition is matched.
+
+| Selection | Iteration | Jump       |
+|:----------|:----------|:-----------|
+| if        | while     | break      |
+| switch    | for       | continue   |
+|           | do-while  | goto       |
+|           |           | return     |
+
+```
+if (expression)
+  statement;
+else
+  statement;
+```
+
+```
+switch(expression) {
+ case constant1:
+  statement sequence
+  break;
+ case constant2:
+  statement sequence
+  break;
+ default
+ statement sequence
+}
+```
+
+```
+for(initialization;condition;increment) {
+  statement
+}
+
+for ( ; ; ) {
+
+}
+```
+
+```
+while (condition) {
+  statement;
+}
+
+do {
+
+} while (condition);
+```
+
+```
+goto label;
+...
+...
+label:
+```
+
 #### (7/10) Pointers - Study Guide
+
+- A pointer is a variable that holds a memory address. This address is the location of another object in memory.
+- If a variable is a pointer, it must be declared in a different way.
+- `type` defines the type of variable the pointer can point to.
+- `*` is the complement of `&`. It returns the value located at the address of the following operator.
+
+```
+type *name;
+
+x = &y; // places the value in memory pointed by y into x. So if y contains the memory address of another variable, x will have the same of that 3rd variable
+```
+
+
+
+
 #### (8/10) Arrays - Study Guide
 #### (9/10) Functions Study Guide
 #### (10/10) C++-assisted exploitation
