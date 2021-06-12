@@ -1637,8 +1637,42 @@ for example:
 while read line; do echo $line; done < file.txt
 ```
 
-#### <span style="color: red">VIDEO - (6/12) Bash Scripting Part 1</span>
-#### <span style="color: red">VIDEO - (7/12) Bash Scripting Part 2</span>
+#### VIDEO - (6/12) Bash Scripting Part 1
+
+Filters open ports from nmap output files
+
+```
+cat *.nmap | grep "open" | grep -v "filtered" | cut -d '/' -f 1 | sort -u | xargs | tr ' ' ',' > ports.txt
+```
+
+#### VIDEO - (7/12) Bash Scripting Part 2
+
+Fingerprint potential applications:
+
+```bash
+cat domains.txt
+domain1.com
+domain2.com
+```
+
+alivecheck.sh:
+
+```bash
+#!/bin/bash
+
+for protocol in 'http://' 'https://';do
+  while read line;
+  do
+    code=$(curl -L --write-out "%{http_code}\n" --output /dev/null --silent --insecure $protocol$line)
+    if [ $code = "000" ]; then
+      echo "$protocol$line: not responding."
+    else
+      echo "$protocol$line: HTTP $code"
+      echo "$protocol$line: $code" >> alive.txt
+    fi
+  done < domains.txt
+done
+```
 
 #### (8/12) Windows Command Line - Study Guide
 
@@ -1701,15 +1735,80 @@ for %i in (*.*) do @echo FILE: %i
 ### Information Gathering (5 items)
 
 #### (1/5) Introduction - Study Guide
+
+- First and one of the most crucial phases of an engagement
+- A pentester cannot leave any stone unturned
+-
+
 #### (2/5) Open-Source Intelligence - Study Guide
+
+- Widening the attack surface
+- Mounting targeted attacks
+- Sharpening your tools in preparation for the next phases
+
+Information Gathering from Social Networks
+- CrunchBase: find detailed information about founders, investors, employees, buyouts and acquisitions
+
+Government Sites
+- System for Award Management
+- GSA eLibrary
+
+Whois database (also accesible through Linux command `whois`)
+- Owner name
+- Street addresses
+- Email Address
+- Technical Contacts
+
+Browsing Client's sites
+- Check products
+- Services
+- Technologies
+- Company Culture
+
+Discovering Emai Pattern
+- `name.surname@company.com`
+- `surname.name@company.com`
+- Many email systems tend to inform the sender that mail was not delivered because it does not exit
+
 #### (3/5) Subdomain Enumeration - Study Guide
-#### (4/5) Subdomain Enumeration
+
+- We keep on widening the attack surface, discovering as many websites owned by the company as possible
+- It's common for websites of the same company to share the same top-level domain name
+- Likely to find resources that
+  - May contain outdated software
+  - Buggy software
+  - Administrative Interfaces
+- Bug bounty program writeups
+- **Passive domain enumeration**: try to identify subdomains without directly interacting with the target
+- Google: `site: company.com`
+- [dnsdumpster.com](https://dnsdumpster.com)
+- `sublist3r` (kali): `sublist3r -d [domain] flag` searches for subdomains in various sources
+
+#### <span style="color:red">(4/5) VIDEO - Subdomain Enumeration</span>
 #### (5/5) The Importance of Information Gathering - Study Guide
+
+- Good vs Bad penentration tester
+- Darts example: better 1000 shots at a microscopic target or single shot to an impossible to miss big target?
+- Cyclic process
+- Every information gathering stage will need the same focus and dedication as the first one
+- Your penetration test will be **as strong as your weekest skill**!
 
 ### Footprinting & Scanning (7 items)
 
 #### (1/7) Disclaimer - Study Guide
+
+> Never run any of these tools and techniques on any machine or netwrok without proper authorization!
+
 #### (2/7) Mapping a Network - Study Guide
+
+
+
+
+
+
+
+
+
 #### (3/7) NMAP OS Fingerprinting
 #### (4/7) Port Scanning - Study Guide
 #### (5/7) NMAP Port Scanning
@@ -1719,6 +1818,36 @@ for %i in (*.*) do @echo FILE: %i
 ### Vulnerability Assessment (4 items)
 
 #### (1/4) Vulnerability Assessment - Study Guide
+
+> Goal #1: Identify vulnerabilities and security misconfigurations
+> Goal #2: Prepare yourself for exploitation phase
+
+- Vulnerability assessment is a phase of the penetration testing process.
+- Sometimes customers just asks for a vulnerability assessment instead of a pentest
+- During the vulnerability assessment, you do not proceed to the exploitation phase
+- This impllies that you will not be able to confirm the vulnerabilities by testing them and giving proof of their existence
+- A full penetration test is more in depth than just vulnerability assessment
+- Can be carried out both locally and remotely
+- Pentesters use vulnerability scanners
+  - Database of known vulnerabilities
+  - Daemons listening on TCP and UDP ports
+  - Config files of OS, software suites, network devices, etc.
+  - Windows registry entries
+  - The purpose of a scanner is to find vulnerabilities or misconfigurations
+  - This scanner tool is up to date by the vendor and it's constantly updated
+
+- OpenVAS
+- Nexpose
+- GFI Lan Guard
+- Nessus
+
+- If you have to test a custom app, a vulnerability scanner isn't enough, you have to test it manually
+- Studying custom applications means:
+  - learning and understanding its features
+  - understanding how it exchanges data over the network
+  - understanding how it accesses resources like databases, servers, local and remote files and os on
+  - reverse engineering its logic
+
 #### (2/4) Nessus - Study Guide
 #### (3/4) Nessus
 #### (4/4) Nessus - Lab
@@ -1726,6 +1855,9 @@ for %i in (*.*) do @echo FILE: %i
 ### Web Attacks (16 items)
 
 #### (1/16) Introduction - Study Guide
+
+Web applications use different technologies and programming paradigms compared to desktop apps
+
 #### (2/16) Web Server Fingerprinting - Study Guide
 #### (3/16) HTTP Verbs - Study Guide
 #### (4/16) Netcat
@@ -1734,6 +1866,19 @@ for %i in (*.*) do @echo FILE: %i
 #### (7/16) Dirb
 #### (8/16) Dirbuster
 #### (9/16) Google Hacking - Study Guide
+
+> Goal #1: perform information gathering without contacting your targets, ability to find hidden resources
+
+- Usage of Google Dorks (ex `inurl:admin intitle:login`)
+
+`site:`, `intitle:`, `inurl:`, `filetype:`, `AND`, `OR`, `&`, `|`, `-`
+
+```
+inurl:(htm|html|php|asp|jsp) intitle:"index of" "last modified" "parent directory" txt OR doc OR pdf
+```
+
+- [Exploit DB](https://www.exploit-db.com/google-hacking-database)
+
 #### (10/16) Cross Site Scripting - Study Guide
 #### (11/16) XSS
 #### (12/16) Cross site scripting
@@ -1774,12 +1919,50 @@ for %i in (*.*) do @echo FILE: %i
 ### Next Steps (6 items)
 
 #### (1/6) What to do Next - Study Guide
+
+- Each BlackBox Penetration Testing labs contains 2-4 machines that should be exploited
+- There are flags per machine
+- There could be more valuable information on the machine that could help you compromise additional hosts
+
+> Study and get updated, new exploitation techniques are being discovered daily, start a blog, read feeds.
+
 #### (2/6) Black-box Penetration Test 1
 #### (3/6) Black-box Penetration Test 2
 #### (4/6) Black-box Penetration Test 3
 #### (5/6) Penetration Testing Approach - Study Guide
+
+- Be curious
+- Don't be ashamed of not knowing
+- Try various methods until you are sure something is really safe
+- Use search engines
+- You can't remember everything
+- Follow some existing penetration testing methodology (as OWASP)
+  - So you can show your client what tests will be conducted
 #### (6/6) Career Paths - Study Guide
+
+- Web App / Network penetration tester
+- Red teamer / Social engineer
+- Reverse engineer
+- Security researcher
+- Mobile application penetration tester
+
+Defense:
+
+- Incident Response team memeber
+- CCERT analyst
+- Malware analyst
+- Threat hunter
+- Secure software developer
+- Netowrk and systems defender
 
 ## References
 
 - https://kentosec.com/2019/08/04/how-to-pass-the-ejpt/
+
+
+<!--
+To do:
+- [ ] Simplify main index, gather sections together
+- [ ] Make a tool list
+- [ ]
+-->
