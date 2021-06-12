@@ -1160,23 +1160,215 @@ type *name;
 x = &y; // places the value in memory pointed by y into x. So if y contains the memory address of another variable, x will have the same of that 3rd variable
 ```
 
-
-
-
 #### (8/10) Arrays - Study Guide
+
+An array is a collection of variables of the same type, which is accessed by an index.
+
+- All arrays have 0 as an index of the first element
+
+```
+type var_name[size];
+
+// Iterate
+
+int x[20];
+int i;
+
+for (i=0; i<20; i++) {
+  x[i] = i;
+}
+```
+
 #### (9/10) Functions Study Guide
-#### (10/10) C++-assisted exploitation
+
+Functions are blocks of statements defined under a name.
+
+```
+type function_name(param1, param2, ...){
+  statements;
+}
+
+// function with "formal" parameters
+int sum(int x, int y) {
+  int z;
+  z = x + y;
+  return(z);
+}
+```
+
+In almost any programming language, there are two ways in which we can pass arguments to a function:
+
+- By value
+  - Copies the value of an argument into a parameter. Changes made to the parameter do not affect the argument
+  - Code in the function does not alter the arguments used by the caller
+  - It's a copy of the value of the argument passed into the function
+  - What occurs inside the function has NO EFFECT on the variable provided by the caller
+- By reference
+  - The address of an argument (not the value) is copied into the parameter
+  - Inside the function, the address is used to access the actual argument used in the call
+  - Changes made to the parameter will affect the argument
+
+```
+void swap(int& x, int& y) {
+  int temp;
+  temp=*x;
+  *x=*y;
+  *y=temp;
+}
+```
+
+#### <span style="color: red">LAB - (10/10) C++-assisted exploitation</span>
 
 ### Python (10 items)
 
 #### (1/10) About Python - Study Guide
+
+- Cross-platform
+- Free
+- Interpreted
+- Usable in conjuction with components written in some other languages
+- Uses whitespace and indentation to determine block structures
+- Python does not use brackets to delimit a block, using indentation instead
+
 #### (2/10) Variables and Types - Study Guide
+
+- A delimiter isn't needed (as ';')
+- There isn't the need to declar the type of a variable
+
+```
+x = 10
+y = "hello"
+```
+
+Operators:
+
+```
+=, +, -, *, /, // (division, with results in truncation), ** (exponentiation), %
+```
+
+You can use:
+
+```
+"allow 'single' quotes"
+'allow "double" quotes'
+'''contain single and double quotes'''
+```
+
+String manipulation:
+
+```
+x = "Hello World!"
+print(x[0])       # H
+print(x[1])       # e
+print(x[-1])      # !
+print(x[0:3])     # Hel
+print(x[4:])      # o World!
+print(x[:])       # Hello World!
+```
+
 #### (3/10) Input / Output - Study Guide
+
+```
+user_input = input("Message ")
+print("User's message:", user_input)
+```
+
 #### (4/10) Control Flow - Study Guide
+
+- The following is interpreted as **False**: `0`, `False`, `None`, `""`, `[]`
+- Everything else is considered as `True`
+- Comparison and Logical operators: `<`, `<=`. `==`, `>`, `>=`, `!=`, `is`, `is not`, `in`, `not in`, `And`, `Or`, `Not`
+- There isn't a `switch / case` statement
+
+```
+if expression:
+  statement
+else:
+  statement
+```
+
+```
+while condition:
+  statements_block
+post_while_statements
+```
+
+```
+for item in sequence
+  for_statements
+post_for_statements
+```
+
+```
+range(5) # contains values from 0 to 4
+range(0,5) # 0, 1, 2, 3, 4
+```
+
 #### (5/10) Lists - Study Guide
+
+- Ordered collections of any type of object
+- The general form of a list is a comma-separated list of elements, embraced in square brackets
+- Lists are mutable, elements can be modified by assignments
+- Python implements many functions that can be used to modifyu a list:
+  - `append`: append a new element to the target list
+  - `extend`: allows to add one list to another
+  - `insert`: add a new list element right before a specific index
+  - `del`: delete list items or slices, indices are automatically updated
+  - `remove`: it does not work with indices, instead it looks for a given value within the list and it removes that element
+  - `.pop(i)`: removes the item at the given position
+  - `.sort()`: sorts a list (items must be of the same type)
+  - `.reverse()`: reverses the order of the elments in the list
+
+```
+simple_list = [1, 2, 3, 4, 5]
+list = [1, 2, "els", 4, 5, "something, [0,9]]
+
+x = [1, 2, 3, 4, "els", 5, 6]
+del x[2]      # [1, 2, 4, "els", 5, 6]
+del x[2]      # [1, 2, "els", 5, 6]
+del x[2:]     # [1, 2]
+x.remove(2)   # [1]
+```
+
 #### (6/10) Dictionaries - Study Guide
+
+- Similar to associative arrays
+- Mapping objects
+- Instead of being indexed by numbers, dictionaries are using _keys_ for indexing elements
+- We have some methods:
+  - `.values()`: returns all the values stored in the dictionary
+  - `.keys()`: returns all the keys stored in the dictionary
+  - `.items()`: returns all the keys and values in the dictionary
+- We can also check wif an specific item exists using the existing two following methods:
+  - `key in dictionary`
+  - `get(key, message)`: if the key exists, returns the associated value, otherwise prints the message passed as an parameter
+
+```
+dictionary = {'first': 'one', 'second': 2}
+```
+
 #### (7/10) Functions - Study Guide
+
+- `function_name.__doc__` shows function description
+- each call to a function creates a new local scope as well as the assigned names within a function that are local to that function
+- global variables can ge used within the function, but to do that we need to insert the keyword  `global` followed by the variable name
+
+```
+def function_name(param1, param2, ...):
+  """ function documentation """
+  function_statements
+  return expression
+```
+
 #### (8/10) Modules - Study Guide
+
+- A module is a file that contains source code
+
+```
+from module_name import object_name1, object_name2, ...
+from module_name import *
+```
+
 #### (9/10) Pentester Scripting - Study Guide
 #### (10/10) Python-assisted exploitation
 
