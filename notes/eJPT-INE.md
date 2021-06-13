@@ -1801,19 +1801,162 @@ Discovering Emai Pattern
 
 #### (2/7) Mapping a Network - Study Guide
 
+- These techniques work both on local and remote
+- Every host connected to the Internet or a private network must have a unique IP address
 
+Example:
 
+```
+Block: 200.200.0.0/16
+2^16 hosts = 200.200.0.0 - 200.200.255.255
+```
 
+##### Ping Sweeping
 
+- `ping` command tests whether a machine is alive
+- Ping works by sending one or more special ICMP packets (**echo request** - Type 8)
+- If the destination host replies with **ICMP echo reply**
+- ICMP is part of the IP protocol
 
+- `fping` is an improved version of the `ping` utility
 
+```
+fping -a -g IPRANGE
 
+# -a option forces the tool to show only alive hosts
+# -g option tells the tool we want to perform a ping sweep instead of standard ping
 
-#### (3/7) NMAP OS Fingerprinting
+fping -a -g 10.54.12.0/24
+fping -a -g 10.54.12.0 10.54.12.255
+```
+
+- When running `fping` on a LAN you are directly attached to, even if you use the `-a` option, you will get some warning messages about the offline hosts (`ICMP Host Unreachable`)
+- Those messages are easily removed by:
+
+```
+fping -a g 192.168.82.0 192.168.82.255 2>/dev/null
+```
+
+##### Nmap Ping Scan
+
+```
+nmap -sn 200.200.0.0/16
+nmap -sn -iL hostilist.txt
+```
+
+```
+HOST DISCOVERY:
+-sL: List Scan - simply list targets to scan
+-sn: Ping Scan - disable port scan
+-Pn: Treat all hosts as online -- skip host discovery
+-PS/PA/PU/PY[portlist]: TCP SYN/ACK, UDP or SCTP discovery to given ports
+-PE/PP/PM: ICMP echo, timestamp, and netmask request discovery probes
+-PO[protocol list]: IP Protocol Ping
+```
+
+##### OS Fingerprinting
+
+- Possible to identify OS because of some tiny differences in the network stack implementation of the various OS
+- Signature of the host behavior
+- The signature is compared against a database of known OS signatures
+- Offline OS fingerpriting can be done with `p0f` but we'll use `nmap`
+
+```
+nmap -Pn -O <target(s)>
+# -Pn switch to skip the ping scan if you already know that the targets are alive
+```
+
+Nmap options:
+```
+OS DETECTION:
+-O: Enable OS detection
+--osscan-limit: Limit OS detection to promising targets
+--osscan-guess: Guess OS more aggresively
+```
+
+#### <span style="color:red">(3/7) NMAP OS Fingerprinting</span>
+
 #### (4/7) Port Scanning - Study Guide
-#### (5/7) NMAP Port Scanning
-#### (6/7) Basic Masscan Usage
-#### (7/7) Scanning and OS Fingerprinting
+
+> Goals:
+> - Prepare for the vulnerability assessment phase
+> - Perform stealth reconnaissnace
+> - Detect firewalls
+
+- Port Scanning goes after knowing the active targets on the network
+- Determine what TCP/UDP ports are opened
+- Also knowing what services are running, software and version, on an specific port
+- Port scanners automate probes requests and response analysis
+- Also let you detect if there's a firewall between you and your target
+- 3-way handshake:
+  - If port is closed -> RST + ACK
+
+##### TCP Connect Scan
+
+- Simplest way to perform a port scan
+- If the scanner receives a `RST` packet, then the port is closed
+- If the scanner is able to complete the connection, then the port is open
+- TCP Connect Scans are recoded in the daemon logs (from the app point of view, the probe looks like a legitimate connection)
+
+##### TCP SYN Scan
+
+- Default nmap scan
+- Stealthy by design
+- Sends a SYN packet and analyzes the response coming from the target machine
+- If a RST packet is received, then port is closed
+- if a ACK packet is recevived, then the port is open (and RST packet is sent to the target to stop the handshake)
+- Cannot be detected by looking at daemons logs
+
+##### Nmap Scan Types
+
+```
+-sT performs a TCP connect scan
+-sS performs a SYN scan
+-sV performs a version detection scan
+```
+
+- `-sV` version detection scan mixes a TCP connect scan with some probes, which are used to detect what application is listening on a particular port, which isn't stealthy but useful.
+- During version detection scan, Nmap performs a TCP connect and reads from the banner of the daemon listening on a port.
+- If the daemon does not send a banner, nmap sends some probes to understand what application is, by studying its behavior
+
+###### Specifying targets
+
+- By DNS name: `nmap <scan_type> target1.domain.com target2.domain.com`
+- With an IP address list: `namp <scan_type> 192.168.1.45 200.200.14.56 10.10.1.3`
+- CIDR notation: `nmap <scan_type> 192.168.1.0/24 200.200.1.0/16`
+- By using wildcards: `nmap <scan_type> 192.168.1.*` or `nmap <scan_type> 10.10.*.1` or `nmap <scan_type> 200.200.*.*`
+- Specifying ranges: `nmap <scan_types> 200.200.6-12.*`
+- Octets Lists: `nmap <scan_types> 10.14.33.1,3,17` or `nmap <scan_type> 10.14,20.3.1,3,17,233`
+
+###### Choosing the ports to scan
+
+- `-p`: `nmap -p 21,22,139,445,443,80 <target>` or `nmap -p 100-1000 <target>`
+
+##### Discovering Network with Port Scanning
+
+- You might encounter networks that are protected by firewalls and where pings are blocked
+- It's not uncommon to come across a server that does not respond to pings but has many TCP/UDP ports open
+- `-Pn`: forces the scan on a server
+- if you would like to find an alive host, you can scan typical ports instead of performing a ping sweep
+- the four most basic TCP ports (22, 445, 80, 443) can be used as indicators of live hosts in the network
+
+##### Spotting a Firewall
+
+- You might often see that a version was not recognized regardless of the open port
+- Or even the service type is not recognized
+- `tcpwrapped` means that the TCP handshake was completed but the remote host closed the connection without receiving any data
+- `--reason` nmap flag will show an explanation of twhy a port is marked as open or closed
+
+##### Masscan
+
+- Another interesting tool that can help you to discover a network via probing TCP ports
+- Designed to deal with large networks and to scan thousands of IP addresses at once
+- Like `nmap` but a lot faster, however is less accurate
+- Maybe best to use this for host discovery and then conduct a detailed scan with nmap against certain hosts
+
+#### <span style="color:red">VIDEO - (5/7) NMAP Port Scanning</span>
+#### <span style="color:red">VIDEO - (6/7) Basic Masscan Usage</span>
+#### <span style="color:red">LAB - (7/7) Scanning and OS Fingerprinting</span>
 
 ### Vulnerability Assessment (4 items)
 
@@ -1849,8 +1992,23 @@ Discovering Emai Pattern
   - reverse engineering its logic
 
 #### (2/4) Nessus - Study Guide
-#### (3/4) Nessus
-#### (4/4) Nessus - Lab
+
+- Nessus is a easy to use powerful vulnerability scanner that works great both on a small and large company network
+- It's free license for non-commercial use, so you can install and use it to secure your home network
+- It has two components: client & server
+  - Client is used to configure the scans, provides a web interface to configure scans
+  - Server performs the scan and repots back to the client, sends probes to systems and applications, collecting the responses and matching them against its vulnerability database
+
+These are the steps that a vulnerability scanner uses:
+- Target hosts alive
+- Open ports
+- Service detection
+- For each detected service, the scanner queries its database looking for known vulnerabilites
+  - You can configure a scanner to ignore the operation system vulnerabilities and test only known web server vulnerabilities
+- Probing: scanner sends probes to verify if the vulnerability exists, this phase is prone to false positives
+
+#### <span style="color:red">VIDEO - (3/4) Nessus</span>
+#### <span style="color:red">LAB - (4/4) Nessus - Lab</span>
 
 ### Web Attacks (16 items)
 
@@ -1859,6 +2017,12 @@ Discovering Emai Pattern
 Web applications use different technologies and programming paradigms compared to desktop apps
 
 #### (2/16) Web Server Fingerprinting - Study Guide
+
+
+
+
+
+
 #### (3/16) HTTP Verbs - Study Guide
 #### (4/16) Netcat
 #### (5/16) Directories and Files Enumeration - Study Guide
@@ -1964,5 +2128,6 @@ Defense:
 To do:
 - [ ] Simplify main index, gather sections together
 - [ ] Make a tool list
-- [ ]
+- [ ] colorize code
+- [ ] write code on gist and link here
 -->
