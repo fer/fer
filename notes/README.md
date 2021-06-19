@@ -2,6 +2,10 @@
 
 A note archive I can maintain.
 
+## Courses
+
+- [eLearnSecurity Junior Penetration Tester](courses/INE/eJPT.md)
+
 ## Tools
 
 - [`cURL`](tools/curl.md)
