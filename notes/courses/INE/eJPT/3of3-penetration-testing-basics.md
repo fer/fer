@@ -21,7 +21,7 @@ Government Sites
 - System for Award Management
 - GSA eLibrary
 
-Whois database (also accesible through Linux command `whois`)
+Whois database (also accessible through Linux command `whois`)
 - Owner name
 - Street addresses
 - Email Address
