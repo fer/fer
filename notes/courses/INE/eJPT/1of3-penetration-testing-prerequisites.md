@@ -1,4 +1,4 @@
-****# Penetration Testing Prerequisites
+# Penetration Testing Prerequisites
 
 - [Introduction](#introduction)
   - [Differences between Clear Text, Cryptography Protocols & VPNs](#differences-between-clear-text-cryptography-protocols--vpns)
