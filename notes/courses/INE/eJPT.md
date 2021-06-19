@@ -13,6 +13,7 @@ To do:
 -->
 
 > Find these documentation files under this [GitHub repo](https://github.com/fer/fer).
+
 ## References
 
 - [Binary Fingers](https://www.mathsisfun.com/numbers/binary-count-fingers.html)
