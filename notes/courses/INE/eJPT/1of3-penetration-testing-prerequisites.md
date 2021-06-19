@@ -1,8 +1,53 @@
-# Penetration Testing Prerequisites
+****# Penetration Testing Prerequisites
+
+- [Introduction](#introduction)
+  - [Differences between Clear Text, Cryptography Protocols & VPNs](#differences-between-clear-text-cryptography-protocols--vpns)
+  - [HTTP(s) Traffic Sniffing with Wireshark](#https-traffic-sniffing-with-wireshark)
+  - [Basic Binary and Hexadecimal Arithmetic](#basic-binary-and-hexadecimal-arithmetic)
+    - [Binary](#binary)
+    - [Hexadecimal](#hexadecimal)
+- [Networking](#networking)
+  - [Protocols](#protocols)
+    - [Protocol Layers](#protocol-layers)
+    - [IPv4](#ipv4)
+    - [IPv6](#ipv6)
+  - [Routing](#routing)
+  - [Hubs/Switches & Protocols](#hubsswitches--protocols)
+    - [MAC addresses](#mac-addresses)
+  - [TCP & UDP & Ports](#tcp--udp--ports)
+    - [TCP 3-way handshake](#tcp-3-way-handshake)
+  - [Firewall & Network Defense](#firewall--network-defense)
+    - [IDS / Intrusion Detection Systems](#ids--intrusion-detection-systems)
+    - [IPS](#ips)
+    - [Stop on Obstacle](#stop-on-obstacle)
+  - [LAB: Find the Secret Server](#lab-find-the-secret-server)
+  - [DNS](#dns)
+    - [DNS Resolution Algorithm](#dns-resolution-algorithm)
+    - [Resolvers and Root servers](#resolvers-and-root-servers)
+    - [Reverse DNS Resolution](#reverse-dns-resolution)
+  - [Wireshark](#wireshark)
+- [Web Applications](#web-applications)
+  - [HTTP Protocol Basics](#http-protocol-basics)
+    - [HTTPS: HTTP over SSL/TLS as an encryption layer](#https-http-over-ssltls-as-an-encryption-layer)
+    - [Tools](#tools)
+  - [HTTP Cookies (1994 - Netscape)](#http-cookies-1994---netscape)
+  - [Sessions](#sessions)
+    - [Session cookies](#session-cookies)
+  - [Same Origin Policy (SOP)](#same-origin-policy-sop)
+  - [Burp Suite](#burp-suite)
+- [Penetration Testing](#penetration-testing)
+  - [Penetration Testing Introduction](#penetration-testing-introduction)
+  - [Lifecycle of a Penetration Tester](#lifecycle-of-a-penetration-tester)
+    - [Engagement](#engagement)
+    - [Information Gathering](#information-gathering)
+    - [Footprinting and Scanning](#footprinting-and-scanning)
+    - [Vulnerability Assessment](#vulnerability-assessment)
+    - [Exploitation](#exploitation)
+    - [Reporting](#reporting)
+- [References](#references)
+- [Glossary](#glossary)
 
 ## Introduction
-
-### The Information Security Field
 
 The term 'hacker' (person who is curious, highly intelligent, starving for knowledge) was born in the 60s (MIT Community).
 
@@ -468,19 +513,7 @@ Be able to filter:
 - Filter http traffic
 - Filter ICMP
 
-### <span style="color: red">LAB - Data Exfiltration</span>
-
-
-
-
-
-
-
-
-
 ## Web Applications
-
-### Web Application Introduction
 
 - The web app world is extremely heterogeneous. Every web application is different from others because developers have many ways to accomplish the same task.
 - Having flexibility in web app development also means having flexibility in creating insecure code.
@@ -489,15 +522,16 @@ Be able to filter:
 ### HTTP Protocol Basics
 
 HTTP works on top of TCP protocol, so when the connection is established, the client sends a request and waits for the answer. The server processes the request and sends back its answer, along with status code and data:
-- Client -> HTTP req -> Server
-- Client <- HTTP res <- Server
 
-HTTP Protocol Basics
+- Client -> HTTP request -> Server
+- Client <- HTTP response <- Server
+
+HTTP Connection establishment:
 
 - Client -> SYN -> Server
 - Client <- SYN/ACK <- Server
 - Client -> ACK + GET /html -> Server
-- Client <- HTML resp + Close connetion <- Server
+- Client <- HTML response + Close connection <- Server
 
 The format of an HTTP message is:
 
@@ -527,7 +561,7 @@ Some status codes:
 | 404 Not Found             | the server cannot find the resource matching the request       |
 | 500 Internal Server Error | the server does not support the functionality required         |
 
-##### HTTP Request
+Request example:
 
 ```bash
 GET / HTTP/1.1                                    # VERB path protocol version
@@ -541,7 +575,7 @@ Connection: keep-alive                            # Future communications with t
 < PAGE CONTENT > ...
 ```
 
-##### HTTP Response
+Response example:
 
 ```bash
 HTTP/1.1 200 OK                                   # Status-Line: protocol version + status code + textual meaning
@@ -556,30 +590,74 @@ Content-Length: 99043                             # length in bytes of the messa
 < PAGE CONTENT > ...
 ```
 
-##### HTTPS: How to protect HTTP using an encryption layer
+#### HTTPS: HTTP over SSL/TLS as an encryption layer
 
-- HTTPS: HTTP over SSL/TLS is a method to run HTTP which is a clear-text protocol over SSL/TLS, a cryptographic protocol
-- Provides: Confidentiality, Integrity Protection and Authentication to the HTTP protocol
-- An attacker cannot sniff the application layer communication
-- An attacker cannot alter the application layer data
-- The client can tell the real identity of the server and, sometimes, vice-versa
-- Traffic can be sniffed, but any adjacent user will not know req/resp headers, req/resp body, req target domain
-- When inspecting HTTPS, one cannot know what domain is contacted and what data is exchanged
-- HTTPS does not protect against web application flaws
-- All the attacks against an application happen regardless of SSL/TLS
-  - Such as XSS and SQL injection will still work
+HTTPS: *HTTP over SSL/TLS* is a method to run HTTP which is a clear-text protocol over SSL/TLS, a cryptographic protocol:
 
-### <span style="color:red"> VIDEO HTTP(s) Protocol Basics</span>
+- Provides: Confidentiality, Integrity Protection and Authentication to the HTTP protocol.
+- An attacker cannot neither sniff the application layer communication nor alter the application layer data.
+- Traffic can be sniffed, but any adjacent user will not know request/response headers, request/response body, request target domain.
+- The client can tell the *real identity of the server* and, sometimes, vice-versa.
+- When inspecting HTTPS, one cannot know what domain is contacted and what data is exchanged.
+- HTTPS does not protect against web application flaws.
+- All the attacks against an application happen regardless of SSL/TLS, such as XSS and SQL injection will still work.
+
+#### Tools
+
+`netcat` opens a raw connection to a service port:
+
+```bash
+$ nc -v www.ferrari.com 80
+
+...
+GET / HTTP/1.1
+Host: www.ferrari.com # 2 lines after inputting this line
+
+...
+HEAD / HTTP/1.1
+Host: www.ferrari.com
+
+...
+HEAD /en_en/ HTTP/1.1
+Host: www.ferrari.com
+```
+
+```bash
+$ nc -v hack.me 443
+
+GET / HTTP/1.1
+Host: hack.me
+
+# Nothing is displayed as netcat cannot open SSL websites
+```
+
+```bash
+$ openssl s_client -connect hack.me:443
+$ openssl s_client -connect hack.me:443 -debug
+$ openssl s_client -connect hack.me:443 -state
+$ openssl s_client -connect hack.me:443 -quiet
+
+# Certificate is spat out
+
+GET / HTTP/1.1
+Host: hack.me
+
+
+OPTIONS / HTTP/1.1
+Host: hack.me
+
+
+```
+
+`Burp Suite` repeater tool also allows same operation in order to inspect raw response given a HTTP verb. It can also configure a HTTPS connection right away.
 
 ### HTTP Cookies (1994 - Netscape)
-- HTTP is a stateless protocol
-- HTTP cannot keep the state of a visit across different HTTP requests
-- HTTP requests are unrelated to the preceding and following ones
-- Often exploits rely on stealing cookies
-- Cookies / Cookie jar, just textual information installed by a website into a web browser
 
+- HTTP is a stateless protocol, therefore HTTP cannot keep the state of a visit across different HTTP requests.
+- HTTP requests are unrelated to the preceding and following ones.
+- Often exploits rely on stealing cookies: Cookies / Cookie jar, just textual information installed by a website into a web browser.
 
-A server can set a cookie via `Set-Cookie` HTTP header field in a response message.
+A server can set a cookie via `Set-Cookie` HTTP header field in a response message:
 
 ```
 HTTP/1.1 200 OK
@@ -595,17 +673,11 @@ Content-Length: 99043
 < PAGE CONTENT > ...
 ```
 
-A cookie contains the following attributes:
-- The actual content
-- An expiration date
-- A path
-- The domain
-- Optional flags
-  - Http only flag
-  - Secure flag
-
 ##### Cookie format
-|                        |                                        |
+
+A cookie contains the following attributes: the actual content, an expiration date, path, domain and optional flags (Http only flag, Secure flag).
+
+| Field                  | Value                                  |
 | :--------------------- | :------------------------------------- |
 | Cookie Content         | ID=Value;                              |
 | Expiration Date        | expires=Thu, 21-May-2015 15:25:20 GMT; |
@@ -614,31 +686,31 @@ A cookie contains the following attributes:
 | Flag-setting Attribute | HttpOnly                               |
 
 - Browsers use domain, path, expires and flags attributes to choose whether or not to send a cookie in request.
-- Cookies are sent only to the valid domain/path when they are not expired and according totheir flags.
+- Cookies are sent only to the valid domain/path when they are not expired and according to their flags.
 - The domain field and the path field set the scope of the cookie.
 - The browser sends the cookie only if the request is for the right domain.
 - When a web server installs a cookie, it sets the domain field.
 - Then the browser will use the cookie for every request sent to that domain and *all its subdomains*.
 - If the server does not specify the domain attribute, the browser will automatically set the domain as the server domain and set the cookie 'host-only' flag,meaning that this cookie will be sent only to that precise hostname.
-- Respectively, when a cookie has the path attribute set, the browser will send the cookie to the right domain and to the resolurces in that path *and not any other*
-- A browser will not send an expired cookie tothe server, session cookies will expire with the HTTP session.
-- `http-only` flag is a mechanism that prevents JavaScript or any other non-HTML technology from reading the cookie (preventing a XSS robbery)
-- `Secure` flag creates secure cookies that will only be sent over an HTTPS connection
+- Respectively, when a cookie has the path attribute set, the browser will send the cookie to the right domain and to the resources in that path *and not any other*.
+- A browser will not send an expired cookie to the server, session cookies will expire with the HTTP session.
+- `http-only` flag is a mechanism that prevents JavaScript or any other non-HTML technology from reading the cookie (preventing a XSS robbery).
+- `Secure` flag creates secure cookies that will only be sent over an HTTPS connection.
 
 ### Sessions
 
-- Sometimes the web developer prefers to store some information on the server side
-- This avoids the back and forth data transmission and hides the application logic
-- Sessions are a mechanism that lets the website store variables specific for a given visit on the server side
-- Each session is identified by a session id
-- The client presents this ID for each subsequent request
-- With that ID, the server is able to retrieve the state of the client
+Sessions are a mechanism that lets the website store variables specific for a given visit on the server side:
 
-##### Session cookies
+- Sometimes the web developer prefers to store some information on the server side.
+- This avoids the back and forth data transmission and hides the application logic.
+- Each session is identified by a session id, where the client presents this ID for each subsequent request.
+- With that ID, the server is able to retrieve the state of the client.
+
+#### Session cookies
 
 Session cookies allow to install a session ID on a web browser
 
-```
+```bash
 SESSION=0mwerj234w
 PHPSESSID=1992maiwr2H     # PHP
 JSESSIONID=W8234mSfsw3    # JSP
@@ -649,9 +721,14 @@ JSESSIONID=W8234mSfsw3    # JSP
 - The browser will send back the cookie according to the cookie protocol,thus sending the session ID.
 - Session IDs can also be transmitted via GET requests.
 
-### <span style="color: red">VIDEO - HTTP(s) Cookies and Sessions</span>
+Session cookies and Cookies can be inspected and manipulated via Firebug for Firefox or any other web developer tools. Your session will be forwarded to re-authenticate if you delete the session cookie after login process.
 
-### Same Origin Policy
+```javascript
+// If HttpOnly isn't enabled, we'd be able to access the cookie jar from JavaScript
+document.cookie
+```
+
+### Same Origin Policy (SOP)
 
 - SOP / Same Origin Policy is a critical point of web application security.
 - Prevents JavaScript code from getting/setting properties on a resource coming from a different origin.
@@ -663,47 +740,49 @@ JSESSIONID=W8234mSfsw3    # JSP
 ### Burp Suite
 
 - Any web application contains many objects like scripts, images, stylesheets, client and server-side intelligence.
-- Having tools that help inthe study and analysis of web application behavior is critical.
+- Having tools that help in the study and analysis of web application behavior is critical.
 - An *intercepting proxy* is a tool that lets you analyze and modify any request and any response exchanged between an HTTP client and a server.
 - Intercepting proxy != web proxy (as Squid)
 
 BurpSuite will let you:
+
 - Intercept request/responses between your browser and web server.
 - Build requests manually.
 - Crawl a website by automatically visiting every page in a website.
 - Fuzz webapps by sending them patterns of a valid and invalid inputs to test their behavior.
 - You can modify the header and the body of a message by hand or automatically.
-
-> Learn how to configure your browser's proxy to work with Burp Suite
-
 - Burp Repeater lets you manually build raw HTTP requests.
 - Same can be achieved with `nc` or `telnet`.
 
-### <span style="color: red">VIDEO - Burpsuite</span>
-### <span style="color: red">LAB - Burp Suite Basics</span>
-### <span style="color: red">LAB - Burp Suite</span>
+Options:
+- Proxy: let's you view, intercept and modify traffic between browser/
+- Spider: web crawler.
+- Repeater: manipulate and reissue HTTP requests.
+- Learn how to find hidden resources on web application.
+- Learn how to configure your browser's proxy to work with Burp Suite, apart of setting 'scope'.
 
-### Penetration Testing
+## Penetration Testing
 
-#### Penetration Testing Introduction
+### Penetration Testing Introduction
 
 - A penetration tester performs a deep investigation of a remote system's security flaws.
 - Penetration testers must test for any and all vulnerabilities, not just the ones that may grant them root access.
 - Penetration testing is not about getting `root`!
-- Penetration testers cannot destroy their client's infrastructure, professional pentesting requires a thorough understanding of attack vectors and their potential
+- Penetration testers cannot destroy their client's infrastructure, professional pentesting requires a thorough understanding of attack vectors and their potential.
 
-#### Lifecycle of a Penetration Tester
+### Lifecycle of a Penetration Tester
 
 - Pentester activity must guarantee that the least impact possible on the production systems and services.
 - Avoid overloading client's systems and networks.
 - Communicate to client what steps to take, just in case anything goes wrong during the pentest.
 - Pentesting is a process that ensures that every potential vulnerability or security weakness gets tested with the lowest possible overhead.
 
-##### Engagement
+#### Engagement
 
 Details about the pentest are established during the Engagement phase.
 
 Quotation:
+
 - Fee establishment for the job to be accomplished.
 - Fee will vary according to:
   - Type of engagement: black box, gray box, etc.
@@ -764,7 +843,7 @@ Legal work:
 - Outline what you can and you cannot do.
 - Rules of engagement is another document that will define the scope of engagement and will put on paper what you are entitled to do and when, this includes the time window for your tests and your contacts in the client's organizations
 
-##### Information Gathering
+#### Information Gathering
 
 - Fundamental stage for a successful penetration test.
 - Starts once the legal paperwork is complete, and not before.
@@ -801,7 +880,7 @@ Web Applications:
 - Harvest Frameworks and CMS in use
 - Treat webapps as completely separate entities
 
-##### Footprinting and Scanning
+#### Footprinting and Scanning
 
 Here you deepen your knowledge of the in-scope servers and services.
 
@@ -817,7 +896,6 @@ Port Scanning:
 - Any mistake made here will impact next steps
 - `nmap` uses different scanning techniques to reveal open, closed and filtered ports
 
-
 Detecting Services:
 
 - Act of knowing what service which service is listening on that port.
@@ -830,7 +908,7 @@ By knowing the services running, we can know:
 - Purpose of a particular IP address (server/client)
 - Relevance of the host in the infrastructure
 
-##### Vulnerability Assessment
+#### Vulnerability Assessment
 
 - Aims to build a list of the present vulnerabilities on the target systems.
 - The pentester will carry out a vulnerability assessment on each target discovered in the previous steps
@@ -842,7 +920,7 @@ Vulnerability assessments can be carried out:
   - Extremely important to properly configure them, you might crash targets if not
   - Their output is a report that the pentester can use in the exploitation phase
 
-##### Exploitation
+#### Exploitation
 
 - Phase where we verify the vulnerabilities really exist.
 - During this phase, a pentester checks and validates a vulnerability and also widens and increases the privileges on the target systems and networks.
@@ -851,7 +929,7 @@ Vulnerability assessments can be carried out:
 
 > Information Gathering -> Scanning -> Vulnerability Assessment -> Exploiting
 
-##### Reporting
+#### Reporting
 
 - This step is as important as the rest of the phases, as it delivers the results to executives, IT staff and development team.
 - This report must address:
@@ -871,6 +949,9 @@ Consultancy:
 - [Binary Fingers](https://www.mathsisfun.com/numbers/binary-count-fingers.html)
 - [Binary Hex Converters](https://www.binaryhexconverter.com/)
 - [CDIR Calculator](https://www.subnet-calculator.com/cidr.php)
+- [DataExfiltration with PacketWhisper](https://github.com/TryCatchHCF/PacketWhisper)
+- [egresscheck framework](https://github.com/stufus/egresscheck-framework)
+- [Exfiltration](https://attack.mitre.org/tactics/TA0010/)
 - [Hacker Manifesto](http://phrack.org/iss3.html)
 - [ISO/OSI Model](https://docs.microsoft.com/en-US/windows-hardware/drivers/network/windows-network-architecture-and-the-osi-model)
 - [OpenVPN stable release](https://build.openvpn.net/downloads/releases/latest/)
@@ -897,6 +978,9 @@ CAM
 
 DoS
 : Denial of Service.
+
+Egress Filtering
+: Practice of monitoring and potentially restricting the flow of information outbound from one network to another. Typically it is information from a private TCP/IP computer network to the Internet that is controlled.
 
 Packet
 : Stream of bits running as electric signals on physical media used for data transmission (wire/LAN, WiFi). Every packet has *header* (ensures receiver can interpret payload and handle the communication) and a *payload* (with the actual information).
