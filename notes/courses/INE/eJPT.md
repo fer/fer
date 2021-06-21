@@ -22,9 +22,11 @@ To do:
 - [DataExfiltration with PacketWhisper](https://github.com/TryCatchHCF/PacketWhisper)
 - [egresscheck framework](https://github.com/stufus/egresscheck-framework)
 - [Exfiltration](https://attack.mitre.org/tactics/TA0010/)
+- [Exploit DB](https://www.exploit-db.com/google-hacking-database)
 - [Hacker Manifesto](http://phrack.org/iss3.html)
 - [ISO/OSI Model](https://docs.microsoft.com/en-US/windows-hardware/drivers/network/windows-network-architecture-and-the-osi-model)
 - [OpenVPN stable release](https://build.openvpn.net/downloads/releases/latest/)
+- [OWASP-XSS](https://owasp.org/www-community/attacks/xss/)
 - [Special Use of IPv4 Addresses](https://datatracker.ietf.org/doc/html/rfc5735)
 - [TCPView](https://docs.microsoft.com/en-us/sysinternals/downloads/tcpview)
 - [Variable Length Subnet Table For IPv4](https://datatracker.ietf.org/doc/html/rfc1878).
@@ -66,3 +68,6 @@ Security through Obscurity
 
 ShellCode
 : Piece of custom code which provides the attacker a shell on the victim machine.
+
+XSS
+: XSS is a vulnerability that lets an attacker control some of the content of a web application. XSS vulnerabilities happen when a web application uses unfiltered user input to build the output content displayed to its end users, letting an attacker control the output HTML and JS code, targeting the app's users (admin is included). XSS involves injecting malicious code into the output of a webpage, this malicious code is the rendered (or executed) by the browser of the visiting users.

