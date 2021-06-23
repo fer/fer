@@ -19,6 +19,7 @@ To do:
 - [Binary Fingers](https://www.mathsisfun.com/numbers/binary-count-fingers.html)
 - [Binary Hex Converters](https://www.binaryhexconverter.com/)
 - [CDIR Calculator](https://www.subnet-calculator.com/cidr.php)
+- [Common Security](https://wiki.skullsecurity.org/Passwords)
 - [DataExfiltration with PacketWhisper](https://github.com/TryCatchHCF/PacketWhisper)
 - [egresscheck framework](https://github.com/stufus/egresscheck-framework)
 - [Exfiltration](https://attack.mitre.org/tactics/TA0010/)
@@ -106,10 +107,10 @@ Trojan Horse:
 : Comes embedded in seemingly harmless file, being _backdoors_ the most common.
 
 Virus
-: Small piece of code that spreads from computer to computer without any direct action or authorization by the owners of the infected machines, normally copying themselves to special sections of the HDD or inside legitimate programs or documents, running everytime an infected program or file is opened.
+: Small piece of code that spreads from computer to computer without any direct action or authorization by the owners of the infected machines, normally copying themselves to special sections of the HDD or inside legitimate programs or documents, running every time an infected program or file is opened.
 
-Worms:
-Spread over the network by exploiting OS and SW vulnerabilities, exploiting credentials or misconfigurations to attack a service or a machine, usually worms are part of other software and they offer an entry point into the target system.
+Worms
+: Spread over the network by exploiting OS and SW vulnerabilities, exploiting credentials or misconfigurations to attack a service or a machine, usually worms are part of other software and they offer an entry point into the target system.
 
 XSS
 : XSS is a vulnerability that lets an attacker control some of the content of a web application. XSS vulnerabilities happen when a web application uses unfiltered user input to build the output content displayed to its end users, letting an attacker control the output HTML and JS code, targeting the app's users (admin is included). XSS involves injecting malicious code into the output of a webpage, this malicious code is the rendered (or executed) by the browser of the visiting users.
