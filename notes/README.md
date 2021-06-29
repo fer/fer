@@ -10,6 +10,7 @@ A note archive I can maintain.
 
 - [`cURL`](tools/curl.md)
 - [`git`](tools/git.md)
+- [`gource`](tools/gource.md)
 - [`nmap`](tools/nmap.md)
 
 ## Linux
@@ -17,4 +18,5 @@ A note archive I can maintain.
 This is a selection of notes and tips on using the command-line that I've found useful when working on Linux/MacOS X.
 
 - [Bash Keyboard Shortcuts](linux/bash-keyboard-shortcuts.md)
+- [Bash Scripting](linux/bash-scripting.md)
 - [History](linux/history.md)
