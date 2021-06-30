@@ -37,7 +37,7 @@ sudo nmap -sV -n -v -Pn -p- -T4 -iL ips.txt -A --open -oG portScan.grep
 
 ### Open Ports and Running Services
 
-####  
+####  172.16.64.101
 
 | Port Number | Service | Version |
 | :--- | :--- | :--- |
