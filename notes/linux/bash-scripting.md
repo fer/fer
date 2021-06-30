@@ -25,24 +25,24 @@ my_watch(){
 while getopts 't:' OPTION
 do
   case $OPTION in
-    t)	time="$OPTARG"
- 	case $time in
-    	  ''|*[!0-9]*)
-	     exec >&2; echo "error: -t argument is not a number!"
- 	     usage; exit 1
+    t)    time="$OPTARG"
+     case $time in
+          ''|*[!0-9]*)
+         exec >&2; echo "error: -t argument is not a number!"
+          usage; exit 1
           ;;
-   	  *) if [ -z $3 ]; then
-	      exec >&2; echo "error: missing command argument"
- 	      usage; exit 1
-	     else
- 	      my_watch $3 $time
-	     fi
-	  ;;
-	esac
-      	;;
-    ?)	usage
-	exit 2
-	;;
+         *) if [ -z $3 ]; then
+          exec >&2; echo "error: missing command argument"
+           usage; exit 1
+         else
+           my_watch $3 $time
+         fi
+      ;;
+    esac
+          ;;
+    ?)    usage
+    exit 2
+    ;;
   esac
 done
 
@@ -58,19 +58,19 @@ my_watch $1
 SCREENLS=`screen -ls | sed -ne 's|^['$'\t'']\+\('$cur'[^'$'\t'']\+\).*Attached.*$|\1 ?|p'`
 
 create_session(){
-	dialog --yesno 'There is no screen to be resumed. Create?' 0 0
-	if [ $? = 0 ]; then
-	   s_name=$(dialog --stdout --inputbox 'Session name:' 0 0)
-	   screen -S $s_name
-	fi
+    dialog --yesno 'There is no screen to be resumed. Create?' 0 0
+    if [ $? = 0 ]; then
+       s_name=$(dialog --stdout --inputbox 'Session name:' 0 0)
+       screen -S $s_name
+    fi
 }
 
 if [ -z $SCREENLS]; then
-	create_session
+    create_session
 else
-	# Attach
-	result=$( dialog --stdout --menu 'Select screen session (or press Cancel to create a new one):' 0 70 0 $SCREENLS)
-	[ -z $result ] && create_session || screen -x $result
+    # Attach
+    result=$( dialog --stdout --menu 'Select screen session (or press Cancel to create a new one):' 0 70 0 $SCREENLS)
+    [ -z $result ] && create_session || screen -x $result
 fi
 ```
 
@@ -80,19 +80,20 @@ fi
 #!/bin/sh
 
 fibonacci() {
-	if [ $# -lt 1 ];
-	then
-		echo "fibonacci: specify an index"
-		return;
-	fi;
+    if [ $# -lt 1 ];
+    then
+        echo "fibonacci: specify an index"
+        return;
+    fi;
 
-	if [ $1 == 0 ]; then echo 0; return; fi;
-	if [ $1 == 1 ]; then echo 1; return; fi;
+    if [ $1 == 0 ]; then echo 0; return; fi;
+    if [ $1 == 1 ]; then echo 1; return; fi;
 
-	echo $(expr $(fibonacci $(expr $1 - 1)) + $(fibonacci $(expr $1 - 2)));
+    echo $(expr $(fibonacci $(expr $1 - 1)) + $(fibonacci $(expr $1 - 2)));
 }
 ```
 
 ## References
 
-- https://devhints.io/bash
+* [https://devhints.io/bash](https://devhints.io/bash)
+

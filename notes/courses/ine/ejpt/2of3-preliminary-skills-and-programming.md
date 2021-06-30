@@ -1,63 +1,64 @@
 # Preliminary Skills & Programming
 
-- [Introduction](#introduction)
-- [C++](#c)
-  - [Operators](#operators)
-  - [Iteration and Conditional Structures](#iteration-and-conditional-structures)
-  - [Pointers](#pointers)
-  - [Arrays](#arrays)
-  - [Functions Study Guide](#functions-study-guide)
-  - [Example: Steals user's directory content](#example-steals-users-directory-content)
-  - [Example: keylogger that sends any collected information back](#example-keylogger-that-sends-any-collected-information-back)
-- [Python](#python)
-  - [Basics](#basics)
-  - [Lists](#lists)
-  - [Dictionaries](#dictionaries)
-  - [Network sockets](#network-sockets)
-  - [Port Scanner](#port-scanner)
-  - [Backdoor](#backdoor)
-  - [Example: HTTP verifier](#example-http-verifier)
-  - [Example: HTTP, GET request and check status code](#example-http-get-request-and-check-status-code)
-  - [Example: Develop a brute-forcing script in Python, that will use employee details as credentials](#example-develop-a-brute-forcing-script-in-python-that-will-use-employee-details-as-credentials)
-- [Command Line Scripting (12 items)](#command-line-scripting-12-items)
-  - [Bash Shell](#bash-shell)
-  - [Bash Environment](#bash-environment)
-  - [Bash Commands and Programs](#bash-commands-and-programs)
-  - [Bash Output Redirectors and Special Characters](#bash-output-redirectors-and-special-characters)
-  - [Bash Conditional Statements and Loops](#bash-conditional-statements-and-loops)
-  - [Windows Command Line](#windows-command-line)
-  - [Windows Environment](#windows-environment)
-  - [Windows Commands and Programs](#windows-commands-and-programs)
-  - [Windows Output Redirectors and Special Characters](#windows-output-redirectors-and-special-characters)
-  - [Windows Conditional Statements and Loops](#windows-conditional-statements-and-loops)
+* [Introduction](2of3-preliminary-skills-and-programming.md#introduction)
+* [C++](2of3-preliminary-skills-and-programming.md#c)
+  * [Operators](2of3-preliminary-skills-and-programming.md#operators)
+  * [Iteration and Conditional Structures](2of3-preliminary-skills-and-programming.md#iteration-and-conditional-structures)
+  * [Pointers](2of3-preliminary-skills-and-programming.md#pointers)
+  * [Arrays](2of3-preliminary-skills-and-programming.md#arrays)
+  * [Functions Study Guide](2of3-preliminary-skills-and-programming.md#functions-study-guide)
+  * [Example: Steals user's directory content](2of3-preliminary-skills-and-programming.md#example-steals-users-directory-content)
+  * [Example: keylogger that sends any collected information back](2of3-preliminary-skills-and-programming.md#example-keylogger-that-sends-any-collected-information-back)
+* [Python](2of3-preliminary-skills-and-programming.md#python)
+  * [Basics](2of3-preliminary-skills-and-programming.md#basics)
+  * [Lists](2of3-preliminary-skills-and-programming.md#lists)
+  * [Dictionaries](2of3-preliminary-skills-and-programming.md#dictionaries)
+  * [Network sockets](2of3-preliminary-skills-and-programming.md#network-sockets)
+  * [Port Scanner](2of3-preliminary-skills-and-programming.md#port-scanner)
+  * [Backdoor](2of3-preliminary-skills-and-programming.md#backdoor)
+  * [Example: HTTP verifier](2of3-preliminary-skills-and-programming.md#example-http-verifier)
+  * [Example: HTTP, GET request and check status code](2of3-preliminary-skills-and-programming.md#example-http-get-request-and-check-status-code)
+  * [Example: Develop a brute-forcing script in Python, that will use employee details as credentials](2of3-preliminary-skills-and-programming.md#example-develop-a-brute-forcing-script-in-python-that-will-use-employee-details-as-credentials)
+* [Command Line Scripting \(12 items\)](2of3-preliminary-skills-and-programming.md#command-line-scripting-12-items)
+  * [Bash Shell](2of3-preliminary-skills-and-programming.md#bash-shell)
+  * [Bash Environment](2of3-preliminary-skills-and-programming.md#bash-environment)
+  * [Bash Commands and Programs](2of3-preliminary-skills-and-programming.md#bash-commands-and-programs)
+  * [Bash Output Redirectors and Special Characters](2of3-preliminary-skills-and-programming.md#bash-output-redirectors-and-special-characters)
+  * [Bash Conditional Statements and Loops](2of3-preliminary-skills-and-programming.md#bash-conditional-statements-and-loops)
+  * [Windows Command Line](2of3-preliminary-skills-and-programming.md#windows-command-line)
+  * [Windows Environment](2of3-preliminary-skills-and-programming.md#windows-environment)
+  * [Windows Commands and Programs](2of3-preliminary-skills-and-programming.md#windows-commands-and-programs)
+  * [Windows Output Redirectors and Special Characters](2of3-preliminary-skills-and-programming.md#windows-output-redirectors-and-special-characters)
+  * [Windows Conditional Statements and Loops](2of3-preliminary-skills-and-programming.md#windows-conditional-statements-and-loops)
 
 ## Introduction
 
 Set of instructions that a computer may follow. It can be used to automate tasks, leaving specific things to be done by a machine instead of a human. Syntax and usage requirements are specific per language, but purpose keeps on being the same.
-- Each programming language has its own syntax, which may require some instructions to use certain characters at the end of each statement while in another language this may not be needed.
-- Variables might have different types depending on the programming language.
-- Functions are normally allowed to be created. These are pieces of code responsible for some repeatable tasks. Might use arguments and return a value.
-- Conditional statements are part of a programming language syntax.
-- Loops are a set of instructions that need to be executed numerous times.
+
+* Each programming language has its own syntax, which may require some instructions to use certain characters at the end of each statement while in another language this may not be needed.
+* Variables might have different types depending on the programming language.
+* Functions are normally allowed to be created. These are pieces of code responsible for some repeatable tasks. Might use arguments and return a value.
+* Conditional statements are part of a programming language syntax.
+* Loops are a set of instructions that need to be executed numerous times.
 
 Level can tell how close these languages are to the hardware.
 
-| Low level                                                       | High level                                                                   |
-| :-------------------------------------------------------------- | :--------------------------------------------------------------------------- |
-| More complicated, more prone to create vulnerabilities          | Ease of development                                                          |
-| Can do anything with them, as they are so closed to the machine | Less flexible                                                                |
-| Deep understanding is required                                  | Writing custom functionality from scratch can be difficult                   |
-| Assembly                                                        | Java, Python                                                                 |
-|                                                                 | They can't run on a bare OS, will need some kind of software already running |
+| Low level | High level |
+| :--- | :--- |
+| More complicated, more prone to create vulnerabilities | Ease of development |
+| Can do anything with them, as they are so closed to the machine | Less flexible |
+| Deep understanding is required | Writing custom functionality from scratch can be difficult |
+| Assembly | Java, Python |
+|  | They can't run on a bare OS, will need some kind of software already running |
 
-| Programming Languages                                                                                     | Scripting Languages                                                              |
-| :-------------------------------------------------------------------------------------------------------- | :------------------------------------------------------------------------------- |
-| Programming languages require a compiler.                                                                 | Interpreted                                                                      |
+| Programming Languages | Scripting Languages |
+| :--- | :--- |
+| Programming languages require a compiler. | Interpreted |
 | A compiler will convert your plain-text program file into something readable by the language environment. | Software environment install on your computer can read a plain-text program file |
 
 ## C++
 
-```c++
+```cpp
 /*
     `Hello World` example where we make use of:
     - Comments
@@ -82,17 +83,17 @@ int main() {
 
 Variables can be 'global' or 'local'.
 
-| Variable Type     |                                                  |
-| :---------------- | :----------------------------------------------- |
-| short / short int | short integer (2 bytes)                          |
-| int               | integer (4 bytes)                                |
-| long / long int   | long integer (4 bytes)                           |
-| bool              | boolean (1 byte)                                 |
-| float             | floating point number (4 bytes)                  |
-| double            | double precision floating point number (8 bytes) |
-| char              | Character (1 byte)                               |
+| Variable Type |  |
+| :--- | :--- |
+| short / short int | short integer \(2 bytes\) |
+| int | integer \(4 bytes\) |
+| long / long int | long integer \(4 bytes\) |
+| bool | boolean \(1 byte\) |
+| float | floating point number \(4 bytes\) |
+| double | double precision floating point number \(8 bytes\) |
+| char | Character \(1 byte\) |
 
-```c++
+```cpp
 // Input / Output
 
 int uservalue;
@@ -104,37 +105,35 @@ cin >> uservalue;
 
 In C++ there are four main classes of operators:
 
-| Operator   |                                  |
-| :--------- | :------------------------------- |
-| Relational | `>`, `>=`, `<`, `<=`, `==`, `!=` |
-| Logical    | `&&`, `||`, `!`                  |
-| Bitwise    | `&`, `|`, `^`, `~`, `>>`, `<<`   |
+| Operator |  |  |  |
+| :--- | :--- | :--- | :--- |
+| Relational | `>`, `>=`, `<`, `<=`, `==`, `!=` |  |  |
+| Logical | `&&`, \` |  | `,`!\` |
+| Bitwise | `&`, \` | `,`^`,`~`,`&gt;&gt;`,`&lt;&lt;\` |  |
 
-
-- Expressions that use relational or logical operators return 0 or false and 1 for true.
-- 0 value converts to false
-- non-zero values automatically converts to true
-
+* Expressions that use relational or logical operators return 0 or false and 1 for true.
+* 0 value converts to false
+* non-zero values automatically converts to true
 
 ### Iteration and Conditional Structures
 
-- Useful to instruct the program to execute or to repeat a specific operation when some condition is matched.
+* Useful to instruct the program to execute or to repeat a specific operation when some condition is matched.
 
-| Selection | Iteration | Jump     |
-| :-------- | :-------- | :------- |
-| if        | while     | break    |
-| switch    | for       | continue |
-|           | do-while  | goto     |
-|           |           | return   |
+| Selection | Iteration | Jump |
+| :--- | :--- | :--- |
+| if | while | break |
+| switch | for | continue |
+|  | do-while | goto |
+|  |  | return |
 
-```c++
+```cpp
 if (expression)
   statement;
 else
   statement;
 ```
 
-```c++
+```cpp
 switch(expression) {
  case constant1:
   statement sequence
@@ -147,7 +146,7 @@ switch(expression) {
 }
 ```
 
-```c++
+```cpp
 for(initialization;condition;increment) {
   statement
 }
@@ -157,7 +156,7 @@ for ( ; ; ) {
 }
 ```
 
-```c++
+```cpp
 while (condition) {
   statement;
 }
@@ -167,7 +166,7 @@ do {
 } while (condition);
 ```
 
-```c++
+```cpp
 goto label;
 ...
 ...
@@ -176,12 +175,12 @@ label:
 
 ### Pointers
 
-- A pointer is a variable that holds a memory address. This address is the location of another object in memory.
-- If a variable is a pointer, it must be declared in a different way.
-- `type` defines the type of variable the pointer can point to.
-- `*` is the complement of `&`. It returns the value located at the address of the following operator.
+* A pointer is a variable that holds a memory address. This address is the location of another object in memory.
+* If a variable is a pointer, it must be declared in a different way.
+* `type` defines the type of variable the pointer can point to.
+* `*` is the complement of `&`. It returns the value located at the address of the following operator.
 
-```c++
+```cpp
 type *name;
 
 x = &y; // places the value in memory pointed by y into x. So if y contains the memory address of another variable, x will have the same of that 3rd variable
@@ -191,7 +190,7 @@ x = &y; // places the value in memory pointed by y into x. So if y contains the 
 
 An array is a collection of variables of the same type, which is accessed by an index. All arrays have 0 as an index of the first element:
 
-```c++
+```cpp
 type var_name[size];
 
 // Iterate
@@ -208,7 +207,7 @@ for (i=0; i<20; i++) {
 
 Functions are blocks of statements defined under a name.
 
-```c++
+```cpp
 type function_name(param1, param2, ...){
   statements;
 }
@@ -223,17 +222,17 @@ int sum(int x, int y) {
 
 In almost any programming language, there are two ways in which we can pass arguments to a function:
 
-- By value
-  - Copies the value of an argument into a parameter. Changes made to the parameter do not affect the argument
-  - Code in the function does not alter the arguments used by the caller
-  - It's a copy of the value of the argument passed into the function
-  - What occurs inside the function has NO EFFECT on the variable provided by the caller
-- By reference
-  - The address of an argument (not the value) is copied into the parameter
-  - Inside the function, the address is used to access the actual argument used in the call
-  - Changes made to the parameter will affect the argument
+* By value
+  * Copies the value of an argument into a parameter. Changes made to the parameter do not affect the argument
+  * Code in the function does not alter the arguments used by the caller
+  * It's a copy of the value of the argument passed into the function
+  * What occurs inside the function has NO EFFECT on the variable provided by the caller
+* By reference
+  * The address of an argument \(not the value\) is copied into the parameter
+  * Inside the function, the address is used to access the actual argument used in the call
+  * Changes made to the parameter will affect the argument
 
-```c++
+```cpp
 void swap(int& x, int& y) {
   int temp;
   temp=*x;
@@ -246,7 +245,7 @@ void swap(int& x, int& y) {
 
 Listen for an incoming connection with `nc -lvp 5555`:
 
-```c++
+```cpp
 #define _WINSOCK_DEPRECATED_NO_WARNINGS
 #pragma comment(lib, "Ws2_32.lib")
 #include <iostream>
@@ -304,7 +303,7 @@ int main()
 
 Listen for an incoming connection with `nc -lvp 5555`:
 
-```c++
+```cpp
 #define _WINSOCK_DEPRECATED_NO_WARNINGS
 #pragma comment(lib, "Ws2_32.lib")
 #include <iostream>
@@ -350,21 +349,22 @@ WSACleanup();
 ### Basics
 
 Python is:
-- Cross-platform.
-- Free.
-- Interpreted.
-- Usable in conjunction with components written in some other languages.
-- Uses whitespace and indentation to determine block structures.
-- Python does not use brackets to delimit a block, using indentation instead.
-- A delimiter isn't needed (as ';').
-- There isn't the need to declare the type of a variable.
-- The following is interpreted as **False**: `0`, `False`, `None`, `""`, `[]`. Everything else is considered as `True`.
-- Comparison and Logical operators: `<`, `<=`. `==`, `>`, `>=`, `!=`, `is`, `is not`, `in`, `not in`, `And`, `Or`, `Not`.
-- There isn't a `switch / case` statement.
+
+* Cross-platform.
+* Free.
+* Interpreted.
+* Usable in conjunction with components written in some other languages.
+* Uses whitespace and indentation to determine block structures.
+* Python does not use brackets to delimit a block, using indentation instead.
+* A delimiter isn't needed \(as ';'\).
+* There isn't the need to declare the type of a variable.
+* The following is interpreted as **False**: `0`, `False`, `None`, `""`, `[]`. Everything else is considered as `True`.
+* Comparison and Logical operators: `<`, `<=`. `==`, `>`, `>=`, `!=`, `is`, `is not`, `in`, `not in`, `And`, `Or`, `Not`.
+* There isn't a `switch / case` statement.
 
 Operators:
 
-```
+```text
 =, +, -, *, /, // (division, with results in truncation), ** (exponentiation), %
 ```
 
@@ -416,18 +416,18 @@ range(0,5) # 0, 1, 2, 3, 4
 
 ### Lists
 
-- Ordered collections of any type of object
-- The general form of a list is a comma-separated list of elements, embraced in square brackets
-- Lists are mutable, elements can be modified by assignments
-- Python implements many functions that can be used to modifyu a list:
-  - `append`: append a new element to the target list
-  - `extend`: allows to add one list to another
-  - `insert`: add a new list element right before a specific index
-  - `del`: delete list items or slices, indices are automatically updated
-  - `remove`: it does not work with indices, instead it looks for a given value within the list and it removes that element
-  - `.pop(i)`: removes the item at the given position
-  - `.sort()`: sorts a list (items must be of the same type)
-  - `.reverse()`: reverses the order of the elments in the list
+* Ordered collections of any type of object
+* The general form of a list is a comma-separated list of elements, embraced in square brackets
+* Lists are mutable, elements can be modified by assignments
+* Python implements many functions that can be used to modifyu a list:
+  * `append`: append a new element to the target list
+  * `extend`: allows to add one list to another
+  * `insert`: add a new list element right before a specific index
+  * `del`: delete list items or slices, indices are automatically updated
+  * `remove`: it does not work with indices, instead it looks for a given value within the list and it removes that element
+  * `.pop(i)`: removes the item at the given position
+  * `.sort()`: sorts a list \(items must be of the same type\)
+  * `.reverse()`: reverses the order of the elments in the list
 
 ```python
 simple_list = [1, 2, 3, 4, 5]
@@ -442,16 +442,16 @@ x.remove(2)   # [1]
 
 ### Dictionaries
 
-- Similar to associative arrays
-- Mapping objects
-- Instead of being indexed by numbers, dictionaries are using _keys_ for indexing elements
-- We have some methods:
-  - `.values()`: returns all the values stored in the dictionary
-  - `.keys()`: returns all the keys stored in the dictionary
-  - `.items()`: returns all the keys and values in the dictionary
-- We can also check wif an specific item exists using the existing two following methods:
-  - `key in dictionary`
-  - `get(key, message)`: if the key exists, returns the associated value, otherwise prints the message passed as an parameter
+* Similar to associative arrays
+* Mapping objects
+* Instead of being indexed by numbers, dictionaries are using _keys_ for indexing elements
+* We have some methods:
+  * `.values()`: returns all the values stored in the dictionary
+  * `.keys()`: returns all the keys stored in the dictionary
+  * `.items()`: returns all the keys and values in the dictionary
+* We can also check wif an specific item exists using the existing two following methods:
+  * `key in dictionary`
+  * `get(key, message)`: if the key exists, returns the associated value, otherwise prints the message passed as an parameter
 
 ```python
 dictionary = {'first': 'one', 'second': 2}
@@ -524,8 +524,8 @@ my_sock.close()
 
 ### Port Scanner
 
-- Instead of using `connect()` we'll use `connect_ex()`, which returns - if the operation succeeded.
-- This script will use the full 3-way handshake.
+* Instead of using `connect()` we'll use `connect_ex()`, which returns - if the operation succeeded.
+* This script will use the full 3-way handshake.
 
 ```python
 import socket
@@ -550,7 +550,7 @@ for port in range(lowport, highport):
 
 ### Backdoor
 
-The program simply binds itself to a NIC and a specific port (6666) and then waits for the client commands. Depending on the command received, it will return specific information to the client.
+The program simply binds itself to a NIC and a specific port \(6666\) and then waits for the client commands. Depending on the command received, it will return specific information to the client.
 
 ```python
 import socket, platform, os
@@ -680,37 +680,37 @@ for name in uniqNames:
         getAuthorized("http://172.16.120.120/admin.php", name, dept)
 ```
 
-## Command Line Scripting (12 items)
+## Command Line Scripting \(12 items\)
 
 ### Bash Shell
 
-- The main non-graphical tool to interact with the operating system is Shell.
-- In FreeBSD there is no GUI at all.
-- Other notable shells: `ksh`, `zsh`, `dash`.
+* The main non-graphical tool to interact with the operating system is Shell.
+* In FreeBSD there is no GUI at all.
+* Other notable shells: `ksh`, `zsh`, `dash`.
 
 ### Bash Environment
 
-- Upon the start of the shell, the OS checks for the existence of several files as: `~/.bashrc`, `~/.bash_login`, `~/.bash_profile`, `~/.bash_logout`.
-- Environment Variables can be viewed by typing `env`.
-- `PATH` is a relevant environment variable, which has a format of `[location]:[location]:...:[location]`.
-- The `PATH` variable is one of the execution helpers.
+* Upon the start of the shell, the OS checks for the existence of several files as: `~/.bashrc`, `~/.bash_login`, `~/.bash_profile`, `~/.bash_logout`.
+* Environment Variables can be viewed by typing `env`.
+* `PATH` is a relevant environment variable, which has a format of `[location]:[location]:...:[location]`.
+* The `PATH` variable is one of the execution helpers.
 
 ### Bash Commands and Programs
 
-- Bash has some built-in commands that provide basic functionality.
-- Examples are: `fg`, `echo`, `set`, `while`.
-- Most commands that are used in everyday tasks are external mini-programs kept in `PATH` locations (use `which` to find the real location).
-- `man` displays help about commands.
+* Bash has some built-in commands that provide basic functionality.
+* Examples are: `fg`, `echo`, `set`, `while`.
+* Most commands that are used in everyday tasks are external mini-programs kept in `PATH` locations \(use `which` to find the real location\).
+* `man` displays help about commands.
 
 ### Bash Output Redirectors and Special Characters
 
-- `~`: current user's home directory.
-- `*`: wildcard that can be used for choosing only certain types of files.
-- `$()`: will be evaluated before the whole statement and will become part of this statement.
-- Use `command > file.txt` format to create a file containing command's output.
-- Use `command >> file.txt` format to append containing command's output to an existing file.
-- `|`: pipe.
-- chaining commands is a quite powerful Bash feature, one-liners.
+* `~`: current user's home directory.
+* `*`: wildcard that can be used for choosing only certain types of files.
+* `$()`: will be evaluated before the whole statement and will become part of this statement.
+* Use `command > file.txt` format to create a file containing command's output.
+* Use `command >> file.txt` format to append containing command's output to an existing file.
+* `|`: pipe.
+* chaining commands is a quite powerful Bash feature, one-liners.
 
 ```bash
 file `ls /etc/*.conf | sort` > test.txt && cat test.txt | wc -l
@@ -718,7 +718,7 @@ file `ls /etc/*.conf | sort` > test.txt && cat test.txt | wc -l
 
 ### Bash Conditional Statements and Loops
 
-- `chmod +x scriptname` so you can execute this script with `./scriptname`
+* `chmod +x scriptname` so you can execute this script with `./scriptname`
 
 ```bash
 echo '#!/bin/bash' > script.sh
@@ -745,12 +745,12 @@ fi
 
 Conditional statements:
 
-- `-eq`: equal
-- `-ne`: not equal
-- `-lt`: less than
-- `-le`: less than or equal
-- `-gt`: greater than
-- `-ge`: greater than or equal
+* `-eq`: equal
+* `-ne`: not equal
+* `-lt`: less than
+* `-le`: less than or equal
+* `-gt`: greater than
+* `-ge`: greater than or equal
 
 Loops:
 
@@ -819,45 +819,46 @@ done
 
 ### Windows Command Line
 
-- `cmd.exe` or Windows Command Line is the Microsoft equivalent of the Linux Bash Shell.
-- Its usual location is `C:\Windows\system32\cmd.exe`.
-- CMD relies mainly on built-in commands.
-- Some of the are: `dir`, `cls`, `move` or `del`.
+* `cmd.exe` or Windows Command Line is the Microsoft equivalent of the Linux Bash Shell.
+* Its usual location is `C:\Windows\system32\cmd.exe`.
+* CMD relies mainly on built-in commands.
+* Some of the are: `dir`, `cls`, `move` or `del`.
 
 ### Windows Environment
 
-In Windows 10: `Control Panel` > `System and Security` > `System` > `Advanced System Settings`.
-- There are System variables (for all users) and for current user.
-- Windows does have a `PATH` variable too, where the executable directories are separated through the `;` symbol.
+In Windows 10: `Control Panel` &gt; `System and Security` &gt; `System` &gt; `Advanced System Settings`.
+
+* There are System variables \(for all users\) and for current user.
+* Windows does have a `PATH` variable too, where the executable directories are separated through the `;` symbol.
 
 ### Windows Commands and Programs
 
-- Windows CMD supports more built-in commands than the Linux one.
-- If you would like to make your newly installed software executable from the command line, syou should place it within any of your `PATH` locations or change the `PATH` variable to contain its location.
+* Windows CMD supports more built-in commands than the Linux one.
+* If you would like to make your newly installed software executable from the command line, syou should place it within any of your `PATH` locations or change the `PATH` variable to contain its location.
 
 ### Windows Output Redirectors and Special Characters
 
-- Windows CMD is a less flexible scripting env than Bash.
-- PowerShell is better to create advanced scripts in Windows.
-- In order to access Windows' env variables: `%varname%`.
-- You can print env variables using `echo`, as in: `echo %PATH%`.
-- `set` allows you to view variables.
-- You can also create your own variables or temporarily modify existing ones.
-- Any modifications will not be permanent and will only exist in the current `cmd.exe` window.
-- Two different `cmd.exe` windows will not affect each other.
-- Output redirection also works in Windows, as in `echo aaa > file.txt` or the append version: `echo bbb >> file.txt`.
-- View files with `type` command: `type file.txt`.
-- Some ways of command chaining:
-  - `command1 & command2`: execute both regardless of the result.
-  - `command1 && command2`: execute the 2nd one if the 1st one's execution succeeded.
-  - `command1 | command2`: send output from the first command to the second one.
-  - `command1 || command2`: execute the 1st command, and if ti fails, execute the second one.
+* Windows CMD is a less flexible scripting env than Bash.
+* PowerShell is better to create advanced scripts in Windows.
+* In order to access Windows' env variables: `%varname%`.
+* You can print env variables using `echo`, as in: `echo %PATH%`.
+* `set` allows you to view variables.
+* You can also create your own variables or temporarily modify existing ones.
+* Any modifications will not be permanent and will only exist in the current `cmd.exe` window.
+* Two different `cmd.exe` windows will not affect each other.
+* Output redirection also works in Windows, as in `echo aaa > file.txt` or the append version: `echo bbb >> file.txt`.
+* View files with `type` command: `type file.txt`.
+* Some ways of command chaining:
+  * `command1 & command2`: execute both regardless of the result.
+  * `command1 && command2`: execute the 2nd one if the 1st one's execution succeeded.
+  * `command1 | command2`: send output from the first command to the second one.
+  * `command1 || command2`: execute the 1st command, and if ti fails, execute the second one.
 
 ### Windows Conditional Statements and Loops
 
-- `.bat` files allow you to save larger command line scripts
+* `.bat` files allow you to save larger command line scripts
 
-```powershell
+```text
 SET x=123
 if %x%==123 (echo true) # true
 if %x%==xyz (echo true) # nothing is output
@@ -866,8 +867,9 @@ if %x%==xyz (echo true) else (echo "does not contain xyz")
 
 For loop:
 
-```powershell
+```text
 for %i in (*.*) do @echo FILE: %i
 ```
 
 > `@`: hides the command prompt and just display the output
+

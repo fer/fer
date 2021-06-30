@@ -21,3 +21,4 @@ Convert the video to upload it to Youtube, Vimeo, etc.
 ```bash
 ffmpeg -y -r 60 -f image2pipe -vcodec ppm -i gource.ppm -crf 1 -threads 0 -bf 0 gource.mp4
 ```
+
