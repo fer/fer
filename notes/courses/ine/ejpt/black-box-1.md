@@ -97,9 +97,9 @@ You did it!
 
 #### 172.16.64.140
 
+Using Dirbuster we find a secret folder called **project**. This url is accessible under **admin/admin** credentials.
 
-
-
+![](../../../../.gitbook/assets/image%20%281%29.png)
 
 
 
