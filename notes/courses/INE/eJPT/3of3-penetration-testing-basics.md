@@ -559,7 +559,7 @@ Tool:
 ### Dirb
 
 ```bash
-dirb http://google.com -user-share-dirb-wordlists-small.txt -a "USER AGENT HERE"
+dirb http://google.com /usr/share/dirb/wordlists/small.txt -a "USER AGENT HERE"
 
 # Fill up Burpsuite with dirb requests
 dirb http://google.com -p http://127.0.0.1:8080
@@ -1156,7 +1156,7 @@ nmap -sS -p135,139,445 <IP>
 # -P Password policies of the system
 # -S shares available in the remote machine
 # brute force:
-enum3linux -s /usr/share/enum4linux/share-list.txt <IP>
+enum4linux -s /usr/share/enum4linux/share-list.txt <IP>
 # -a do all simple enumeration
 
 # => samrdump
