@@ -3,7 +3,7 @@
 * [README](README.md)
 * [Note Archive](notes/README.md)
   * [tools](notes/tools.md)
-* [ctf-writeups](ctf.md)
+* [OverTheWire: Wargames](ctf.md)
 
 ## Courses
 
@@ -23,6 +23,7 @@
 * [Bash Keyboard Shortcuts](linux/bash-keyboard-shortcuts.md)
 * [Bash Scripting](linux/bash-scripting.md)
 * [History](linux/history.md)
+* [Jupyter](linux/jupyter.md)
 
 ## Tools
 

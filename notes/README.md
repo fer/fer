@@ -15,8 +15,6 @@ A note archive I can maintain.
 
 ## Linux
 
-This is a selection of notes and tips on using the command-line that I've found useful when working on Linux/MacOS X.
-
 * [Bash Keyboard Shortcuts](../linux/bash-keyboard-shortcuts.md)
 * [Bash Scripting](../linux/bash-scripting.md)
 * [History](../linux/history.md)
