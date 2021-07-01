@@ -4,7 +4,7 @@
 
 The idea is simple, we gather info from history, lets look at the command combo’s now.
 
-```text
+```bash
 history | awk '{CMD[$2]++;count++;}END { for (a in CMD)print CMD[a] " " CMD[a]/count*100 "% " a;}' | grep -v "./" | column -c3 -s " " -t | sort -nr | nl |  head -n10
 ```
 

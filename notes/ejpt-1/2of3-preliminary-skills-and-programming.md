@@ -1,4 +1,4 @@
-# Preliminary Skills & Programming
+# 2/3: Preliminary Skills & Programming
 
 * [Introduction](2of3-preliminary-skills-and-programming.md#introduction)
 * [C++](2of3-preliminary-skills-and-programming.md#c)

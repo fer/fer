@@ -1,4 +1,4 @@
-# Penetration Testing Prerequisites
+# 1/3: Penetration Testing Prerequisites
 
 * [Introduction](1of3-penetration-testing-prerequisites.md#introduction)
   * [Differences between Clear Text, Cryptography Protocols & VPNs](1of3-penetration-testing-prerequisites.md#differences-between-clear-text-cryptography-protocols--vpns)
@@ -81,7 +81,7 @@ VPN:
 
 There are **2** websites using **HTTP** and **HTTPS** respectively, differences in the communication can be checked through a sniffer as Wireshark and using the command 'Follow TCP Stream':
 
-![](../../../../.gitbook/assets/http.png) ![](../../../../.gitbook/assets/https.png)
+![](../../.gitbook/assets/http.png) ![](../../.gitbook/assets/https.png)
 
 ### Basic Binary and Hexadecimal Arithmetic
 
@@ -151,7 +151,7 @@ IP protocol header is 160bits \(20Bytes\):
 * Source Address: 32 bits \(starting at position 96\).
 * Destination Address: just right after.
 
-![](../../../../.gitbook/assets/ip-header-format.drawio.png)
+![](../../.gitbook/assets/ip-header-format.drawio.png)
 
 #### Protocol Layers
 
@@ -366,7 +366,7 @@ Check _listening ports_ and _current TCP connections_ as information about the p
 
 #### TCP 3-way handshake
 
-![](../../../../.gitbook/assets/tcp-session-establishment.drawio.png)
+![](../../.gitbook/assets/tcp-session-establishment.drawio.png)
 
 TCP is connection oriented. The header fields involved in the handshake are:
 

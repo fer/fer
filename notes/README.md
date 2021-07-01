@@ -4,7 +4,7 @@ A note archive I can maintain.
 
 ## Courses
 
-* [eLearnSecurity Junior Penetration Tester](courses/ine/ejpt-1.md)
+* [eLearnSecurity Junior Penetration Tester](ejpt-1/)
 
 ## Tools
 

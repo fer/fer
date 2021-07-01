@@ -1,4 +1,4 @@
-# Penetration Testing Basics
+# 3/3: Penetration Testing Basics
 
 * [Information Gathering](3of3-penetration-testing-basics.md#information-gathering)
   * [Open-Source Intelligence](3of3-penetration-testing-basics.md#open-source-intelligence)
@@ -596,7 +596,7 @@ nmap -sV 10.104.11.96,198
 
 Find hidden files via dirbuster:
 
-![](../../../../.gitbook/assets/dirbuster.png)
+![](../../.gitbook/assets/dirbuster.png)
 
 You might find a `config.old` file where the MySQL database connection parameters are visible.
 

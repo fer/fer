@@ -4,7 +4,7 @@ description: >-
   Your goal is to read the flag file on each machine.
 ---
 
-# Black Box Penetration Test 1
+# Black Box Test 1
 
 ### Discover live hosts on the network
 
@@ -72,7 +72,7 @@ sudo nmap -sV -n -v -Pn -p- -T4 -iL ips.txt -A --open -oG portScan.grep
 
 Apache Tomcat has [http://172.16.64.101:8080/manager/html](http://172.16.64.101:8080/manager/html) as a management url. In case your authentication fail several times, a 401 page is presented, with a default username and password:
 
-![](../../../../.gitbook/assets/image.png)
+![](../../.gitbook/assets/image.png)
 
 ```bash
 # Terminal 1
@@ -99,11 +99,11 @@ You did it!
 
 Using Dirbuster we find a secret folder called **project**. This url is accessible under **admin/admin** credentials.
 
-![](../../../../.gitbook/assets/image%20%281%29.png)
+![](../../.gitbook/assets/image%20%281%29.png)
 
-![We find suspicious files under /project/backup/test](../../../../.gitbook/assets/image%20%283%29.png)
+![We find suspicious files under /project/backup/test](../../.gitbook/assets/image%20%283%29.png)
 
-![](../../../../.gitbook/assets/image%20%282%29.png)
+![](../../.gitbook/assets/image%20%282%29.png)
 
 {% embed url="http://172.16.64.140/project/backup/test/sdadas.txt" %}
 
