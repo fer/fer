@@ -10,7 +10,7 @@ I develop stuff sometimes. This is the philosophy I usually follow:
 2. If it isn't broken, don't fix it.
 3. Dead/commented code is zombie code and will always infect the system.
 
-Hereby I take some of [my notes](notes/) on GitHub.
+Hereby I take some of [my notes](https://ferx.gitbook.io/wiki/) on GitBook.
 
 ## Want to talk?
 
