@@ -157,6 +157,5 @@ sshpass -p dF3334slKw ssh developer@172.16.64.182
 find . | grep flag
 cat flag.txt 
 Congratulations, you got it!
-
 ```
 
