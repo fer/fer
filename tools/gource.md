@@ -1,6 +1,10 @@
-# Gource
+---
+description: >-
+  Gource is a nice piece of software to generate animations based on your Git
+  history.
+---
 
-Gource is a nice piece of software to generate animations based on your Git history.
+# gource
 
 ## Install
 

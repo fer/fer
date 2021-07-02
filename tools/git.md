@@ -1,13 +1,10 @@
-# Git
+---
+description: >-
+  Git is a free and open source distributed version control system designed to
+  handle everything from small to very large projects with speed and efficiency.
+---
 
-1. [Start](git.md#wiki-start)
-2. [Tagging](git.md#wiki-tagging)
-3. [Branches](git.md#wiki-branches)
-4. [Quick Recipes](git.md#wiki-quick-recipes)
-5. [Resources](git.md#wiki-resources)
-6. [Aliases](git.md#wiki-aliases)
-
-![](http://i43.tinypic.com/2rmw7ix.png)
+# git
 
 Get some help:
 
