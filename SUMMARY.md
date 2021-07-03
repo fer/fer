@@ -32,6 +32,7 @@
 * [grep](tools/grep.md)
 * [history](tools/history.md)
 * [nmap](tools/nmap.md)
+* [paste](tools/paste.md)
 * [ssh](tools/ssh.md)
 * [tar](tools/tar.md)
 * [sed](tools/sed.md)
@@ -44,6 +45,5 @@
 
 ---
 
-* [paste](paste.md)
 * [To Do](to-do.md)
 

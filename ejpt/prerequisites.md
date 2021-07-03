@@ -4,19 +4,7 @@ description: 'Technical aspects of systems, networks, and applications.'
 
 # Penetration Testing Prerequisites
 
-## Introduction
-
-The term 'hacker' \(person who is curious, highly intelligent, starving for knowledge\) was born in the 60s \(MIT Community\).
-
-Career opportunities:
-
-* Need of protecting sensitive information.
-* Wide range of cyber-threats.
-* IT Security is a difficult game.
-* Pentesters, simulate hacks against a network, computer system, webapp or organization using the same techniques as malicious criminals.
-* Demand is in growth.
-
-### Differences between Clear Text, Cryptography Protocols & VPNs
+## Differences between Clear Text, Cryptography Protocols & VPNs
 
 Clear-text:
 
