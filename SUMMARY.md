@@ -6,7 +6,9 @@
 ## eLearning Junior Penetration Tester <a id="ejpt"></a>
 
 * [Penetration Testing Prerequisites](ejpt/prerequisites.md)
-* [Preliminary Skills & Programming](ejpt/preliminary-skills-and-programming.md)
+* [Preliminary Skills & Programming](ejpt/preliminary-skills-and-programming/README.md)
+  * [C++](ejpt/preliminary-skills-and-programming/c++.md)
+  * [Python](ejpt/preliminary-skills-and-programming/python.md)
 * [Penetration Testing Basics](ejpt/basics.md)
 * [Black Box Test 1](ejpt/black-box-1.md)
 * [Black Box Test 2](ejpt/black-box-2.md)
