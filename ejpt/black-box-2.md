@@ -40,7 +40,7 @@ sudo nmap -sV -n -v -Pn -p- -T4 -iL ips.txt -A --open -oG portScan.grep
 | 80 | http | Apache httpd 2.4.18 \(Ubuntu\) |
 | 6379 | redis | Redis key-value store |
 
-### 172.16.64.92
+### 172.16.64.92 \(var/www/flag.txt\)
 
 | Port Number | Service | Version |
 | :--- | :--- | :--- |
@@ -240,7 +240,7 @@ Table: users
 
 ![](../.gitbook/assets/image%20%287%29.png)
 
-![](../.gitbook/assets/image%20%288%29.png)
+![](../.gitbook/assets/image%20%2810%29.png)
 
 ```text
 <!-- = '127.0.0.1'; = 'dbuser'; = 'xXxyYyzZz789789)))'; = 'footracking'; = mysqli_connect(, , , );-->
@@ -250,4 +250,8 @@ Table: users
 mysql --host=172.16.64.92 --user=dbuser --password=xXxyYyzZz789789))) --port 63306 footracking
 > update users set adm='yes' where id=3;
 ```
+
+![admin](../.gitbook/assets/image%20%289%29.png)
+
+![](../.gitbook/assets/image%20%288%29.png)
 
