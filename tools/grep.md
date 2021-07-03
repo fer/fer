@@ -23,3 +23,9 @@ grep -c ".*" filename
 grep ^[^#] /etc/squid/squid.conf
 ```
 
+
+
+* [7 Linux Grep OR, Grep AND, Grep NOT Operator Examples](http://www.thegeekstuff.com/2011/10/grep-or-and-not-operators/)
+* [USEFUL ONE-LINE SCRIPTS FOR SED](http://sed.sourceforge.net/sed1line.txt)
+* [Idle Curiosity and Bash](http://www.tomgibara.com/misc/command-history)
+

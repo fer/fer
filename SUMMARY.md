@@ -20,6 +20,7 @@
 * [Bash Keyboard Shortcuts](linux/bash-keyboard-shortcuts.md)
 * [Bash Scripting](linux/bash-scripting.md)
 * [Jupyter](linux/jupyter.md)
+* [String Manipulation](linux/string-manipulation.md)
 
 ## Tools
 
@@ -40,8 +41,4 @@
 ## CTF
 
 * [OverTheWire: Wargames](ctf/ctf.md)
-
----
-
-* [String Manipulation](string-manipulation.md)
 

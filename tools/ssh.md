@@ -25,3 +25,7 @@ function authme {
 
 gpg-agent can handle GPG keys as well as SSH keys. In order to use your SSH key with gpg-agent you have to run ssh-add once to store the key's fingerprint in ~/.gnupg/sshcontrol.
 
+
+
+[https://www.howtoforge.com/ssh-best-practices](https://www.howtoforge.com/ssh-best-practices)
+
