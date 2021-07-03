@@ -10,6 +10,7 @@
   * [C++](ejpt/preliminary-skills-and-programming/c++.md)
   * [Python](ejpt/preliminary-skills-and-programming/python.md)
   * [Bash Shell](ejpt/preliminary-skills-and-programming/bash-shell.md)
+  * [Windows Shell](ejpt/preliminary-skills-and-programming/windows-shell.md)
 * [Penetration Testing Basics](ejpt/basics.md)
 * [Black Box Test 1](ejpt/black-box-1.md)
 * [Black Box Test 2](ejpt/black-box-2.md)
