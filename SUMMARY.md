@@ -42,3 +42,8 @@
 
 * [OverTheWire: Wargames](ctf/ctf.md)
 
+---
+
+* [paste](paste.md)
+* [To Do](to-do.md)
+

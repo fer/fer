@@ -17,5 +17,5 @@ sysctl -a | grep kern.boottime
 
 
 
-[https://www.eriwen.com/productivity/find-is-a-beautiful-tool/](https://www.eriwen.com/productivity/find-is-a-beautiful-tool/)
+
 
