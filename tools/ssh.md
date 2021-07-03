@@ -1,8 +1,18 @@
+---
+description: >-
+  Know ssh, and the basics of passwordless authentication, via ssh-agent,
+  ssh-add, etc.
+---
+
 # ssh
 
+## **Append your key to a server's authorized keys file**
 
-
-* Know ssh, and the basics of passwordless authentication, via `ssh-agent`, `ssh-add`, etc.
+```bash
+function authme {
+   ssh $1 'cat >>.ssh/authorized_keys' <~/.ssh/id_rsa.pub
+}
+```
 
 ## References
 

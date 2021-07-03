@@ -18,7 +18,6 @@
 
 * [Bash Keyboard Shortcuts](linux/bash-keyboard-shortcuts.md)
 * [Bash Scripting](linux/bash-scripting.md)
-* [history](linux/history.md)
 * [Jupyter](linux/jupyter.md)
 
 ## Tools
@@ -27,6 +26,7 @@
 * [git](tools/git.md)
 * [gource](tools/gource.md)
 * [grep](tools/grep.md)
+* [history](tools/history.md)
 * [nmap](tools/nmap.md)
 * [ssh](tools/ssh.md)
 * [tar](tools/tar.md)
@@ -35,4 +35,8 @@
 ## CTF
 
 * [OverTheWire: Wargames](ctf/ctf.md)
+
+---
+
+* [Command Line](command-line.md)
 

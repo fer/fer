@@ -6,14 +6,6 @@ description: Simple scripts. No magic here.
 
 ## Examples
 
-### **A**ppend your key to a server's authorized keys file
-
-```bash
-function authme {
-   ssh $1 'cat >>.ssh/authorized_keys' <~/.ssh/id_rsa.pub
-}
-```
-
 ### `watch` command implemented in bash
 
 ```bash
