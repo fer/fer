@@ -23,6 +23,7 @@
 
 ## Tools
 
+* [awk](tools/awk.md)
 * [cURL](tools/curl.md)
 * [git](tools/git.md)
 * [gource](tools/gource.md)
@@ -33,8 +34,13 @@
 * [tar](tools/tar.md)
 * [sed](tools/sed.md)
 * [vim](tools/vim.md)
+* [xargs](tools/xargs.md)
 
 ## CTF
 
 * [OverTheWire: Wargames](ctf/ctf.md)
+
+---
+
+* [diff](diff.md)
 
