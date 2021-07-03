@@ -25,6 +25,7 @@
 
 * [awk](tools/awk.md)
 * [cURL](tools/curl.md)
+* [diff](tools/diff.md)
 * [git](tools/git.md)
 * [gource](tools/gource.md)
 * [grep](tools/grep.md)
@@ -42,5 +43,5 @@
 
 ---
 
-* [diff](diff.md)
+* [String Manipulation](string-manipulation.md)
 

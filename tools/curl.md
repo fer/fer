@@ -1,5 +1,11 @@
 # cURL
 
+
+
+{% hint style="info" %}
+For web debugging, `curl` and `curl -I` are handy, or their `wget` equivalents, or the more modern [`httpie`](https://github.com/jakubroztocil/httpie).
+{% endhint %}
+
 ## Fetch sessions with cURL
 
 If username and password are entered in a form on a login page, then cURL can "submit" that form like:
