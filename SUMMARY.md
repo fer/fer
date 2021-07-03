@@ -39,4 +39,5 @@
 ---
 
 * [Command Line](command-line.md)
+* [vim](vim.md)
 
