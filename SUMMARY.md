@@ -16,6 +16,7 @@
 
 ## Linux
 
+* [Command Line](linux/command-line.md)
 * [Bash Keyboard Shortcuts](linux/bash-keyboard-shortcuts.md)
 * [Bash Scripting](linux/bash-scripting.md)
 * [Jupyter](linux/jupyter.md)
@@ -31,13 +32,9 @@
 * [ssh](tools/ssh.md)
 * [tar](tools/tar.md)
 * [sed](tools/sed.md)
+* [vim](tools/vim.md)
 
 ## CTF
 
 * [OverTheWire: Wargames](ctf/ctf.md)
-
----
-
-* [Command Line](command-line.md)
-* [vim](vim.md)
 
