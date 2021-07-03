@@ -1,6 +1,7 @@
 # Table of contents
 
 * [README](README.md)
+* [Glossary](glossary.md)
 
 ## eLearning Junior Penetration Tester <a id="ejpt"></a>
 
@@ -11,14 +12,13 @@
 * [Black Box Test 2](ejpt/black-box-2.md)
 * [Black Box Test 3](ejpt/black-box-3.md)
 * [Tool Summary](ejpt/tool-summary.md)
-* [Glossary](ejpt/glossary.md)
 * [References](ejpt/references.md)
 
 ## Linux
 
 * [Bash Keyboard Shortcuts](linux/bash-keyboard-shortcuts.md)
 * [Bash Scripting](linux/bash-scripting.md)
-* [History](linux/history.md)
+* [history](linux/history.md)
 * [Jupyter](linux/jupyter.md)
 
 ## Tools
@@ -28,6 +28,9 @@
 * [gource](tools/gource.md)
 * [grep](tools/grep.md)
 * [nmap](tools/nmap.md)
+* [ssh](tools/ssh.md)
+* [tar](tools/tar.md)
+* [sed](tools/sed.md)
 
 ## CTF
 

