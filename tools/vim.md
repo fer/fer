@@ -6,9 +6,7 @@ description: >-
 
 # vim
 
-
-
-## Start vim!
+## Start vim
 
 | Run it! | And get this |
 | :--- | :--- |
