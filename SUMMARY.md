@@ -51,3 +51,7 @@
 
 * [To Do](to-do.md)
 
+## Applications
+
+* [Terminator](applications/terminator.md)
+

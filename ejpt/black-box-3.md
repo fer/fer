@@ -72,7 +72,7 @@ lo        Link encap:Local Loopback
 -->
 ```
 
-### 172.16.37.234
+### 172.16.37.234  \(flag.txt in ftp\)
 
 view-source:[http://172.16.37.234:40180/xyz/](http://172.16.37.234:40180/xyz/)
 
@@ -146,6 +146,7 @@ You got the first machine!
 
 ```text
 route add 172.16.50.0/24 via 10.13.37.1
+sudo nmap -sn 172.16.50.0/24
 ```
 
 We discovered 2 more machines we need to enumerate.
