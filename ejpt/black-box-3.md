@@ -184,5 +184,18 @@ PORT     STATE SERVICE
 9666/tcp open  zoomcp
 ```
 
+{% embed url="https://security.stackexchange.com/questions/188921/use-netcat-to-pivot" %}
+
+{% embed url="https://www.hackplayers.com/2018/05/taller-de-pivoting-netcat-y-socat.html" %}
+
+{% embed url="https://www.hackplayers.com/2018/05/taller-de-pivoting-netcat-y-socat.html" %}
+
+```text
+#!/bin/bash
+while true; do
+    # your netcat command(s) here
+done;
+```
+
 
 

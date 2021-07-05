@@ -1,27 +1,19 @@
 # Terminator
 
-Something handy for me is setting this up in the custom commands plugin for terminator.  
-i have 3 commands, one to pty.spawn bash, one to print and set stty info locally, and one to set stty on the actual rev shell. they are quick and dirty one liners but it works pretty well here are my commands:
+## Plugin: CustomCommandsMenu
 
-Terminator Custom Commands
+### Upgrade Reverse Shell to Fully Interactive TTY
 
-name: Upgrade TTY Python  
-Command: python -c "import pty;pty.spawn\('/bin/bash'\)"
+| Name | Command |
+| :--- | :--- |
+| Upgrade TTY Python | `python -c "import pty;pty.spawn('/bin/bash')"` |
+| Fix TTY 1 | `printf "\n\n(Rows,Cols)\n ";printf '\e[1;91m%-6s\e[m' $(stty size);printf "\n\nTerm= \e[91m$TERM\e[0m\n\n";stty raw -echo;fg;` |
+| Fix TTY 2 | `export SHELL=bash;export TERM=xterm-256color;stty rows 20 columns 100;\echo ;echo ;read -p "Enter Rows:" ROWS;read -p "Enter Cols:" COLS;stty rows $ROWS columns $COLS && clear` |
 
-name: Fix TTY 1  
-command: printf "\n\n\(Rows,Cols\)\n ";printf '\e\[1;91m%-6s\e\[m' $\(stty size\);printf "\n\nTerm= \e\[91m$TERM\e\[0m\n\n";stty raw -echo;fg;
-
-name: Fix TTY 2  
-command: export SHELL=bash;export TERM=xterm-256color;stty rows 20 columns 100;\echo ;echo ;read -p "Enter Rows:" ROWS;read -p "Enter Cols:" COLS;stty rows $ROWS columns $COLS && clear
-
-once you get a reverse shell  
-1. right click &gt; custom commands &gt; Upgrade TTY Python  
+Once you get a reverse shell  
+1. Right click &gt; custom commands &gt; Upgrade TTY Python  
 2. Press Ctrl+z to background  
-3. right click &gt; custom commands &gt; Fix TTY 1  
-4. right click &gt; custom commands &gt; Fix TTY 2  
-5. enter the row and col values when prompted \(should still be on screen from step 2, so long as no reset is used\).
-
-
-
-[https://blog.ropnop.com/upgrading-simple-shells-to-fully-interactive-ttys/](https://blog.ropnop.com/upgrading-simple-shells-to-fully-interactive-ttys/)
+3. Right click &gt; custom commands &gt; Fix TTY 1  
+4. Right click &gt; custom commands &gt; Fix TTY 2  
+5. Enter the `row` and `col` values when prompted \(should still be on screen from step 2, so long as no reset is used\)
 
