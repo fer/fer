@@ -6,9 +6,9 @@
 
 | Name | Command |
 | :--- | :--- |
-| Upgrade TTY Python | `python -c "import pty;pty.spawn('/bin/bash')"` |
-| Fix TTY 1 | `printf "\n\n(Rows,Cols)\n ";printf '\e[1;91m%-6s\e[m' $(stty size);printf "\n\nTerm= \e[91m$TERM\e[0m\n\n";stty raw -echo;fg;` |
-| Fix TTY 2 | `export SHELL=bash;export TERM=xterm-256color;stty rows 20 columns 100;\echo ;echo ;read -p "Enter Rows:" ROWS;read -p "Enter Cols:" COLS;stty rows $ROWS columns $COLS && clear` |
+| TTY/Upgrade TTY Python | `python -c "import pty;pty.spawn('/bin/bash')"` |
+| TTY/Fix TTY 1 | `printf "\n\n(Rows,Cols)\n ";printf '\e[1;91m%-6s\e[m' $(stty size);printf "\n\nTerm= \e[91m$TERM\e[0m\n\n";stty raw -echo;fg;` |
+| TTY/Fix TTY 2 | `export SHELL=bash;export TERM=xterm-256color;stty rows 20 columns 100;\echo ;echo ;read -p "Enter Rows:" ROWS;read -p "Enter Cols:" COLS;stty rows $ROWS columns $COLS && clear` |
 
 Once you get a reverse shell  
 1. Right click &gt; custom commands &gt; Upgrade TTY Python  
