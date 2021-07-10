@@ -2,6 +2,7 @@
 
 * [README](README.md)
 * [Glossary](glossary.md)
+* [To Do](to-do.md)
 
 ## eLearning Junior Penetration Tester <a id="ejpt"></a>
 
@@ -46,10 +47,6 @@
 ## CTF
 
 * [OverTheWire: Wargames](ctf/ctf.md)
-
----
-
-* [To Do](to-do.md)
 
 ## Applications
 

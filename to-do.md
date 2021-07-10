@@ -6,6 +6,10 @@ description: 'Please, do not look. Work in Progress.'
 
 {% embed url="https://www.eriwen.com/productivity/find-is-a-beautiful-tool/" %}
 
+[https://docs.xfce.org/panel-plugins/xfce4-genmon-plugin/start](https://docs.xfce.org/panel-plugins/xfce4-genmon-plugin/start)
+
+
+
 [http://www.karakas-online.de/gnu-linux-tools-summary/network-commands.html](http://www.karakas-online.de/gnu-linux-tools-summary/network-commands.html)
 
 NETCAT: [http://crysol.org/node/28](http://crysol.org/node/28) NETCAT: [http://www.sweetnam.eu/index.php/Using\_Netcat\_for\_Backup](http://www.sweetnam.eu/index.php/Using_Netcat_for_Backup)
