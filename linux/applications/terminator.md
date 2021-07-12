@@ -4,6 +4,8 @@
 
 ### Upgrade Reverse Shell to Fully Interactive TTY
 
+![](../../.gitbook/assets/image%20%2814%29.png)
+
 | Name | Command |
 | :--- | :--- |
 | TTY/Upgrade TTY Python | `python -c "import pty;pty.spawn('/bin/bash')"` |
