@@ -1,6 +1,8 @@
-# README
+---
+description: "Hello World! \U0001F44B"
+---
 
-## Hello World! 👋
+# README
 
 I'm [**fer**](https://github.com/fer), another human being stuck to screens since 1988.
 
