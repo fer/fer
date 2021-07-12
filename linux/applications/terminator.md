@@ -1,3 +1,7 @@
+---
+description: 'https://terminator-gtk3.readthedocs.io/en/latest/'
+---
+
 # Terminator
 
 ## Plugin: CustomCommandsMenu
