@@ -213,8 +213,6 @@ myfile-9.txt
 {% endtab %}
 {% endtabs %}
 
-## 
-
 ### Substitute string across a file
 
 ```bash

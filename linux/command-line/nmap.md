@@ -27,3 +27,15 @@ You can use `nmap` to list live hosts in a network.
 | To see just open ports and not closed / filtered ones | `--open` |
 |  For detailed information and running some scripts | `-A` |
 
+## Nmap options
+
+* `-sV` for version identification 
+* `-n` for disabling reverse DNS lookup 
+* `-v` for Verbose 
+* `-Pn` to assume the host is alive 
+* `-p-` to scan all the ports 
+* `-T4` to speed things up 
+* `-iL` to use a list of IPs as input \(ips.txt\) 
+* `--open` to see just open ports and not closed / filtered ones 
+* `-A` for detailed information and running some scripts
+
