@@ -21,34 +21,30 @@
 
 ## Linux
 
-* [Command Line](linux/command-line.md)
+* [Command Line Tools](linux/command-line/README.md)
+  * [awk](linux/command-line/awk.md)
+  * [cURL](linux/command-line/curl.md)
+  * [diff](linux/command-line/diff.md)
+  * [git](linux/command-line/git.md)
+  * [grep](linux/command-line/grep.md)
+  * [gource](linux/command-line/gource.md)
+  * [history](linux/command-line/history.md)
+  * [jupyter](linux/command-line/jupyter.md)
+  * [nmap](linux/command-line/nmap.md)
+  * [paste](linux/command-line/paste.md)
+  * [sed](linux/command-line/sed.md)
+  * [ssh](linux/command-line/ssh.md)
+  * [String Manipulation](linux/command-line/string-manipulation.md)
+  * [tar](linux/command-line/tar.md)
+  * [vim](linux/command-line/vim.md)
+  * [xargs](linux/command-line/xargs.md)
 * [Bash Keyboard Shortcuts](linux/bash-keyboard-shortcuts.md)
 * [Bash Scripting](linux/bash-scripting.md)
-* [Jupyter](linux/jupyter.md)
-* [String Manipulation](linux/string-manipulation.md)
-
-## Tools
-
-* [awk](tools/awk.md)
-* [cURL](tools/curl.md)
-* [diff](tools/diff.md)
-* [git](tools/git.md)
-* [gource](tools/gource.md)
-* [grep](tools/grep.md)
-* [history](tools/history.md)
-* [nmap](tools/nmap.md)
-* [paste](tools/paste.md)
-* [ssh](tools/ssh.md)
-* [tar](tools/tar.md)
-* [sed](tools/sed.md)
-* [vim](tools/vim.md)
-* [xargs](tools/xargs.md)
+* [Applications](linux/applications/README.md)
+  * [Terminator](linux/applications/terminator.md)
+  * [xfce4-genmon-plugin](linux/applications/xfce4-genmon-plugin.md)
 
 ## CTF
 
 * [OverTheWire: Wargames](ctf/ctf.md)
-
-## Applications
-
-* [Terminator](applications/terminator.md)
 
