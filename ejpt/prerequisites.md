@@ -802,7 +802,7 @@ Infrastructure Information Gathering:
 * Transform the IP addresses or the domains in scope into actionable information about servers, OSs, etc.
 * If the scope is defined as a list of IP addresses, you can move on to the next step.
 * If the scope is the whole company or some of their domains, you will have to harvest the relevant IP blocks by using `WHOIS` and other _DNS information_.
-* Give meaning to every IP address in scope, determining the following in order to focus your efforts/attacks and select the riht tools for the exploitation phase:
+* Give meaning to every IP address in scope, determining the following in order to focus your efforts/attacks and select the right tools for the exploitation phase:
   * if there's a live host or server using it
   * if there are one or more websites using that IP address
   * What OS is running on the host or the server
@@ -876,7 +876,7 @@ Vulnerability assessments can be carried out:
   * Impact and risk analysis for each vulnerability
   * Remediation tips \(of real value for the client, as they can be used to resolve their security issues\)
 
-Consultancy:
+#### Consultancy
 
 * Pentester are often asked to provide some hours of consultancy after delivering the report.
 * The initial engagement is closed and the pentester must keep the report encrypted in a safe place, or even destroy it.

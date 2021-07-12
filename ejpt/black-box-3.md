@@ -12,6 +12,10 @@ cat hostAlive.nmap | grep for | awk {'print $5'} > ips.txt
 sudo nmap -sV -n -v -Pn -p- -T4 -iL ips.txt -A --open -oG portScan.grep
 ```
 
+{% hint style="info" %}
+Find more [**nmap options**](https://ferx.gitbook.io/wiki/linux/command-line/nmap).
+{% endhint %}
+
 ### Hosts Alive
 
 | Host | OS |
