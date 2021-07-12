@@ -1,12 +1,14 @@
 ---
-description: >-
-  You can use this information as tutorial if you wish.
-  http://www.pement.org/sed/sed1line.txt
+description: 'http://www.pement.org/sed/sed1line.txt'
 ---
 
 # sed
 
 ## **Practice sed commands** 
+
+{% hint style="info" %}
+You can use this information as a tutorial if you wish.
+{% endhint %}
 
 Start by generating the following files. Check _Output_  tab to test your results.
 
