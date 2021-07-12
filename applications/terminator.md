@@ -10,10 +10,11 @@
 | TTY/Fix TTY 1 | `printf "\n\n(Rows,Cols)\n ";printf '\e[1;91m%-6s\e[m' $(stty size);printf "\n\nTerm= \e[91m$TERM\e[0m\n\n";stty raw -echo;fg;` |
 | TTY/Fix TTY 2 | `export SHELL=bash;export TERM=xterm-256color;stty rows 20 columns 100;\echo ;echo ;read -p "Enter Rows:" ROWS;read -p "Enter Cols:" COLS;stty rows $ROWS columns $COLS && clear` |
 
-Once you get a reverse shell  
-1. Right click &gt; custom commands &gt; Upgrade TTY Python  
-2. Press Ctrl+z to background  
-3. Right click &gt; custom commands &gt; Fix TTY 1  
-4. Right click &gt; custom commands &gt; Fix TTY 2  
-5. Enter the `row` and `col` values when prompted \(should still be on screen from step 2, so long as no reset is used\)
+#### Once you get a reverse shell:
+
+1. Right click → Custom Commands → TTY → Upgrade TTY Python  
+2. Press `ctrl+z` to background  
+3. Right click → Custom Commands → TTY → Fix TTY 1  
+4. Right click → Custom Commands → TTY → Fix TTY 2  
+5. Enter the `row` and `col` values as prompted from step 2
 
