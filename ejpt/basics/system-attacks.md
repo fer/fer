@@ -1,8 +1,6 @@
 # System Attacks
 
-## System Attacks
-
-### Backdoor
+## Backdoor
 
 Backdoors have two components, server and client:
 
@@ -12,7 +10,7 @@ Backdoors have two components, server and client:
 * If the backdoor server sits behind a firewall, the easiest way to archive a connection is using a **Connect-back Backdoor** or **Reverse Backdoor**.
 * A firewall cannot tell the difference between a user surfing the web and a backdoor connecting back to the attacker's machine.
 
-#### Create stable connection to a remote host
+### Create stable connection to a remote host
 
 ```bash
 # => Listener
@@ -53,11 +51,11 @@ while [ 1 ]; do
 done
 ```
 
-### Password Attacks
+## Password Attacks
 
 Normally stored in an encrypted form, preventing a malicious local user from getting to know user's passwords, using a _one-way encryption algorithm_, using a cryptographic hashing function. There are three main strategies:
 
-#### Brute force attacks
+### Brute force attacks
 
 > This method is only used when other attack vectors fail.
 
@@ -73,7 +71,7 @@ You try them all by _generating_ and testing all the possible valid passwords. G
   * `john -incremental -users:victim crackme`
   * To display the passwords recovered by `john`, use: `john --show <file>`
 
-#### Dictionary attacks
+### Dictionary attacks
 
 * Common passwords
 * Faster than pure brute force attacks
@@ -85,7 +83,7 @@ You try them all by _generating_ and testing all the possible valid passwords. G
   * Variations on dictionary words
   * `john -wordlist=<custom wordlist file> <file to crack> -rules <file to crack>`
 
-#### Rainbow Tables\*\*
+### Rainbow Tables
 
 * Offer a tradeoff between the processing time needed to calculate the hash of a password and the storage space needed to mount an attack.
 * A rainbow table contains links between the results of a run of one hashing function and another.
@@ -93,7 +91,7 @@ You try them all by _generating_ and testing all the possible valid passwords. G
 * Great choice to crack simple and complex short passwords.
 * `Ophcrack` rainbow cracking for Windows authentication passwords \(can run on Linux too\).
 
-### John the Ripper
+## John the Ripper
 
 ```bash
 unshadow /etc/passwd /etc/shadow > hashes.txt
@@ -101,7 +99,7 @@ john --wordlist=/usr/share/john/password.lst hashes.txt
 cat /root/.john/john.pot
 ```
 
-### Hashcat
+## Hashcat
 
 ```bash
 # -m hash-type
@@ -140,7 +138,7 @@ $2
 > hascat -m 0 -a 3 example.hash ?l?l?l?l
 ```
 
-### Buffer Overflow Attacks
+## Buffer Overflow Attacks
 
 A BoF attack can lead to:
 
@@ -154,7 +152,7 @@ A buffer is an area in the RAM reserved for temporary data storage:
 * User input, parts of a video file, server banners received by a client application. etc.
 * Buffers have a finite size, therefore: if an app developer does not enforce a buffer limit, an attacker could find a way to write data beyond those limits and write there arbitrary code
 
-#### Stack
+### Stack
 
 * A stack is a data structure used to store data.
 * Two operation for LIFO stacks: `pop` & `push`.

@@ -12,6 +12,7 @@
   * [Windows Shell](ejpt/preliminary-skills-and-programming/windows-shell.md)
 * [Penetration Testing Basics](ejpt/basics/README.md)
   * [Information Gathering](ejpt/basics/information-gathering.md)
+  * [Footprinting & Scanning](ejpt/basics/footprinting-and-scanning.md)
   * [Vulnerability Assessment](ejpt/basics/vulnerability-assessment.md)
   * [Web Attacks](ejpt/basics/web-attacks.md)
   * [System Attacks](ejpt/basics/system-attacks.md)
