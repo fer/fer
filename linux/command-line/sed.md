@@ -1,29 +1,73 @@
 ---
-description: 'http://www.pement.org/sed/sed1line.txt'
+description: >-
+  You can use this information as tutorial if you wish.
+  http://www.pement.org/sed/sed1line.txt
 ---
 
 # sed
 
+## **Practice sed commands** 
 
+Start by generating the following files. Check _Output_  tab to test your results.
 
-{% hint style="info" %}
-You can **use this information as tutorial** if you wish.
-{% endhint %}
-
-{% hint style="success" %}
-**Practice sed commands by generating the following files**
-
-\*\*\*\*
-
+{% tabs %}
+{% tab title="Input" %}
 ```bash
 mkdir sed-files
 cd sed-files
 touch myfile-{1..20}.md
-ls -la >> myfile-{1..20}.{md,txt}
+ls -1 >> myfile-{1..20}.{md,txt}
 ```
-{% endhint %}
+{% endtab %}
 
-## **Rename files massively**
+{% tab title="Output" %}
+```bash
+[~/sed-files] ls -1 
+myfile-10.md
+myfile-10.txt
+myfile-11.md
+myfile-11.txt
+myfile-12.md
+myfile-12.txt
+myfile-13.md
+myfile-13.txt
+myfile-14.md
+myfile-14.txt
+myfile-15.md
+myfile-15.txt
+myfile-16.md
+myfile-16.txt
+myfile-17.md
+myfile-17.txt
+myfile-18.md
+myfile-18.txt
+myfile-19.md
+myfile-19.txt
+myfile-1.md
+myfile-1.txt
+myfile-20.md
+myfile-20.txt
+myfile-2.md
+myfile-2.txt
+myfile-3.md
+myfile-3.txt
+myfile-4.md
+myfile-4.txt
+myfile-5.md
+myfile-5.txt
+myfile-6.md
+myfile-6.txt
+myfile-7.md
+myfile-7.txt
+myfile-8.md
+myfile-8.txt
+myfile-9.md
+myfile-9.txt
+```
+{% endtab %}
+{% endtabs %}
+
+### **Rename files massively**
 
 {% tabs %}
 {% tab title="Input" %}
@@ -34,50 +78,47 @@ ls *.txt | awk '{print("mv "$1" "$1)}' | sed 's/myfile/text/2' | /bin/sh
 
 {% tab title="Output" %}
 ```bash
-[~/sed-files] ls -la                                                                                                                                                   2 ⨯
-total 168
-drwxr-xr-x 2 kali kali 4096 Jul 12 07:56 .
-drwxr-xr-x 6 kali kali 4096 Jul 12 07:39 ..
--rw-r--r-- 1 kali kali 3424 Jul 12 07:52 myfile-10.md
--rw-r--r-- 1 kali kali 3424 Jul 12 07:52 myfile-11.md
--rw-r--r-- 1 kali kali 3424 Jul 12 07:52 myfile-12.md
--rw-r--r-- 1 kali kali 3424 Jul 12 07:52 myfile-13.md
--rw-r--r-- 1 kali kali 3424 Jul 12 07:52 myfile-14.md
--rw-r--r-- 1 kali kali 3424 Jul 12 07:52 myfile-15.md
--rw-r--r-- 1 kali kali 3424 Jul 12 07:52 myfile-16.md
--rw-r--r-- 1 kali kali 3424 Jul 12 07:52 myfile-17.md
--rw-r--r-- 1 kali kali 3424 Jul 12 07:52 myfile-18.md
--rw-r--r-- 1 kali kali 3424 Jul 12 07:52 myfile-19.md
--rw-r--r-- 1 kali kali 3424 Jul 12 07:52 myfile-1.md
--rw-r--r-- 1 kali kali 3424 Jul 12 07:52 myfile-20.md
--rw-r--r-- 1 kali kali 3424 Jul 12 07:52 myfile-2.md
--rw-r--r-- 1 kali kali 3424 Jul 12 07:52 myfile-3.md
--rw-r--r-- 1 kali kali 3424 Jul 12 07:52 myfile-4.md
--rw-r--r-- 1 kali kali 3424 Jul 12 07:52 myfile-5.md
--rw-r--r-- 1 kali kali 3424 Jul 12 07:52 myfile-6.md
--rw-r--r-- 1 kali kali 3424 Jul 12 07:52 myfile-7.md
--rw-r--r-- 1 kali kali 3424 Jul 12 07:52 myfile-8.md
--rw-r--r-- 1 kali kali 3424 Jul 12 07:52 myfile-9.md
--rw-r--r-- 1 kali kali 2258 Jul 12 07:52 text-10.txt
--rw-r--r-- 1 kali kali 2258 Jul 12 07:52 text-11.txt
--rw-r--r-- 1 kali kali 2258 Jul 12 07:52 text-12.txt
--rw-r--r-- 1 kali kali 2258 Jul 12 07:52 text-13.txt
--rw-r--r-- 1 kali kali 2258 Jul 12 07:52 text-14.txt
--rw-r--r-- 1 kali kali 2258 Jul 12 07:52 text-15.txt
--rw-r--r-- 1 kali kali 2258 Jul 12 07:52 text-16.txt
--rw-r--r-- 1 kali kali 2258 Jul 12 07:52 text-17.txt
--rw-r--r-- 1 kali kali 2258 Jul 12 07:52 text-18.txt
--rw-r--r-- 1 kali kali 2258 Jul 12 07:52 text-19.txt
--rw-r--r-- 1 kali kali 2258 Jul 12 07:52 text-1.txt
--rw-r--r-- 1 kali kali 2258 Jul 12 07:52 text-20.txt
--rw-r--r-- 1 kali kali 2258 Jul 12 07:52 text-2.txt
--rw-r--r-- 1 kali kali 2258 Jul 12 07:52 text-3.txt
--rw-r--r-- 1 kali kali 2258 Jul 12 07:52 text-4.txt
--rw-r--r-- 1 kali kali 2258 Jul 12 07:52 text-5.txt
--rw-r--r-- 1 kali kali 2258 Jul 12 07:52 text-6.txt
--rw-r--r-- 1 kali kali 2258 Jul 12 07:52 text-7.txt
--rw-r--r-- 1 kali kali 2258 Jul 12 07:52 text-8.txt
--rw-r--r-- 1 kali kali 2258 Jul 12 07:52 text-9.txt
+[~/sed-files] ls -1
+myfile-10.md
+myfile-11.md
+myfile-12.md
+myfile-13.md
+myfile-14.md
+myfile-15.md
+myfile-16.md
+myfile-17.md
+myfile-18.md
+myfile-19.md
+myfile-1.md
+myfile-20.md
+myfile-2.md
+myfile-3.md
+myfile-4.md
+myfile-5.md
+myfile-6.md
+myfile-7.md
+myfile-8.md
+myfile-9.md
+text-10.txt
+text-11.txt
+text-12.txt
+text-13.txt
+text-14.txt
+text-15.txt
+text-16.txt
+text-17.txt
+text-18.txt
+text-19.txt
+text-1.txt
+text-20.txt
+text-2.txt
+text-3.txt
+text-4.txt
+text-5.txt
+text-6.txt
+text-7.txt
+text-8.txt
+text-9.txt
 
 [~/sed-files] ls * | wc -l                     
 40
@@ -89,7 +130,92 @@ drwxr-xr-x 6 kali kali 4096 Jul 12 07:39 ..
 {% endtab %}
 {% endtabs %}
 
-## Substitute string across a file
+## Selective deletion of certain rules
+
+### Delete lines matching pattern
+
+{% tabs %}
+{% tab title="Input" %}
+```bash
+sed '/md/d' myfile-1.txt 
+```
+{% endtab %}
+
+{% tab title="Output" %}
+```bash
+[~/sed-files] sed '/md/d' myfile-1.txt 
+myfile-10.txt
+myfile-11.txt
+myfile-12.txt
+myfile-13.txt
+myfile-14.txt
+myfile-15.txt
+myfile-16.txt
+myfile-17.txt
+myfile-18.txt
+myfile-19.txt
+myfile-1.txt
+myfile-20.txt
+myfile-2.txt
+myfile-3.txt
+myfile-4.txt
+myfile-5.txt
+myfile-6.txt
+myfile-7.txt
+myfile-8.txt
+myfile-9.txt
+```
+{% endtab %}
+
+{% tab title="myfile-1.txt" %}
+```
+myfile-10.md
+myfile-10.txt
+myfile-11.md
+myfile-11.txt
+myfile-12.md
+myfile-12.txt
+myfile-13.md
+myfile-13.txt
+myfile-14.md
+myfile-14.txt
+myfile-15.md
+myfile-15.txt
+myfile-16.md
+myfile-16.txt
+myfile-17.md
+myfile-17.txt
+myfile-18.md
+myfile-18.txt
+myfile-19.md
+myfile-19.txt
+myfile-1.md
+myfile-1.txt
+myfile-20.md
+myfile-20.txt
+myfile-2.md
+myfile-2.txt
+myfile-3.md
+myfile-3.txt
+myfile-4.md
+myfile-4.txt
+myfile-5.md
+myfile-5.txt
+myfile-6.md
+myfile-6.txt
+myfile-7.md
+myfile-7.txt
+myfile-8.md
+myfile-8.txt
+myfile-9.md
+myfile-9.txt
+```
+{% endtab %}
+{% endtabs %}
+
+## 
+
+### Substitute string across a file
 
 ```bash
 sed -i s/regexp/subst/g file
