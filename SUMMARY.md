@@ -2,7 +2,6 @@
 
 * [README](README.md)
 * [Glossary](glossary.md)
-* [To Do](to-do.md)
 
 ## eLearning Junior Penetration Tester <a id="ejpt"></a>
 
@@ -24,7 +23,8 @@
 * [Command Line Tools](linux/command-line/README.md)
   * [awk](linux/command-line/awk.md)
   * [cURL](linux/command-line/curl.md)
-  * [diff](linux/command-line/diff.md)
+  * [diff](linux/command-line/diff/README.md)
+    * [To Do](linux/command-line/diff/to-do.md)
   * [git](linux/command-line/git.md)
   * [grep](linux/command-line/grep.md)
   * [gource](linux/command-line/gource.md)
