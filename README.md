@@ -12,7 +12,7 @@ I develop stuff sometimes. This is the philosophy I usually follow:
 
 Hereby I take some of [my notes on GitBook](https://ferx.gitbook.io/wiki/). 
 
-> If you see an error or something that could be better, please [submit an issue](https://github.com/fer/fer/issues/new) or [create a PR](https://github.com/fer/fer/compare) on GitHub.
+> If you see an error or something that could be better, please [submit an issue](https://github.com/fer/fer/issues/new) or [create a PR](https://github.com/fer/fer/compare) on [my GitHub.](https://github.com/fer)
 
 ## Want to talk?
 
