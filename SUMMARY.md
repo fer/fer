@@ -28,6 +28,7 @@
   * [git](linux/command-line/git.md)
   * [grep](linux/command-line/grep.md)
   * [gource](linux/command-line/gource.md)
+  * [gpg](linux/command-line/gpg.md)
   * [history](linux/command-line/history.md)
   * [jupyter](linux/command-line/jupyter.md)
   * [nmap](linux/command-line/nmap.md)

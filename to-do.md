@@ -6,7 +6,53 @@ description: 'Please, do not look. Work in Progress.'
 
 {% embed url="https://www.eriwen.com/productivity/find-is-a-beautiful-tool/" %}
 
-[https://docs.xfce.org/panel-plugins/xfce4-genmon-plugin/start](https://docs.xfce.org/panel-plugins/xfce4-genmon-plugin/start)
+{% embed url="https://docs.xfce.org/panel-plugins/xfce4-genmon-plugin/start" %}
+
+
+
+
+
+## links
+
+* [https://www.eriwen.com/productivity/find-is-a-beautiful-tool/](https://www.eriwen.com/productivity/find-is-a-beautiful-tool/)
+* [7 Linux Grep OR, Grep AND, Grep NOT Operator Examples](http://www.thegeekstuff.com/2011/10/grep-or-and-not-operators/)
+* [USEFUL ONE-LINE SCRIPTS FOR SED](http://sed.sourceforge.net/sed1line.txt)
+* [Idle Curiosity and Bash](http://www.tomgibara.com/misc/command-history)
+* [http://www.linuxjournal.com/article/7385](http://www.linuxjournal.com/article/7385)
+* [http://www.pixelbeat.org/cmdline.html](http://www.pixelbeat.org/cmdline.html)
+* [http://www.cs.usfca.edu/~parrt/course/601/lectures/unix.util.html](http://www.cs.usfca.edu/~parrt/course/601/lectures/unix.util.html)
+* [create distribution from scratch](http://www.linuxfromscratch.org/lfs/)
+* [quick hacks](http://www.troubleshooters.com/linux/quickhacks.htm)
+* [xdialog](http://aurelio.net/shell/dialog/)
+* [xdialog](http://linuxgazette.net/101/sunil.html)
+* [cheatsheets](http://www.bookmarkbliss.com/programming/the-developer-cheat-sheet-compilation/)
+* [lsof primer](https://danielmiessler.com/study/lsof/)
+* [wicked cool shell script library](http://www.intuitive.com/wicked/wicked-cool-shell-script-library.shtml)
+* [linux commands cheatsheets](http://www.catonmat.net/projects/cheat-sheets/)
+* [linux commands](http://www.linuxguide.it/commands_list.php?Choose_Language:Spanish&print#index)
+* [unix toolbox](http://cb.vu/unixtoolbox.xhtml#onlinehelp)
+* [rosetta](http://bhami.com/rosetta.html)
+* [Linux Command Line Tips: Become a Master](http://requiremind.com/linux-command-line-tips-become-a-master/)
+* \[Bash One-Liners Explained, Part I: Working with files\]\([http://www.catonmat.net/blog/bash-one-liners-explained-part-one/](http://www.catonmat.net/blog/bash-one-liners-explained-part-one/)
+* [Bash One-Liners Explained, Part II: Working with strings](http://www.catonmat.net/blog/bash-one-liners-explained-part-two/)
+* [Bash One-Liners Explained, Part III: All about redirections](http://www.catonmat.net/blog/bash-one-liners-explained-part-three)
+* [Bash One-Liners Explained, Part IV: Working with history](http://www.catonmat.net/blog/bash-one-liners-explained-part-four)
+* [Bash One-Liners Explained, Part V: Navigating around]([http://www.catonmat.net/blog/bash-one-liners-explained-part-five)
+* [Command line reference for common operations](http://www.pixelbeat.org/cmdline.html)
+* [UNIX TOOLBOX](http://cb.vu/unixtoolbox.xhtml)
+* [How To Look Like A UNIX Guru](http://www.cs.usfca.edu/~parrt/course/601/lectures/unix.util.html)
+* [Bash: Find out the exit codes of all piped commands](https://www.cyberciti.biz/faq/unix-linux-bash-find-out-the-exit-codes-of-all-piped-commands/)
+* [Linux Shell Scripting Tutorial - A Beginner's handbook](http://www.freeos.com/guides/lsst/)
+* [Linux Quick Hacks](http://www.troubleshooters.com/linux/quickhacks.htm)
+* [Linux Command Line \| Basic, Advanced, Useful commands](http://www.linuxguide.it/commands_list.php?Choose_Language:Spanish&print#index)
+* [An lsof Primer](https://danielmiessler.com/study/lsof/)
+* [dialog command in Linux](http://aurelio.net/shell/dialog/)
+* [Bash Shortcuts For Maximum Productivity](http://www.skorks.com/2009/09/bash-shortcuts-for-maximum-productivity/)
+* [Wicked Cool Shell Script Library](http://www.intuitive.com/wicked/wicked-cool-shell-script-library.shtml)
+* [SHELLdorado your UNIX shell scripting resource](http://www.shelldorado.com/) [http://www.karakas-online.de/gnu-linux-tools-summary/network-commands.html](http://www.karakas-online.de/gnu-linux-tools-summary/network-commands.html)
+* NETCAT: [http://crysol.org/node/28](http://crysol.org/node/28)
+* NETCAT: [http://www.sweetnam.eu/index.php/Using\_Netcat\_for\_Backup](http://www.sweetnam.eu/index.php/Using_Netcat_for_Backup)
+* NETCAT: [http://dlerch.blogspot.hk/2007/05/gnu-netcat.html](http://dlerch.blogspot.hk/2007/05/gnu-netcat.html)
 
 
 
