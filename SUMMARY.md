@@ -14,6 +14,8 @@
   * [Information Gathering](ejpt/basics/information-gathering.md)
   * [Vulnerability Assessment](ejpt/basics/vulnerability-assessment.md)
   * [Web Attacks](ejpt/basics/web-attacks.md)
+  * [System Attacks](ejpt/basics/system-attacks.md)
+  * [Network Attacks](ejpt/basics/network-attacks.md)
 * [Black Box Test 1](ejpt/black-box-1.md)
 * [Black Box Test 2](ejpt/black-box-2.md)
 * [Black Box Test 3](ejpt/black-box-3.md)
