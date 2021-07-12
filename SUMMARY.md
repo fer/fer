@@ -1,7 +1,6 @@
 # Table of contents
 
 * [README](README.md)
-* [Glossary](glossary.md)
 
 ## eLearning Junior Penetration Tester <a id="ejpt"></a>
 
@@ -23,8 +22,7 @@
 * [Command Line Tools](linux/command-line/README.md)
   * [awk](linux/command-line/awk.md)
   * [cURL](linux/command-line/curl.md)
-  * [diff](linux/command-line/diff/README.md)
-    * [To Do](linux/command-line/diff/to-do.md)
+  * [diff](linux/command-line/diff.md)
   * [git](linux/command-line/git.md)
   * [grep](linux/command-line/grep.md)
   * [gource](linux/command-line/gource.md)
@@ -48,4 +46,9 @@
 ## CTF
 
 * [OverTheWire: Wargames](ctf/ctf.md)
+
+## Other
+
+* [Glossary](other/glossary.md)
+* [To Do](other/to-do.md)
 
