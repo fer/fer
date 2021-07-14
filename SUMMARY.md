@@ -61,3 +61,8 @@
 * [Glossary](other/glossary.md)
 * [To Do](other/to-do.md)
 
+## Hardware
+
+* [Cactus WHID](hardware/cactus-whid.md)
+* [CJMCU-VIRTUAL USB TF ATMEGA32U4](hardware/cjmcu-virtual-usb-tf-atmega32u4.md)
+
