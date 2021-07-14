@@ -597,6 +597,20 @@ peter:youdonotguessthatone5
 | 80/tcp | open | http | Apache httpd 2.4.18 |
 | 6379/tcp | open | redis | Redis key-value store |
 
+{% tabs %}
+{% tab title="Dirbuster" %}
+* Target URL: [http://172.16.64.](http://172.16.64.81)91
+* File Extension: \*
+* File with list of dirs/files: /usr/share/dirbuster/wordlists/directory-list-lowercase-2.3-medium.txt
+{% endtab %}
+
+{% tab title="Report" %}
+```bash
+
+```
+{% endtab %}
+{% endtabs %}
+
 ### 172.16.64.92 \(Linux 3.12 - 95%\)
 
 | Port | State | Service | Version |
