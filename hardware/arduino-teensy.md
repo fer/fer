@@ -4,5 +4,5 @@
 
 ## References
 
-* [https://medium.com/iqube-kct/bad-usb-using-teensy-1633ad7cd01](https://medium.com/iqube-kct/bad-usb-using-teensy-1633ad7cd01) 
-* 
+* [https://medium.com/iqube-kct/bad-usb-using-teensy-1633ad7cd01](https://medium.com/iqube-kct/bad-usb-using-teensy-1633ad7cd01)
+
