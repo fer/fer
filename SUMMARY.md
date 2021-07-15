@@ -44,6 +44,7 @@
   * [ssh](linux/command-line/ssh.md)
   * [tar](linux/command-line/tar.md)
   * [vim](linux/command-line/vim.md)
+  * [wfuzz](linux/command-line/wfuzz.md)
   * [xargs](linux/command-line/xargs.md)
 * [Bash Keyboard Shortcuts](linux/bash-keyboard-shortcuts.md)
 * [String Manipulation](linux/string-manipulation.md)
