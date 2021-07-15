@@ -2,7 +2,7 @@
 description: Badusb USB TTF virtual memory keyboard
 ---
 
-# CJMCU-VIRTUAL USB TF ATMEGA32U4
+# CJMCU Virtual USB TF ATMEGA32U4
 
 ![](https://images-na.ssl-images-amazon.com/images/I/51hMyoFYdEL._AC_SY355_.jpg)
 
