@@ -8,23 +8,20 @@ description: Badusb USB TTF virtual memory keyboard
 
 ## Use without an SD Card
 
-### Step \#1: Grab your ducky script
+{% tabs %}
+{% tab title="Step 1: Grab your ducky script payload" %}
+**hak5darren**'s **Github payload** list:   
+[https://github.com/hak5darren/USB-Rubber-Ducky/wiki/Payloads](https://github.com/hak5darren/USB-Rubber-Ducky/wiki/Payloads)
+{% endtab %}
 
-* [https://github.com/hak5darren/USB-Rubber-Ducky/wiki/Payloads](https://github.com/hak5darren/USB-Rubber-Ducky/wiki/Payloads)
+{% tab title="Step 2: Compile to Arduino" %}
+Use this online and simple **DuckyScript** to **Arduino** converter: [https://dukweeno.github.io/Duckuino/](https://dukweeno.github.io/Duckuino/)
+{% endtab %}
+{% endtabs %}
 
-### Step \#2: Compile to Arduino
+## References
 
-* [https://dukweeno.github.io/Duckuino/](https://dukweeno.github.io/Duckuino/)
-
-{% embed url="https://derechodelared.com/bad-usb/" %}
-
-
-
-{% embed url="https://thehackerway.com/2017/09/05/vuelve-el-patito-low-cost-ahora-grazna-como-un-usb-rubber-ducky-original/" %}
-
-{% embed url="https://github.com/ernesto-xload/ducky\_interpreter" %}
-
-
-
-
+* [https://derechodelared.com/bad-usb/](https://derechodelared.com/bad-usb/)
+* [https://thehackerway.com/2017/09/05/vuelve-el-patito-low-cost-ahora-grazna-como-un-usb-rubber-ducky-original/](https://thehackerway.com/2017/09/05/vuelve-el-patito-low-cost-ahora-grazna-como-un-usb-rubber-ducky-original/)
+* [https://github.com/ernesto-xload/ducky\_interpreter](https://github.com/ernesto-xload/ducky_interpreter)
 
