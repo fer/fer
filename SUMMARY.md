@@ -65,4 +65,5 @@
 
 * [Cactus WHID](hardware/cactus-whid.md)
 * [CJMCU Virtual USB TF ATMEGA32U4](hardware/cjmcu-virtual-usb-tf-atmega32u4.md)
+* [Arduino Teensy](hardware/arduino-teensy.md)
 
