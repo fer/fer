@@ -151,7 +151,7 @@ You got the first machine!
 ```
 
 ```text
-route add 172.16.50.0/24 via 10.13.37.1
+sudo ip route add 172.16.50.0/24 via 10.13.37.1
 sudo nmap -sn 172.16.50.0/24
 ```
 
