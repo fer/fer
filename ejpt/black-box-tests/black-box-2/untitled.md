@@ -14,7 +14,7 @@ sudo openvpn black-box-penetration-test-2.ovpn
 sudo nmap -sn 172.16.64.0/24 --exclude 172.16.64.10 -oN hostAlive.nmap &&
 cat hostAlive.nmap | grep for | awk {'print $5'} > ips.txt &&
 sudo nmap -sV -n -v -Pn -p- -T4 -iL ips.txt -A --open -oX portScan.xml &&
-sh nmap2md.sh portScan.xml | xclip
+nmap2md.sh portScan.xml | xclip
 ```
 
 ## Scanner
