@@ -1,3 +1,9 @@
+---
+description: >-
+  You have been engaged in a Black-box Penetration Test (172.16.37.0/24 range).
+  Your goal is to read the flag file on each machine.
+---
+
 # BB3
 
 ## Prework
