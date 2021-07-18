@@ -50,6 +50,28 @@ nmap -sV -n -v -Pn -p- -T4 -iL ips.txt -A --open -oX portScan.xml
 
 {% tab title="Report" %}
 ```bash
+DirBuster 1.0-RC1 - Report
+http://www.owasp.org/index.php/Category:OWASP_DirBuster_Project
+Report produced on Sun Jul 18 12:20:43 EDT 2021
+--------------------------------
+
+http://172.16.37.220:80
+--------------------------------
+Directories found during testing:
+
+Dirs found with a 200 response:
+
+/
+
+Dirs found with a 403 response:
+
+/icons/
+/javascript/
+/icons/small/
+
+
+--------------------------------
+--------------------------------
 
 ```
 {% endtab %}
