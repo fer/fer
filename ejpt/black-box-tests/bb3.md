@@ -123,7 +123,7 @@ lo        Link encap:Local Loopback
 {% tab title="Dirbuster" %}
 * Target URL: [http://](http://172.16.64.81)172.16.37.234:40180
 * File Extension: \*
-* File with list of dirs/files: /usr/share/dirbuster/wordlists/directory-list-lowercase-2.3-medium.txt
+* File with list of dirs/files: /usr/share/dirbuster/wordlists/directory-list-2.3-small.txt
 {% endtab %}
 
 {% tab title="Report" %}
