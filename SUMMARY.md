@@ -22,7 +22,8 @@
     * [BB1](ejpt/black-box-tests/black-box-1/untitled.md)
   * [Black Box Test 2](ejpt/black-box-tests/black-box-2/README.md)
     * [BB2](ejpt/black-box-tests/black-box-2/untitled.md)
-  * [Black Box Test 3](ejpt/black-box-tests/black-box-3.md)
+  * [Black Box Test 3](ejpt/black-box-tests/black-box-3/README.md)
+    * [BB3](ejpt/black-box-tests/black-box-3/bb3.md)
 * [Tool Summary](ejpt/tool-summary.md)
 * [References](ejpt/references.md)
 
