@@ -52,11 +52,17 @@ nmap -sV -n -v -Pn -p- -T4 -iL ips.txt -A --open -oX portScan.xml
 | 9080/tcp | open | http | Apache Tomcat/Coyote JSP engine 1.1 |
 | 59919/tcp | open | http | Apache httpd 2.4.18 |
 
-#### dirbuster
+{% tabs %}
+{% tab title="Dirbuster" %}
 
+{% endtab %}
+
+{% tab title="Report" %}
 * Target URL: [http://172.16.64.101:8080](http://172.16.64.101:8080)
-* File with list of dirs/files: /usr/share/dirbuster/wordlists/directory-list-2.3-medium.txt
 * File Extension: \* 
+* File with list of dirs/files: /usr/share/dirbuster/wordlists/directory-list-2.3-medium.txt
+{% endtab %}
+{% endtabs %}
 
 ![](../../../.gitbook/assets/dirbuster-101-1.png)
 
