@@ -23,7 +23,6 @@
   * [BB3](ejpt/black-box-tests/bb3.md)
   * [Black Box Test 1](ejpt/black-box-tests/black-box-1.md)
   * [Black Box Test 2](ejpt/black-box-tests/black-box-2.md)
-  * [Black Box Test 3](ejpt/black-box-tests/black-box-3.md)
 * [Tool Summary](ejpt/tool-summary.md)
 * [References](ejpt/references.md)
 

