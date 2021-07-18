@@ -42,7 +42,7 @@ nmap -sV -n -v -Pn -p- -T4 -iL ips.txt -A --open -oX portScan.xml
 | 3307/tcp | open | tcpwrapped |  |
 
 {% tabs %}
-{% tab title="Dirbuster" %}
+{% tab title="OWASP Dirbuster 1.0-RC1" %}
 * Target URL: [http://](http://172.16.64.81)172.16.37.220
 * File Extension: \*
 * File with list of dirs/files: /usr/share/dirbuster/wordlists/directory-list-lowercase-2.3-medium.txt
@@ -80,8 +80,13 @@ Dirs found with a 403 response:
 {% hint style="info" %}
 **Found relevant information at view-source:**[**http://172.16.37.220/**](http://172.16.37.220/)\*\*\*\*
 
-```text
+This discovers a new IP in a new network: **172.16.50.222**
+
+```
 <!--ens192    Link encap:Ethernet  HWaddr 00:50:56:a0:9c:e3  
+```
+
+```text
           inet addr:172.16.37.220  Bcast:172.16.37.255  Mask:255.255.255.0
           inet6 addr: fe80::250:56ff:fea0:9ce3/64 Scope:Link
           UP BROADCAST RUNNING MULTICAST  MTU:1500  Metric:1
@@ -120,7 +125,7 @@ lo        Link encap:Local Loopback
 | 40180/tcp | open | http | Apache httpd 2.4.18 |
 
 {% tabs %}
-{% tab title="Dirbuster" %}
+{% tab title="OWASP Dirbuster 1.0-RC1" %}
 * Target URL: [http://](http://172.16.64.81)172.16.37.234:40180
 * File Extension: \*
 * File with list of dirs/files: /usr/share/dirbuster/wordlists/directory-list-2.3-small.txt
@@ -132,6 +137,42 @@ lo        Link encap:Local Loopback
 ```
 {% endtab %}
 {% endtabs %}
+
+{% hint style="info" %}
+**Dirbuster found the following url:** [**http://172.16.37.234:40180/xyz/**](http://172.16.37.234:40180/xyz/)
+
+This is the content, which discovers a new IP in a new network: 172.16.50.224
+
+```text
+<!-- cmd: --><hr />ens192    Link encap:Ethernet  HWaddr 00:50:56:a0:88:b6  
+          inet addr:172.16.37.234  Bcast:172.16.37.255  Mask:255.255.255.0
+          inet6 addr: fe80::250:56ff:fea0:88b6/64 Scope:Link
+          UP BROADCAST RUNNING MULTICAST  MTU:1500  Metric:1
+          RX packets:2038265 errors:0 dropped:23 overruns:0 frame:0
+          TX packets:1588929 errors:0 dropped:0 overruns:0 carrier:0
+          collisions:0 txqueuelen:1000 
+          RX bytes:284381733 (284.3 MB)  TX bytes:245921592 (245.9 MB)
+
+ens224    Link encap:Ethernet  HWaddr 00:50:56:a0:09:4d  
+          inet addr:172.16.50.224  Bcast:172.16.50.255  Mask:255.255.255.0
+          inet6 addr: fe80::250:56ff:fea0:94d/64 Scope:Link
+          UP BROADCAST RUNNING MULTICAST  MTU:1500  Metric:1
+          RX packets:52 errors:0 dropped:13 overruns:0 frame:0
+          TX packets:30 errors:0 dropped:0 overruns:0 carrier:0
+          collisions:0 txqueuelen:1000 
+          RX bytes:5703 (5.7 KB)  TX bytes:4104 (4.1 KB)
+
+lo        Link encap:Local Loopback  
+          inet addr:127.0.0.1  Mask:255.0.0.0
+          inet6 addr: ::1/128 Scope:Host
+          UP LOOPBACK RUNNING  MTU:65536  Metric:1
+          RX packets:194609 errors:0 dropped:0 overruns:0 frame:0
+          TX packets:194609 errors:0 dropped:0 overruns:0 carrier:0
+          collisions:0 txqueuelen:1 
+          RX bytes:16100124 (16.1 MB)  TX bytes:16100124 (16.1 MB)
+
+```
+{% endhint %}
 
 {% hint style="info" %}
 **ftp splash screen suggests to login with 'ftpuser' while trying to connect.**
