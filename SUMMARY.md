@@ -29,6 +29,11 @@
 
 ## Linux
 
+* [Applications](linux/applications/README.md)
+  * [Terminator](linux/applications/terminator.md)
+  * [xfce4-genmon-plugin](linux/applications/xfce4-genmon-plugin.md)
+* [Bash Keyboard Shortcuts](linux/bash-keyboard-shortcuts.md)
+* [Bash Scripting](linux/bash-scripting.md)
 * [Command Line Tools](linux/command-line/README.md)
   * [awk](linux/command-line/awk.md)
   * [cURL](linux/command-line/curl.md)
@@ -47,12 +52,7 @@
   * [vim](linux/command-line/vim.md)
   * [wfuzz](linux/command-line/wfuzz.md)
   * [xargs](linux/command-line/xargs.md)
-* [Bash Keyboard Shortcuts](linux/bash-keyboard-shortcuts.md)
 * [String Manipulation](linux/string-manipulation.md)
-* [Bash Scripting](linux/bash-scripting.md)
-* [Applications](linux/applications/README.md)
-  * [Terminator](linux/applications/terminator.md)
-  * [xfce4-genmon-plugin](linux/applications/xfce4-genmon-plugin.md)
 
 ## CTF
 
