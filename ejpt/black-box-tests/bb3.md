@@ -141,7 +141,7 @@ lo        Link encap:Local Loopback
 {% hint style="info" %}
 **Dirbuster found the following url:** [**http://172.16.37.234:40180/xyz/**](http://172.16.37.234:40180/xyz/)
 
-This is the content, which discovers a new IP in a new network: 172.16.50.224
+This is the content, which discovers a new IP in a new network: **172.16.50.224**
 
 ```text
 <!-- cmd: --><hr />ens192    Link encap:Ethernet  HWaddr 00:50:56:a0:88:b6  
