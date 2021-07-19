@@ -19,3 +19,12 @@ sudo apt install terminator code-oss -y
 * [ ] [http://manicai.net/comp/swap-caps-ctrl.html](http://manicai.net/comp/swap-caps-ctrl.html)
 * [ ] Remove login screen at boot
 
+```text
+ > sudo vi /etc/lightdm/lightdm.conf
+ 
+[Seat:*]
+autologin-user=kali
+autologin-user-timeout=0
+autologin-session=lightdm-xsession
+```
+
