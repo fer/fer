@@ -59,6 +59,7 @@
 * [OverTheWire: Wargames](ctf/ctf.md)
 * [TryHackMe](ctf/tryhackme/README.md)
   * [Vulnversity](ctf/tryhackme/vulnversity.md)
+  * [Blue](ctf/tryhackme/blue.md)
 
 ## Other
 
