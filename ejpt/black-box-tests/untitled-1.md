@@ -51,7 +51,7 @@ nmap -sV -n -v -Pn -p- -T4 -iL ips.txt -A --open -oX portScan.xml
 | 13306/tcp | open | mysql | MySQL 5.7.25-0ubuntu0.16.04.2 |
 
 {% tabs %}
-{% tab title="Dirbuster" %}
+{% tab title="OWASP Dirbuster 1.0-RC1" %}
 * Target URL: [http://172.16.64.81](http://172.16.64.81)
 * File Extension: \*
 * File with list of dirs/files: /usr/share/dirbuster/wordlists/directory-list-lowercase-2.3-medium.txt
