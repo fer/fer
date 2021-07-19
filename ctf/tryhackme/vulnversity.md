@@ -29,7 +29,7 @@ nmap -sV -n -v -Pn -p- -T4 -A --open -oX portScan.xml 10.10.32.135
 | 3128/tcp | open | http-proxy | Squid http proxy 3.5.12 |
 | 3333/tcp | open | http | Apache httpd 2.4.18 |
 
-### Task \#3: Locating directories in the webserver
+## Task \#3: Locating directories in the webserver
 
 {% hint style="success" %}
 #### What is the directory that has an upload form page?
@@ -53,5 +53,9 @@ Dirbuster found the following route with an Upload form:
 {% endtab %}
 {% endtabs %}
 
+## Task \#4: Compromise the webserver
 
+#### Try upload a few file types to the server, what common extension seems to be blocked?
+
+####  
 

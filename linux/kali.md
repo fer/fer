@@ -29,7 +29,8 @@ autologin-session=lightdm-xsession
 ```
 
 * [ ] Encrypt VMWare disk
-* [ ] 
+* [ ] Install FoxyProxy: [https://addons.mozilla.org/es/firefox/addon/foxyproxy-standard/](https://addons.mozilla.org/es/firefox/addon/foxyproxy-standard/)
+
 ## References
 
 {% embed url="https://askubuntu.com/questions/530072/how-to-auto-login-in-xubuntu-or-ubuntu-server-with-xfce" %}
