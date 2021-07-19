@@ -7,8 +7,7 @@ description: Kali post-installation hit-list.
 ## Update/Upgrade OS + Install Apps
 
 ```text
-sudo apt update -y
-sudo apt upgrade -y
+sudo apt update -y && sudo apt upgrade -y
 sudo apt install terminator code-oss -y
 ```
 
@@ -27,4 +26,10 @@ autologin-user=kali
 autologin-user-timeout=0
 autologin-session=lightdm-xsession
 ```
+
+## References
+
+{% embed url="https://askubuntu.com/questions/530072/how-to-auto-login-in-xubuntu-or-ubuntu-server-with-xfce" %}
+
+
 
