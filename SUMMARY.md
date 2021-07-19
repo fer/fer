@@ -57,8 +57,8 @@
 ## CTF
 
 * [OverTheWire: Wargames](ctf/ctf.md)
-* [TryHackMe](ctf/tryhackme.md)
-* [Vulnversity](ctf/vulnversity.md)
+* [TryHackMe](ctf/tryhackme/README.md)
+  * [Vulnversity](ctf/tryhackme/vulnversity.md)
 
 ## Other
 
