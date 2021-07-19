@@ -34,6 +34,7 @@
 * [Bash Keyboard Shortcuts](linux/bash-keyboard-shortcuts.md)
 * [Bash Scripting](linux/bash-scripting.md)
 * [Command Line Tools](linux/command-line/README.md)
+  * [Kali](linux/command-line/kali.md)
   * [awk](linux/command-line/awk.md)
   * [cURL](linux/command-line/curl.md)
   * [diff](linux/command-line/diff.md)
