@@ -28,11 +28,15 @@ autologin-user-timeout=0
 autologin-session=lightdm-xsession
 ```
 
+* [ ] Encrypt VMWare disk
+* [ ] 
 ## References
 
 {% embed url="https://askubuntu.com/questions/530072/how-to-auto-login-in-xubuntu-or-ubuntu-server-with-xfce" %}
 
 {% embed url="https://serverfault.com/questions/10437/how-do-you-swap-the-caps-lock-to-control-in-xfce" %}
+
+{% embed url="https://docs.vmware.com/en/VMware-Workstation-Pro/16.0/com.vmware.ws.using.doc/GUID-8A64D0EF-CB0E-4C50-A034-3FD5C0A0F905.html" %}
 
 
 
