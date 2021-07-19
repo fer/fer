@@ -50,6 +50,10 @@ nmap -sV -n -v -Pn -p- -T4 -iL ips.txt -A --open -oX portScan.xml
 
 {% endtab %}
 
+{% tab title="" %}
+
+{% endtab %}
+
 {% tab title="Report" %}
 * Target URL: [http://172.16.64.101:8080](http://172.16.64.101:8080)
 * File Extension: \* 
