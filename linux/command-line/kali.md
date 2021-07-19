@@ -1,5 +1,5 @@
 ---
-description: Kali installation hit-list
+description: Kali post-installation hit-list.
 ---
 
 # Kali
@@ -16,4 +16,5 @@ sudo apt install terminator code-oss -y
 * [ ] Power Manager &gt; Display Power Management &gt; Disable
 * [ ] Power Manager &gt; Security &gt; Automatically lock the session &gt; Never
 * [ ] Power Manager &gt; Security &gt; Lock screen when system is going to sleep &gt; Disable
-
+* [ ] [http://manicai.net/comp/swap-caps-ctrl.html](http://manicai.net/comp/swap-caps-ctrl.html)
+* [ ] 
