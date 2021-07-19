@@ -34,7 +34,6 @@
 * [Bash Keyboard Shortcuts](linux/bash-keyboard-shortcuts.md)
 * [Bash Scripting](linux/bash-scripting.md)
 * [Command Line Tools](linux/command-line/README.md)
-  * [Kali](linux/command-line/kali.md)
   * [awk](linux/command-line/awk.md)
   * [cURL](linux/command-line/curl.md)
   * [diff](linux/command-line/diff.md)
@@ -52,6 +51,7 @@
   * [vim](linux/command-line/vim.md)
   * [wfuzz](linux/command-line/wfuzz.md)
   * [xargs](linux/command-line/xargs.md)
+* [Kali](linux/kali.md)
 * [String Manipulation](linux/string-manipulation.md)
 
 ## CTF
