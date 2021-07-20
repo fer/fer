@@ -17,6 +17,7 @@ sudo apt install terminator code-oss -y
 * [ ] Power Manager &gt; Security &gt; Lock screen when system is going to sleep &gt; Disable
 * [ ] [S](http://manicai.net/comp/swap-caps-ctrl.html)wap CAPS for CTRL 
   * [ ] Session and Startup &gt; Add &gt; `/usr/bin/setxkbmap -option "ctrl:nocaps"`
+* [ ] Change kali user password.
 * [ ] Remove login screen at boot
 
 ```text
