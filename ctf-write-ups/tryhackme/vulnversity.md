@@ -4,7 +4,7 @@ description: 'Learn about active recon, web app attacks and privilege escalation
 
 # Vulnversity
 
-## Task \#1: Deploy the Machine
+## Task \#1: Deploy the Machine and connect to VPN
 
 ```bash
 sudo openvpn fer.opvn
