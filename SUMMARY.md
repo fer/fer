@@ -54,12 +54,12 @@
 * [Kali](linux/kali.md)
 * [String Manipulation](linux/string-manipulation.md)
 
-## CTF
+## CTF Write-ups
 
-* [OverTheWire: Wargames](ctf/ctf.md)
-* [TryHackMe](ctf/tryhackme/README.md)
-  * [Vulnversity](ctf/tryhackme/vulnversity.md)
-  * [Blue](ctf/tryhackme/blue.md)
+* [OverTheWire: Wargames](ctf-write-ups/ctf.md)
+* [TryHackMe](ctf-write-ups/tryhackme/README.md)
+  * [Vulnversity](ctf-write-ups/tryhackme/vulnversity.md)
+  * [Blue](ctf-write-ups/tryhackme/blue.md)
 
 ## Other
 
