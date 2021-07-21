@@ -51,7 +51,7 @@ Find more [**nmap options**](https://ferx.gitbook.io/wiki/linux/command-line/nma
 | 22 | ssh | OpenSSH 7.2p2 Ubuntu 4ubuntu2.8 \(Ubuntu Linux; protocol 2.0\) |
 | 53 | 53 | dnsmasq 2.75 |
 | 80 | http | Apache httpd 2.4.18 \(Ubuntu\) |
-| 63306 | mysql | MySQL 5.7.25-0ubuntu0.16.04.2 |
+| 13306 | mysql | MySQL 5.7.25-0ubuntu0.16.04.2 |
 
 ### 172.16.64.166 \(flag under sabrina user\)
 
