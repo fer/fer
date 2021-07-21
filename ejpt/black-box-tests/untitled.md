@@ -47,25 +47,17 @@ nmap -sV -n -v -Pn -p- -T4 -iL ips.txt -A --open -oX portScan.xml
 
 {% tabs %}
 {% tab title="Dirbuster" %}
-
-{% endtab %}
-
-{% tab title="" %}
-
+* Target URL: [http://172.16.64.101:8080](http://172.16.64.101:8080)
+* File Extension: \*
+* File with list of dirs/files: /usr/share/dirbuster/wordlists/directory-list-2.3-medium.txt
 {% endtab %}
 
 {% tab title="Report" %}
-* Target URL: [http://172.16.64.101:8080](http://172.16.64.101:8080)
-* File Extension: \* 
-* File with list of dirs/files: /usr/share/dirbuster/wordlists/directory-list-2.3-medium.txt
+```bash
+
+```
 {% endtab %}
 {% endtabs %}
-
-![](../../.gitbook/assets/dirbuster-101-1.png)
-
-![](../../.gitbook/assets/dirbuster-101-2.png)
-
-#### Gaining access
 
 {% hint style="info" %}
 Trying to access unsuccessfully for a couple of times will get you redirected to [**http://172.16.64.101:8080/host-manager/html**](http://172.16.64.101:8080/host-manager/html), where the following information is shown:

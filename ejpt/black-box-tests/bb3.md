@@ -522,7 +522,7 @@ You got the first machine!
 ```
 {% endhint %}
 
-We run nmap from this machine to discover opened ports on 172.16.50.224
+We run `nmap` from this new machine to discover opened ports on 172.16.50.224
 
 {% tabs %}
 {% tab title="nmap \(on 172.16.50.224\) " %}
@@ -558,7 +558,7 @@ nmap -sV -n -v -Pn -p- -T4 -oX portScan.xml --min-rate=5000 172.16.50.222
 {% endtab %}
 {% endtabs %}
 
-Use netcat to pivot an `hydra` attack for the `ssh` service on `172.16.50.222` :
+Use `netcat` to pivot an `hydra` attack for the `ssh` service on `172.16.50.222` :
 
 {% tabs %}
 {% tab title=" Attacker Machine \(listener.sh\)" %}
