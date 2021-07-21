@@ -622,7 +622,7 @@ peter:youdonotguessthatone5
 | 22/tcp | open | ssh | OpenSSH 7.2p2 Ubuntu 4ubuntu2.8 |
 | 53/tcp | open | domain | dnsmasq 2.75 |
 | 80/tcp | open | http | Apache httpd 2.4.18 |
-| 63306/tcp | open | mysql | MySQL 5.7.25-0ubuntu0.16.04.2 |
+| 13306/tcp | open | mysql | MySQL 5.7.25-0ubuntu0.16.04.2 |
 
 ### 172.16.64.166 \(Linux 3.12 - 95%\)
 
