@@ -1,8 +1,14 @@
 ---
-description: Kali post-installation hit-list.
+description: Kali post-installation hit-list... Work in progress!
 ---
 
 # Kali
+
+
+
+{% hint style="danger" %}
+**This document is still in progress...** 
+{% endhint %}
 
 ## 1. Update/Upgrade OS + Install Apps
 
