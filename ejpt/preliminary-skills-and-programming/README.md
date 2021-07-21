@@ -31,11 +31,3 @@ Level can tell how close these languages are to the hardware.
 | Programming languages require a compiler. | Interpreted |
 | A compiler will convert your plain-text program file into something readable by the language environment. | Software environment install on your computer can read a plain-text program file |
 
-### 
-
-## Command Line Scripting
-
-### 
-
-### 
-
