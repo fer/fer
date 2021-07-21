@@ -78,7 +78,7 @@ Dirbuster found the following route with an Upload form:
 {% hint style="success" %}
 **Burpsuite showed** `.phtml` **files are allowed to upload.** 
 
-Let's upload a PHP rev-shell.
+Let's upload a PHP rev-shell to **find our flag!**
 {% endhint %}
 
 {% tabs %}
@@ -246,9 +246,6 @@ function printit ($string) {
 }
 
 ?> 
-
-
-
 ```
 {% endtab %}
 
