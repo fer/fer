@@ -83,7 +83,7 @@ Dirs found with a 403 response:
 {% endtab %}
 {% endtabs %}
 
-{% hint style="info" %}
+{% hint style="warning" %}
 **Found relevant information at view-source:**[**http://172.16.37.220/**](http://172.16.37.220/)\*\*\*\*
 
 This discovers a new IP in a new network: **172.16.50.222**
@@ -163,7 +163,7 @@ Dirs found with a 403 response:
 {% endtab %}
 {% endtabs %}
 
-{% hint style="info" %}
+{% hint style="warning" %}
 **Dirbuster found the following url:** [**http://172.16.37.234:40180/xyz/**](http://172.16.37.234:40180/xyz/)
 
 This is the content, which discovers a new IP in a new network: **172.16.50.224**
@@ -239,8 +239,8 @@ Hydra (https://github.com/vanhauser-thc/thc-hydra) starting at 2021-07-18 14:34:
 {% endtab %}
 {% endtabs %}
 
-{% hint style="info" %}
-**ftpuser/ftpuser**
+{% hint style="warning" %}
+**Found credentials for ftp server through hydra: ftpuser/ftpuser**
 
 Now that we have access to the ftp, **we can upload a PHP reverse shell**, and invoke it by opening this URL in your browser: [**http://172.16.37.234:40180/xyz/rev-shell.php**](http://172.16.37.234:40180/xyz/rev-shell.php)\*\*\*\*
 {% endhint %}
@@ -496,7 +496,7 @@ test:x:1001:1002::/home/test:
 {% endtab %}
 {% endtabs %}
 
-{% hint style="info" %}
+{% hint style="warning" %}
 **ftpuser has root rights \(just use the same password\)**:
 
 ```
