@@ -624,12 +624,40 @@ peter:youdonotguessthatone5
 | 80/tcp | open | http | Apache httpd 2.4.18 |
 | 13306/tcp | open | mysql | MySQL 5.7.25-0ubuntu0.16.04.2 |
 
+{% tabs %}
+{% tab title="OWASP Dirbuster 1.0-RC1" %}
+* Target URL: [http://172.16.64.](http://172.16.64.81)92
+* File Extension: \*
+* File with list of dirs/files: /usr/share/dirbuster/wordlists/directory-list-lowercase-2.3-medium.txt
+{% endtab %}
+
+{% tab title="Report" %}
+```bash
+
+```
+{% endtab %}
+{% endtabs %}
+
 ### 172.16.64.166 \(Linux 3.12 - 95%\)
 
 | Port | State | Service | Version |
 | :--- | :--- | :--- | :--- |
 | 2222/tcp | open | ssh | OpenSSH 7.2p2 Ubuntu 4ubuntu2.8 |
 | 8080/tcp | open | http | Apache httpd 2.4.18 |
+
+{% tabs %}
+{% tab title="OWASP Dirbuster 1.0-RC1" %}
+* Target URL: [http://172.16.64.](http://172.16.64.81)166:8080
+* File Extension: \*
+* File with list of dirs/files: /usr/share/dirbuster/wordlists/directory-list-lowercase-2.3-medium.txt
+{% endtab %}
+
+{% tab title="Report" %}
+```bash
+
+```
+{% endtab %}
+{% endtabs %}
 
 {% hint style="info" %}
 **Warning about password policy**
