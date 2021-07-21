@@ -585,15 +585,13 @@ Files found with a 500 responce:
 {% endtab %}
 {% endtabs %}
 
-{% hint style="info" %}
+{% hint style="warning" %}
 **Dirbuster found http://172.16.64.81:80/webapp/img/custom/thumbs/users.bak**
 
 ```text
 john1:password123
 peter:youdonotguessthatone5
 ```
-
-\*\*\*\*![users.bak contains usernames and passwords](../../.gitbook/assets/image%20%2815%29.png)
 {% endhint %}
 
 ### 172.16.64.91 \(Linux 3.13 - 95%\)
