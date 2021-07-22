@@ -38,7 +38,31 @@ autologin-session=lightdm-xsession
 * [ ] Encrypt VMWare disk
 * [ ] Install FoxyProxy: [https://addons.mozilla.org/es/firefox/addon/foxyproxy-standard/](https://addons.mozilla.org/es/firefox/addon/foxyproxy-standard/)
 * [ ] Remove Desktop Icons \(Home, File System... leave only Trash and Removable Devices\)
-* [ ] 
+* [ ] Change Download Directory, Documents Directory, Pictures:
+* [ ] ```text
+  cat ~/.config/user-dirs.dirs                                           1 ⨯
+
+  # This file is written by xdg-user-dirs-update
+  # If you want to change or add directories, just edit the line you're
+  # interested in. All local changes will be retained on the next run.
+  # Format is XDG_xxx_DIR="$HOME/yyy", where yyy is a shell-escaped
+  # homedir-relative path, or XDG_xxx_DIR="/yyy", where /yyy is an
+  # absolute path. No other format is supported.
+  # 
+  XDG_DESKTOP_DIR="$HOME/Desktop"
+  XDG_DOWNLOAD_DIR="$HOME/Desktop"
+  XDG_TEMPLATES_DIR="$HOME/Templates"
+  XDG_PUBLICSHARE_DIR="$HOME/Public"
+  XDG_DOCUMENTS_DIR="$HOME/Desktop"
+  XDG_MUSIC_DIR="$HOME/Desktop"
+  XDG_PICTURES_DIR="$HOME/Desktop"
+  XDG_VIDEOS_DIR="$HOME/Desktop"
+
+  ```
+
+  * Point Firefox/Chromium Download folder to Desktop
+  * 
+
 ## References
 
 {% embed url="https://askubuntu.com/questions/530072/how-to-auto-login-in-xubuntu-or-ubuntu-server-with-xfce" %}
