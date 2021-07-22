@@ -1,6 +1,10 @@
+---
+description: Tips & Tricks for the small but perfectly formed file manager.
+---
+
 # Thunar
 
-![](../../.gitbook/assets/image%20%2820%29.png)
+![Contextual Menu Option when right clicking on a .ovpn file.](../../.gitbook/assets/image%20%2820%29.png)
 
 ## Open openvpn VPN in Terminator 
 
