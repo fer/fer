@@ -610,6 +610,28 @@ peter:youdonotguessthatone5
 
 {% tab title="Report" %}
 ```bash
+DirBuster 1.0-RC1 - Report
+http://www.owasp.org/index.php/Category:OWASP_DirBuster_Project
+Report produced on Thu Jul 22 17:24:30 EDT 2021
+--------------------------------
+
+http://172.16.64.91:80
+--------------------------------
+Directories found during testing:
+
+Dirs found with a 200 response:
+
+/
+
+Dirs found with a 403 response:
+
+/icons/
+/icons/small/
+/server-status/
+
+
+--------------------------------
+--------------------------------
 
 ```
 {% endtab %}
@@ -633,7 +655,68 @@ peter:youdonotguessthatone5
 
 {% tab title="Report" %}
 ```bash
+DirBuster 1.0-RC1 - Report
+http://www.owasp.org/index.php/Category:OWASP_DirBuster_Project
+Report produced on Thu Jul 22 17:24:49 EDT 2021
+--------------------------------
 
+http://172.16.64.92:80
+--------------------------------
+Directories found during testing:
+
+Dirs found with a 200 response:
+
+/
+/images/
+/assets/
+/assets/js/
+/assets/css/
+/assets/fonts/
+/assets/sass/
+/assets/css/images/
+/assets/sass/libs/
+
+Dirs found with a 403 response:
+
+/icons/
+/icons/small/
+/server-status/
+
+
+--------------------------------
+Files found during testing:
+
+Files found with a 200 responce:
+
+/assets/js/jquery.scrolly.min.js
+/assets/js/browser.min.js
+/assets/js/breakpoints.min.js
+/assets/js/jquery.min.js
+/assets/js/util.js
+/assets/js/main.js
+/assets/js/footracking.js
+/assets/css/font-awesome.min.css
+/assets/sass/main.scss
+/assets/sass/noscript.scss
+/assets/fonts/FontAwesome.otf
+/assets/css/main.css
+/assets/css/images/overlay3.svg
+/assets/css/noscript.css
+/assets/fonts/fontawesome-webfont.eot
+/assets/css/images/overlay4.svg
+/assets/sass/libs/_breakpoints.scss
+/assets/sass/libs/_functions.scss
+/assets/sass/libs/_html-grid.scss
+/assets/fonts/fontawesome-webfont.ttf
+/assets/fonts/fontawesome-webfont.svg
+/assets/sass/libs/_mixins.scss
+/assets/sass/libs/_vars.scss
+/assets/fonts/fontawesome-webfont.woff2
+/assets/fonts/fontawesome-webfont.woff
+/assets/sass/libs/_vendor.scss
+
+
+--------------------------------
 
 ```
 {% endtab %}
