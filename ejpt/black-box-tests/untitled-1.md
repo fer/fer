@@ -738,8 +738,35 @@ Files found with a 200 responce:
 
 {% tab title="Report" %}
 ```bash
+DirBuster 1.0-RC1 - Report
+http://www.owasp.org/index.php/Category:OWASP_DirBuster_Project
+Report produced on Thu Jul 22 17:25:53 EDT 2021
+--------------------------------
+
+http://172.16.64.166:8080
+--------------------------------
+Directories found during testing:
+
+Dirs found with a 200 response:
+
+/
+/img/
+/img/blog/
+/img/gallery/
+/css/
+/js/
+/img/stream/
+/img/slider/
+
+Dirs found with a 403 response:
+
+/icons/
+/icons/small/
+/server-status/
 
 
+--------------------------------
+--------------------------------
 ```
 {% endtab %}
 {% endtabs %}
