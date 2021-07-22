@@ -50,6 +50,17 @@ nmap -sV -n -v -Pn -p- -T4 -iL ips.txt -A --open -oX portScan.xml
 | 80/tcp | open | http | Apache httpd 2.4.18 |
 | 13306/tcp | open | mysql | MySQL 5.7.25-0ubuntu0.16.04.2 |
 
+{% hint style="info" %}
+**We found the following hosts in a host.bak file!** 
+
+While inspecting sabrina's ssh account on **ssh://sabrina:CHANGEME@172.16.64.166:222**
+
+```text
+172.16.64.81	cms.foocorp.io
+172.16.64.81  static.foocorp.io
+```
+{% endhint %}
+
 {% tabs %}
 {% tab title="OWASP Dirbuster 1.0-RC1" %}
 * Target URL: [http://172.16.64.81](http://172.16.64.81)
@@ -596,6 +607,36 @@ peter:youdonotguessthatone5
 ```
 {% endhint %}
 
+{% hint style="warning" %}
+**\[Web\]  We get redirected trying to login with `john1:password123` and we find the application leaks database credentials in its headers!**
+
+![](../../.gitbook/assets/image%20%2825%29.png) ![](../../.gitbook/assets/image%20%2826%29.png) 
+
+```text
+HTTP/1.1 302 Found
+Date: Thu, 22 Jul 2021 23:05:39 GMT
+Server: Apache/2.4.18 (Ubuntu)
+X-DB-Key: x41x41x412019!
+X-DB-User: root
+X-DB-name: mysql
+Location: 500.php
+Content-Length: 0
+Keep-Alive: timeout=5, max=99
+Connection: Keep-Alive
+Content-Type: text/html; charset=UTF-8
+```
+{% endhint %}
+
+{% tabs %}
+{% tab title="First Tab" %}
+
+{% endtab %}
+
+{% tab title="Second Tab" %}
+
+{% endtab %}
+{% endtabs %}
+
 ### 172.16.64.91 \(Linux 3.13 - 95%\)
 
 | Port | State | Service | Version |
@@ -796,15 +837,16 @@ admin@172.16.64.166's password:
 {% hint style="info" %}
 **\[Web\] Found commented** info **for logged in users on the website's markup**!
 
+* [http://172.16.64.166:8080/about-us.htm](http://172.16.64.166:8080/about-us.htm)
+
  ![](../../.gitbook/assets/image%20%2824%29.png) 
 {% endhint %}
 
 {% tabs %}
 {% tab title="Grab website" %}
 ```
-wget  
+wget http://172.16.64.166:8080/about-us.htm
 xmllint --html about-us.htm --xpath '//comment()'
-
 ```
 {% endtab %}
 
@@ -1111,7 +1153,7 @@ sabrina@xubuntu:~$
 {% endtabs %}
 
 {% hint style="info" %}
-**Found hosts.bak in sabrina's account via ssh**
+**Found hosts.bak in sabrina's account via ssh:**
 
 ```text
 sabrina@xubuntu:~$ cat ~/hosts.bak 
@@ -1129,7 +1171,7 @@ ff02::2 ip6-allrouters
 {% endhint %}
 
 {% hint style="success" %}
-**Flag encountered!**
+**Flag encountered!** 😁 
 
 ```text
 sabrina@xubuntu:~$ cat ~/flag.txt 
