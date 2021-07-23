@@ -5,7 +5,7 @@
 ## eLearning Junior Penetration Tester <a id="ejpt"></a>
 
 * [Penetration Testing Prerequisites](ejpt/prerequisites/README.md)
-  * [Intro](ejpt/prerequisites/differences-between-clear-text-cryptography-protocols-and-vpn.md)
+  * [Introduction](ejpt/prerequisites/differences-between-clear-text-cryptography-protocols-and-vpn.md)
   * [Networking](ejpt/prerequisites/networking.md)
   * [Web Applications](ejpt/prerequisites/web-appliations.md)
 * [Preliminary Skills & Programming](ejpt/preliminary-skills-and-programming/README.md)

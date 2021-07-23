@@ -1,4 +1,4 @@
-# Intro
+# Introduction
 
 ## Differences between Clear Text, Cryptography Protocols & VPNs
 
