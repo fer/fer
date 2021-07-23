@@ -30,10 +30,6 @@
 
 ## Linux
 
-* [Desktop Applications](linux/applications/README.md)
-  * [Thunar](linux/applications/thunar.md)
-  * [Terminator](linux/applications/terminator.md)
-  * [xfce4-genmon-plugin](linux/applications/xfce4-genmon-plugin.md)
 * [Bash Scripting](linux/bash-scripting/README.md)
   * [Command Line Tools](linux/bash-scripting/command-line/README.md)
     * [awk](linux/bash-scripting/command-line/awk.md)
@@ -55,7 +51,10 @@
     * [xargs](linux/bash-scripting/command-line/xargs.md)
   * [Bash Keyboard Shortcuts](linux/bash-scripting/bash-keyboard-shortcuts.md)
   * [String Manipulation](linux/bash-scripting/string-manipulation.md)
-* [Kali](linux/kali.md)
+* [Kali](linux/kali/README.md)
+  * [xfce4-genmon-plugin](linux/kali/xfce4-genmon-plugin.md)
+  * [Terminator](linux/kali/terminator.md)
+  * [Thunar](linux/kali/thunar.md)
 
 ## CTF Write-ups
 
