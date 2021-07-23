@@ -10,29 +10,31 @@ Information Gathering from Social Networks:
 
 * **CrunchBase**: find detailed information about founders, investors, employees, buyouts and acquisitions.
 
-Government Sites:
+### Government Sites
 
 * System for Award Management.
 * GSA eLibrary.
 
-Whois database \(also accessible through Linux command `whois`\):
+### Whois database 
+
+Also accessible through Linux command `whois`:
 
 * Owner name.
 * Street addresses.
 * Email Address.
 * Technical Contacts.
 
-Browsing Client's sites:
+### Browsing Client's sites
 
 * Check products.
 * Services.
 * Technologies.
 * Company Culture.
 
-Discovering Emai Pattern:
+### Discovering Emai Pattern
 
-* `name.surname@company.com`.
-* `surname.name@company.com`.
+* `name.surname@company.com`
+* `surname.name@company.com`
 * Many email systems tend to inform the sender that mail was not delivered because it does not exit.
 
 ## Subdomain Enumeration
@@ -66,8 +68,4 @@ sublist3r -v -d google.com -b
 # amass
 amass -ip -d google.com
 ```
-
-## 
-
-## 
 
