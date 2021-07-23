@@ -20,13 +20,13 @@
   * [Web Attacks](ejpt/basics/web-attacks.md)
   * [System Attacks](ejpt/basics/system-attacks.md)
   * [Network Attacks](ejpt/basics/network-attacks.md)
+* [Annex A: Labs](ejpt/labs.md)
 * [Annex B: Black Box Tests](ejpt/black-box-tests/README.md)
   * [BB1](ejpt/black-box-tests/untitled.md)
   * [BB2](ejpt/black-box-tests/untitled-1/README.md)
     * [Black Box Test 2](ejpt/black-box-tests/untitled-1/black-box-2.md)
   * [BB3](ejpt/black-box-tests/bb3.md)
 * [References](ejpt/references.md)
-* [Annex A: Labs](ejpt/labs.md)
 
 ## Linux
 
