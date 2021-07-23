@@ -4,7 +4,9 @@
 
 ## eLearning Junior Penetration Tester <a id="ejpt"></a>
 
-* [Penetration Testing Prerequisites](ejpt/prerequisites.md)
+* [Penetration Testing Prerequisites](ejpt/prerequisites/README.md)
+  * [Networking](ejpt/prerequisites/networking.md)
+  * [Web Applications](ejpt/prerequisites/web-appliations.md)
 * [Preliminary Skills & Programming](ejpt/preliminary-skills-and-programming/README.md)
   * [C++](ejpt/preliminary-skills-and-programming/c++.md)
   * [Python](ejpt/preliminary-skills-and-programming/python.md)
