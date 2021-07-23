@@ -8,15 +8,12 @@ description: 'Technical aspects of systems, networks, and applications.'
 * Penetration testers must test for any and all vulnerabilities, not just the ones that may grant them root access.
 * Penetration testing is not about getting `root`!
 * Penetration testers cannot destroy their client's infrastructure, professional pentesting requires a thorough understanding of attack vectors and their potential.
-
-## Lifecycle of a Penetration Tester
-
 * Pentester activity must guarantee that the least impact possible on the production systems and services.
 * Avoid overloading client's systems and networks.
 * Communicate to client what steps to take, just in case anything goes wrong during the pentest.
 * Pentesting is a process that ensures that every potential vulnerability or security weakness gets tested with the lowest possible overhead.
 
-### Engagement
+## Phase \#0: Engagement
 
 Details about the pentest are established during the Engagement phase.
 
@@ -31,7 +28,7 @@ Quotation:
 * Evaluation and quoting these aspects requires experience.
 * If you are not able to quantify the amount of work required by an engagement, you can provide an hourly fee.
 
-#### Proposal Submittal
+### Proposal Submittal
 
 * The best way to win a job is by providing a sound and targeted proposal.
 * You should write the proposal keeping in mind the client's needs and infrastructure.
@@ -58,13 +55,13 @@ Quotation:
     * Domain names
     * Etc.
 
-#### Scope
+### Scope
 
 * Make sure that the target of your engagement is the property of your client.
 * Shared hosting: You must not conduct an assessment on targets unless you are given written permission from the hosting provider.
 * Check country laws
 
-#### Incident Handling
+### Incident Handling
 
 * Unplanned and unwanted situation that affects the client's environment and disrupts its services.
 * Even when sticking to best practices,there's a possibility to damage the tested assets.
@@ -75,7 +72,7 @@ Quotation:
   * Have an emergency contact.
   * Add an statement to the rules of engagement.
 
-#### Legal work
+### Legal work
 
 * Sometimes you will need to involve a lawyer as information security laws vary a lot from country to country
 * Sometimes a professional insurance is required
@@ -83,7 +80,7 @@ Quotation:
 * Outline what you can and you cannot do.
 * Rules of engagement is another document that will define the scope of engagement and will put on paper what you are entitled to do and when, this includes the time window for your tests and your contacts in the client's organizations
 
-### Information Gathering
+## Phase \#1: Information Gathering
 
 * Fundamental stage for a successful penetration test.
 * Starts once the legal paperwork is complete, and not before.
@@ -100,7 +97,7 @@ Extremely useful information if Social Engineering is allowed by the rules of th
 * Having an understanding of the business is a key aspect in understanding what is important for your client.
 * Understanding the business allows us to rate the risks associated with a successful attack.
 
-#### Infrastructure Information Gathering
+### Infrastructure Information Gathering
 
 * After understanding the business
 * Transform the IP addresses or the domains in scope into actionable information about servers, OSs, etc.
@@ -111,7 +108,7 @@ Extremely useful information if Social Engineering is allowed by the rules of th
   * if there are one or more websites using that IP address
   * What OS is running on the host or the server
 
-#### Web Applications
+### Web Applications
 
 * Harvest Domains
 * Harvest subdomains
@@ -120,23 +117,23 @@ Extremely useful information if Social Engineering is allowed by the rules of th
 * Harvest Frameworks and CMS in use
 * Treat webapps as completely separate entities
 
-### Footprinting and Scanning
+## Phase \#2: Footprinting and Scanning
 
 Here you deepen your knowledge of the in-scope servers and services.
 
-#### Fingerprinting the OS
+### Fingerprinting the OS
 
 * Gives you info about the OS
 * Helps to narrow down the number of potential vulnerabilities
 * Some tools use exploits to some singularities you can find the network stack implementation
 
-#### Port Scanning
+### Port Scanning
 
 * Once you know the live hosts, you can determine which ports are open on a remote system
 * Any mistake made here will impact next steps
 * `nmap` uses different scanning techniques to reveal open, closed and filtered ports
 
-#### Detecting Services
+### Detecting Services
 
 * Act of knowing what service which service is listening on that port.
 * Knowing the port number isn't enough, there's the need to discover the service that is running behind.
@@ -148,7 +145,7 @@ By knowing the services running, we can know:
 * Purpose of a particular IP address \(server/client\)
 * Relevance of the host in the infrastructure
 
-### Vulnerability Assessment
+## Phase \#3: Vulnerability Assessment
 
 * Aims to build a list of the present vulnerabilities on the target systems.
 * The pentester will carry out a vulnerability assessment on each target discovered in the previous steps
@@ -161,16 +158,18 @@ Vulnerability assessments can be carried out:
   * Extremely important to properly configure them, you might crash targets if not
   * Their output is a report that the pentester can use in the exploitation phase
 
-### Exploitation
+## Phase \#4: Exploitation
 
 * Phase where we verify the vulnerabilities really exist.
 * During this phase, a pentester checks and validates a vulnerability and also widens and increases the privileges on the target systems and networks.
 * A penetration test is a cyclic process:
 * The process finishes when there are no more systems and services in-scope to exploit.
 
-> Information Gathering -&gt; Scanning -&gt; Vulnerability Assessment -&gt; Exploiting
+{% hint style="info" %}
+**Information Gathering**  [**→**](https://www.toptal.com/designers/htmlarrows/arrows/right-arrow/) **Scanning**  [**→**](https://www.toptal.com/designers/htmlarrows/arrows/right-arrow/) **Vulnerability Assessment**  [**→**](https://www.toptal.com/designers/htmlarrows/arrows/right-arrow/) **Exploiting**
+{% endhint %}
 
-### Reporting
+## Phase \#5: Reporting
 
 * This step is as important as the rest of the phases, as it delivers the results to executives, IT staff and development team.
 * This report must address:
