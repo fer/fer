@@ -47,13 +47,13 @@ Also accessible through Linux command `whois`:
   * Administrative Interfaces.
 * Bug bounty program writeups.
 
-Online services:
+### Online services
 
 * [VirusTotal](https://www.virustotal.com)
 * [DNSdumpster](https://dnsdumpster.com): a subscription is needed.
 * [crt.sh](https://crt.sh): view certificates and see associated domains and subdomains.
 
-Automated tools:
+### Automated tools
 
 * `sublist3r` / `subbrute`: use domain wordlist in order to bruteforce subdomains.
 
