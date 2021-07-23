@@ -4,111 +4,19 @@ description: 'Technical aspects of systems, networks, and applications.'
 
 # Penetration Testing Prerequisites
 
-## Differences between Clear Text, Cryptography Protocols & VPNs
-
-Clear-text:
-
-* Easy to intercept, eavesdrop & mangle.
-* Use clear-text only on trusted networks.
-
-Cryptographic Protocols:
-
-* Protocol encrypts information transmitted to protect the communication.
-* Prevents eavesdropping.
-* Need to transmit clear-text anyways? Wrap your communication into a **tunnel**.
-* Protocol for Tunneling = VPN.
-
-VPN:
-
-* A VPN uses cryptography to extend a private network over a public one.
-* Protected connection a to a a private network.
-* A VPN connection is needed for using the course Labs.
-
-### HTTP\(s\) Traffic Sniffing with Wireshark
-
-There are **2** websites using **HTTP** and **HTTPS** respectively, differences in the communication can be checked through a sniffer as Wireshark and using the command 'Follow TCP Stream':
-
-![](../../.gitbook/assets/http.png) ![](../../.gitbook/assets/https.png)
-
-### Basic Binary and Hexadecimal Arithmetic
-
-#### Binary
-
-> `1 + 1 = 10`
->
-> `111 + 1 = 1000`
->
-> `1101b` = `13d`
-
-**Converting Decimal and to Binary**
-
-Divide by 2 and keep a not of the remainder iterating the same operation until the dividend is zero.
-
-`13d` is `1011b`:
-
-| Step | Operation | Remainder |
-| :--- | :--- | ---: |
-| 1 | 13 / 2 = 6 | 1 |
-| 2 | 6 / 2 = 3 | 0 |
-| 3 | 2 / 2 = 1 | 1 |
-| 4 | 1 / 2 = 0 | 1 |
-
-**Binary Operators**
-
-| Name | Description | Example |
-| :--- | :--- | :--- |
-| `NOT` | Negation | `NOT 1101` = `0010` |
-| `AND` | if \(both bits in the comparing position are ones\) -&gt; 1; else 0 | `1001 AND 1100` = `1000` |
-| `OR` | if \(at least one of the bits is one\) -&gt; 1; else 0 | `1001 OR 1100` = `1101` |
-| `XOR` | if \(**just one** of the bits is one\) -&gt; 1; else 0 | `1001 XOR 1100` = `0101` |
-
-#### Hexadecimal
-
-|  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |
-| :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- |
-| Hex | 0 | 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8 | 9 | A | B | C | D | E | F |
-| Dec | 0 | 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8 | 9 | 10 | 11 | 12 | 13 | 14 | 15 |
-
-`0x3a1` = `3a1h` = `929d`
-
-| Conversion | Operation | Total |
-| :--- | :--- | ---: |
-| 3 = 3 | 3 \* 16^2 | 768 |
-| a = 10 | 10 \* 16^1 | 160 |
-| 1 = 1 | 1 \* 16^0 | 1 |
-
-**Converting decimal to hexadecimal**
-
-Similar to converting decimal to binary: `1019d` = `0x3FB`
-
-| Number/16 | Result | Reminder \* 16 |
-| :--- | :--- | :--- |
-| 1019 / 16 | 63.6875 | 0.6875 \* 16 = 11 \(B\) |
-| 63 / 16 | 3.9375 | 0.9375 \* 16 = 15 \(F\) |
-| 3 / 16 | 0.1875 | 0.1875 \* 16 = 3 |
-| 0 / 16 | -- |  |
-
-## 
-
-## 
-
-## Penetration Testing
-
-### Penetration Testing Introduction
-
 * A penetration tester performs a deep investigation of a remote system's security flaws.
 * Penetration testers must test for any and all vulnerabilities, not just the ones that may grant them root access.
 * Penetration testing is not about getting `root`!
 * Penetration testers cannot destroy their client's infrastructure, professional pentesting requires a thorough understanding of attack vectors and their potential.
 
-### Lifecycle of a Penetration Tester
+## Lifecycle of a Penetration Tester
 
 * Pentester activity must guarantee that the least impact possible on the production systems and services.
 * Avoid overloading client's systems and networks.
 * Communicate to client what steps to take, just in case anything goes wrong during the pentest.
 * Pentesting is a process that ensures that every potential vulnerability or security weakness gets tested with the lowest possible overhead.
 
-#### Engagement
+### Engagement
 
 Details about the pentest are established during the Engagement phase.
 
@@ -123,7 +31,7 @@ Quotation:
 * Evaluation and quoting these aspects requires experience.
 * If you are not able to quantify the amount of work required by an engagement, you can provide an hourly fee.
 
-Proposal Submittal:
+#### Proposal Submittal
 
 * The best way to win a job is by providing a sound and targeted proposal.
 * You should write the proposal keeping in mind the client's needs and infrastructure.
@@ -150,13 +58,13 @@ Proposal Submittal:
     * Domain names
     * Etc.
 
-Scope:
+#### Scope
 
 * Make sure that the target of your engagement is the property of your client.
 * Shared hosting: You must not conduct an assessment on targets unless you are given written permission from the hosting provider.
 * Check country laws
 
-Incident Handling:
+#### Incident Handling
 
 * Unplanned and unwanted situation that affects the client's environment and disrupts its services.
 * Even when sticking to best practices,there's a possibility to damage the tested assets.
@@ -167,7 +75,7 @@ Incident Handling:
   * Have an emergency contact.
   * Add an statement to the rules of engagement.
 
-Legal work:
+#### Legal work
 
 * Sometimes you will need to involve a lawyer as information security laws vary a lot from country to country
 * Sometimes a professional insurance is required
@@ -175,7 +83,7 @@ Legal work:
 * Outline what you can and you cannot do.
 * Rules of engagement is another document that will define the scope of engagement and will put on paper what you are entitled to do and when, this includes the time window for your tests and your contacts in the client's organizations
 
-#### Information Gathering
+### Information Gathering
 
 * Fundamental stage for a successful penetration test.
 * Starts once the legal paperwork is complete, and not before.
@@ -192,7 +100,7 @@ Extremely useful information if Social Engineering is allowed by the rules of th
 * Having an understanding of the business is a key aspect in understanding what is important for your client.
 * Understanding the business allows us to rate the risks associated with a successful attack.
 
-Infrastructure Information Gathering:
+#### Infrastructure Information Gathering
 
 * After understanding the business
 * Transform the IP addresses or the domains in scope into actionable information about servers, OSs, etc.
@@ -203,7 +111,7 @@ Infrastructure Information Gathering:
   * if there are one or more websites using that IP address
   * What OS is running on the host or the server
 
-Web Applications:
+#### Web Applications
 
 * Harvest Domains
 * Harvest subdomains
@@ -212,23 +120,23 @@ Web Applications:
 * Harvest Frameworks and CMS in use
 * Treat webapps as completely separate entities
 
-#### Footprinting and Scanning
+### Footprinting and Scanning
 
 Here you deepen your knowledge of the in-scope servers and services.
 
-Fingerprinting the OS:
+#### Fingerprinting the OS
 
 * Gives you info about the OS
 * Helps to narrow down the number of potential vulnerabilities
 * Some tools use exploits to some singularities you can find the network stack implementation
 
-Port Scanning:
+#### Port Scanning
 
 * Once you know the live hosts, you can determine which ports are open on a remote system
 * Any mistake made here will impact next steps
 * `nmap` uses different scanning techniques to reveal open, closed and filtered ports
 
-Detecting Services:
+#### Detecting Services
 
 * Act of knowing what service which service is listening on that port.
 * Knowing the port number isn't enough, there's the need to discover the service that is running behind.
@@ -240,7 +148,7 @@ By knowing the services running, we can know:
 * Purpose of a particular IP address \(server/client\)
 * Relevance of the host in the infrastructure
 
-#### Vulnerability Assessment
+### Vulnerability Assessment
 
 * Aims to build a list of the present vulnerabilities on the target systems.
 * The pentester will carry out a vulnerability assessment on each target discovered in the previous steps
@@ -253,7 +161,7 @@ Vulnerability assessments can be carried out:
   * Extremely important to properly configure them, you might crash targets if not
   * Their output is a report that the pentester can use in the exploitation phase
 
-#### Exploitation
+### Exploitation
 
 * Phase where we verify the vulnerabilities really exist.
 * During this phase, a pentester checks and validates a vulnerability and also widens and increases the privileges on the target systems and networks.
@@ -262,7 +170,7 @@ Vulnerability assessments can be carried out:
 
 > Information Gathering -&gt; Scanning -&gt; Vulnerability Assessment -&gt; Exploiting
 
-#### Reporting
+### Reporting
 
 * This step is as important as the rest of the phases, as it delivers the results to executives, IT staff and development team.
 * This report must address:
@@ -272,7 +180,7 @@ Vulnerability assessments can be carried out:
   * Impact and risk analysis for each vulnerability
   * Remediation tips \(of real value for the client, as they can be used to resolve their security issues\)
 
-#### Consultancy
+## Consultancy
 
 * Pentester are often asked to provide some hours of consultancy after delivering the report.
 * The initial engagement is closed and the pentester must keep the report encrypted in a safe place, or even destroy it.
