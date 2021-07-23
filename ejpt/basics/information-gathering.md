@@ -1,12 +1,14 @@
+---
+description: >-
+  OSINT: Widening the attack surface. Mounting targeted attacks. Sharpening your
+  tools in preparation for the next phases.
+---
+
 # Information Gathering
 
 ## Open-Source Intelligence
 
-* Widening the attack surface.
-* Mounting targeted attacks.
-* Sharpening your tools in preparation for the next phases.
-
-Information Gathering from Social Networks:
+### Information Gathering from Social Networks
 
 * **CrunchBase**: find detailed information about founders, investors, employees, buyouts and acquisitions.
 
