@@ -63,15 +63,15 @@
   * [Vulnversity](ctf-write-ups/tryhackme/vulnversity.md)
   * [Blue](ctf-write-ups/tryhackme/blue.md)
 
-## Other
-
-* [Glossary](other/glossary.md)
-* [To Do](other/to-do.md)
-
 ## Hardware
 
 * [Bad USB](hardware/bad-usb/README.md)
   * [CJMCU Virtual USB TF ATMEGA32U4](hardware/bad-usb/cjmcu-virtual-usb-tf-atmega32u4.md)
   * [Cactus WHID](hardware/bad-usb/cactus-whid.md)
   * [Arduino Teensy](hardware/bad-usb/arduino-teensy.md)
+
+## Other
+
+* [Glossary](other/glossary.md)
+* [To Do](other/to-do.md)
 
