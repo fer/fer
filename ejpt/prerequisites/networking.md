@@ -16,7 +16,7 @@ IP protocol header is 160bits \(20Bytes\):
 * The receiving host does the same operation in reverse order. Using this method, the application does not need to worry about how the transport, network and link layers work. It just hands in the packet to the transport layer.
 
 | TCP/IP | ISO/OSI |
-| :--- | :--- |
+| :---: | :---: |
 | Application   Transport   Network   Physical | Application   Presentation   Session   Transport   Network   Link   Physical |
 
 ### IPv4
