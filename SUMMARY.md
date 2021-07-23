@@ -70,7 +70,8 @@
 
 ## Hardware
 
-* [Arduino Teensy](hardware/arduino-teensy.md)
-* [Cactus WHID](hardware/cactus-whid.md)
-* [CJMCU Virtual USB TF ATMEGA32U4](hardware/cjmcu-virtual-usb-tf-atmega32u4.md)
+* [Bad USB](hardware/bad-usb/README.md)
+  * [CJMCU Virtual USB TF ATMEGA32U4](hardware/bad-usb/cjmcu-virtual-usb-tf-atmega32u4.md)
+  * [Cactus WHID](hardware/bad-usb/cactus-whid.md)
+  * [Arduino Teensy](hardware/bad-usb/arduino-teensy.md)
 
