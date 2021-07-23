@@ -83,14 +83,14 @@ OS DETECTION:
 * Also let you detect if there's a firewall between you and your target.
 * 3-way handshake: If port is closed ➝ RST + ACK.
 
-#### TCP Connect Scan
+### TCP Connect Scan
 
 * Simplest way to perform a port scan.
 * If the scanner receives a `RST` packet, then the port is closed.
 * If the scanner is able to complete the connection, then the port is open.
 * TCP Connect Scans are recoded in the daemon logs \(from the app point of view, the probe looks like a legitimate connection\).
 
-#### TCP SYN Scan
+### TCP SYN Scan
 
 * Default nmap scan.
 * Stealthy by design
@@ -99,7 +99,7 @@ OS DETECTION:
 * if a ACK packet is received, then the port is open \(and RST packet is sent to the target to stop the handshake\).
 * Cannot be detected by looking at daemons logs.
 
-#### Nmap Scan Types
+### Nmap Scan Types
 
 ```bash
 -sT # performs a TCP connect scan
@@ -111,7 +111,7 @@ OS DETECTION:
 * During version detection scan, Nmap performs a TCP connect and reads from the banner of the daemon listening on a port.
 * If the daemon does not send a banner, nmap sends some probes to understand what application is, by studying its behavior
 
-#### NMAP Port Scanning
+### NMAP Port Scanning
 
 ```bash
 nmap -sn 192.168.1.0/24 > hosts-up.txt
@@ -119,7 +119,7 @@ nmap -sT -p80 192.168.1.0/24              # checks for all webservers in this ne
 nmap -sS -sV -p 21 192.168.1.0/24         # checks for service version
 ```
 
-#### Specifying targets
+### Specifying targets
 
 ```bash
 # By DNS name:
@@ -148,7 +148,7 @@ nmap -p 21,22,139,445,443,80 <target>
 nmap -p 100-1000 <target>
 ```
 
-#### Discovering Network with Port Scanning
+### Discovering Network with Port Scanning
 
 * You might encounter networks that are protected by firewalls and where pings are blocked.
 * It's not uncommon to come across a server that does not respond to pings but has many TCP/UDP ports open.
@@ -156,7 +156,7 @@ nmap -p 100-1000 <target>
 * If you would like to find an alive host, you can scan typical ports instead of performing a ping sweep.
 * The four most basic TCP ports \(22, 445, 80, 443\) can be used as indicators of live hosts in the network.
 
-#### Spotting a Firewall
+### Spotting a Firewall
 
 * You might often see that a version was not recognized regardless of the open port.
 * Or even the service type is not recognized.
