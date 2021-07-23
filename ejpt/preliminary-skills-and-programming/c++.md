@@ -286,5 +286,3 @@ WSACleanup();
 }
 ```
 
-## Python
-

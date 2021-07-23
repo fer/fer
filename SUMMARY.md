@@ -19,9 +19,9 @@
   * [Network Attacks](ejpt/basics/network-attacks.md)
 * [Black Box Tests](ejpt/black-box-tests/README.md)
   * [BB1](ejpt/black-box-tests/untitled.md)
-  * [BB2](ejpt/black-box-tests/untitled-1.md)
+  * [BB2](ejpt/black-box-tests/untitled-1/README.md)
+    * [Black Box Test 2](ejpt/black-box-tests/untitled-1/black-box-2.md)
   * [BB3](ejpt/black-box-tests/bb3.md)
-  * [Black Box Test 2](ejpt/black-box-tests/black-box-2.md)
 * [References](ejpt/references.md)
 
 ## Linux
