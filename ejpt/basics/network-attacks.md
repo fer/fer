@@ -456,6 +456,5 @@ $ msfconsole
 #
 # Staged: it's smaller. Not enough to create a shell itself. You require to use a msf listener.
 # Stageless: it's bigger. It doesn't need anything aditional, just nc in your computer as a listener.
-#
 ```
 
