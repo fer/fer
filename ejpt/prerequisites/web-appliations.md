@@ -52,9 +52,9 @@ Some status codes:
 | 404 Not Found | the server cannot find the resource matching the request |
 | 500 Internal Server Error | the server does not support the functionality required |
 
-Request example:
-
-```bash
+{% tabs %}
+{% tab title="HTTP Request Example" %}
+```javascript
 GET / HTTP/1.1                                    # VERB path protocol version
 Host: www.elarnsecurity.com                       # Specifies the internet hostname and port number, obtained from the URI of the resource
 User-Agent: Mozilla/5.0 (X11; Linux x86_64 ...)   # Tells the server what client software is issuing the request
@@ -65,10 +65,10 @@ Connection: keep-alive                            # Future communications with t
 \r\n\r\n
 < PAGE CONTENT > ...
 ```
+{% endtab %}
 
-Response example:
-
-```bash
+{% tab title="HTTP Response Example" %}
+```javascript
 HTTP/1.1 200 OK                                   # Status-Line: protocol version + status code + textual meaning
 Date: Wed, 19 Nov 2020 10:10:10 GNT               # Time at which the message was originated
 Cache-Control: private, max-age=0                 # Using cached content saves bandwidth
@@ -80,6 +80,8 @@ Content-Length: 99043                             # length in bytes of the messa
 
 < PAGE CONTENT > ...
 ```
+{% endtab %}
+{% endtabs %}
 
 ### HTTPS: HTTP over SSL/TLS as an encryption layer
 
