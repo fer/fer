@@ -22,11 +22,11 @@
   * [Network Attacks](ejpt/basics/network-attacks.md)
 * [Annex A: Labs](ejpt/labs.md)
 * [Annex B: Black Box Tests](ejpt/black-box-tests/README.md)
-  * [BB1](ejpt/black-box-tests/untitled.md)
-  * [BB2](ejpt/black-box-tests/untitled-1/README.md)
-    * [Black Box Test 2](ejpt/black-box-tests/untitled-1/black-box-2.md)
+  * [BB1](ejpt/black-box-tests/bb1.md)
+  * [BB2](ejpt/black-box-tests/bb2/README.md)
+    * [Black Box Test 2](ejpt/black-box-tests/bb2/black-box-2.md)
   * [BB3](ejpt/black-box-tests/bb3.md)
-* [Annex C: Tools](ejpt/annex-c-tools.md)
+* [Annex C: Tools](ejpt/tools.md)
 * [References](ejpt/references.md)
 
 ## Linux
