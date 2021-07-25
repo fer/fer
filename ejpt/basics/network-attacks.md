@@ -219,11 +219,13 @@ smb: \> get flag.txt /home/kali/Desktop/flag.txt
 
 If an attacker finds a way to manipulate the ARP cache, then the attacker will also be able to receive traffic destined to other IP addresses.
 
-> Ability to:
->
-> * Perform MITM attacks.
-> * Mount advanced attacks.
-> * Sniff traffic on a switched network.
+{% hint style="info" %}
+**Goals**
+
+* Perform MITM attacks.
+* Mount advanced attacks.
+* Sniff traffic on a switched network.
+{% endhint %}
 
 * The attacker can manipulate other hosts' ARP cache tables by sending gratuitous ARP replies.
 * Gratuitous ARP replies = ARP reply messages.
