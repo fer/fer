@@ -70,11 +70,13 @@ OS DETECTION:
 
 ## Port Scanning
 
-> Goals:
->
-> * Prepare for the vulnerability assessment phase.
-> * Perform stealth reconnaissance.
-> * Detect firewalls.
+{% hint style="info" %}
+**Goals**
+
+* Prepare for the vulnerability assessment phase.
+* Perform stealth reconnaissance.
+* Detect firewalls.
+{% endhint %}
 
 * Port Scanning goes after knowing the active targets on the network.
 * Determine what TCP/UDP ports are opened.
