@@ -2,7 +2,7 @@
 
 * [README](README.md)
 
-## eLearning Junior Penetration Tester <a id="ejpt"></a>
+## eLearning JPT <a id="ejpt"></a>
 
 * [Penetration Testing Prerequisites](ejpt/prerequisites/README.md)
   * [Introduction](ejpt/prerequisites/differences-between-clear-text-cryptography-protocols-and-vpn.md)
