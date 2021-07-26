@@ -42,7 +42,29 @@ ip route add 192.168.222.0/24 via 10.175.34.1
 
 ### C++ → C++ Assisted Exploitation - WIP
 
-### Python→ Python Assisted Exploitation - WIP
+### Python → Python Assisted Exploitation - WIP
+
+## Penetration Testing Basics
+
+### Footprinting and Scanning → Scanning and OS Fingerprinting - WIP
+
+### Vulnerability Assesment → Nessus - WIP
+
+### Web Attacks → Dirbuster - WIP
+
+### Web Attacks → Cross site scripting - WIP
+
+### Web Attacks → SQL Injection - WIP
+
+### Network Attacks → Bruteforce and Password Cracking - WIP
+
+### Network Attacks → Null Session - WIP
+
+### Network Attacks → ARP Poisoning - WIP
+
+### Network Attacks →  Metasploit - WIP
+
+
 
 
 
