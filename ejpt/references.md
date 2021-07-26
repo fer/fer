@@ -1,4 +1,8 @@
-# References
+---
+description: Mentioned links and information during the course.
+---
+
+# Annex D: References
 
 * [Binary Fingers](https://www.mathsisfun.com/numbers/binary-count-fingers.html)
 * [Binary Hex Converters](https://www.binaryhexconverter.com/)

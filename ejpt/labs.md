@@ -24,5 +24,37 @@ The idea is to captura and analyze an HTTP and HTTPS login session and analyze a
 
 ![HTTPS followed TCP stream](../.gitbook/assets/image%20%2827%29.png)
 
+### Networking → Find the Secret Server
 
+The goal of the lab is to configure your VPN lab environment in order to reach all the hosts in the networks \(172.16.88.0/24, 192.168.241.0/24\)
+
+```bash
+ip route add 192.168.222.0/24 via 10.175.34.1
+```
+
+###  Networking → Data Exfiltration - WIP
+
+### Web Applications → Burp Suite Basics - WIP 
+
+### Web Applications → Burp Suite - WIP 
+
+## Preliminary Skills & Programming
+
+### C++ → C++ Assisted Exploitation - WIP
+
+### Python→ Python Assisted Exploitation - WIP
+
+
+
+
+
+
+
+
+
+
+
+
+
+#### 
 

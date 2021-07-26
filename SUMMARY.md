@@ -27,7 +27,7 @@
     * [Black Box Test 2](ejpt/black-box-tests/bb2/black-box-2.md)
   * [BB3](ejpt/black-box-tests/bb3.md)
 * [Annex C: Tools](ejpt/tools.md)
-* [References](ejpt/references.md)
+* [Annex D: References](ejpt/references.md)
 
 ## Linux
 
