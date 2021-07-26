@@ -48,7 +48,7 @@ ip route add 192.168.222.0/24 via 10.175.34.1
 
 ### Footprinting and Scanning → Scanning and OS Fingerprinting - WIP
 
-### Vulnerability Assesment → Nessus - WIP
+### Vulnerability Assessment → Nessus - WIP
 
 ### Web Attacks → Dirbuster - WIP
 
