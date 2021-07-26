@@ -16,5 +16,5 @@ Hereby I take some of [my notes on GitBook](https://ferx.gitbook.io/wiki/).
 
 ## Want to talk?
 
-[![Protonmail](https://img.shields.io/badge/ProtonMail-8B89CC?style=for-the-badge&logo=protonmail&logoColor=white)](mailto:seeyoudowntheroad@pm.me) [![Telegram](https://img.shields.io/badge/Telegram-2CA5E0?style=for-the-badge&logo=telegram&logoColor=white)](https://t.me/my_name_is_fer)[![GitHub](https://img.shields.io/badge/GITHUB%20-%237289DA.svg?&style=for-the-badge&logo=github&logoColor=white&badgeColor=black)](https://github.com/fer)
+[![Protonmail](https://img.shields.io/badge/ProtonMail-8B89CC?style=for-the-badge&logo=protonmail&logoColor=white)](mailto:seeyoudowntheroad@pm.me) [![Telegram](https://img.shields.io/badge/Telegram-2CA5E0?style=for-the-badge&logo=telegram&logoColor=white)](https://t.me/my_name_is_fer) [![GitHub](https://img.shields.io/badge/GITHUB%20-%237289DA.svg?&style=for-the-badge&logo=github&logoColor=white&badgeColor=black)](https://github.com/fer)
 
