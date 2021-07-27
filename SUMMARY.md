@@ -63,6 +63,7 @@
 * [TryHackMe](ctf-write-ups/tryhackme/README.md)
   * [Vulnversity](ctf-write-ups/tryhackme/vulnversity.md)
   * [Blue](ctf-write-ups/tryhackme/blue.md)
+  * [Kenobi](ctf-write-ups/tryhackme/kenobi.md)
 
 ## Hardware
 
