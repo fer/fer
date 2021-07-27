@@ -143,7 +143,7 @@ Nmap done: 1 IP address (1 host up) scanned in 98.11 seconds
 **Machine vulnerable to** [**ms17-010**](https://es.wikipedia.org/wiki/EternalBlue)\*\*\*\*
 {% endhint %}
 
-## Task \#2: Gain Access
+## Task \#2, \#3 & \#4: Gain Access, Escalate and Crack Hashes
 
 {% tabs %}
 {% tab title="1. Stat Metasploit" %}
@@ -249,13 +249,30 @@ Jon:1000:aad3b435b51404eeaad3b435b51404ee:ffb43f0de35be4d9917ac0cc8ad57f8d:::
 {% endtab %}
 
 {% tab title="Crack password" %}
+1. Go to [CrackStation](https://crackstation.net/)
+2. Copy the second part of the hash for Jon:
+
+```text
+Jon:1000:aad3b435b51404eeaad3b435b51404ee:ffb43f0de35be4d9917ac0cc8ad57f8d:::
 ```
 
-```
+So only `ffb43f0de35be4d9917ac0cc8ad57f8d`
+
+3. Password is `alqfna22`
 {% endtab %}
 {% endtabs %}
 
+## Task \#5: Flags
 
+{% hint style="info" %}
+Flag in root system: `flag{access_the_machine}`
 
-
+```text
+C:\>where /r c: flag*.txt
+where /r c: flag*.txt
+C:\flag1.txt
+C:\Users\Jon\Documents\flag3.txt
+C:\Windows\System32\config\flag2.txt
+```
+{% endhint %}
 
