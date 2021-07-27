@@ -151,7 +151,7 @@ Nmap done: 1 IP address (1 host up) scanned in 32.09 seconds
 {% tabs %}
 {% tab title="Enumerate shares with nmap" %}
 ```text
-nmap -p 445 --script=smb-enum-shares.nse,smb-enum-users.nse 10.10.128.62
+nmap -p 445 --script=smb-enum-shares.nse,smb-enum-users.nse 10.10.233.180
 ```
 {% endtab %}
 
@@ -196,7 +196,72 @@ Nmap done: 1 IP address (1 host up) scanned in 7.05 seconds
 
 ```
 {% endtab %}
+
+{% tab title="smbclient" %}
+```
+$ smbclient //10.10.233.180/anonymous
+lpcfg_do_global_parameter: WARNING: The "client use spnego" option is deprecated 
+lpcfg_do_global_parameter: WARNING: The "client ntlmv2 auth" option is deprecated 
+Enter WORKGROUP\kali's password: 
+Try "help" to get a list of possible commands. 
+smb: > ls 
+.          D     0 Wed Sep 4 06:49:09 2019 
+..         D     0 Wed Sep 4 06:56:07 2019 
+log.txt    N 12237 Wed Sep 4 06:49:09 2019
+
+    9204224 blocks of size 1024. 6877096 blocks available
+smb: >
+```
+{% endtab %}
+
+{% tab title="Enumerate RPC" %}
+```
+$ nmap -p 111 --script=nfs-ls,nfs-statfs,nfs-showmount 10.10.233.180
+Starting Nmap 7.91 ( https://nmap.org ) at 2021-07-27 13:28 EDT
+Nmap scan report for 10.10.233.180
+Host is up (0.045s latency).
+
+PORT    STATE SERVICE
+111/tcp open  rpcbind
+| nfs-showmount: 
+|_  /var *
+
+Nmap done: 1 IP address (1 host up) scanned in 0.66 seconds
+```
+{% endtab %}
 {% endtabs %}
 
+## Task \#3: Gain access with ProFtpd
 
+{% hint style="info" %}
+**ProFtpd** is a free and open-source FTP server, compatible with Unix and Windows systems. Its also been vulnerable in the past software versions.
+{% endhint %}
+
+{% tabs %}
+{% tab title="What version" %}
+```text
+$ ftp                    
+ftp> o 10.10.233.180
+Connected to 10.10.233.180.
+220 ProFTPD 1.3.5 Server (ProFTPD Default Installation) [10.10.233.180]
+Name (10.10.233.180:kali): 
+```
+{% endtab %}
+
+{% tab title="searchsploit" %}
+```text
+$ searchsploit proftpd 1.3.5
+-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- ---------------------------------
+ Exploit Title                                                                                                                                                                                                                                                                              |  Path
+-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- ---------------------------------
+ProFTPd 1.3.5 - 'mod_copy' Command Execution (Metasploit)                                                                                                                                                                                                                                   | linux/remote/37262.rb
+ProFTPd 1.3.5 - 'mod_copy' Remote Command Execution                                                                                                                                                                                                                                         | linux/remote/36803.py
+ProFTPd 1.3.5 - 'mod_copy' Remote Command Execution (2)                                                                                                                                                                                                                                     | linux/remote/49908.py
+ProFTPd 1.3.5 - File Copy                                                                                                                                                                                                                                                                   | linux/remote/36742.txt
+-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- ---------------------------------
+Shellcodes: No Results
+
+```
+{% endtab %}
+{% endtabs %}
 
