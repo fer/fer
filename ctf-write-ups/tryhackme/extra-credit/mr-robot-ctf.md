@@ -208,9 +208,58 @@ hydra -L fsocity.dic \
       -V http-form-post '/wp-login.php:log=^USER^&pwd=^PASS^&wp-submit=Log In&testcookie=1:S=Location' 
 ```
 {% endtab %}
+
+{% tab title="gobuster" %}
+```
+$ gobuster dir -w /usr/share/dirbuster/wordlists/directory-list-lowercase-2.3-medium.txt -u http://10.10.19.249
+===============================================================
+Gobuster v3.1.0
+by OJ Reeves (@TheColonial) & Christian Mehlmauer (@firefart)
+===============================================================
+[+] Url:                     http://10.10.19.249
+[+] Method:                  GET
+[+] Threads:                 10
+[+] Wordlist:                /usr/share/dirbuster/wordlists/directory-list-lowercase-2.3-medium.txt
+[+] Negative Status codes:   404
+[+] User Agent:              gobuster/3.1.0
+[+] Timeout:                 10s
+===============================================================
+2021/07/28 13:49:45 Starting gobuster in directory enumeration mode
+===============================================================
+/images               (Status: 301) [Size: 235] [--> http://10.10.19.249/images/]
+/blog                 (Status: 301) [Size: 233] [--> http://10.10.19.249/blog/]  
+/sitemap              (Status: 200) [Size: 0]                                    
+/rss                  (Status: 301) [Size: 0] [--> http://10.10.19.249/feed/]    
+/login                (Status: 302) [Size: 0] [--> http://10.10.19.249/wp-login.php]
+/0                    (Status: 301) [Size: 0] [--> http://10.10.19.249/0/]          
+/video                (Status: 301) [Size: 234] [--> http://10.10.19.249/video/]    
+/feed                 (Status: 301) [Size: 0] [--> http://10.10.19.249/feed/]       
+/image                (Status: 301) [Size: 0] [--> http://10.10.19.249/image/]      
+/atom                 (Status: 301) [Size: 0] [--> http://10.10.19.249/feed/atom/]  
+/wp-content           (Status: 301) [Size: 239] [--> http://10.10.19.249/wp-content/]
+/admin                (Status: 301) [Size: 234] [--> http://10.10.19.249/admin/]     
+/audio                (Status: 301) [Size: 234] [--> http://10.10.19.249/audio/]     
+/intro                (Status: 200) [Size: 516314]                                   
+/wp-login             (Status: 200) [Size: 2606]                                     
+/css                  (Status: 301) [Size: 232] [--> http://10.10.19.249/css/]       
+/rss2                 (Status: 301) [Size: 0] [--> http://10.10.19.249/feed/]        
+/license              (Status: 200) [Size: 309]                                      
+/wp-includes          (Status: 301) [Size: 240] [--> http://10.10.19.249/wp-includes/]
+/readme               (Status: 200) [Size: 64]                                        
+/js                   (Status: 301) [Size: 231] [--> http://10.10.19.249/js/]         
+/rdf                  (Status: 301) [Size: 0] [--> http://10.10.19.249/feed/rdf/]     
+/page1                (Status: 301) [Size: 0] [--> http://10.10.19.249/]              
+/robots               (Status: 200) [Size: 41]                                        
+Progress: 2088 / 207644 (1.01%)                                                      ^C
+[!] Keyboard interrupt detected, terminating.
+                                                                                      
+===============================================================
+2021/07/28 14:06:16 Finished
+===============================================================
+
+```
+{% endtab %}
 {% endtabs %}
-
-
 
 
 
