@@ -1,6 +1,6 @@
 # README
 
-## Hello World! 👋
+## whoami
 
 I'm [**fer**](https://github.com/fer), another human being stuck to screens since 1988.
 
