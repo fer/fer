@@ -1,6 +1,6 @@
 # Table of contents
 
-* [README](README.md)
+* [whoami](README.md)
 
 ## eLearning JPT <a id="ejpt"></a>
 
