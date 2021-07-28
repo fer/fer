@@ -46,6 +46,7 @@
     * [paste](linux/bash-scripting/command-line/paste.md)
     * [sed](linux/bash-scripting/command-line/sed.md)
     * [ssh](linux/bash-scripting/command-line/ssh.md)
+    * [strings](linux/bash-scripting/command-line/strings.md)
     * [tar](linux/bash-scripting/command-line/tar.md)
     * [vim](linux/bash-scripting/command-line/vim.md)
     * [wfuzz](linux/bash-scripting/command-line/wfuzz.md)
