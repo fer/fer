@@ -62,9 +62,14 @@
 
 * [OverTheWire: Wargames](ctf-write-ups/ctf.md)
 * [TryHackMe](ctf-write-ups/tryhackme/README.md)
-  * [Vulnversity](ctf-write-ups/tryhackme/vulnversity.md)
-  * [Blue](ctf-write-ups/tryhackme/blue.md)
-  * [Kenobi](ctf-write-ups/tryhackme/kenobi.md)
+  * [Offensive Pentesting](ctf-write-ups/tryhackme/offensive-pentesting/README.md)
+    * [Getting Started](ctf-write-ups/tryhackme/offensive-pentesting/getting-started/README.md)
+      * [Vulnversity](ctf-write-ups/tryhackme/offensive-pentesting/getting-started/vulnversity.md)
+      * [Blue](ctf-write-ups/tryhackme/offensive-pentesting/getting-started/blue.md)
+      * [Kenobi](ctf-write-ups/tryhackme/offensive-pentesting/getting-started/kenobi.md)
+  * [Advanced Exploitation](ctf-write-ups/tryhackme/advanced-exploitation.md)
+  * [Extra Credit](ctf-write-ups/tryhackme/extra-credit/README.md)
+    * [Mr Robot CTF](ctf-write-ups/tryhackme/extra-credit/mr-robot-ctf.md)
 
 ## Hardware
 
