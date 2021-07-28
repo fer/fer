@@ -10,7 +10,7 @@ description: >-
 ## Task \#1: Deploy and Scan
 
 {% tabs %}
-{% tab title="First Tab" %}
+{% tab title="nmap" %}
 ```text
 nmap -sV -n -v -Pn -p- -T4 -A --open -oX portScan.xml 10.10.128.62
 ```
