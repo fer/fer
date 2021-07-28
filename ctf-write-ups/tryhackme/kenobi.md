@@ -695,5 +695,40 @@ d0b0f3f53b6caa532a83915e19224899
 Some binaries such as passwd need to be run with elevated privileges \(as its resetting your password on the system\), however other custom files could that have the SUID bit can lead to all sorts of issues.
 {% endhint %}
 
+{% tabs %}
+{% tab title="find" %}
+```text
+$ find / -perm -u=s -type f 2>/dev/null
+```
+{% endtab %}
 
+{% tab title="Output" %}
+```bash
+/sbin/mount.nfs
+/usr/lib/policykit-1/polkit-agent-helper-1
+/usr/lib/dbus-1.0/dbus-daemon-launch-helper
+/usr/lib/snapd/snap-confine
+/usr/lib/eject/dmcrypt-get-device
+/usr/lib/openssh/ssh-keysign
+/usr/lib/x86_64-linux-gnu/lxc/lxc-user-nic
+/usr/bin/chfn
+/usr/bin/newgidmap
+/usr/bin/pkexec
+/usr/bin/passwd
+/usr/bin/newuidmap
+/usr/bin/gpasswd
+/usr/bin/menu
+/usr/bin/sudo
+/usr/bin/chsh
+/usr/bin/at
+/usr/bin/newgrp
+/bin/umount
+/bin/fusermount
+/bin/mount
+/bin/ping
+/bin/su
+/bin/ping6
+```
+{% endtab %}
+{% endtabs %}
 
