@@ -67,9 +67,10 @@
       * [Vulnversity](ctf-write-ups/tryhackme/offensive-pentesting/getting-started/vulnversity.md)
       * [Blue](ctf-write-ups/tryhackme/offensive-pentesting/getting-started/blue.md)
       * [Kenobi](ctf-write-ups/tryhackme/offensive-pentesting/getting-started/kenobi.md)
-  * [Advanced Exploitation](ctf-write-ups/tryhackme/advanced-exploitation.md)
-  * [Extra Credit](ctf-write-ups/tryhackme/extra-credit/README.md)
-    * [Mr Robot CTF](ctf-write-ups/tryhackme/extra-credit/mr-robot-ctf.md)
+    * [Advanced Exploitation](ctf-write-ups/tryhackme/offensive-pentesting/advanced-exploitation/README.md)
+      * [WIP - Relevant](ctf-write-ups/tryhackme/offensive-pentesting/advanced-exploitation/wip-relevant.md)
+    * [Extra Credit](ctf-write-ups/tryhackme/offensive-pentesting/extra-credit/README.md)
+      * [WIP - Mr Robot CTF](ctf-write-ups/tryhackme/offensive-pentesting/extra-credit/mr-robot-ctf.md)
 
 ## Hardware
 
