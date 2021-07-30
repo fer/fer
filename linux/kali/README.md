@@ -13,6 +13,7 @@ description: Kali post-installation hit-list... Work in progress!
 ```text
 sudo apt update -y && sudo apt upgrade -y && sudo apt-get dist-upgrade
 sudo apt install terminator code-oss jq -y 
+sudo apt install seclists -y
 ```
 
 * [ ] Remove desktop background image
