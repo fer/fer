@@ -120,7 +120,7 @@ lo        Link encap:Local Loopback
 ```
 {% endhint %}
 
-### 172.16.37.234 \(Linux 3.11 - 4.1 - 95%\)
+### ✔️172.16.37.234 \(Linux 3.11 - 4.1 - 95%\)
 
 | Port | State | Service | Version |
 | :--- | :--- | :--- | :--- |
@@ -610,7 +610,7 @@ Hydra (https://github.com/vanhauser-thc/thc-hydra) starting at 2021-07-18 18:24:
 {% hint style="success" %}
 **Flag encountered for** `172.16.50.222!`
 
-root/root, just login from your attacker machine:
+`root/root`, just login from your attacker machine:
 
 ```text
 > ssh root@127.0.0.1 -p 222

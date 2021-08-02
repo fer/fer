@@ -20,7 +20,7 @@ sudo openvpn black-box-penetration-test-1.ovpn
 sudo nmap -sn 172.16.64.0/24 --exclude 172.16.64.10 -oN hostAlive.nmap &&
 cat hostAlive.nmap | grep for | awk {'print $5'} > ips.txt &&
 sudo nmap -sV -n -v -Pn -p- -T4 -iL ips.txt -A --open -oX portScan.xml &&
-nmap2md.sh portScan.xml | xclip| xclip
+nmap2md.sh portScan.xml | xclip
 ```
 
 ## Scanner
@@ -42,7 +42,7 @@ nmap -sV -n -v -Pn -p- -T4 -iL ips.txt -A --open -oX portScan.xml
 
 ## Open Ports and Running Services
 
-### 172.16.64.101 \(Linux 3.12 - 95%\)
+### ✔️172.16.64.101 \(Linux 3.12 - 95%\)
 
 | Port | State | Service | Version |
 | :--- | :--- | :--- | :--- |
@@ -127,7 +127,7 @@ You did it!
 ```
 {% endhint %}
 
-### 172.16.64.140 \(Linux 3.12 - 95%\)
+### ✔️172.16.64.140 \(Linux 3.12 - 95%\)
 
 | Port | State | Service | Version |
 | :--- | :--- | :--- | :--- |
@@ -353,7 +353,7 @@ Now continue to others.
 ```
 {% endhint %}
 
-### 172.16.64.182 \(Linux 3.12 - 95%\)
+### ✔️172.16.64.182 \(Linux 3.12 - 95%\)
 
 | Port | State | Service | Version |
 | :--- | :--- | :--- | :--- |
@@ -378,7 +378,7 @@ Congratulations, you got it!
 ```
 {% endhint %}
 
-### 172.16.64.199 \(Microsoft Windows 10 - 96%\)
+### ✔️172.16.64.199 \(Microsoft Windows 10 - 96%\)
 
 | Port | State | Service | Version |
 | :--- | :--- | :--- | :--- |
