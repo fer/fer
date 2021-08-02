@@ -40,7 +40,7 @@ nmap -sV -n -v -Pn -p- -T4 -iL ips.txt -A --open -oX portScan.xml
 
 ## Open Ports and Running Services
 
-### 172.16.37.220 \(Linux 3.11 - 4.1 - 95%\)
+### ✔️172.16.37.220 \(Linux 3.11 - 4.1 - 95%\)
 
 | Port | State | Service | Version |
 | :--- | :--- | :--- | :--- |
