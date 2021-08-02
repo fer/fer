@@ -813,7 +813,8 @@ Actions:
 {% tabs %}
 {% tab title="Download Form" %}
 ```bash
-# Save a local file with
+# Save a local file with this updated code for the form
+# Notice the form action argument
 <html><body style="background: black; color: white;">
 <script src="http://75ajvxi36vchsv584es1.foocorp.io/app/js/auth.js"></script>
 <center><div style="border: 1px yellow double">
