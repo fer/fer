@@ -4,7 +4,7 @@ description: >-
   Your goal is to read the flag file on each machine.
 ---
 
-# BB2
+# Black Box Test \#2
 
 ## Prework
 
