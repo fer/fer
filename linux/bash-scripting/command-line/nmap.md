@@ -4,6 +4,12 @@ description: Network Mapper - WIP
 
 # nmap
 
+{% hint style="info" %}
+**Work In Progress**:
+
+* [https://tryhackme.com/room/furthernmap](https://tryhackme.com/room/furthernmap)
+{% endhint %}
+
 ## Perform Host Discovery Using `nmap` \(WIP\)
 
 You can use `nmap` to list live hosts in a network.
