@@ -1,5 +1,5 @@
 ---
-description: Simple scripts. No magic here.
+description: Simple example scripts for the bash newbie. No magic here.
 ---
 
 # Bash Scripting
