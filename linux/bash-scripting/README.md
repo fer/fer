@@ -82,19 +82,33 @@ fi
 
 ```bash
 #!/bin/sh
+# Fibonacci number in bash
+# usage: ./script number
 
 fibonacci() {
-    if [ $# -lt 1 ];
+    if [ $# -lt 1 ]
     then
-        echo "fibonacci: specify an index"
-        return;
-    fi;
+        echo "$0: specify an index"
+        exit 1
+    fi
 
-    if [ $1 == 0 ]; then echo 0; return; fi;
-    if [ $1 == 1 ]; then echo 1; return; fi;
+    if [ $1 -eq 0 ]
+    then 
+        echo 0
+        return
+    fi
 
-    echo $(expr $(fibonacci $(expr $1 - 1)) + $(fibonacci $(expr $1 - 2)));
+    if [ $1 -eq 1 ]
+    then 
+        echo 1
+        return
+    fi
+
+    echo $(expr $(fibonacci $(expr $1 - 1)) + $(fibonacci $(expr $1 - 2)))
 }
+
+
+fibonacci $1
 ```
 
 ## References
