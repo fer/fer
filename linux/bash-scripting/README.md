@@ -29,22 +29,22 @@ my_watch(){
 while getopts 't:' OPTION
 do
   case $OPTION in
-    t)    time="$OPTARG"
+    t) time="$OPTARG"
      case $time in
           ''|*[!0-9]*)
-         exec >&2; echo "error: -t argument is not a number!"
+          exec >&2; echo "error: -t argument is not a number!"
           usage; exit 1
           ;;
          *) if [ -z $3 ]; then
           exec >&2; echo "error: missing command argument"
-           usage; exit 1
+          usage; exit 1
          else
            my_watch $3 $time
          fi
       ;;
     esac
           ;;
-    ?)    usage
+    ?) usage
     exit 2
     ;;
   esac
