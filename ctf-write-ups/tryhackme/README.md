@@ -6,6 +6,8 @@ description: >-
 
 # TryHackMe
 
+![](https://tryhackme-badges.s3.amazonaws.com/fer.png)
+
 ## Pre-requisites
 
 Download your openvpn file from your [profile page](https://tryhackme.com/access) and connect before starting a room:
