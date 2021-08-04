@@ -14,5 +14,11 @@ Download your openvpn file from your [profile page](https://tryhackme.com/access
 $ sudo openvpn fer.openvpn
 ```
 
+## Free Rooms
+
+{% embed url="https://hacklido.com/blog/9-top-free-tryhackme-thm-rooms-that-you-should-try" %}
+
+
+
 
 
