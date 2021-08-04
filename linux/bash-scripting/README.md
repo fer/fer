@@ -78,7 +78,7 @@ else
 fi
 ```
 
-### Fibonacci
+### Fibonacci number
 
 ```bash
 #!/bin/sh
