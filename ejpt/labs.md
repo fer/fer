@@ -20,7 +20,7 @@ The idea is to captura and analyze an HTTP and HTTPS login session and analyze a
 
 ![Find Post HTTP packet and right click to select &apos;Follow TCP Stream&apos;](../.gitbook/assets/image%20%2828%29.png)
 
-![HTTP followed TCP stream](../.gitbook/assets/image%20%2829%29.png)
+![HTTP followed TCP stream](../.gitbook/assets/image%20%2829%29%20%281%29.png)
 
 ![HTTPS followed TCP stream](../.gitbook/assets/image%20%2827%29.png)
 

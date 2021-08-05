@@ -968,7 +968,7 @@ xhr.onreadystatechange = function() {
 {% hint style="info" %}
 **Having found  72ab311dcbfaa40ca0739f5daf505494/tracking2.ph**p URL leads to think there's another hidden tracking.php \(without '2'\), where an `id` url parameter can be passed:
 
-![](../../.gitbook/assets/image%20%2833%29.png) 
+![](../../.gitbook/assets/image%20%2833%29%20%281%29.png) 
 
 **Actions:**
 
