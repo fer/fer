@@ -6,7 +6,8 @@ description: >-
 
 # TryHackMe
 
-![](https://tryhackme-badges.s3.amazonaws.com/fer.png)
+<img src="https://tryhackme-badges.s3.amazonaws.com/fer.png" alt="TryHackMe">
+
 
 ## Pre-requisites
 
