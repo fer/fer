@@ -34,6 +34,7 @@
     * [awk](linux/bash-scripting/command-line/awk.md)
     * [cURL](linux/bash-scripting/command-line/curl.md)
     * [diff](linux/bash-scripting/command-line/diff.md)
+    * [find](linux/bash-scripting/command-line/find.md)
     * [git](linux/bash-scripting/command-line/git.md)
     * [grep](linux/bash-scripting/command-line/grep.md)
     * [gource](linux/bash-scripting/command-line/gource.md)
