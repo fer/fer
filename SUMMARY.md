@@ -21,7 +21,7 @@
     * [Introduction](courses/ejpt/prerequisites/differences-between-clear-text-cryptography-protocols-and-vpn.md)
     * [Networking](courses/ejpt/prerequisites/networking.md)
     * [Web Applications](courses/ejpt/prerequisites/web-appliations.md)
-  * [Annex A: Labs](courses/ejpt/labs.md)
+  * [Annex A: Glossary](courses/ejpt/glossary.md)
   * [Annex B: Black Box Tests](courses/ejpt/black-box-tests/README.md)
     * [Black Box Test \#1](courses/ejpt/black-box-tests/bb1.md)
     * [Black Box Test \#2](courses/ejpt/black-box-tests/bb2.md)
@@ -81,6 +81,5 @@
 
 ## Other
 
-* [Glossary](other/glossary.md)
 * [To Do](other/to-do.md)
 
