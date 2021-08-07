@@ -2,6 +2,16 @@
 
 * [whoami](README.md)
 
+## eCPPTv2
+
+* [System Security](ecpptv2/system-security.md)
+* [Network Security](ecpptv2/network-security.md)
+* [PowerShell for Pentesters](ecpptv2/powershell-for-pentesters.md)
+* [Linux Exploitation](ecpptv2/linux-exploitation.md)
+* [Web App Security](ecpptv2/web-app-security.md)
+* [Wi-Fi Security](ecpptv2/wi-fi-security.md)
+* [Metasploit & Ruby](ecpptv2/metasploit-and-ruby.md)
+
 ## Courses
 
 * [eJPT](courses/ejpt/README.md)

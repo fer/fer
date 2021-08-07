@@ -7,7 +7,7 @@ description: Mentioned links and information during the course.
 * [Binary Fingers](https://www.mathsisfun.com/numbers/binary-count-fingers.html)
 * [Binary Hex Converters](https://www.binaryhexconverter.com/)
 * [CDIR Calculator](https://www.subnet-calculator.com/cidr.php)
-* [Common Security](https://wiki.skullsecurity.org/Passwords)
+* [Common Security](https://wiki.skullsecurity.org/Passwords) 
 * [DataExfiltration with PacketWhisper](https://github.com/TryCatchHCF/PacketWhisper)
 * [egresscheck framework](https://github.com/stufus/egresscheck-framework)
 * [Exfiltration](https://attack.mitre.org/tactics/TA0010/)
