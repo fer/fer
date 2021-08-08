@@ -22,9 +22,9 @@ description: >-
 
 ### Network and OS Interaction
 
-### 📽 Packetfu
+### ▶ Packetfu
 
-### 📽 Packetful Sniffing
+### ▶ Packetful Sniffing
 
 ### Ruby
 
@@ -32,19 +32,19 @@ description: >-
 
 ### The Web
 
-### 📽 Post Flooding
+### ▶ Post Flooding
 
-### 📽 Form Extraction
+### ▶ Form Extraction
 
-### 📽 Nokogiri
+### ▶ Nokogiri
 
 ## Exploitation with Ruby
 
 ### Exploitation with Ruby
 
-### 📽 Exploitation with Ruby
+### ▶ Exploitation with Ruby
 
-### ⚗ Exploitation with Ruby
+### 🧪 Exploitation with Ruby
 
 
 

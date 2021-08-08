@@ -4,3 +4,91 @@ description: Understanding of x86 Architecture and its weaknesses.
 
 # System Security
 
+## Architecture Fundamentals
+
+### Introduction - Study Guide
+
+### Architecture Fundamentals - Study Guide
+
+### ▶ Stack Frames
+
+### Security Implementations - Study Guide
+
+### 🧪 System Security
+
+## Assembler Debuggers and Tool Arsenal
+
+### Introduction - Study Guide
+
+### Assembler - Study Guide
+
+### Compiler - Study Guide
+
+### NASM - Study Guide
+
+### Tools Arsenal - Study Guide
+
+### ▶ Immunity Debugger
+
+## Buffer Overflows
+
+### Understanding Buffer Overflows - Study Guide
+
+### ▶ Debugging Buffer Overflows Goodpassword
+
+### Finding Buffer Overflows - Study Guide
+
+### Exploiting Buffer Overflows - Study Guide
+
+### Exploiting a Real World Buffer Overflow - Study Guide
+
+### ▶ Exploiting Buffer Overflows 32bit FTP
+
+### Security Implementations - Study Guide
+
+## Shellcoding
+
+### Execution of a Shellcode - Study Guide
+
+### Types of Shellcode - Study Guide
+
+### Encoding of Shellcode - Study Guide
+
+### Debugging a Shellcode - Study Guide
+
+### Creating Our First Shellcode - Study Guide
+
+### A More Advanced Shellcode - Study Guide
+
+### Shellcode and Payload Generators - Study Guide
+
+## Cryptography and Password Cracking
+
+### Introduction - Study Guide
+
+### Classification - Study Guide
+
+### Cryptographic Hash Function - Study Guide
+
+### Public Key Infrastructure - Study Guide
+
+### Pretty Good Privacy \(PGP\) - Study Guide
+
+### Secure Shell \(SSH\) - Study Guide
+
+### Cryptographic Attacks - Study Guide
+
+### Security Pitfalls Implementing Cryptographic Systems - Study Guide
+
+### Windows Passwords - Study Guide
+
+## Malware
+
+### Classification - Study Guide
+
+### Techniques Used by Malware - Study Guide
+
+### How Malware Spreads - Study Guide
+
+### Samples - Study Guide
+

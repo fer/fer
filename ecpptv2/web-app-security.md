@@ -8,65 +8,65 @@ description: Conduct a thorough Penetration test against web applications.
 
 ### Introduction - Study Guide
 
-### 📽 Same Origin
+### ▶ Same Origin
 
-### 📽 HTTP Cookies and Session
+### ▶ HTTP Cookies and Session
 
-### 📽 Burp Suite
+### ▶ Burp Suite
 
-### 📽 OWASP Zap
+### ▶ OWASP Zap
 
-### ⚗ WebApp Labs - Introduction
+### 🧪 WebApp Labs - Introduction
 
 ## Information Gathering
 
 ### Information Gathering - Study Guide
 
-### 📽 Web App Information Gathering
+### ▶ Web App Information Gathering
 
-### 📽 Web App Fingerprinting
+### ▶ Web App Fingerprinting
 
-### 📽 Dirbuster
+### ▶ Dirbuster
 
-### 📽 Subdomain Enumeration
+### ▶ Subdomain Enumeration
 
-### 📽 Crawling and Spidering
+### ▶ Crawling and Spidering
 
 ## Cross Site Scripting
 
 ### Cross Site Scripting - Study Guide
 
-### 📽 Cross Site Scripting
+### ▶ Cross Site Scripting
 
-### 📽 Dom XSS
+### ▶ Dom XSS
 
-### 📽 XSS Beef
+### ▶ XSS Beef
 
 ## SQL Injections
 
 ### SQL Injections - Study Guide
 
-### 📽 Finding SQL Injection
+### ▶ Finding SQL Injection
 
-### 📽 Exploiting In-Band SQL Injections
+### ▶ Exploiting In-Band SQL Injections
 
-### 📽 Exploiting Error-Based SQL Injection
+### ▶ Exploiting Error-Based SQL Injection
 
-### 📽 Exploiting Blind SQL Injection
+### ▶ Exploiting Blind SQL Injection
 
-### 📽 SQL Injection Basics
+### ▶ SQL Injection Basics
 
-### 📽 SQLmap Basics
+### ▶ SQLmap Basics
 
-### ⚗ WebApp Labs - Web Application Attacks
+### 🧪 WebApp Labs - Web Application Attacks
 
 ## Other Common Web Attacks
 
 ### Other Common Web Attacks - Study Guide
 
-### 📽 Session Hijacking and Fixation
+### ▶ Session Hijacking and Fixation
 
-### 📽 Cross Site Request Forgery
+### ▶ Cross Site Request Forgery
 
-### 📽 Files and Resources Vulnerabilities
+### ▶ Files and Resources Vulnerabilities
 
