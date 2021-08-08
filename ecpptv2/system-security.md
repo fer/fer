@@ -6,9 +6,19 @@ description: Understanding of x86 Architecture and its weaknesses.
 
 ## Architecture Fundamentals
 
-### Introduction - Study Guide
+{% hint style="info" %}
+**Goal:**
+
+Improve skills and provide a solid foundation in fuzzing, exploit, development, buffer overflows, debugging, reverse engineering and malware analysis.
+
+**Keywords:**
+
+x86/x64, assembly, compilers, ASLR, DEP, BufferOverflow.
+{% endhint %}
 
 ### Architecture Fundamentals - Study Guide
+
+
 
 ### ▶ Stack Frames
 
