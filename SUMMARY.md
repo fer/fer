@@ -99,4 +99,5 @@
 * [Module 02: Footprinting and Reconnaissance](cehv11/module-02-footprinting-and-reconnaissance.md)
 * [Module 04: Enumeration](cehv11/module-04-enumeration.md)
 * [Module 05: Vulnerability Analysis](cehv11/module-05-vulnerability-analysis.md)
+* [Module 07: Malware Threats](cehv11/module-07-malware-threats.md)
 
