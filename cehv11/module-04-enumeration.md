@@ -245,7 +245,7 @@ The communication process between an SNMP manager and SNMP agent is as follows:
 
 If the communnity string does not match the string stored in the MIB database, then `host Y` will send a community string to a pre-configured SNMP manager indicating the error.
 
-![](../.gitbook/assets/image%20%2829%29.png)
+![](../.gitbook/assets/image%20%2849%29.png)
 
 #### MIB
 
