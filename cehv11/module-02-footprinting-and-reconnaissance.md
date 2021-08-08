@@ -1,6 +1,7 @@
 # Module 02: Footprinting and Reconnaissance
 
-## Objectives
+{% hint style="info" %}
+**Objectives**
 
 * Understanding Footprinting Concepts
 * Understanding Footprinting Through Search Engines And Advanced Google Hacking Techniques
@@ -9,6 +10,7 @@
 * Understanding WHOIS, DNS and NEtwork Footprinting
 * Understanding Footprinting Through Social Engineering
 * Understanding Different Footprinting Tools And Countermeasures
+{% endhint %}
 
 ## 1. Footprinting Concepts
 

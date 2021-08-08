@@ -1,6 +1,7 @@
 # Module 01: Introduction to Ethical Hacking
 
-## Objectives
+{% hint style="info" %}
+**Objectives**
 
 * Understanding the Elements of Information Security
 * Understanding Information Security Attacks And Information Warfare
@@ -9,6 +10,7 @@
 * Understanding Ethical Hacking Concepts and its Scope
 * Overview of Information Security Controls
 * Overview of Information Security Act And Laws
+{% endhint %}
 
 ## 1. Information Security Overview
 

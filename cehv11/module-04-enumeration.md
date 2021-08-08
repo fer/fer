@@ -1,8 +1,7 @@
 # Module 04: Enumeration
 
-## Objectives
-
-Similar in a way to Scanning.
+{% hint style="info" %}
+**Objectives**
 
 * Understanding Enumeration Concepts 
 * Understanding Different Techniques for NetBIOS Enumeration 
@@ -11,6 +10,7 @@ Similar in a way to Scanning.
 * Understanding Different Techniques for SMTP and DNS Enumeration
 * Understanding Other Enumerations such as IPsec, VoIP, RPC, Linux/Unix, Telnet, FTP, TFTP, SMB, IPv6, and BGP enumeration
 * Understanding Different Enumeration Countermeasures
+{% endhint %}
 
 ## 1. Enumeration Concepts
 
