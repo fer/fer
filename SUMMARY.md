@@ -96,4 +96,5 @@
 ## CEHv11
 
 * [Module 01: Introduction to Ethical Hacking](cehv11/module-01-introduction-to-ethical-hacking.md)
+* [Module 02: Footprinting and Reconnaissance](cehv11/module-02-footprinting-and-reconnaissance.md)
 
