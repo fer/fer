@@ -80,6 +80,7 @@
 
 * [OverTheWire: Wargames](ctf-write-ups/ctf.md)
 * [TryHackMe](ctf-write-ups/tryhackme/README.md)
+  * [Chill Hack](ctf-write-ups/tryhackme/chill-hack.md)
   * [Offensive Pentesting](ctf-write-ups/tryhackme/offensive-pentesting/README.md)
     * [Getting Started](ctf-write-ups/tryhackme/offensive-pentesting/getting-started/README.md)
       * [Vulnversity](ctf-write-ups/tryhackme/offensive-pentesting/getting-started/vulnversity.md)
