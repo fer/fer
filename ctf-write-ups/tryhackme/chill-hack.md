@@ -312,5 +312,11 @@ cat local.txt
 {USER-FLAG: e8vpd3323cfvlp0qpxxx9qtr5iq37oww}
 ```
 
+{% hint style="info" %}
+/var/www/files/hacker.php seems to link to mysql credentials
 
+In index.php
+{% endhint %}
+
+![](../../.gitbook/assets/image%20%2876%29.png)
 
