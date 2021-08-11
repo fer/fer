@@ -286,5 +286,15 @@ We'll cover:
 
 ### 🧪 Exploitation with Ruby
 
+## Metasploit
+
+### Metasploit - Study Guide
+
+### Meterpreter API
+
+### Metasploit Write Custom Modules
+
+### Meterpreter Scripting
+
 
 
