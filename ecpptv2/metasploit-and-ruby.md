@@ -143,15 +143,90 @@ We'll cover:
 
 > Keep in mind that _every value_ in Ruby is an object, including the operators `+`, `-`, `/`, used in operations are happening between objects.
 
-**Integer**
+{% tabs %}
+{% tab title="Integer" %}
+```text
+>> 2**5
+=> 32
+>> 10/2
+=> 5
+>> 4.odd?
+=> false
+>> 10.next
+=> 11
+>> 10.pred
+=> 9
+>> 25.to_s
+=> "25"
+>> 65.chr
+=> "A"
+>> -5.abs
+=> 5
+```
+{% endtab %}
 
-\*\*\*\*
+{% tab title="Float" %}
+```
+>> 2.0**3
+=> 8.0
+>> 2.51.round
+=> 3
+>> 2.51.ceil
+=> 3
+>> 2.51.floor
+=> 2
+```
+{% endtab %}
 
+{% tab title="Numeric" %}
+**Integer** & **Float** _extend_ `Numeric` wich in turn extends **Object** and so on up to the **Basic Object**.
+{% endtab %}
 
+{% tab title="Anticipation" %}
+{% code title="ip\_upto.rb" %}
+```bash
+# $ ruby ip_upto.rb 192.168.1 10 20
+# 192.168.1.10
+# 191.168.1.11
+# ....
+# 192.168.1.20
 
+(ARGV[1]..ARGV[2]).each {|i| print ARGV[0],".",i,"\n"}
+```
+{% endcode %}
+{% endtab %}
 
+{% tab title="Comments" %}
+```ruby
+=begin
+ Multiline comment
+ with multiple lines :)
+=end
 
+# this is a comment too.
+```
+{% endtab %}
+{% endtabs %}
 
+**Strings**
+
+> Another built-in Ruby class. Create strings with single and double quotes.
+
+{% tabs %}
+{% tab title="Escape Sequences" %}
+```ruby
+# Single quotes only support two escape sequences:
+>> 'It\'s funny'
+=> "It's funny"
+>> '\\backslash!'
+=> \backslash!
+```
+{% endtab %}
+
+{% tab title="Second Tab" %}
+
+{% endtab %}
+{% endtabs %}
 
 
 
