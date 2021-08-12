@@ -521,21 +521,35 @@ st.insert(st.size, " FIN")
 >> hash['a']        # => "Hi"
 ```
 {% endtab %}
+
+{% tab title="Hash keys are Symbols" %}
+```ruby
+>> website = {:url => 'https://ferx.gitbook.io/wiki/', :title => 'Wiki'}
+>> website[:url]
+=> "https://ferx.gitbook.io/wiki/"
+
+# Same can be achieved without ':'
+>> website = {url: 'https://ferx.gitbook.io/wiki/', title: 'Wiki'}
+>> website[:url]
+=> "https://ferx.gitbook.io/wiki/"
+
+```
+{% endtab %}
 {% endtabs %}
 
-
-
-
-
-
-
-
-
-
-
-
-
 ## Control Structures
+
+
+
+
+
+
+
+
+
+
+
+
 
 ## Methods, Variables and Scope
 
