@@ -223,8 +223,41 @@ We'll cover:
 ```
 {% endtab %}
 
-{% tab title="Second Tab" %}
+{% tab title="Double Quotes" %}
+Double quotes support escape sequences. Some of the are:
 
+| Syntax | Escape sequence description |
+| :--- | :--- |
+| `\"` | Double quote |
+| `\r` | Carriage return |
+| `\s` | Space |
+| `\t` | Tab |
+| `\n` | New Line |
+| `\\` | Single backslash |
+{% endtab %}
+
+{% tab title="Alternative quotes" %}
+You can add your custom string delimiter after the first `%`character to instruct Ruby where the quoted string begins: 
+
+```bash
+>> print %q!my string! 
+=> my string=> nil
+```
+
+You can make full use of:
+
+* Brackets
+* Braces
+* &lt;&gt; signs
+
+```bash
+>> print %q[my string]
+my string=> nil
+>> print %q<my string>
+my string=> nil
+>> print %q{my string>}
+my string>=> nil
+```
 {% endtab %}
 {% endtabs %}
 
