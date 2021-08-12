@@ -237,17 +237,24 @@ Double quotes support escape sequences. Some of the are:
 {% endtab %}
 
 {% tab title="Alternative quotes" %}
-You can add your custom string delimiter after the first `%`character to instruct Ruby where the quoted string begins: 
+You can add your custom string delimiter after the first `%q`character to instruct Ruby where the quoted string begins: 
 
 ```bash
 >> print %q!my string! 
 => my string=> nil
 ```
 
+{% hint style="info" %}
+`%q` works as delimited _single quote_.
+
+`%Q` works as delimited _double quote_.
+{% endhint %}
+
 You can make full use of:
 
 * Brackets
 * Braces
+* Parenthesis
 * &lt;&gt; signs
 
 ```bash
@@ -257,9 +264,111 @@ my string=> nil
 my string=> nil
 >> print %q{my string>}
 my string>=> nil
+>> print %q(my string)
+my string=> nil
+
+```
+{% endtab %}
+
+{% tab title="Operations" %}
+```bash
+# check if string is empty
+str.empty?
+
+# clear string
+str.clear
+
+# Length
+str.length
+
+str.size
+str.start_with? "start"
+str.end_with? "end"
+
+# ... and many more string methods... 
+# Remember: strings are objects in Ruby
+```
+{% endtab %}
+
+{% tab title="heredoc" %}
+```ruby
+str = <<END
+This is a multiline
+string... Enjoy!
+END
+```
+{% endtab %}
+
+{% tab title="String Arithmetics" %}
+```ruby
+# + notation
+"this" + " is " + "a string"
+
+# juxtaposition
+"this" " is " "a string too" 
+
+# << notation
+"this" << " is" << " a string"
+
+# OO Notation
+"this".concat(" is ").concat("a string")
+
+# Do not alter a string
+st = "my string"
+st.freeze
+
+# Check if string is frozen
+st.frozen?
+
+# [index] method
+st = "My String"
+st["My"]             # => "My"
+st[1..6]             # => "y stri"
+st[0]                # => "M"
+
+# 'sub' replaces first ocurrence
+st = st * 2         # => "My stringMy string"
+st.sub('i','1')     # => "My str1ngMy string"
+
+# 'gsub' replaces all ocurrences
+st.gsub('g','8')     # => "My strin8My strin8"
+
+# Note: modify the original string with:
+# => st.gsub!('g','8')
+# => st.sub!('i','1')
+
+# Insert string
+st.insert(st.size, " FIN")
+```
+{% endtab %}
+
+{% tab title="Interpolation" %}
+```ruby
+>> st = "1234567890"
+>> "'st' string has #{st.length} chars"
+=> "'st' string has 10 chars"
+```
+{% endtab %}
+
+{% tab title="More useful methods" %}
+```ruby
+>> "asdf".upcase
+=> "ASDF"
+>> "asdf".downcase
+=> "asdf"
+>> "asdf".capitalize
+=> "Asdf"
+>> "asdf".reverse
+=> "fdsa"
+>> "asdf".chop
+=> "asd"
 ```
 {% endtab %}
 {% endtabs %}
+
+**Array**
+
+> An Array is an Object containing other Objects \(including other Arrays\) accessible through an Index.
 
 
 
