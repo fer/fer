@@ -539,7 +539,43 @@ st.insert(st.size, " FIN")
 
 ## Control Structures
 
+{% tabs %}
+{% tab title="Comp ops" %}
+| Operator | Description |
+| :---: | :--- |
+| `==` | Equality Operator |
+| `.eql?` | Equality Operator \(OO Style\) |
+| `!=` | Inequality operator |
+| `<` | Less than |
+| `>` | Greater than |
+| `<=` | Less than or equal to |
+| `>=` | Greater than or equal to |
+{% endtab %}
 
+{% tab title="if" %}
+```bash
+>> x = 6
+?> if x > 3 then
+?>   puts "greater!!"
+>> end
+greater!!
+
+# else
+>> x = 2
+?> if x > 3 then
+?>   puts "greater!!"
+?> else
+?>   puts "lower!!"
+>> end
+lower!!
+
+>> puts "greater!!" if x > 1
+greater!!
+
+
+```
+{% endtab %}
+{% endtabs %}
 
 
 
