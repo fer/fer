@@ -573,9 +573,72 @@ lower!!
 greater!!
 ```
 {% endtab %}
+
+{% tab title="unless" %}
+```ruby
+# Opposite of 'if' statement
+>> x = 5
+=> unless x == 10 then print "#{x}" end
+=> print "#{x}" unless x == 10
+```
+{% endtab %}
+
+{% tab title="case" %}
+```ruby
+=> x = 5
+>> case x
+ | when 1 print "one"
+ | when 2 print "two" 
+ | when 3 print "three"
+ | else print "no idea"
+ | end
+ 
+# Assign the return value to a variable
+>> id = 2000
+>> name = case
+ | when id == 1111 then "Mark"
+ | when id == 1112 then "Bob"
+ | when id >= 2000 then "Other"
+>> id
+=> 2000
+>> name
+=> Other 
+```
+{% endtab %}
+
+{% tab title="Comparisons in Ranges" %}
+```ruby
+(1..10) === 4 # Use triple equal sign
+```
+{% endtab %}
+
+{% tab title="Ternary Operators" %}
+```ruby
+name = "Bob"
+name == "Bob" ? "Hi Bob" : "Who are you?"
+```
+{% endtab %}
 {% endtabs %}
 
+{% tabs %}
+{% tab title="while" %}
+```ruby
 
+```
+{% endtab %}
+
+{% tab title="until" %}
+```
+
+```
+{% endtab %}
+
+{% tab title="for" %}
+```
+
+```
+{% endtab %}
+{% endtabs %}
 
 
 
