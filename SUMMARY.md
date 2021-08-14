@@ -37,7 +37,7 @@
     * [Black Box Test \#2](courses/ejpt/black-box-tests/bb2.md)
     * [Black Box Test \#3](courses/ejpt/black-box-tests/bb3.md)
   * [Annex C: References](courses/ejpt/references.md)
-* [CEHv11\(Mod 1 to 7\)](courses/cehv11-mod-1-to7/README.md)
+* [CEHv11 \(Mod 1 to 7\)](courses/cehv11-mod-1-to7/README.md)
   * [Module 01: Introduction to Ethical Hacking](courses/cehv11-mod-1-to7/module-01-introduction-to-ethical-hacking.md)
   * [Module 02: Footprinting and Reconnaissance](courses/cehv11-mod-1-to7/module-02-footprinting-and-reconnaissance.md)
   * [Module 03: Scanning Networks](courses/cehv11-mod-1-to7/module-03-scanning-networks.md)

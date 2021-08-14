@@ -539,6 +539,8 @@ st.insert(st.size, " FIN")
 
 ## Control Structures
 
+### Conditional structures
+
 {% tabs %}
 {% tab title="Comp ops" %}
 | Operator | Description |
@@ -620,25 +622,181 @@ name == "Bob" ? "Hi Bob" : "Who are you?"
 {% endtab %}
 {% endtabs %}
 
+### Loops
+
 {% tabs %}
 {% tab title="while" %}
 ```ruby
+#  Repeats a block of code until the test expression is evaluated to false
+
+>> i = 0 
+?> while i < 5 do
+?>   print i = i + 1,"\s"
+>> end
+1 2 3 4 5
+=> nil
+
+>> i = 0
+>> print i = i + 1,"\s"  while i < 5
+1 2 3 4 5
 
 ```
 {% endtab %}
 
 {% tab title="until" %}
-```
+```ruby
+# Repeats a block of code until the test expression is evaluated to true
+>> i = 5
+?> until i == 0
+?>   print i-=1,"\s"
+>> end
+4 3 2 1 0 => nil
+
+>> i = 5
+>> print i-=1,"\s" until i == 0
+4 3 2 1 0 => nil
 
 ```
 {% endtab %}
 
 {% tab title="for" %}
-```
+```ruby
+# iterates through the elements of an enumerable object
+
+?> for i in [10,20,4] do
+?>     print i,"\s"
+>> end
+10 20 4 => [10, 20, 4]
 
 ```
 {% endtab %}
+
+{% tab title="for with collections" %}
+```ruby
+>> hash = {:name => "fer", :gender => "maple" }
+?> for key, value in hash
+?>     print "#{key}:#{value}\n"
+>> end
+name:fer
+gender:maple
+```
+{% endtab %}
+
+{% tab title="for with ranges" %}
+```ruby
+?> for i in 1..10
+?>     print "#{i}\s"
+>> end
+1 2 3 4 5 6 7 8 9 10 => 1..10
+```
+{% endtab %}
 {% endtabs %}
+
+### Iterators & Enumerators
+
+{% tabs %}
+{% tab title="each" %}
+```ruby
+>> (1..5).each {|i| print "#{i}\s" }
+1 2 3 4 5 => 1..5
+
+# Another way
+?> ('a'..'h').each do |c|
+?>   print "#{c}\n"
+>> end
+a
+b
+c
+d
+e
+f
+g
+h
+=> "a".."h"
+```
+{% endtab %}
+
+{% tab title="times, upto, downto" %}
+```ruby
+>> 5.downto(1) { |i| print "#{i}\s" }
+5 4 3 2 1 => 5
+
+>> 1.upto(5) { |i| print "#{i}\s" }
+1 2 3 4 5 => 1
+
+>> 5.times { |i| print "#{i}\s" }
+0 1 2 3 4 => 5
+```
+{% endtab %}
+{% endtabs %}
+
+{% tabs %}
+{% tab title="map" %}
+```ruby
+>> array = [1, 2, 3, 4, 5]
+>> array.map { |x| x**2 }
+=> [1, 4, 9, 16, 25]
+>> array.map! { |x| x**2 }
+=> [1, 4, 9, 16, 25]
+>> array
+=> [1, 4, 9, 16, 25]
+```
+{% endtab %}
+
+{% tab title="select" %}
+```ruby
+>> array
+=> [1, 4, 9, 16, 25]
+>> array.select { |x| x > 10 }
+=> [16, 25]
+```
+{% endtab %}
+
+{% tab title="reject" %}
+```ruby
+# oposite of select
+
+>> array
+=> [1, 4, 9, 16, 25]
+>> array.reject { |x| x > 10 }
+=> [1, 4, 9]
+```
+{% endtab %}
+
+{% tab title="accumulator" %}
+```ruby
+>> array = [1, 2, 3, 4, 5]
+>> array.inject { |sum, x| sum + x}
+=> 15
+>> array.inject(100) { |sum, x| sum + x}
+=> 115
+```
+{% endtab %}
+{% endtabs %}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
