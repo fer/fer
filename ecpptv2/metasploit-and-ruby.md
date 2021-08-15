@@ -643,7 +643,6 @@ name == "Bob" ? "Hi Bob" : "Who are you?"
 >> i = 0
 >> print i = i + 1,"\s"  while i < 5
 1 2 3 4 5
-
 ```
 {% endtab %}
 
@@ -794,7 +793,6 @@ h
 => #<Enumerator: ...>
 >> a.select 
 => #<Enumerator: ...>
-
 ```
 {% endtab %}
 
@@ -958,10 +956,114 @@ end
 # Local scope is the area where code that can use the binding 
 #  between the name and the object ref value.
 ```
+
+* If the outside scope has some binding for variables with the same name used in the block scope, they are hidden inside the block and reactivated outside.
+* Note that statements like for, while, if, etc... do not define a new scope. Variables defined inside them are still accessible outside.
+
+```ruby
+for i in 1..0
+    a = i + 1
+end
+
+a === 11 # True
+```
+
+* Methods does define its own scope and variables.
+* Generally, the following control structures define a new scope:
+  * `def ... end`
+  * `class ... end`
+  * `module ... end`
+  * `loop {...}`
+  * `proc {...}`
+  * iterators/method blocks
+  * the entire script
+* You can also verify the scope of a variable using the `defined?` method.
+* 
+{% endtab %}
+
+{% tab title="global" %}
+* Global variables begins with the **$** special character.
+* Accessible anywhere in the program.
+* Nor recommendable. Global vars can be changed anywhere in the code.
+* Their overuse can make tracking and handling bugs difficult.
+
+```ruby
+$*        # array of command line arguments
+$0        # name of the script being executed
+$_        # last string reads by gets
+```
+{% endtab %}
+
+{% tab title="instance /  class" %}
+* Instance and class variables can be defined within a class definition.
+* **Class variables** begin with `@@` ****and they are visible by all instances of a class.
+* **Instance variables** begin with `@` and they are local to specific instances of a class.
+{% endtab %}
+
+{% tab title="constants" %}
+* Constants begin with **uppercase letters**. 
+* Ruby allows you to change uppercased variables but a _warning is raised_. 
+* Constants belong to their namespace in their scope:
+
+```ruby
+A=100
+module B
+    A = 200
+end
+
+>> A         # 100
+>> B:A       # 200
+```
+
+* Ruby has a lot of predefined constants:
+  * `ARGV`: holds command line arguments.
+  * `ENV`: holds info about the environment.
 {% endtab %}
 {% endtabs %}
 
+### Some tricks
+
+```ruby
+# Multiple variable assignment
+>> a,b,c = "a", "b", "c"
+
+# Swap values
+>> x = 10; y = 20
+>> [x, y] = [y, x]
+
+# Multi-variable assignment via a function
+def ret_value
+    return 1,2,3
+end
+
+one, two, three = ret_value
+```
+
 ## Classes, Modules and Exceptions
+
+### Class Principles
+
+
+
+
+
+
+
+
+
+
+
+
+
+### Method Visibility
+
+### Subclassing and Inheritance
+
+### Modules
+
+### Exceptions
+
+### Conclusion
 
 ## Pentesters Prerequisites
 
