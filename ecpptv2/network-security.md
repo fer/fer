@@ -6,6 +6,10 @@ description: >-
 
 # Network Security
 
+{% hint style="danger" %}
+**This document is still in progress...** 
+{% endhint %}
+
 ## Information Gathering
 
 ### Information Gathering Introduction - Study Guide

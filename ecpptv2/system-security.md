@@ -4,6 +4,10 @@ description: Understanding of x86 Architecture and its weaknesses.
 
 # System Security
 
+{% hint style="danger" %}
+**This document is still in progress...** 
+{% endhint %}
+
 ## Architecture Fundamentals
 
 {% hint style="info" %}

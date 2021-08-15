@@ -6,6 +6,10 @@ description: >-
 
 # Metasploit & Ruby
 
+{% hint style="danger" %}
+**This document is still in progress...** 
+{% endhint %}
+
 ## Installation and Fundamentals
 
 > Ruby is a dynamic, open source programming language with a focus on simplicity and productivity. Elegant syntax, natural to read and easy to write.
@@ -700,7 +704,7 @@ gender:maple
 >> (1..5).each {|i| print "#{i}\s" }
 1 2 3 4 5 => 1..5
 
-# Another way
+# Blocks!
 ?> ('a'..'h').each do |c|
 ?>   print "#{c}\n"
 >> end
@@ -774,41 +778,188 @@ h
 {% endtab %}
 {% endtabs %}
 
-enumerators...
+> **Enumerator**: object whose purpose is to enumerate another enumerable ojbect. This means that enumerators are _enumerable_ too.
+>
+> If you have a method that uses an enumerable object, you may not want to pass the enumerable collection object because it is mutable and the method may modify it.
+>
+> So you can pass an enumerator created with **to\_enum** and nothing will happen to the original enumerable collection
 
+{% tabs %}
+{% tab title="Ruby" %}
+```ruby
+>> a = [1,2,3,4]
+>> a.each 
+=> #<Enumerator: ...>
+>> a.map 
+=> #<Enumerator: ...>
+>> a.select 
+=> #<Enumerator: ...>
 
+```
+{% endtab %}
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+{% tab title="External Iterators" %}
+```ruby
+>> a = [1, 2, 3, 4]
+=> enum = a.to_enum
+>> enum.next
+=> 1
+>> enum.next
+=> 2
+```
+{% endtab %}
+{% endtabs %}
 
 ## Methods, Variables and Scope
+
+### Methods
+
+> **Methods** are a common structure. Define code abstraction, providing specific semantic and hiding implementation.
+>
+> * Parameterized Block code with a name: can be used with different parametric values per invocation.
+
+{% tabs %}
+{% tab title="Simple method" %}
+```ruby
+def double(x)
+    return x*2
+end    
+```
+{% endtab %}
+
+{% tab title="Alias" %}
+```ruby
+def spit_it_out
+    puts "arghhhh!!"
+end
+
+alias arg spit_it_out
+```
+{% endtab %}
+
+{% tab title="Variable length arguments" %}
+```ruby
+def vl_method(first, *others)
+    puts "First is: " + first.to_s
+    puts "Others: " + others.to_s
+end
+
+vl_method(1,2)
+vl_method(1,2,3,4,5,6)
+```
+{% endtab %}
+
+{% tab title="VLA in method invocation" %}
+```ruby
+def sum(a,b)
+    a+b
+end
+
+>> sum *[1,2]
+=> 3
+>> sum *[10,20]
+=> 30
+```
+{% endtab %}
+
+{% tab title="Hash as ARG" %}
+```ruby
+def printPerson(hash)
+    puts hash["name"]
+    puts hash["age"]
+end
+
+printPerson({"name"=>"Jon", "age"=>25})
+
+# Improved:
+
+def printPerson(hash)
+    name = hash[:name] || 'Unknown'
+    name = hash[:age] || 'Unknown'
+    name = hash[:gender] || 'Unknown'
+    print "#{name} #{age} #{gender}"
+end
+
+>> printPerson name:"Jon", age:25
+=> Jon 25 Unknown
+```
+{% endtab %}
+
+{% tab title="yield" %}
+```ruby
+def method
+    puts "uno"
+    yield
+    puts "dos"
+    yield
+end
+
+>> method { puts "check!" }
+uno
+check!
+dos
+check!
+
+# Another example
+def double(x)
+    yield 2*x
+end
+
+>> double(5) { |x| puts x }
+=> 10
+```
+{% endtab %}
+
+{% tab title="call" %}
+```ruby
+# Ruby allows you to pass a block as an argument.
+# With this strategy, the block becomes an instance of the Proc class and you have
+# to use call instead of yield to transfer the control to it.
+#
+# To specify that an argument will be a Proc object that encapsulates a block
+# you must use ampersand (&) in method definition.
+
+def square_cube(n,&p)
+    for i in 1..0
+        p.call(i**2)
+        p.call(i**3)
+    end
+end
+
+>> square_cube(5) { |x| print x, "\s" }
+1 1 4 8 9 27 16 64 25 125
+
+>> square_cube(5) { |x| print x-1, "\s" }
+0 0 3 7 8 26 15 63 24 124
+
+# Using Proc
+>> square = Proc.new {|x| print x**2, "\s"}
+>> (1..10).each(&square)
+1 4 9 16 25 36 49 64 81 100
+
+>> summ = Proc.new{|sum,x| sum+x**2}
+>> (1..5).inject(0,&summ)
+=> 55
+```
+{% endtab %}
+{% endtabs %}
+
+### Variables and Scope
+
+> **Variable:** name for a mutable value
+>
+> * Ruby is a dynamically typed language, you can create a variable without specifying its type.
+> * 4 types: **local**, **global**, **instance**, **class**.
+> * Ruby allows the definitions of **constant** too.
+
+{% tabs %}
+{% tab title="local" %}
+```ruby
+# Local scope is the area where code that can use the binding 
+#  between the name and the object ref value.
+```
+{% endtab %}
+{% endtabs %}
 
 ## Classes, Modules and Exceptions
 

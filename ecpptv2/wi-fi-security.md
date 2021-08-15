@@ -6,6 +6,10 @@ description: >-
 
 # Wi-Fi Security
 
+{% hint style="danger" %}
+**This document is still in progress...** 
+{% endhint %}
+
 ## Prerequisites
 
 ## Environment Setup
