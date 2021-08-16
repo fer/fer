@@ -1107,6 +1107,14 @@ end
 
 ```
 {% endtab %}
+
+{% tab title="Metaprogramming" %}
+```ruby
+# Getter/Setter
+
+
+```
+{% endtab %}
 {% endtabs %}
 
 
