@@ -1043,7 +1043,71 @@ one, two, three = ret_value
 
 ### Class Principles
 
+> **Classes** define what an object will look like.
 
+{% tabs %}
+{% tab title="class" %}
+```ruby
+class MyClass
+    def hello
+        print "Hello"
+    end
+end
+
+>> myObj = MyClass.new
+>> myObj.hello
+```
+{% endtab %}
+
+{% tab title="Instance Variables" %}
+```ruby
+class Myclass
+    # Constructor
+    def initialize(a)
+        @a = a
+    end
+    
+    # Setter
+    def a=(value)
+        @a = value
+    end 
+
+    # Getter
+    def a
+        @a
+    end
+end
+
+>> obj1 = MyClass.new(20)
+>> obj2 = MyClass.new(3)
+>> obj1.a = 400
+```
+{% endtab %}
+
+{% tab title="Instance Vars 2" %}
+```ruby
+class WrongClass
+    @a = 4000
+    
+    def a 
+        @a
+    end
+    
+    def a=(val)
+        @a = val
+    end
+end
+
+>> wobj = WrongClass.new
+>> wobj.a                     # nil
+>> wobj.instance_variables    # [ ]
+>> wobj.a = 100
+>> wobj.instance_variables    # [:@a]
+>> wobj.a                     # 100
+
+```
+{% endtab %}
+{% endtabs %}
 
 
 
