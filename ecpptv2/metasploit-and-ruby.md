@@ -1110,9 +1110,29 @@ end
 
 {% tab title="Metaprogramming" %}
 ```ruby
-# Getter/Setter
+# Getter/Setter via metaprogramming
+# Metaprogramming allows to write, manipulate and
+# generate programs at runtime.
 
+class QuickClass
+    attr_accessor :x, :y
+    # attr_accessor defines a getter and setter 
+end
 
+>> obj = QuickClass.new
+>> obj.x, obj.y = 100, 300
+
+# with attr_reader, a getter is defined
+
+class QuickClass
+    attr_reader :x, :y
+    
+    def initialize(x, y)
+        @x, @y = x, y
+    end
+end
+
+>> obj.x = 123 # !!!! Error
 ```
 {% endtab %}
 {% endtabs %}
