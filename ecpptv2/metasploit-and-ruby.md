@@ -1133,6 +1133,23 @@ class QuickClass
 end
 
 >> obj.x = 123 # !!!! Error
+
+# Attr 
+# if used alone, it defines a getter, while 
+# with 'True' it defines a setter too.
+
+class QuickClass
+    attr :x, true
+    attr :y
+    
+    def initialize(x,y)
+        @x, @y = x,y
+    end
+end
+
+>> my_class = QuickClass.new(10,20)
+>> obj.x = 100
+>> obj.y = 200    # error
 ```
 {% endtab %}
 {% endtabs %}
