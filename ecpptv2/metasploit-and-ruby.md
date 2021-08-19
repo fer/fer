@@ -1174,6 +1174,16 @@ end
 
 Exercise:
 
+
+
+
+
+
+
+
+
+
+
 ```ruby
 class ClassObj
   # class object @a constructor
