@@ -1152,9 +1152,57 @@ end
 >> obj.y = 200    # error
 ```
 {% endtab %}
+
+{% tab title="Class Methods" %}
+```ruby
+# use self for declaring own class methods
+# these methods won't be visible per class instance
+
+class C1
+    def self.say
+        print "hello!"
+    end
+end
+
+>> C1.say
+=> "hello!"
+>> obj = C1.new
+>> obj.say => # !!!! error
+```
+{% endtab %}
 {% endtabs %}
 
+Exercise:
 
+```ruby
+class ClassObj
+  # class object @a constructor
+  @a = 100
+  
+  # Instance object getter/setter for @a
+  attr_accessor :a
+ 
+  # class object setter for @a
+  def self.a=(val)
+   @a = val
+  end
+  
+  # class object getter for @a  
+  def self.a 
+   @a 
+  end
+  
+  # instance object @a constructor
+  def initialize(a)
+   @a = a 
+  end
+end
+```
+
+> Class methods may be defined in a few other ways
+>
+> * Using the class name instead of `self` keyword
+> * Using the `<<` notation
 
 
 
