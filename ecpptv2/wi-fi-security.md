@@ -136,6 +136,41 @@ Ex: -30dBm signal is much stronger than -70dBm
 
 ## Environment Setup
 
+> **Consideration \#1**
+>
+> * The Linux 802.11 subsystem is fragmented. Available tools and commands depend on the driver you are using.
+
+The most reliable way to determine if you are using mac80211 drivers is by running following command from a terminal window:
+
+```bash
+> lsmod | grep mac80211
+mac80211    1378841    1    rtl8187
+```
+
+Modules listed on the right side are mac80211 drivers. In this particular example `rtl8187` is the driver of our Wi-Fi Dongle, based on a Realtek chip.
+
+> **Consideration \#2**
+>
+> another difference to note between the various Linux wireless drivers is the naming scheme for the network interface; older drivers use different prefixes like `eth`, `wifi` or `ath`.
+
+The mac80211 framework set a standard prefix, `wlan`. 
+
+{% embed url="https://www.aircrack-ng.org/doku.php?id=install\_drivers" %}
+
+### Adapter configuration
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
