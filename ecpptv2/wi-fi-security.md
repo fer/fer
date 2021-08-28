@@ -560,6 +560,14 @@ Once a gratuitous ARP packet is received, it is possible to flip certain bytes a
 
 
 
+
+
+
+
+
+
+
+
 #### WPA and WPA2 
 
 #### WPS
