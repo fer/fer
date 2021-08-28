@@ -383,17 +383,152 @@ Not enough acks, repeating.
 ```
 {% endhint %}
 
-With the captured PRGA, we now build an APR request packet using this command:
+With the captured PRGA, we now build an APR request packet using this command. This command creates the packet and saves it to the specified output file:
 
 ```bash
 packetforge-ng -0 -a <BSSID> -h <source_mac> -k <ip1> -l <ip2> -y <prga.xor> -w outfile
 
 # -0 build an ARP request looking for the MAC address of ip1
+
+# Ex:we use 255.255.255.255 as the value for both IP since many IPs will ignore the IPs used in the ARP
+packetforge-ng -0 -a 00:11:22:33:44:55 -h 22:22:22:33:33:33 -k 255.255.255.255 -l 255.255.255.255 -y file.xor -w arp-request
 ```
 
-This command creates the packet and saves it to the specified output file.
+Now we will start injecting packets thus generating new IVs so start up `airodump-ng`to save them. To inject the forged ARP request, we use `aireplay-ng` interactive mode:
+
+```bash
+aireplay-ng -2 -r <packet-file> <interface>
+# confirm pressing "y" and let the attack begin!
+```
+
+As we now have a way to generate new traffic, we can proceed through the usual attack process. We will gather the IVs and run `aircrack-ng` .
+{% endtab %}
+
+{% tab title="Bypassing Shared Key Authentication" %}
+There is another option when it comes to authenticating wireless stations on a WEP "secured" network. That is _Shared Key Authentication_. 
+
+When using SKA, a station wanting to associate to an AP needs to know the WEP key, otherwise its authentication request would be discarded and consequently it would not be able to associate and communicate with other stations.
+
+But this is not entirely true given the fact than an attacker will be able to authenticate if he can sniff one challenge-response message exchanged from a victim client and the target AP.
+
+{% hint style="info" %}
+**Shared Key Authentication process with Wireshark!**
+
+* The first Authentication Frame, from client to AP reports Shared Keys is in use \(value is 1\)
+* The second frame from AP to STA contains the 'Challenge Text'
+* The client using the known WEP key encrypts the challenge and resends it through the wireless medium.
+* The 4th and final message of the process is just a simple confirmation message from the AP. It should contain a success status code if the challenge was decrypted correctly.
+{% endhint %}
+
+### ByPass Attack
+
+Steps:
+
+1. Deauthenticate one victim client
+2. Obtain keystream from captured authentication frames
+3. Authenticate with the AP using recovered keystream
+4. Initiate ARP replay attack
+
+**Lab settings**
+
+| Access Point SSID | LabNetwork |
+| :--- | :--- |
+| 1 victim STA | associated to LabNetwork |
+| WEP encryption | using Shared Key Authentication |
+|  |  |
+|  |  |
+
+The AP should be configured to use WEP encryption using Shared Key Authentication System. Please ensure the same options are set on STA.
+
+#### Step 1: Deauthentication attack
+
+The objective here is to force the victim to restart the authentication process and then capture the challenge-response messages. 
+
+Of course this is not possible when there are no clients associated with the target network. In that scenario, you are stuck waiting for a client to associate.
+
+Start `airodump=ng` on the proper channel and start saving captured data to a file:
+
+```text
+airodump-ng -c <channel> -w shared <interface>
+```
+
+Once `airodump-ng` is started, you should see the victim client reported as associated to the target network. Note MAC address as you will need it.
+
+In another terminal, we will now launch the deauthentication attack using aireplay-ng:
+
+```bash
+aireplay-ng -0 0 -e <SSID> -c <client_MAC> <interface>
+```
+
+The _client\_MAC_ uses the MAC address you noted. This syntax is a little different than since we are specifying the target network by its SSID value instead of its BBSID. The result will be the same in this case as there is only one AP having that SSID name in our scenario.
+
+#### Step 2: Explore airodump-ng
+
+On the top part you should see a message which informs you a keystream was recovered.
+
+The recovered keystream will be saves in a `.xor` file located in the `airodump-ng` directory. The file will have the prefix you specified in the `airodump-ng` command, followed by the MAC address of the victim client.
+
+#### Step 3: Try to authenticate with the target AP
+
+As we now have a reusable keystream \(along with its IV\), we can try to authenticate ourselves with the target AP.
+
+We will launch `aireplay-ng` _fake authentication_ attack but this time, we will provide the command with the needed keystream.
+
+The syntax is almost the same as usual fake authentication, only this time we use the `-y` option specifying they keystream file:
+
+```bash
+aireplay-ng -1 6000 -q 10 -e <SSID> -y <file.xor> <interface>
+```
+
+`Association successful` is the desired output for this command.
+
+#### Step 4: ARP Replay
+
+The attack is now almost complete. You just need to perform ARP replay as we have learned along this document.
+{% endtab %}
+
+{% tab title="Caffe-Latte: Attacking the client" %}
+All of the attacks explored thus far against WEP require the physical presence of the AP to be perpetrated.
+
+In the past few years, a new type of attack arose that could permit WEP cracking off-site. This is possible because these attacks target the wireless clients instead of the network infrastructure. A good example of this new type of attacks is the so-called Caffe-Latte attack.
+
+The Caffe-Latte attack was presented in 2007 by Vivek Ramachandran and MD Sohail Ahmad of Airtight Networks at the Toorcon conference. 
+
+Its name comes from the fact that using this attack you can crack a WEP key in the time you enjoy a caffe-latte at the bar.
+
+The main target of the attack is the roaming client: an unassociated client periodically sends out Probe Request on every channel, searching for the wireless networks it is configured to use.
+
+Probe Requests only search for a particular SSID so that the AP MAC address can change without affecting the clients. 
+
+This property, along with the multiple flaws of WEP can be used to mount this attack. The attacker starts a fake AP advertising as the target network. As mutual authentication is not enforced by WEP security, the client will simply sense that its preferred AP is in range and try to associate with it. Until now, no encrypted packets have been sent so how can the attack collect a sufficient number of IVs?
+
+Most wireless clients, upon association to a network, will send out a few gratuitous ARP and DHCP requests. These packets are encrypted! A basic form of the attack could now deauthenticate the client and restart the process over and over until a sufficient amount of IVs has been gathered. Unfortunately, this could take a huge amount of time and wouldn't be practical as we are targeting a roaming client and we only have few minutes.
+
+The solution found by this attacks' authors is to exploit how WEP fails to verify the integrity and absence of manipulation of transmitted packets.
+
+In fact, it is possible to "flip" bits in the packet payload and then adjust the corresponding ICV \(Integrity Check Value\), a CRC-32 field calculated on the encrypted data, obtaining a perfectly valid packet. 
+
+Once a gratuitous ARP packet is received, it is possible to flip certain bytes and forge a new ARP request targeting the client \(see the paper for details\). It is now possible to flood the client with these ARP requests and collect a huge amount of encrypted packets in a few minutes.
 {% endtab %}
 {% endtabs %}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
