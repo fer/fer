@@ -509,66 +509,226 @@ The solution found by this attacks' authors is to exploit how WEP fails to verif
 In fact, it is possible to "flip" bits in the packet payload and then adjust the corresponding ICV \(Integrity Check Value\), a CRC-32 field calculated on the encrypted data, obtaining a perfectly valid packet. 
 
 Once a gratuitous ARP packet is received, it is possible to flip certain bytes and forge a new ARP request targeting the client \(see the paper for details\). It is now possible to flood the client with these ARP requests and collect a huge amount of encrypted packets in a few minutes.
+
+### Lab Setup
+
+* Your target network AP is switched off or out of reach.
+* A client with a pre-configured WEP key for the target network is in range an unassociated to any wireless network.
+* You have another device as your attack machine.
+
+#### Step 1
+
+If we start airodump-ng, we can see our client is sending Probe Request searching for pre-configured networks. 
+
+```bash
+airodump-ng -w <outfile> <interface>
+```
+
+{% hint style="info" %}
+As Probe Request will be sent out on all channels, a good tip is to fix the channel in `airodump-ng` using the `-c` option.
+{% endhint %}
+
+#### Step 2
+
+Rogue AP / evil-twin. We need to perform the Caffe-Latte attack:
+
+```bash
+airbase-ng -c <channel> -W 1 -L -e <SSID> <interface>
+# -L enable Caffe-Latte attack
+# -e sets airbase-ng to act as an AP for the specified SSID
+# -c fixes the wireless channel
+# -W 1 force airbase-ng to not set the WEP Privacy Bit in beacons
+```
+
+Results should show clients associated to our fake AP and `airbase-ng` automatically starts the Caffe-Latte attack for us, incrementing the number of data packet rate as we collect the IVs \(see this in your on-going `airodump-ng`\).
+
+We now just wait to gather a sufficient amount of encrypted packets. In the meantime, we can start `aircrack-ng` and feed it with the capture file from `airodump-ng`. 150000 IVs should be enough to decrypt the key.
+
+{% hint style="info" %}
+**Hirte Attack \(\`-H\`\)**
+
+There is a variation to this attack that you can perform while using `airbase-ng.` 
+
+This attack uses the same tactics targeting the client but also uses frame fragmentation to achieve a higher speed as the same ARP request can be split into multiple shorter encrypted frames. 
+
+If the attack doesn't not work for you, you can still fallback on the classic Caffe-Latte.
+{% endhint %}
 {% endtab %}
 {% endtabs %}
 
+#### WPA and WPA2
+
+{% hint style="info" %}
+**The Four-Way Handshake**
+
+Attacks against WPA/WPA2 keys are much less diversified than those targeting WEP. Until now, WPA has proved to be robust security measure to provide effective privacy for wireless networks. WPA and its successor WPA2 fixed the various flaws that plagued WEP, making it impossible to just look at the traffic to get information about the key.
+
+When a new client wants to join a WPA/WPA2 protected network, it must first authenticate itself, proving it owns the shared key. After association, the two parties start what is called _the four-way handshake_, which is a process that permits the mutual authentication between the AP \(called Authenticator\) and the STA \(called Supplicant\).
+
+During the communication, the PSK is never sent through the wireless medium. The PSK is only used to generate a PTK \(Pairwise Transient Key\) that is used as session-only encryption key.
+
+Since the PSK is never transmitted, both AP and STA need a secure way to generate the PTK. This is what the 4-way handshake does.
+{% endhint %}
+
+![The 4 way handshake](../.gitbook/assets/image%20%2877%29.png)
+
+#### Steps of the 4-way handshake
+
+**Step 0**
+
+At first the shared passphrase is used to generate the so-called PMK \(Pairwise Master Key\), which is 256bits long.
+
+Both the STA and AP independently calculate this value combining the PSK and SSID name.
+
+**Step 1/4**
+
+When the handshake starts, the AP sends the STA a message containing a `nonce` , a security cryptographic random number. In the WPA specification, this number is called `Anonce` \(as Authenticator Nonce\).
+
+**Step 2/4**
+
+STA generates another nonce, called `SNonce` \(Supplicant Nonce\), and builds the PTK containing the PMK, both nonces, the MAC addresses of AP and STA and processing this product through a cryptographic hash function called `PBKDF2-SAH1`.
+
+**Step 3/4**
+
+STA then sends its `SNonce` to the AP that can now build the PTK. As it uses the same information, both PTKs will be the same without the original PSK ever being transmitted over the air. This third message also contains a MIC \(Message Integrity Code\) which is used to authenticate the sending STA. 
+
+**Step 4/4**
+
+Finally, the AP replies back with a message containing the GTK \(Group Temporal Key\) used to decrypt multicast and broadcast traffic. This message is also authenticated by means of MIC. An acknowledgment concludes the process.
+
+#### Perform an attack
+
+#### Capturing the Handshake
+
+**Setup LAB** 
+
+* AP SSID: LabNetwork, channel 11, WPA enabled.
+* 1 vicitim STA associated to the AP
+* The attacker PC
+
+Capturing the handshake is actually quite simple. Launch `airodump-ng` and start sniffing on the correct channel:
+
+```bash
+airodump-ng -w <outfile> -c <channel> <interface>
+```
+
+If we wanted to perform a totally passive attack, we could have waited for a new client to join the network but this could require more time.
+
+Write down the client MAC address and launch the _deauth_ attack against it:
+
+```bash
+aireplay-ng -0 1 -a <BSSID> -c <client_mac> <iface>
+```
+
+If the victim STA is inside the reachable area of your wireless card, it will be forced to rejoin the network and you should be able to get a new 4-way handshake \(`airodump-ng` notifies when the handshake reception happens\).
+
+Now that we have captured the handshake and it is stored into a file, it's time to crack it!
+
+#### Use aircrack-ng against the handshake
+
+`aircrack-ng` has two cracking options when it comes to WPA/WPA2 keys:
+
+1. Dictionary Attack \(also available for WEP\)
+2. Pure brute force attack
+
+{% hint style="info" %}
+Before using brute force, it is always recommended to at least try a dictionary attack, this is because it may be possible to recover the password \(even if long or complex\) with a fraction of the time if compared with a brute force attempt.
+{% endhint %}
+
+```bash
+aircrack-ng -w <wordlist(s)> <.cap file>
+
+# Example:
+aircrack-ng -w /usr/share/wordlists/nmap.st wpa-file.cap
+```
+
+The syntax is very simple, you only have to provide a wordlist file \(or comma-separated list\) and the path to your `.cap` file containing the captured handshake. This is the file saved by `airodump-ng` at the previous step.
+
+#### Build a wordlist with crunch
+
+`crunch` will generate all of the possible combination of words between the two length values. 
+
+```bash
+crunch <min_length> <max_length>
+
+# Hint: start with a minimum length of 8 as routers and APs require 
+#  a passphrase at least that long. 
+# crunch will output the words to the console by default. 
+
+# consult "man crunch" for a complete reference
+
+crunch 8 8 -o my_words.lst # to generate 1.8 TB of data
+
+# without dumping words into a file and save disk space:
+crunch 8 8 | aircrack-ng -e LabNetwork file.cap -w -
+```
+
+{% hint style="warning" %}
+**Notes on Speed**
+
+* If you want to compare your computing power, you can run a simple test with `aircrack-ng` itself: `aircrack-ng -S`
+* Exploiting GPU power tools
+  * `oclHascat`: supports many hashing functions and cryptographic algorithms but if you want to be able to discover the key from a WPA/WPA2 handshake, you'll need to transform the `.cap` file to a format understandable by the program \(`.hccap`\). There's an [online tool](https://hashcat.net/cap2hccap/) for this purpose. You can also use `aircrack-ng` with the `-J` option.
+  * `Pyrit`
+  * `John the Ripper`
+
+```bash
+oclHashCat -m 2500 <.hccap file> <wordlist_file>
+# -m 2500 crack a WPA/WPA2 handshake
+```
+
+"Cracking as a Service" can be an option for those without a powerful GPU. These services only require you to upload the `.cap` file containing the 4-way handshake and specify the target SSID. Once you have uploaded the file, you often choose between a series of different dictionaries so if you have a clue of the key, you can better restrict the search. Please note that most powerful services need you to pay a small fee. 
+
+* CloudCracker
+{% endhint %}
+
+{% hint style="info" %}
+**Space-time tradeoff**
+
+As _the last option available in your toolbox_, we will present you an alternative bruteforce method that can be particularly useful in some occasions. 
+
+A recent trend in the password cracking field make use of the time-space tradeoff to pre-calculate large amount of hashes and store them in so-called **rainbow-tables.**
+
+**Rainbow tables**
+
+Brute forcing a WPA or WPA2 key is only possible when you get a 4-way handshake from a client and the AP. Both parties generates a PTK that is uses to encrypt subsequent communications.
+
+MICS are computed using the generate PTK and thus provide guarantee that both parties originally had the same PSK.
+
+Every PSK you want to try against the handshake, you first need to calculate the PMK. Then using the values obtained from the handshake, generate the PTK. Finally you calculate the MIC and compare it with the one in the handshake. If they are equal, you have foudn the correct PSK.
+
+_Beware this process is slow!_
+
+In fact, the algorithm used to calculate the PMK, called `PBKDF2` requires running 4096 iterations of the HMAC algorithm that is actually designed to be computationally expensive.
+
+One way to speed up this process is to pre-calculate the PMK for all of the various passphrases in your wordlist.
+
+In theory, this would be a huge speed improvement as now every time you want   
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+{% endhint %}
 
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-#### WPA and WPA2 
 
 #### WPS
 
