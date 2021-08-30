@@ -239,7 +239,15 @@ This percentage is an excellent indication of the link quality for the specified
 
 ## Wireless Standards and Networks
 
+### IEEE 802.11 Standards
 
+
+
+### Types of Wireless Networks
+
+### Wireless frames
+
+### Security features
 
 
 
