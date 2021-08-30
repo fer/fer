@@ -241,9 +241,60 @@ This percentage is an excellent indication of the link quality for the specified
 
 ### IEEE 802.11 Standards
 
+IEEE \(Institute of Electrical and Electronic Engineers\) is a worldwide association counting over 435000 members dedicated to advancing technological innovation.
 
+IEEE 802.11 is the IEEE Working Group that develops and enhances standards related to Wi-Fi technologies.
+
+| Protocol | Release Date | Radio Band \(GHz\) |
+| :--- | :--- | :--- |
+| 802.11 \(legacy\) | 1997 | 2.4 |
+| 802.11a | 1999 | 5 |
+| 802.11b | 1999 | 2.4 |
+| 802.11g | 2003 | 2.4 |
+| 802.11n | 2009 | 2.4 / 5 |
+
+IEEE 802.11g is the most widely deployed version of the protocol. In the last few years, 'n' version APs have become quite frequent but most of them still use the 2.4GHz band for backward compatibility with older adapters.
+
+The 2.4GHz band \(2.4GHz - 2.495Ghz\) is divided into _14 overlapping channels_ with a 22MHz bandwidth around the central frequency. Each channel is simply referred to by its number.
+
+Channel availability is not the same in every part of the world. In fact, most countries have special requirements. For example in USA you can only use channels from 1 to 11 while in Japan the whole spectrum is available \(1 to 14\).
+
+The 802.11n protocol introduced the 5GHz band as the 2.4GHz was getting more and more crowded with so many devices interfering with Wi-Fi communications \(bluetooth, cordless phones, microwave ovens\). 5GHz band is far less crowded and guarantees a higher number of non-overlapping channels.
+
+802.111n also defines specifications for 40MHz channel bandwidth that double the maximum theoretical throughput.
 
 ### Types of Wireless Networks
+
+There are two main types of wireless network architectures described by Wi-Fi standards:
+
+1. Infrastructure Network
+2. Ad-hoc Nework
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 ### Wireless frames
 
