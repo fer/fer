@@ -18,7 +18,7 @@ While normal pentesting operations can be performed with standard hardware, when
 
 Almost all new notebooks come equipped with a WNIC \(Wireless Network Interface Controller\) that enables Wi-Fi communications.
 
-These controllers use the common Mini PCI \(or more recently, Mini PCI-Express\) bus and are teotally integrated in the notebook chassis.
+These controllers use the common Mini PCI \(or more recently, Mini PCI-Express\) bus and are totally integrated in the notebook chassis.
 
 This does not make them the perfect solution for penetration testers as they can not provide the necessary signal power and receiving sensitivity - crucial parameters for a successful wireless attack.
 
@@ -159,25 +159,99 @@ The mac80211 framework set a standard prefix, `wlan`.
 
 ### Adapter configuration
 
+#### 1st step
 
+As a first step, you must verify that your wireless card has been correctly detected:
 
+```bash
+> iwconfig
+```
 
+If you want to get even more information, you can use another command available for `mac802111` drivers: `iw` tool.
 
+```bash
+> iw list
+```
 
+You will get a list of all of your adapter's supported modes and capabilities.
 
+It's worth noting that the `iwconfig` utility can be used to set various parameters for your wireless interface. For example this command sets the card's Wi-fi channel to 11:
 
+```bash
+> iwconfig wlan0 channel 11
+> iw dev wlan0 set channel 11
+```
 
+> Maximum transmission power level is also controlled by country laws. In the 802.11 specifications, every country represents a so-called regulatory domain, often shortened to _regdomain_. Each _regdomain_ is identified by the correspondent ISO country code.
+>
+> **Please not that using a high transmission power may be illegal in your country!**
 
+By default, many wireless adpaters are configured to work with regdomain set to 0. When running with this configuration, most adpaters will not deliver their maximum performance. However you can change internal regdomain setting with command line utilities. 
 
+{% hint style="info" %}
+**Bolivia**
 
+A trick that is often used to increase maximum transmit power of a wireless adapter consists in setting the country code to match Bolivia's. 
 
+```bash
+> iw reg set BO
+> iw dev wlan0 set txpower fixed 30dbm
+```
 
+This commands se the maximum transmission power to 30dBm which as we know, corresponds to 1000mW. 
 
+You can confirm everything worked by launching `iwconfig`.
+{% endhint %}
 
+Usually the `wlan0` interface can only be used to connect to _intrastructure_ or _ad-hoc_ networks, although more can be done.
 
+#### 2nd step
 
+The next step is to setup a **monitor interface**_,_ a virtual interface that can be used to sniff traffic and perform low level network operations through your adapter.
+
+```bash
+> airmon-ng start wlan0
+> iwconfig mon0
+> airmon-ng stop mon0 # stop / dete the monitor interface!
+```
+
+`airmon-ng` can also help you to detect and resolve blocked device conditions.
+
+```bash
+> airmon-ng check kill
+```
+
+#### 3rd step
+
+The last thing we should do is to check if everything is working fine with `aireplay-ng` tool, in this way we can test whether packet injection is working. 
+
+`-9` is 'test-mode'. Upon execution, `aireplay-ng` will send out broadcast probe requests. If any AP responds, `arieplay-ng` will print a message informing you that your card can successfully inject.
+
+> Remember to start your monitor interface first and set the card to the desired channel.
+
+Every AP in the respondents list is the directly probed 30 times and a percentage of responses received is given for each one. 
+
+This percentage is an excellent indication of the link quality for the specified AP.
+
+{% embed url="https://www.aircrack-ng.org/doku.php?id=aireplay-ng" %}
+
+{% embed url="https://www.aircrack-ng.org/doku.php?id=airmon-ng" %}
 
 ## Wireless Standards and Networks
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 ## Discover Wi-Fi Networks
 
@@ -570,7 +644,7 @@ During the communication, the PSK is never sent through the wireless medium. The
 Since the PSK is never transmitted, both AP and STA need a secure way to generate the PTK. This is what the 4-way handshake does.
 {% endhint %}
 
-![The 4 way handshake](../.gitbook/assets/image%20%2877%29.png)
+![The 4 way handshake](../.gitbook/assets/image%20%2878%29.png)
 
 #### Steps of the 4-way handshake
 
@@ -703,34 +777,213 @@ In fact, the algorithm used to calculate the PMK, called `PBKDF2` requires runni
 
 One way to speed up this process is to pre-calculate the PMK for all of the various passphrases in your wordlist.
 
-In theory, this would be a huge speed improvement as now every time you want   
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
+In theory, this would be a huge speed improvement as now every time you want to crack WPA handshake, you only have to generate the PTK and compare MICs; both of these operations are much faster than the `PBKDF2` function.
+
+However, WPA authors thought about this possibility when they were designing the protocol and they came up with a pretty clever but simple solution.
+
+> The calculation of the PMK does not only depend on the used PSK but it also depends on the network's SSID value!
+
+Given that you cannot have universally acceptable PMKs but you must calculate them for each SSID name you are interested in cracking.
+
+Even with the mentioned limitation, a rainbow table approach is still applicable to WPA cracking. It is also the case that a lot of APs are configured with standard factory values like "default", "linksys", "dlink" or similar vendor-related SSIDs.
+
+With these theoretic bases, let's figure out how to create a PMKs database.
+
+### Pyrit
+
+Python-based application compatible with Linux, Mac OS X and BSD. `pyrit` uses a file-based storage to persist its database:
+
+```bash
+> pyrit eval
+```
+
+`pyrit` will "connect" to the local file and get some statistics about currently stored passwords. At first, obviously you will have 0 passwords.
+
+Let's import some passwords from our wordlist:
+
+```bash
+> pyrit -i <wordlist_file> import_passwords
+```
+
+`pyrit` will process the input file and automatically discard all duplicates and all the words that are not suitable for a PSK \(also short\). Will also remove all the unusable passwords.
+
+> **Note** you will need large wordlists to have any success while cracking WPA.
+
+Now to generate the PMKs, we must provide `pyrit` with at least one SSID. In order to do this, we use `create_essid` command:
+
+```bash
+> pyrit -e <ssid> create_essid
+```
+
+This last command will not actually start the building process. In fact, try to re-eval the database:
+
+```bash
+> pyrit eval
+```
+
+Still, our newly added SSID does not have calculated PMKs. The number of calculated PMKs for our `LabNetwork` SSID is still zero. The last step of the process is launching the `batch` command which has a very simple syntax:
+
+```bash
+> pyrit batch
+```
+
+At this point, `pyrit` will start building your database for the included SSIDs and password combinations. Database generation could be a very long process, depending on the power of your CPU and the number of passwords you imported. `pyrit` can make use of the computational power of modern GPUs, like `oclHashCat`, so you are encouraged to run it on a desktop PC with a recent video card installed.
+
+Now launch this command to initiate the attack against the handshake:
+
+```bash
+> pyrit -r <.cap file> attack_db
+```
+
+`pyrit` will try all of the different PMKs in its database very quickly and will eventually output the found key if it was initially in your wordlist. The focal point here is the speed.
+
+> Having a pre-built database for a given SSID can tremendously speed up your attack.
+
+### Pre-built hash files
+
+On the internet you can find pre-built PMKs databases for the most common SSID names.
+
+* Church of WiFi WPA-PSK Lookup Tables
+  * [https://www.renderlab.net/projects/WPA-tables/](https://www.renderlab.net/projects/WPA-tables/)
+  * 2 databases
+    * 172000 words X 1000 SSIDs: 7GB
+    * 1 Million words X 1000 SSIDs: 33GB
+* Google
+  * SSID rainbow table
+  * SSID PMK database
 {% endhint %}
 
+#### WPS: Wireless Protected Setup
+
+In 2011, Stefan Viehbock published a paper describing a new attack against WPS \(Wireless Protected Setup\).
+
+{% embed url="https://sviehb.files.wordpress.com/2011/12/viehboeck\_wps.pdf" %}
+
+WPS was designed a simple and secure way to setup a protected wireless network.
+
+Stefan also found that design and implementation flaws in various devices may lead to a very effective attack method that can disclose the wireless encryption key.
+
+WPS provides 3 different setup alternative methods:
+
+* Push-Button-Connect
+* Internal-Registrar
+* External-Registrar
+
+While the former two methods require stronger authentication procedures \(physical access or web interface access\) the External-Registrar method only requires the client to provide a PIN \(8 digits\).
+
+> Normally, bruteforcing a 8 digits number will require testing for 10^8 \(=1000000000\) combinations but the actual form of authentication used by WPS highly reduces this number.
+
+This is the representation of the WPS PIN number:
+
+| 1st half of PIN \(4 bits\) | 2nd half of PIN \(4 bits\) |
+| :--- | :--- |
+| 0, 1, 2, 3 | 4, 5, 6, 7 \(7 = checksum digit\) |
+
+It's divided into two halves of 4 digits each. The last digit of the 2nd half is a checksum meaning it is always calculated from the other digits.
+
+The authentication process works like this:
+
+1. Both AP and client initialize encryption keys and internal state
+2. Client proves possession of 1st half of the PIN
+3. Client proves possession of 2nd half of the PIN
+4. AP sends network security configuration
+
+At every step, if the client is sending wrong data the AP terminates the process and sends a `NACK` packet.
+
+This behavior, combined with the split PIN allows us to build a quite optimized brute force attack.
+
+![](../.gitbook/assets/image%20%2877%29.png)
+
+> **How many combinations do we need to try?**
+>
+> Splitting the PIN get us from 10^8 to 10^4 + 10^4 \(=20000\) while having a checksum digit reduces the number of guesses for the 2nd half and we get the final result of only **10^4 + 10^3 \(=11000\)** combinations.
+
+There are two tools that can help to exploit this vulnerability:
+
+* Reaver
+* Bully
+
+{% hint style="info" %}
+**Reaver \(& wash\)**
+
+Developed by Tactical Network Solutions. It has both an open-source and a paid version that features a friendlier GUI and other goodies.
+
+`reaver` also comes with aa secondary tool called `wash`that can be used to find vulnerable APs.
+
+To be able to attack WPS, you must first be sure the target AP has WPS enabled. Inside `reaver` package you can find `wash` that servers this purpose.
+
+With your monitor interface up and running, launch:
+
+```bash
+> wash -i <interface>
+```
+
+`wash` will start hopping through the wireless channels and will list discovered APs that support WPS.
+
+`wash` output offers other useful information apart from signal level \(`RSSI` column\) you can find `WPS Locked` column. If the value is `YES` you will find the corresponding AP disabled WPS due to internal anti-bruteforce protection mechanisms, being a major hurdle for the WPS attacks.
+{% endhint %}
+
+{% hint style="info" %}
+**Bully**
+
+`bully` is opensourced on GitHub. It has some advantages over `reaver` such as fewer dependencies and a build process optimized for embedded devices. It also has features to handle anomalous scenarios.
+
+Once you are sure your target AP is vulnerable to the attack \(with `bash`\) you can launch `bully` with the following command:
+
+```bash
+> bully -b <BSSID> <interface>
+```
+
+Where BSSID is the target AP's MAC address.
+
+`bully` will start trying every possible PIN in randomized order. On average, you will need to try 50% of the possible PIN numbers which is roughly 5500 WPS requests. The time it could take varies depending from the AP as well as the quality of the signal.
+
+In the best scenario, you will probably need a few hours to complete the attack and get the WPA/WPA2 key back.
+{% endhint %}
+
+WPS attacks have been around since 2011. Since then, many vendors have upgraded their devices and AP firmware now contains a protection against PIN bruteforce. This protection is called **WPS Lockdown** and it's simply a self-defense procedure that temporarily disables WPS registration if a repeated number of attempts to register is detected.
+
+When your attack is detected, an AP can lockdown the WPS registration procedure for a time that varies between a few seconds to one hour or more. Some devices could even require a complete reboot.
+
+If `bully` detects a lockout, it will normally display the following output and then wait for 43 seconds before next attempt. On the other hand, you can also disable lockout detection in `bully` and force it to continue the attack but this is not recommended.
+
+```bash
+> bully -b <BSSID> -L <interface>
+```
+
+The `-L` switch is used to disable lockdown detection.
+
+A better option to avoid being locked out is to add a certain delay after every PIN attempt. By adding a pause between each try, you could bypass the attack detection system and get a smoother bruteforce attack. 
+
+This will increase the needed time to test each PIN; most of the time, this will be the only viable solution given that newer firmware disables WPS registration for hours after multiple authentication attempts are detected in a few seconds.
+
+The syntax to use to enable delay for the bully command goes as follows:
+
+```bash
+> bully -b <BSSID> -1 <seconds> -2 <seconds> <interface>
+```
+
+Where the `-1` option controls the delay in the first phase of the attack \(first half of the PIN\) and `-2` options sets the delay value for the second phase. Values of 60 seconds or more are recommended for most APs.
+
+{% embed url="https://www.aircrack-ng.org/" %}
+
+{% embed url="https://www.aircrack-ng.org/doku.php?id=arp-request\_reinjection" %}
+
+{% embed url="https://www.aircrack-ng.org/doku.php?id=packetforge-ng" %}
+
+{% embed url="https://www.slideshare.net/AirTightWIPS/toorcon-caffe-latte-attack" %}
+
+{% embed url="http://www.tcpipguide.com/free/t\_TCPIPAddressResolutionProtocolARP.htm" %}
+
+{% embed url="https://eprint.iacr.org/2007/120.pdf" %}
 
 
 
+{% embed url="https://www.aircrack-ng.org/doku.php?id=airbase-ng" %}
 
-#### WPS
+{% embed url="http://www.tcpipguide.com/free/t\_TCPIPAddressResolutionProtocolARP.htm" %}
+
+
 
 ### ▶ WEP Cracking
 
