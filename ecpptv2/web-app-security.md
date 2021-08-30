@@ -2,7 +2,7 @@
 description: Conduct a thorough Penetration test against web applications.
 ---
 
-# Web App Security
+# ⭐ Web App Security
 
 {% hint style="danger" %}
 **This document is still in progress...** 

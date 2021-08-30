@@ -4,7 +4,7 @@ description: >-
   devices.
 ---
 
-# Network Security
+# ⭐ Network Security
 
 {% hint style="danger" %}
 **This document is still in progress...** 
@@ -136,7 +136,7 @@ description: >-
 
 ### 🧪 DNS and SMB Relay Attack
 
-## Post Exploitation
+## ⭐ Post Exploitation
 
 ### Introduction - Study Guide
 
@@ -152,7 +152,7 @@ description: >-
 
 ### Pillaging - Study Guide
 
-### ▶ Pillaging
+### ▶ ⭐Pillaging
 
 ### ▶ Bypassing Firewalls and Data Exfiltration with DNS Tunneling
 
@@ -160,9 +160,9 @@ description: >-
 
 ### ▶ Mapping the Network
 
-### Exploitation Through Pivoting - Study Guide
+### ⭐ Exploitation Through Pivoting - Study Guide
 
-### ▶ Exploiting via Pivoting
+### ▶ ⭐ Exploiting via Pivoting
 
 ### ▶ Meterpreter SSL Certificate Impersonation and Detection Evasion
 
