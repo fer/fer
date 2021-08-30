@@ -479,7 +479,7 @@ If the calculated version and the received one do not match, the frame is discar
 The main problem of this approach is that CRC-32 was not intended as a security measure when it was designed. Its main purpose is to provide error checking during transmissions or storage of data, using statistical methodologies. This leads to another major WEP flaw: it is actually possible to make controlled changes to the frame payload and re-inject it without the receiver noticing.
 
 {% hint style="info" %}
-**Linearity of the CRC algorithm**
+**Linearity of the CRC algorithm** _**and bit-flipping attack**_
 
 Given two messages M1 and M2, the following is valid:
 
@@ -491,7 +491,190 @@ Suppose now that a message M was sent encrypted on the network with cyphertext C
 
 C=RC4\(IV,K\) ⊕ \(M,CRC\(M\)\)
 
-The attacker can now build a new cyphertext C
+The attacker can now build a new cyphertext C' that is decrypted to \(M', CRM\(M'\)\) without knowing the network key.
+
+He chooses an arbitrary message Δ and uses it to compute C':
+
+C' = C ⊕ \(Δ,CRC\(Δ\)\) 
+
+= RC4\(IV, K\) ⊕ \(M,CRC\(M\)\) ⊕  \(Δ,CRC\(Δ\)\) 
+
+= RC4\(IV, K\) ⊕ \( M ⊕ Δ, CRC\(M\) ⊕ CRC\(Δ\)\) 
+
+= RC4\(IV, K\) ⊕ \( M ⊕ Δ, CRC\(M ⊕ Δ\)\)
+
+= RC4\(IV, K\) ⊕ \( M', CRC\(M'\)\)  \# here we apply CRC linearity!
+
+The major limitation of the attack derives from the fact that the attacker does not know the plaintext content of the original message but he does know is that a "1" in a specified position in the Δ message produce a "flipped" bit in the corresponding position in M'.
+
+This is called a _bit-flipping attack_. Using this technique, an attacker can make controlled changes that will not be detected by the receiver.
+{% endhint %}
+
+While these design flaws surfaced almost after WEP specification release, further analysis of plain RC4 cypher and particularly of its usage mode in WEP showed that the encryption schme could be broken by a series of statistical attacks.
+
+Back in 2001, Scott Fluhrer, Itsik Mantin and Adi Shamir published a paper exposing a methodology to take advantage of the way RC4 cipher and IV are used in WEP in order to recover the network key.
+
+The authors discovered correlations between the first bytes of the keystream and the key itself resulting in a passive attack that can recover the RC4 key after eavesdropping on the network long enough to collect a sufficient amount of packets \(typically around 4 million\).
+
+The attack was named **FMS** after the names of the original discoverers.
+
+The **FMS Attack** relies particularly on a subset of the possible IVs, named "weak IVs". While the other IVs are simply discarded during the attack, these weak IVs can "leak" portions of the key; statistical attacks can be performed in order to fully recover the network key.
+
+Implementation of the attack are available in the `aireplay-ng` tool.
+
+Most vendors implemented countermeasures against the FMS attack. An obvious one was detecting and avoiding the use of "weak IVs". This countermeasure proved to be insufficient; in 2004 a person using the pseudonym **KoreK** posted a series of 17 statistical attacks that do not need weak IVs and reduced the number of frames to recover the key to less than 500000.
+
+Andreas Klein, in 2005, discovered even more correlations between the key and the RC4 generated keystream.
+
+In 2007, Andrei Pychkine, Erik Tews and Ralf-Philipp Weinmann were able to optimize Klein's attack and apply to the WEP scenario in a powerful new methodology.
+
+With this new attack, named **PTW** from the initials of the original authors, it is possible to recover a 104-bit WEP key with 50% probability using only 40000 captured packets.
+
+{% embed url="https://eprint.iacr.org/2007/120.pdf" %}
+
+
+
+#### WPA: Wi-Fi Protected Access
+
+It became available in 2003 as part of the IEEE 802.11i standard draft. It was intended as a replacement for WEP while WPA2 was in development stage. WPA specification solves the flaws that plagued WEP.
+
+The main addition was the use of a per-packet 128 bit key, generated using the Temporal Key Integrity Protocol \(TKIP\), a feature that prevents the types of attacks that compromised WEP. This means that for each packet, a new key is dynamically generated.
+
+Another feature of WPA is the addition of a message integrity check \(MIC\). This is designed to prevent an attacker from capturing, altering and/or resending data packets; this replaces the Cyclic Redundancy Check \(CRC\) used by WEP that could not provide any security guarantee.
+
+WPA2 is the result of the final IEEE 802.11i specifications and was published in 2004. The new standard deprecates the use of TKIP in favor of CCMP, a new AES-based encryption scheme with strong security properties.
+
+While WPA was a huge improvement over WEP with regard to security guarantees, TKIP was still based on the RC4 cypher. This was a design requirement as it allowed adoption of the new algorithm implementation through a simpler software/firmware upgrade.
+
+However, researchers were able to demonstrate attacks on WPA when TKIP encryption was in use by exploiting some of the known flaws existing in RC4.
+
+These attacks, developed by Martin Beck, Eric Tews, Toshihiro Ohigashi and Masakatu Morii, circumvent WPA anti-replay protection and enable the attacker to decrypt one packet and use the obtained keystream to forge and inject up to 7 new frames. While the discovered attacks are interesting on theoretical bases, they are not practical and can not be used to recover the network key.
+
+{% embed url="https://dl.aircrack-ng.org/breakingwepandwpa.pdf" %}
+
+Since TKIP is completely secure and has been deprecated, to guarantee the best security of a Wi-Fi network, WPA2 with CCMP/AES encryption must be used.
+
+#### Authentication
+
+In order to exchange messages, client stations must be associated with an AP. Before this can happen, stations need to authenticate themselves, proving they have the rights to access the wireless network.
+
+802.11 specifications describes three possible connection states for a client that model this process:
+
+1. Not authenticated
+2. Authenticated but not associated
+3. Authenticated and associated
+
+The 802.11 original standard specified two different station's authentication modes:
+
+* Open Authentication
+* Sharked Key Authentication \(SKA\)
+
+{% hint style="info" %}
+**Open Authentication**
+
+If Open Authentication is enabled on the AP, the client station simply sends an Authentication Request frame specifying the target SSID, and receives an Authentication Response with a successful result.
+
+In this case, the client does not need to provide any proof beside the SSID; given that this information is broadcasted by the AP in beacon frames, it cannot be considered a secret.
+
+Open Authentication messages flow:
+
+1. STA → AP: Open System Authentication Request
+2. STA ← AP: Open System Authentication Response
+3. STA → AP: Association Request
+4. STA ← AP: Association Response
+
+Truth is that something could go wrong along the way due to transmission errors, stations incompatibilities but also to MAC filtering features enabled on the AP. When one of these happens, the AP will report a failure status code in its Authentication Response.
+
+It's also useful to note that all of the messages exchanged during the process are sent unencrypted; WEP encryption is used only for data frames sent immediately after a successful authentication.
+{% endhint %}
+
+{% hint style="info" %}
+**Shared Key Authentication**
+
+SKA is available only when WEP is enabled. Different from the Open mode, when receiving an Authentication Request, the AP responds with a challenge text \(128 bytes\). The client needs to encrypt the challenge with the shared WEP key and return it to the AP in the next frame. Then the AP compares the decrypted challenge to the known plaintext and successfully authenticates the client if they are equal.
+
+1. STA → AP: Authentication Request
+2. STA ← AP: Challenge Text
+3. STA → AP: Encrypted Challenge 
+4. STA ← AP: Authentication Response
+
+The Association messages are removed but are obviously necessary. 
+
+While it may seem like SKA is an improvement over simple open authentication, _it can simplify certain attacks against WEP_. In fact, an attacker is able to recover 128 bytes of keystream given that the challenge text that was sent unencrypted. **This can be used to forge encrypted packets without actually knowing the key!**
+
+An attacker will be able to authenticate to the AP once he has snooped over at least one authentication message flow. 
+
+This clearly makes the Shared Key Authentication completely broken so you should not rely on it for any security requirements. 
+{% endhint %}
+
+## Discover Wi-Fi Networks
+
+### Discover Wi-Fi Networks
+
+#### Tools
+
+Since discovering wireless network mostly requires just traffic sniffing, mature tools are available for all of the major platforms. Some of the best are:
+
+* Kismet, `airodump-ng` \(Linux\)
+* InSSIDer Office \(Windows\)
+* KisMAC \(Mac OS X\)
+
+{% hint style="info" %}
+**InSSIDer Office**
+
+Intuitive tool developed by MetaGeek. It is a commercial Windows-only tool but it's available in a free trial mode. There's a _Networks panel_, we find information about reachable networks in the area.
+
+The InSSIDer Networks panel table provides us with:
+
+* SSID \(Service Set Identifier\)
+* Signal strength
+* Channel\(s\)
+* Encryption level \(WEP/WPA/WPA2\)
+* AP MAC address
+* Wi-Fi protocol
+
+As a side note, InSSIDer also provides the Channels pane which gives us a great way to optimize our Wi-Fi performances by choosing the less crowded channels.
+{% endhint %}
+
+{% hint style="info" %}
+**Kismet**
+
+While less intuitive, it offers more useful features for the wireless pentester. Kismet is based on a client/server architecture. The server provides data while the client application uses them to display information gathered from one or more servers. This architecture is further extensible with another subject: drones.
+
+These drones are simple wireless devices that only scan the air and feed captured frames to a specified server.
+
+The first thing to do when using Kismet is putting your wireless adapter into monitor mode.
+
+The simples way to start sniffing with Kismet and your monitoring interface is through:
+
+```bash
+> kismet -c <mon_interface>
+```
+
+In the upper panel, you will find a list of available wireless networks. The central panel will display information about clients connected to the selected network. The plot displays packets and data rates. The bottom panel shows an informative log that can be useful for debugging purposes. Sidebar shows useful statistics as well.
+
+If you want to dive into a particular network, you can click on its row in the Networks list and a details window will open up.
+
+A more interesting feature allows you to see the clients that communicate with a particular AP/Network. Information about currently or previously associated clients is fundamental for some of the most powerful attacks.
+
+Kismet uses color coding to help you to identify features of listed networks. Chosen color depends on the value of the C \(Encryption type\) column:
+
+* Green. N \(None\)
+* Red. W \(WEP\)
+* Yellow. O \(Other\), typically WPA or WPA2
+{% endhint %}
+
+{% hint style="info" %}
+**airodump-ng**
+
+Comprehensive wireless sniffing tool included in the famous `aircrack-ng` suite. It comes with a very essential text-based user interface. Despite this, it has a lot of useful feautres and it perfectly integrates with all of the other tools of the `aircrack-ng` suite which makes it the perfect  pentester companion.
+
+It can:
+
+* Perform automatic channel switching
+* Filter captured traffic by BSSID or cypher suite
+* Determine the list of clients associated to a network and their MAC addresses
+* Provide information on signal level, network traffic, security settings
 {% endhint %}
 
 
@@ -512,9 +695,15 @@ The attacker can now build a new cyphertext C
 
 
 
-## Discover Wi-Fi Networks
 
-### Discover Wi-Fi Networks
+
+
+
+
+
+
+
+#### Hidden SSID
 
 ### ▶ Discover Wi-Fi Networks
 
