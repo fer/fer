@@ -675,6 +675,18 @@ It can:
 * Filter captured traffic by BSSID or cypher suite
 * Determine the list of clients associated to a network and their MAC addresses
 * Provide information on signal level, network traffic, security settings
+
+Upper section: shows information about current channel, elapsed time and date-time.
+
+Upper left: will notify you of particular events as you will see in later modules when we explore the attacks. 
+
+Network lists: gives you information about network found in your area. 
+
+The tabular view is very similar to what we encountered when trying InSSIDer or Kismet.
+
+\#Data and \#/s columns: will be of much information value when we learn how to crack WEP keys.
+
+RXQ column: Receive Quality, measured as the percentage of successfully received management and data frames over the last 10 seconds. A value of 100 represents a perfect signal. It is calculated by looking at sequence numbers of received frames and looking for gaps between them.
 {% endhint %}
 
 
