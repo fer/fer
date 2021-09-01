@@ -687,43 +687,38 @@ The tabular view is very similar to what we encountered when trying InSSIDer or 
 \#Data and \#/s columns: will be of much information value when we learn how to crack WEP keys.
 
 RXQ column: Receive Quality, measured as the percentage of successfully received management and data frames over the last 10 seconds. A value of 100 represents a perfect signal. It is calculated by looking at sequence numbers of received frames and looking for gaps between them.
+
+Bottom section shows information about network clients.
+
+The two numbers under Rate represents the "AP to client" and "Client to AP" last detected data rates respectively, whereas "Lost" indicates the number of lost packets coming from the particular clients. The number is obtained in a similar way to RXQ, by looking at sequence numbers of received management and data frames.
+
+```bash
+> airodump-ng -w filename -c 1,6,11 -t wep -b <BSSID> mon0
+```
 {% endhint %}
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 #### Hidden SSID
+
+Almost all APs have an option to cloak the SSID value they broadcast in all the beacon frames. When this option is set, the AP will simply replace the original SSID value with a null value. While this can be a simple measure to stop a newbie from "seeing" the network, it does not deliver strong protection. 
+
+Passive de-cloacking attacks work by sniffing frames transmitted over the network. Many Wi-Fi frames transmitted by both the AP and the STAs will contain an SSID field in plain-text.
+
+Some examples are:
+
+* Probe request
+* Probe responses
+* Association requests
+* Re-association requests
+
+{% hint style="info" %}
+**Wireshark moment**
+
+If you are sitting in an area crowded by Wi-Fi networks, you will probably receive a lot of frames in just a few seconds. To focus only on beacon frames you can use this Wireshark filter:
+
+```text
+wlan[0] == 0x80
+```
+{% endhint %}
 
 ### ▶ Discover Wi-Fi Networks
 
