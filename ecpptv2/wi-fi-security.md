@@ -720,11 +720,109 @@ wlan[0] == 0x80
 ```
 {% endhint %}
 
+It's simply a matter of time before a station sends out a frame containing the SSID information.
+
+While a passive attack should work most of the time, there is a slight chance that if the network traffic is very low, an active attack may be necessary.
+
+**Active attacks**
+
+Active attacks involve sending DEAUTHENTICATE messages for an active station to the station's AP. This will force the STA to rejoin the network in order to communicate with the original AP. Since the network is hidden to the STA too, it will have to cycle through all the channels sending Probe Request frames, allowing us to intercept the Probe responses containing the target SSID field.
+
+ Lab:
+
+* Configure your AP to hide the SSID value
+* Associate a victim client to the network
+* Configure your monitoring interface and start sniffing through it with Kismet
+
+Kismet will show a placeholder for the hidden networks.
+
+The next step of the attack requires locking our wireless adapter to the target network's channel. You can achieve this through Kismet by clicking on the Kismet menu and selecting _Configure Channel_. 
+
+Click _Lock_ in the next window and write the proper channel into the input field.
+
+Now you need to get the list of STAs associated to the target hidden network as you will next try to deauthenticate one; write down your victim client MAC address. To perform deauthentication:
+
+```bash
+> aireplay-ng -0 <num> -c <client_mac> -a <BSSID> <interface>
+# -0 num : stands for deauth attack repeated for num times or use 0 (zero) for infinite loop
+```
+
+If Wireshark was running during the attack, you can take a look at the Probe Response frames sent by the target client after deauthentication. Use this expression to filter out uninteresting frames:
+
+```bash
+wlan.fc.type_subtype == 0x05
+```
+
+So cloaking the SSID value of a wireless network can not stop an attacker from discovering it.
+
+In a small office environment, with low client mobility and more permanent connections, a simple deauthentication attack can reveal the SSID in a couple of seconds while in a bigger environment a passive scanning will suffice as Probe Requests/Responses will be much more frequent.
+
+{% embed url="https://www.metageek.com/" %}
+
+{% embed url="https://www.kismetwireless.net/" %}
+
+{% embed url="https://www.wireshark.org/" %}
+
 ### ▶ Discover Wi-Fi Networks
 
 ## Traffic Analysis
 
 ### Traffic Analysis
+
+Traffic analysis is a fundamental step to gather further information on the attacked network and can also reveal sensitive data.
+
+#### Capturing traffic
+
+Before you can start analyzing wireless traffic, you have to set up your wireless adapter. connect the adapter to your PC if it is an external adapter such as a USB or PCMCI card \(otherwise you can use your integrates wireless card\).
+
+You should verify that your adapter has been correctly recognized by the OS. In Kali Linux you'd use `iwconfig` tool for this purpose.
+
+Now disconnect your wireless card from any AP you might be associated with and try capturing from `wlan0` with Wireshark. AT this point, you will notice that you are not able to capture any packet.  
+
+
+This is due to how the wireless drivers stack internally cooperates with the operating systems and processes in order to achieve transparent Wi-fi communications.
+
+Processes are not provided with the raw packets data. Instead the wireless stack delivers the packets as normal Ethernet frames.
+
+The network stack of the OS is then charged with the duty to process those packets and deliver them to the proper processes as it normally does with Ethernet frames. This means that in normal conditions, Wireshark or any other traffic analysis tool, cannot receive raw 802.11 frames. Actually, if your wireless adapter is not associated to any Wi-Fi network, you will not be able to "sense" any data.
+
+To demonstrate this concept, try to associate your wireless adapter to your test network and start a new Wireshark capture from the same wlan0 interface you previously used. You will suddenly start to see a lot of packets flowing. If you do not, try browsing a website or pinging your AP to generate some traffic.
+
+Another limitation of this approach is that you will only see packets directed to your station. you will not be able to sniff traffic from other wireless clients.
+
+This kind of behavior can be useful if you want to debug high level protocols.
+
+Most of the attacks we will discuss in the next modules need lower access to the network stack so we need to set up our wireless interface to do so.
+
+#### Monitor mode
+
+In the Ethernet world: promiscuous mode. In the 802.11 jargon: monitor mode.
+
+An interface configured to work in monitor mode will expose 802.11 frames to higher level protocols and will also accept frames directed to other STAs.
+
+Not all operating systems or drivers natively support monitor mode. Monitor mode is an optional feature of NDIS 6 so it must still be implemented by the adapter driver.
+
+Linux 802.11 stack has native support for monitor mode and many adapter drivers offer that support.
+
+If you are using Kali Linux, then you are almost finished as most drivers included in that distribution are already patched to enable monitor mode on many adapters.
+
+If your configuration is considerably different, you will probably need to find out specific information on how to configure your wireless pentesting attack machine.
+
+The easiest way to put your interface into monitor mode on Linux is to use `airmon-ng` from the `aircrack-ng` suite:
+
+```bash
+> airmon-ng start <interface>
+```
+
+This command will crate a new virtual Wi-Fi interface, probably named "mon0", but this vary depending on the drivers you are using.
+
+#### Channel hopping
+
+#### Wireshark filters
+
+#### Traffic decryption
+
+
 
 ### ▶ Protocol and Wireshark Filters
 
