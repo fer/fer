@@ -90,7 +90,7 @@ The two numbers under Rate represents the "AP to client" and "Client to AP" last
 
 Almost all APs have an option to cloak the SSID value they broadcast in all the beacon frames. When this option is set, the AP will simply replace the original SSID value with a null value. While this can be a simple measure to stop a newbie from "seeing" the network, it does not deliver strong protection. 
 
-Passive de-cloacking attacks work by sniffing frames transmitted over the network. Many Wi-Fi frames transmitted by both the AP and the STAs will contain an SSID field in plain-text.
+Passive de-cloaking attacks work by sniffing frames transmitted over the network. Many Wi-Fi frames transmitted by both the AP and the STAs will contain an SSID field in plain-text.
 
 Some examples are:
 
@@ -129,7 +129,7 @@ The next step of the attack requires locking our wireless adapter to the target 
 
 Click _Lock_ in the next window and write the proper channel into the input field.
 
-Now you need to get the list of STAs associated to the target hidden network as you will next try to deauthenticate one; write down your victim client MAC address. To perform deauthentication:
+Now you need to get the list of STAs associated to the target hidden network as you will next try to deauthenticate one; write down your victim client MAC address. To perform de-authentication:
 
 ```bash
 > aireplay-ng -0 <num> -c <client_mac> -a <BSSID> <interface>
@@ -152,11 +152,10 @@ In a small office environment, with low client mobility and more permanent conne
 
 {% embed url="https://www.wireshark.org/" %}
 
-### ▶ Discover Wi-Fi Networks
-
-
-
-
-
-
+```bash
+iwconfig
+kismet -c mon0
+airodump-ng mon0
+airodump-ng -c 11 -a mon0
+```
 

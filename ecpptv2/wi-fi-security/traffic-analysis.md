@@ -1,15 +1,18 @@
-# Traffic Analysis
+---
+description: >-
+  Traffic analysis is a fundamental step to gather further information on the
+  attacked network and can also reveal sensitive data.
+---
 
-Traffic analysis is a fundamental step to gather further information on the attacked network and can also reveal sensitive data.
+# Traffic Analysis
 
 #### Capturing traffic
 
-Before you can start analyzing wireless traffic, you have to set up your wireless adapter. connect the adapter to your PC if it is an external adapter such as a USB or PCMCI card \(otherwise you can use your integrates wireless card\).
+Before you can start analyzing wireless traffic, you have to set up your wireless adapter. Connect the adapter to your PC if it is an external adapter such as a USB or PCMCI card \(otherwise you can use your integrates wireless card\).
 
 You should verify that your adapter has been correctly recognized by the OS. In Kali Linux you'd use `iwconfig` tool for this purpose.
 
-Now disconnect your wireless card from any AP you might be associated with and try capturing from `wlan0` with Wireshark. AT this point, you will notice that you are not able to capture any packet.  
-
+Now disconnect your wireless card from any AP you might be associated with and try capturing from `wlan0` with Wireshark. AT this point, you will notice that you are not able to capture any packet.
 
 This is due to how the wireless drivers stack internally cooperates with the operating systems and processes in order to achieve transparent Wi-fi communications.
 
