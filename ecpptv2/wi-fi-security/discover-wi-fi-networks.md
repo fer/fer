@@ -1,19 +1,20 @@
+---
+description: >-
+  Since discovering wireless network mostly requires just traffic sniffing,
+  mature tools are available for all of the major platforms.
+---
+
 # Discover Wi-Fi Networks
 
-## Discover Wi-Fi Networks
+## Tools
 
-### Discover Wi-Fi Networks
-
-#### Tools
-
-Since discovering wireless network mostly requires just traffic sniffing, mature tools are available for all of the major platforms. Some of the best are:
+ Some of the best tools are:
 
 * Kismet, `airodump-ng` \(Linux\)
 * InSSIDer Office \(Windows\)
 * KisMAC \(Mac OS X\)
 
-{% hint style="info" %}
-**InSSIDer Office**
+### **InSSIDer Office**
 
 Intuitive tool developed by MetaGeek. It is a commercial Windows-only tool but it's available in a free trial mode. There's a _Networks panel_, we find information about reachable networks in the area.
 
@@ -27,10 +28,8 @@ The InSSIDer Networks panel table provides us with:
 * Wi-Fi protocol
 
 As a side note, InSSIDer also provides the Channels pane which gives us a great way to optimize our Wi-Fi performances by choosing the less crowded channels.
-{% endhint %}
 
-{% hint style="info" %}
-**Kismet**
+### **Kismet**
 
 While less intuitive, it offers more useful features for the wireless pentester. Kismet is based on a client/server architecture. The server provides data while the client application uses them to display information gathered from one or more servers. This architecture is further extensible with another subject: drones.
 
@@ -55,12 +54,10 @@ Kismet uses color coding to help you to identify features of listed networks. Ch
 * Green. N \(None\)
 * Red. W \(WEP\)
 * Yellow. O \(Other\), typically WPA or WPA2
-{% endhint %}
 
-{% hint style="info" %}
-**airodump-ng**
+### **airodump-ng**
 
-Comprehensive wireless sniffing tool included in the famous `aircrack-ng` suite. It comes with a very essential text-based user interface. Despite this, it has a lot of useful feautres and it perfectly integrates with all of the other tools of the `aircrack-ng` suite which makes it the perfect  pentester companion.
+Comprehensive wireless sniffing tool included in the famous `aircrack-ng` suite. It comes with a very essential text-based user interface. Despite this, it has a lot of useful feautres and it perfectly integrates with all of the other tools of the `aircrack-ng` suite which makes it the perfect pentester companion.
 
 It can:
 
@@ -88,9 +85,8 @@ The two numbers under Rate represents the "AP to client" and "Client to AP" last
 ```bash
 > airodump-ng -w filename -c 1,6,11 -t wep -b <BSSID> mon0
 ```
-{% endhint %}
 
-#### Hidden SSID
+## Hidden SSID
 
 Almost all APs have an option to cloak the SSID value they broadcast in all the beacon frames. When this option is set, the AP will simply replace the original SSID value with a null value. While this can be a simple measure to stop a newbie from "seeing" the network, it does not deliver strong protection. 
 
@@ -148,7 +144,7 @@ wlan.fc.type_subtype == 0x05
 
 So cloaking the SSID value of a wireless network can not stop an attacker from discovering it.
 
-In a small office environment, with low client mobility and more permanent connections, a simple deauthentication attack can reveal the SSID in a couple of seconds while in a bigger environment a passive scanning will suffice as Probe Requests/Responses will be much more frequent.
+In a small office environment, with low client mobility and more permanent connections, a simple de-authentication attack can reveal the SSID in a couple of seconds while in a bigger environment a passive scanning will suffice as Probe Requests/Responses will be much more frequent.
 
 {% embed url="https://www.metageek.com/" %}
 
@@ -157,4 +153,10 @@ In a small office environment, with low client mobility and more permanent conne
 {% embed url="https://www.wireshark.org/" %}
 
 ### ▶ Discover Wi-Fi Networks
+
+
+
+
+
+
 

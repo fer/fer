@@ -293,8 +293,6 @@ With this new attack, named **PTW** from the initials of the original authors, i
 
 {% embed url="https://eprint.iacr.org/2007/120.pdf" %}
 
-
-
 #### WPA: Wi-Fi Protected Access
 
 It became available in 2003 as part of the IEEE 802.11i standard draft. It was intended as a replacement for WEP while WPA2 was in development stage. WPA specification solves the flaws that plagued WEP.
