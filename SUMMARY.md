@@ -14,6 +14,8 @@
   * [Wireless Standards and Networks](ecpptv2/wi-fi-security/wireless-standards-and-networks.md)
   * [Discover Wi-Fi Networks](ecpptv2/wi-fi-security/discover-wi-fi-networks.md)
   * [Traffic Analysis](ecpptv2/wi-fi-security/traffic-analysis.md)
+  * [Attacking Wi-Fi Networks](ecpptv2/wi-fi-security/attacking-wi-fi-networks.md)
+  * [Wi-Fi as Attack Vectors](ecpptv2/wi-fi-security/wi-fi-as-attack-vectors.md)
 * [Metasploit & Ruby](ecpptv2/metasploit-and-ruby.md)
 
 ## Courses
