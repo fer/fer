@@ -19,6 +19,8 @@
 * [Metasploit & Ruby](ecpptv2/metasploit-and-ruby/README.md)
   * [Data Types](ecpptv2/metasploit-and-ruby/data-types.md)
   * [Control Structures](ecpptv2/metasploit-and-ruby/control-structures.md)
+  * [Methods, Variables and Scope](ecpptv2/metasploit-and-ruby/methods-variables-and-scope.md)
+  * [Classes, Modules and Exceptions](ecpptv2/metasploit-and-ruby/classes-modules-and-exceptions.md)
 
 ## Courses
 
