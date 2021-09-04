@@ -20,7 +20,8 @@
   * [Data Types](ecpptv2/metasploit-and-ruby/data-types.md)
   * [Control Structures](ecpptv2/metasploit-and-ruby/control-structures.md)
   * [Methods, Variables and Scope](ecpptv2/metasploit-and-ruby/methods-variables-and-scope.md)
-  * [Classes, Modules and Exceptions](ecpptv2/metasploit-and-ruby/classes-modules-and-exceptions.md)
+  * [WIP - Classes, Modules and Exceptions](ecpptv2/metasploit-and-ruby/classes-modules-and-exceptions.md)
+  * [Pentesters Prerequisites](ecpptv2/metasploit-and-ruby/pentesters-prerequisites.md)
 
 ## Courses
 

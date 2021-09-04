@@ -1,4 +1,4 @@
-# Classes, Modules and Exceptions
+# WIP - Classes, Modules and Exceptions
 
 ## Class Principles
 
@@ -186,7 +186,15 @@ end
 
 A class variable must start with special characters @@ and it is shared among all class instances:
 
+### Method Visibility
 
+### Subclassing and Inheritance
+
+### Modules
+
+### Exceptions
+
+### Conclusion
 
 
 

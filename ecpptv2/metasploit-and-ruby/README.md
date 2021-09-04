@@ -143,27 +143,17 @@ pry --simple-prompt
 
 
 
-## 
-
-## 
-
-## 
 
 
 
 
 
-### Method Visibility
 
-### Subclassing and Inheritance
-
-### Modules
-
-### Exceptions
-
-### Conclusion
+### 
 
 ## Pentesters Prerequisites
+
+### Regular Expressions
 
 ## Input/Output
 
@@ -199,11 +189,11 @@ pry --simple-prompt
 
 ### Metasploit - Study Guide
 
-### Meterpreter API
+### ▶ Meterpreter API
 
-### Metasploit Write Custom Modules
+### ▶ Metasploit Write Custom Modules
 
-### Meterpreter Scripting
+### ▶ Meterpreter Scripting
 
 
 
