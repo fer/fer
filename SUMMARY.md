@@ -16,7 +16,9 @@
   * [Traffic Analysis](ecpptv2/wi-fi-security/traffic-analysis.md)
   * [Attacking Wi-Fi Networks](ecpptv2/wi-fi-security/attacking-wi-fi-networks.md)
   * [Wi-Fi as Attack Vectors](ecpptv2/wi-fi-security/wi-fi-as-attack-vectors.md)
-* [Metasploit & Ruby](ecpptv2/metasploit-and-ruby.md)
+* [Metasploit & Ruby](ecpptv2/metasploit-and-ruby/README.md)
+  * [Data Types](ecpptv2/metasploit-and-ruby/data-types.md)
+  * [Control Structures](ecpptv2/metasploit-and-ruby/control-structures.md)
 
 ## Courses
 
