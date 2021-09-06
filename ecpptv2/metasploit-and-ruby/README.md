@@ -131,32 +131,6 @@ pry --simple-prompt
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-### 
-
-## Pentesters Prerequisites
-
-### Regular Expressions
-
-## Input/Output
-
 ## Network and OS Interaction
 
 ### Network and OS Interaction

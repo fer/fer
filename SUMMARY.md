@@ -22,6 +22,7 @@
   * [Methods, Variables and Scope](ecpptv2/metasploit-and-ruby/methods-variables-and-scope.md)
   * [WIP - Classes, Modules and Exceptions](ecpptv2/metasploit-and-ruby/classes-modules-and-exceptions.md)
   * [Pentesters Prerequisites](ecpptv2/metasploit-and-ruby/pentesters-prerequisites.md)
+  * [Input/Output](ecpptv2/metasploit-and-ruby/input-output.md)
 
 ## Courses
 
