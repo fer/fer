@@ -4,7 +4,7 @@ description: >-
   their weaknesses and how to exploit them.
 ---
 
-# Wi-Fi Security
+# WIP - Wi-Fi Security
 
 {% hint style="danger" %}
 **This document is still in progress...** 
