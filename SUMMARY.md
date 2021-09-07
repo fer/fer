@@ -4,11 +4,11 @@
 
 ## eCPPTv2 - WIP! <a id="ecpptv2"></a>
 
-* [System Security](ecpptv2/system-security.md)
-* [⭐ Network Security](ecpptv2/network-security.md)
+* [TBD - System Security](ecpptv2/system-security.md)
+* [⭐TBD - Network Security](ecpptv2/network-security.md)
 * [WIP - PowerShell for Pentesters](ecpptv2/powershell-for-pentesters.md)
-* [⭐ Linux Exploitation](ecpptv2/linux-exploitation.md)
-* [⭐ Web App Security](ecpptv2/web-app-security.md)
+* [⭐ WIP - Linux Exploitation](ecpptv2/linux-exploitation.md)
+* [⭐ TBD - Web App Security](ecpptv2/web-app-security.md)
 * [WIP - Wi-Fi Security](ecpptv2/wi-fi-security/README.md)
   * [Environment Setup](ecpptv2/wi-fi-security/environment-setup.md)
   * [Wireless Standards and Networks](ecpptv2/wi-fi-security/wireless-standards-and-networks.md)
