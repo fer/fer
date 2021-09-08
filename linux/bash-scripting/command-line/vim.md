@@ -6,6 +6,12 @@ description: >-
 
 # vim
 
+## Write on a file that needs root permission
+
+```text
+:w !sudo tee %
+```
+
 ## Start vim
 
 | Run it! | And get this |
