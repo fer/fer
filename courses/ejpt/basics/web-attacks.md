@@ -292,6 +292,10 @@ flocse($fp);
 ?>
 ```
 
+{% embed url="https://xsshunter.com/" %}
+
+{% embed url="https://tryhackme.com/room/xssgi" %}
+
 ## SQL Injections
 
 They allow an unauthorized user to take control over SQL statements used by a web application. This kind of attack has a huge impact on a web site because getting control over a backend database means controlling:
