@@ -8,7 +8,7 @@ I develop stuff sometimes. This is the philosophy I usually follow:
 2. If it isn't broken, don't fix it.
 3. Dead/commented code is zombie code and will always infect the system.
 
-Check [my notes on GitBook](https://ferx.gitbook.io/wiki/), as I am using it as a journal.
+Check [my notes on GitBook](https://ferx.gitbook.io/wiki/), as I am using Gitbook as a journal.
 
 > If you see an error or something that could be better, please [submit an issue](https://github.com/fer/fer/issues/new) or [create a PR](https://github.com/fer/fer/compare) on [my GitHub.](https://github.com/fer)
 
