@@ -16,13 +16,13 @@ description: >-
 ### Installation
 
 * Comes preinstalled with Kali.
-* Use [RubyInstaller](https://rubyinstaller.org/) for Windows.
+* Use [RubyInstaller](https://rubyinstaller.org) for Windows.
 
 ### Getting started
 
 #### Ruby from the command line
 
-```text
+```
 c:\Ruby193>ruby -e "puts 'Hello friend'"
 ```
 
@@ -30,7 +30,7 @@ c:\Ruby193>ruby -e "puts 'Hello friend'"
 
 Classic default prompt prints more information than the simple one:
 
-```text
+```
 c:\Ruby193>irb --simple-prompt
 ```
 
@@ -70,7 +70,7 @@ $ ruby -pe 0 'file'
 
 * `-e`: executes one line of ruby command.
 * `-p`: iterates into a loop that reads each line and prints them to stdout.
-* `-pe 0 'file'`: read 'file' line to line and prints then to stdout, executing 0 command. 
+* `-pe 0 'file'`: read 'file' line to line and prints then to stdout, executing 0 command.&#x20;
 
 #### `wc` unix command in Ruby onliner
 
@@ -135,9 +135,9 @@ pry --simple-prompt
 
 ### Network and OS Interaction
 
-### ▶ Packetfu
+### :arrow\_forward: Packetfu
 
-### ▶ Packetful Sniffing
+### :arrow\_forward: Packetful Sniffing
 
 ### Ruby
 
@@ -145,29 +145,27 @@ pry --simple-prompt
 
 ### The Web
 
-### ▶ Post Flooding
+### :arrow\_forward: Post Flooding
 
-### ▶ Form Extraction
+### :arrow\_forward: Form Extraction
 
-### ▶ Nokogiri
+### :arrow\_forward: Nokogiri
 
 ## Exploitation with Ruby
 
 ### Exploitation with Ruby
 
-### ▶ Exploitation with Ruby
+### :arrow\_forward: Exploitation with Ruby
 
-### 🧪 Exploitation with Ruby
+### :test\_tube: Exploitation with Ruby
 
 ## Metasploit
 
 ### Metasploit - Study Guide
 
-### ▶ Meterpreter API
+### :arrow\_forward: Meterpreter API
 
-### ▶ Metasploit Write Custom Modules
+### :arrow\_forward: Metasploit Write Custom Modules
 
-### ▶ Meterpreter Scripting
-
-
+### :arrow\_forward: Meterpreter Scripting
 

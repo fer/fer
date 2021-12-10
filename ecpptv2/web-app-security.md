@@ -5,72 +5,71 @@ description: Conduct a thorough Penetration test against web applications.
 # ⭐ TBD - Web App Security
 
 {% hint style="danger" %}
-**This document is still in progress...** 
+**This document is still in progress...**&#x20;
 {% endhint %}
 
 ## Introduction
 
 ### Introduction - Study Guide
 
-### ▶ Same Origin
+### :arrow\_forward: Same Origin
 
-### ▶ HTTP Cookies and Session
+### :arrow\_forward: HTTP Cookies and Session
 
-### ▶ Burp Suite
+### :arrow\_forward: Burp Suite
 
-### ▶ OWASP Zap
+### :arrow\_forward: OWASP Zap
 
-### 🧪 WebApp Labs - Introduction
+### :test\_tube: WebApp Labs - Introduction
 
 ## Information Gathering
 
 ### Information Gathering - Study Guide
 
-### ▶ Web App Information Gathering
+### :arrow\_forward: Web App Information Gathering
 
-### ▶ Web App Fingerprinting
+### :arrow\_forward: Web App Fingerprinting
 
-### ▶ Dirbuster
+### :arrow\_forward: Dirbuster
 
-### ▶ Subdomain Enumeration
+### :arrow\_forward: Subdomain Enumeration
 
-### ▶ Crawling and Spidering
+### :arrow\_forward: Crawling and Spidering
 
 ## Cross Site Scripting
 
 ### Cross Site Scripting - Study Guide
 
-### ▶ Cross Site Scripting
+### :arrow\_forward: Cross Site Scripting
 
-### ▶ Dom XSS
+### :arrow\_forward: Dom XSS
 
-### ▶ XSS Beef
+### :arrow\_forward: XSS Beef
 
 ## SQL Injections
 
 ### SQL Injections - Study Guide
 
-### ▶ Finding SQL Injection
+### :arrow\_forward: Finding SQL Injection
 
-### ▶ Exploiting In-Band SQL Injections
+### :arrow\_forward: Exploiting In-Band SQL Injections
 
-### ▶ Exploiting Error-Based SQL Injection
+### :arrow\_forward: Exploiting Error-Based SQL Injection
 
-### ▶ Exploiting Blind SQL Injection
+### :arrow\_forward: Exploiting Blind SQL Injection
 
-### ▶ SQL Injection Basics
+### :arrow\_forward: SQL Injection Basics
 
-### ▶ SQLmap Basics
+### :arrow\_forward: SQLmap Basics
 
-### 🧪 WebApp Labs - Web Application Attacks
+### :test\_tube: WebApp Labs - Web Application Attacks
 
 ## Other Common Web Attacks
 
 ### Other Common Web Attacks - Study Guide
 
-### ▶ Session Hijacking and Fixation
+### :arrow\_forward: Session Hijacking and Fixation
 
-### ▶ Cross Site Request Forgery
+### :arrow\_forward: Cross Site Request Forgery
 
-### ▶ Files and Resources Vulnerabilities
-
+### :arrow\_forward: Files and Resources Vulnerabilities

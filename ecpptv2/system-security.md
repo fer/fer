@@ -5,7 +5,7 @@ description: Understanding of x86 Architecture and its weaknesses.
 # TBD - System Security
 
 {% hint style="danger" %}
-**This document is still in progress...** 
+**This document is still in progress...**&#x20;
 {% endhint %}
 
 ## Architecture Fundamentals
@@ -24,11 +24,11 @@ x86/x64, assembly, compilers, ASLR, DEP, BufferOverflow.
 
 
 
-### ▶ Stack Frames
+### :arrow\_forward: Stack Frames
 
 ### Security Implementations - Study Guide
 
-### 🧪 System Security
+### :test\_tube: System Security
 
 ## Assembler Debuggers and Tool Arsenal
 
@@ -42,13 +42,13 @@ x86/x64, assembly, compilers, ASLR, DEP, BufferOverflow.
 
 ### Tools Arsenal - Study Guide
 
-### ▶ Immunity Debugger
+### :arrow\_forward: Immunity Debugger
 
 ## Buffer Overflows
 
 ### Understanding Buffer Overflows - Study Guide
 
-### ▶ Debugging Buffer Overflows Goodpassword
+### :arrow\_forward: Debugging Buffer Overflows Goodpassword
 
 ### Finding Buffer Overflows - Study Guide
 
@@ -56,7 +56,7 @@ x86/x64, assembly, compilers, ASLR, DEP, BufferOverflow.
 
 ### Exploiting a Real World Buffer Overflow - Study Guide
 
-### ▶ Exploiting Buffer Overflows 32bit FTP
+### :arrow\_forward: Exploiting Buffer Overflows 32bit FTP
 
 ### Security Implementations - Study Guide
 
@@ -86,9 +86,9 @@ x86/x64, assembly, compilers, ASLR, DEP, BufferOverflow.
 
 ### Public Key Infrastructure - Study Guide
 
-### Pretty Good Privacy \(PGP\) - Study Guide
+### Pretty Good Privacy (PGP) - Study Guide
 
-### Secure Shell \(SSH\) - Study Guide
+### Secure Shell (SSH) - Study Guide
 
 ### Cryptographic Attacks - Study Guide
 
@@ -105,4 +105,3 @@ x86/x64, assembly, compilers, ASLR, DEP, BufferOverflow.
 ### How Malware Spreads - Study Guide
 
 ### Samples - Study Guide
-

@@ -6,14 +6,14 @@ Now we are going to see how you can exploit vulnerabilities of Wi-Fi security pr
 
 #### WEP
 
- Given the low security level provided by the WEP encryption scheme, less and less networks are configured to use it.
+&#x20;Given the low security level provided by the WEP encryption scheme, less and less networks are configured to use it.
 
 Still, it's useful to know how to deal with them as corporations or individuals could still be using this configuration for various compatibility reasons.
 
 The main flaws of WEP encryption are:
 
 * Weak authentication scheme
-* Short Initialization Vector \(IV\) and subsequent frequent reuse
+* Short Initialization Vector (IV) and subsequent frequent reuse
 * vulnerable to replay attacks
 * Weak frame integrity protection
 * Low resistance to related key attacks enabling efficient statistical attacks
@@ -23,13 +23,13 @@ The key of all attacks directed against WEP key recovery is getting a sufficient
 In a medium-sized network, the actual traffic between legitimate clients could be enough to gather the required encrypted data very quickly but this will not always be the case.
 
 {% tabs %}
-{% tab title="LAB \#1" %}
+{% tab title="LAB #1" %}
 Setup your environment with the following guidelines:
 
 * Access Point SSID: LabNetwork
 * Use WEP Encryption
-* Set WEP key size to 40bit and choso your key \(10 hexadecimal characters\)
-* 1 vicitim STA \(associated to Lab Network\), this shouldn't be the same device you will use for the attack!
+* Set WEP key size to 40bit and choso your key (10 hexadecimal characters)
+* 1 vicitim STA (associated to Lab Network), this shouldn't be the same device you will use for the attack!
 * The attacker machine
 
 > Have a note of your AP channel as you'll need it later.
@@ -48,7 +48,7 @@ Setup your environment with the following guidelines:
 
 We can also see our victim client associated stations section.
 
-> `#Data` column indicates the number of data frames collected thus far on a particular network while `#/s` displays the data frames capture rate as frames per second. 
+> `#Data` column indicates the number of data frames collected thus far on a particular network while `#/s` displays the data frames capture rate as frames per second.&#x20;
 >
 > You **do want** high values for these columns in order to succeed.
 
@@ -56,9 +56,9 @@ We can also see our victim client associated stations section.
 
 If `LabNetwork` does not produce a lot of traffic, we might need to have a way to increment the packet rate.
 
-When deauthenticated from a wireless network, normally a client will try to re-authenticate shortly later \(_just as the IEEE 802.11 standard specifies a management frame for this purpose, this is sent completely unencrypted and requires no authentication from the sender_\).
+When deauthenticated from a wireless network, normally a client will try to re-authenticate shortly later (_just as the IEEE 802.11 standard specifies a management frame for this purpose, this is sent completely unencrypted and requires no authentication from the sender_).
 
-_**deauth**_ **frames aren't encrypted**. They are not useful per se to increase the number of collected IVs.
+_**deauth**_** frames aren't encrypted**. They are not useful per se to increase the number of collected IVs.
 
 On the other hand, after re-associating a client, the client will most certainly send some gratuitous ARP or DHCP messages and this traffic is clearly valuable as it's sent encrypted.
 
@@ -82,31 +82,34 @@ The ARP replay attack is a bit more complicated than simple deauthentication. As
 
 Steps of an ARP Replay attack:
 
-1. Stations normally communicate with the AP while the attacker machine is not yet operating.  `aireplay-ng -1 15 -a <bssid> -e <ssid> <interface>`. This will associate your adapter to the specified network. You have to provide both the BSSID and SSID. The `-1` stands for _fake authentication_, while the number on the right is the delay between authentication attempts. When successful, you should see something like `Association successful`
-2. The attacking machine associates itself with the AP, with Open Authentication system, this is only a matter of exchanging 4 frames without providing any credentials. In the `aircrack-ng` terminology, this is called **fake authentication**. 
+1. Stations normally communicate with the AP while the attacker machine is not yet operating. \
+   `aireplay-ng -1 15 -a <bssid> -e <ssid> <interface>`.\
+   This will associate your adapter to the specified network. You have to provide both the BSSID and SSID. The `-1` stands for _fake authentication_, while the number on the right is the delay between authentication attempts. When successful, you should see something like `Association successful`
+2. The attacking machine associates itself with the AP, with Open Authentication system, this is only a matter of exchanging 4 frames without providing any credentials. In the `aircrack-ng` terminology, this is called **fake authentication**.&#x20;
    1. During the real attack, you can find that your adapter constantly receives deauthentication messages from the victim AP. You can try this variation for "picky APs": `aireplay-ng -1 6000 -1 10 -o 1 -a <bssid> -e <ssid> <interface>`
       1. `-q 10` enables keep-alive packets. This command causes this packets to be sent every 10 seconds to maintain the authentication status. The long re-authentication time permits these packets to be sent.
       2. `-o 1` forces `aireplay-ng` to send one set of packets at a time, these can be necessary as some APs can get confused by aireplay-ng's default behavior.
-      3. Do not close opened terminal windows as `aireplay-ng` will need to continue running while performing the attack. 
+      3. Do not close opened terminal windows as `aireplay-ng` will need to continue running while performing the attack.&#x20;
 3. Once the attacker is associated, the attacker starts to passively scan for ARP request, listen for broadcasted ARP request frames.
-   1. Now we need to listen for ARP requests sent by clients on the network. Obviously this will not work if your STA is the only associated one.  `aireplay-ng -3 -b <bssid> <interface>`
+   1. Now we need to listen for ARP requests sent by clients on the network. Obviously this will not work if your STA is the only associated one. \
+      `aireplay-ng -3 -b <bssid> <interface>`
 4. After a while, STA1 sends an ARP request to all of the nodes in the network, and the AP forwards it and the attacker is thus able to capture the frame.
-   1. After a few minutes you should capture at least an ARP request. 
+   1. After a few minutes you should capture at least an ARP request.&#x20;
 5. At this point, the attacker can flood the network by re-injecting the same ARP frame over and over. Simply put: the attacker floods the AP with ARP requests.
    1. Almost instantly `aireplay-ng` will start to re-inject the captured ARP request.
 6. Following the protocol, the AP simply forwards each received ARP **using a new IV every time**.
    1. airodump-ng will show the increase in received frames as you are flooding the AP.
-7. By collecting all of these frames, the attacker can then mount one of the statistical attacks. 
+7. By collecting all of these frames, the attacker can then mount one of the statistical attacks.&#x20;
 
 {% hint style="info" %}
 **Question: Given that the traffic is encrypted, how can the attacker actually identify an ARP request?**
 
-Luckily, ARP request have a fixed payload size \(36 bytes\) so they can be easily identified. They always have a broadcast destination address\(`FF:FF:FF:FF:FF:FF`\) that is transmitted in plain text in the frame header.
+Luckily, ARP request have a fixed payload size (36 bytes) so they can be easily identified. They always have a broadcast destination address(`FF:FF:FF:FF:FF:FF`) that is transmitted in plain text in the frame header.
 {% endhint %}
 
 ### 3. Cracking the key with aircrack-ng
 
-`aircrack-ng` is a software that encapsulates a series of cracking techniques for both WEP and WPA network keys. 
+`aircrack-ng` is a software that encapsulates a series of cracking techniques for both WEP and WPA network keys.&#x20;
 
 This command needs packets in order to crack the WEP key. **The minimum amount of packets depend on the key length.**
 
@@ -127,7 +130,7 @@ If that fails for more than 10000 IVs, just try again with a key of 128 bits.
 > aircrack-ng -e LabNetwork wep_attack*.cap
 ```
 
-Now `aircrack-ng` will start reading all of the IVs from the specified files then the cracking process will begin. If the number of IVs isn't sufficient, `aircrack-ng` will just wait for `airodump-ng` to get more so you do not need to restart the command. 
+Now `aircrack-ng` will start reading all of the IVs from the specified files then the cracking process will begin. If the number of IVs isn't sufficient, `aircrack-ng` will just wait for `airodump-ng` to get more so you do not need to restart the command.&#x20;
 
 {% hint style="info" %}
 **PTW attack with aircrack-ng**
@@ -157,8 +160,8 @@ Cracking speed can be much slower, moreover the required number of IVs is at lea
 {% tab title="Clientless WEP cracking" %}
 > Assure yourself there are no clients associated to the "AP.  You can have a look to your `airodump-ng` output and see that no clients are listed.
 
-1. Use `aireplay-ng` fragmentation attack option to get a PRGA \(Pseudo Random Generation Algorithm: it represents a keystream generated by the RC4 cipher used in WEP encryption\) stream.
-2. Once you have a _keystream_, we can encrypt any packet and inject it \(like we had the network key\). In this way, we can forge an ARP request, encrypt it and still use the old ARP replay technique.
+1. Use `aireplay-ng` fragmentation attack option to get a PRGA (Pseudo Random Generation Algorithm: it represents a keystream generated by the RC4 cipher used in WEP encryption) stream.
+2. Once you have a _keystream_, we can encrypt any packet and inject it (like we had the network key). In this way, we can forge an ARP request, encrypt it and still use the old ARP replay technique.
 
 ```bash
 # 1. Use aireplay-ng for fake authentication as usual:
@@ -211,7 +214,7 @@ As we now have a way to generate new traffic, we can proceed through the usual a
 {% endtab %}
 
 {% tab title="Bypassing Shared Key Authentication" %}
-There is another option when it comes to authenticating wireless stations on a WEP "secured" network. That is _Shared Key Authentication_. 
+There is another option when it comes to authenticating wireless stations on a WEP "secured" network. That is _Shared Key Authentication_.&#x20;
 
 When using SKA, a station wanting to associate to an AP needs to know the WEP key, otherwise its authentication request would be discarded and consequently it would not be able to associate and communicate with other stations.
 
@@ -220,7 +223,7 @@ But this is not entirely true given the fact than an attacker will be able to au
 {% hint style="info" %}
 **Shared Key Authentication process with Wireshark!**
 
-* The first Authentication Frame, from client to AP reports Shared Keys is in use \(value is 1\)
+* The first Authentication Frame, from client to AP reports Shared Keys is in use (value is 1)
 * The second frame from AP to STA contains the 'Challenge Text'
 * The client using the known WEP key encrypts the challenge and resends it through the wireless medium.
 * The 4th and final message of the process is just a simple confirmation message from the AP. It should contain a success status code if the challenge was decrypted correctly.
@@ -237,24 +240,24 @@ Steps:
 
 **Lab settings**
 
-| Access Point SSID | LabNetwork |
-| :--- | :--- |
-| 1 victim STA | associated to LabNetwork |
-| WEP encryption | using Shared Key Authentication |
-|  |  |
-|  |  |
+| Access Point SSID | LabNetwork                      |
+| ----------------- | ------------------------------- |
+| 1 victim STA      | associated to LabNetwork        |
+| WEP encryption    | using Shared Key Authentication |
+|                   |                                 |
+|                   |                                 |
 
 The AP should be configured to use WEP encryption using Shared Key Authentication System. Please ensure the same options are set on STA.
 
 #### Step 1: Deauthentication attack
 
-The objective here is to force the victim to restart the authentication process and then capture the challenge-response messages. 
+The objective here is to force the victim to restart the authentication process and then capture the challenge-response messages.&#x20;
 
 Of course this is not possible when there are no clients associated with the target network. In that scenario, you are stuck waiting for a client to associate.
 
 Start `airodump=ng` on the proper channel and start saving captured data to a file:
 
-```text
+```
 airodump-ng -c <channel> -w shared <interface>
 ```
 
@@ -276,7 +279,7 @@ The recovered keystream will be saves in a `.xor` file located in the `airodump-
 
 #### Step 3: Try to authenticate with the target AP
 
-As we now have a reusable keystream \(along with its IV\), we can try to authenticate ourselves with the target AP.
+As we now have a reusable keystream (along with its IV), we can try to authenticate ourselves with the target AP.
 
 We will launch `aireplay-ng` _fake authentication_ attack but this time, we will provide the command with the needed keystream.
 
@@ -298,13 +301,13 @@ All of the attacks explored thus far against WEP require the physical presence o
 
 In the past few years, a new type of attack arose that could permit WEP cracking off-site. This is possible because these attacks target the wireless clients instead of the network infrastructure. A good example of this new type of attacks is the so-called Caffe-Latte attack.
 
-The Caffe-Latte attack was presented in 2007 by Vivek Ramachandran and MD Sohail Ahmad of Airtight Networks at the Toorcon conference. 
+The Caffe-Latte attack was presented in 2007 by Vivek Ramachandran and MD Sohail Ahmad of Airtight Networks at the Toorcon conference.&#x20;
 
 Its name comes from the fact that using this attack you can crack a WEP key in the time you enjoy a caffe-latte at the bar.
 
 The main target of the attack is the roaming client: an unassociated client periodically sends out Probe Request on every channel, searching for the wireless networks it is configured to use.
 
-Probe Requests only search for a particular SSID so that the AP MAC address can change without affecting the clients. 
+Probe Requests only search for a particular SSID so that the AP MAC address can change without affecting the clients.&#x20;
 
 This property, along with the multiple flaws of WEP can be used to mount this attack. The attacker starts a fake AP advertising as the target network. As mutual authentication is not enforced by WEP security, the client will simply sense that its preferred AP is in range and try to associate with it. Until now, no encrypted packets have been sent so how can the attack collect a sufficient number of IVs?
 
@@ -312,9 +315,9 @@ Most wireless clients, upon association to a network, will send out a few gratui
 
 The solution found by this attacks' authors is to exploit how WEP fails to verify the integrity and absence of manipulation of transmitted packets.
 
-In fact, it is possible to "flip" bits in the packet payload and then adjust the corresponding ICV \(Integrity Check Value\), a CRC-32 field calculated on the encrypted data, obtaining a perfectly valid packet. 
+In fact, it is possible to "flip" bits in the packet payload and then adjust the corresponding ICV (Integrity Check Value), a CRC-32 field calculated on the encrypted data, obtaining a perfectly valid packet.&#x20;
 
-Once a gratuitous ARP packet is received, it is possible to flip certain bytes and forge a new ARP request targeting the client \(see the paper for details\). It is now possible to flood the client with these ARP requests and collect a huge amount of encrypted packets in a few minutes.
+Once a gratuitous ARP packet is received, it is possible to flip certain bytes and forge a new ARP request targeting the client (see the paper for details). It is now possible to flood the client with these ARP requests and collect a huge amount of encrypted packets in a few minutes.
 
 ### Lab Setup
 
@@ -324,7 +327,7 @@ Once a gratuitous ARP packet is received, it is possible to flip certain bytes a
 
 #### Step 1
 
-If we start airodump-ng, we can see our client is sending Probe Request searching for pre-configured networks. 
+If we start airodump-ng, we can see our client is sending Probe Request searching for pre-configured networks.&#x20;
 
 ```bash
 airodump-ng -w <outfile> <interface>
@@ -346,16 +349,16 @@ airbase-ng -c <channel> -W 1 -L -e <SSID> <interface>
 # -W 1 force airbase-ng to not set the WEP Privacy Bit in beacons
 ```
 
-Results should show clients associated to our fake AP and `airbase-ng` automatically starts the Caffe-Latte attack for us, incrementing the number of data packet rate as we collect the IVs \(see this in your on-going `airodump-ng`\).
+Results should show clients associated to our fake AP and `airbase-ng` automatically starts the Caffe-Latte attack for us, incrementing the number of data packet rate as we collect the IVs (see this in your on-going `airodump-ng`).
 
 We now just wait to gather a sufficient amount of encrypted packets. In the meantime, we can start `aircrack-ng` and feed it with the capture file from `airodump-ng`. 150000 IVs should be enough to decrypt the key.
 
 {% hint style="info" %}
-**Hirte Attack \(\`-H\`\)**
+**Hirte Attack (\`-H\`)**
 
-There is a variation to this attack that you can perform while using `airbase-ng.` 
+There is a variation to this attack that you can perform while using `airbase-ng.`&#x20;
 
-This attack uses the same tactics targeting the client but also uses frame fragmentation to achieve a higher speed as the same ARP request can be split into multiple shorter encrypted frames. 
+This attack uses the same tactics targeting the client but also uses frame fragmentation to achieve a higher speed as the same ARP request can be split into multiple shorter encrypted frames.&#x20;
 
 If the attack doesn't not work for you, you can still fallback on the classic Caffe-Latte.
 {% endhint %}
@@ -369,44 +372,46 @@ If the attack doesn't not work for you, you can still fallback on the classic Ca
 
 Attacks against WPA/WPA2 keys are much less diversified than those targeting WEP. Until now, WPA has proved to be robust security measure to provide effective privacy for wireless networks. WPA and its successor WPA2 fixed the various flaws that plagued WEP, making it impossible to just look at the traffic to get information about the key.
 
-When a new client wants to join a WPA/WPA2 protected network, it must first authenticate itself, proving it owns the shared key. After association, the two parties start what is called _the four-way handshake_, which is a process that permits the mutual authentication between the AP \(called Authenticator\) and the STA \(called Supplicant\).
+When a new client wants to join a WPA/WPA2 protected network, it must first authenticate itself, proving it owns the shared key. After association, the two parties start what is called _the four-way handshake_, which is a process that permits the mutual authentication between the AP (called Authenticator) and the STA (called Supplicant).
 
-During the communication, the PSK is never sent through the wireless medium. The PSK is only used to generate a PTK \(Pairwise Transient Key\) that is used as session-only encryption key.
+During the communication, the PSK is never sent through the wireless medium. The PSK is only used to generate a PTK (Pairwise Transient Key) that is used as session-only encryption key.
 
 Since the PSK is never transmitted, both AP and STA need a secure way to generate the PTK. This is what the 4-way handshake does.
+
+
 {% endhint %}
 
-![The 4 way handshake](../../.gitbook/assets/image%20%2880%29.png)
+![The 4 way handshake](<../../.gitbook/assets/image (80).png>)
 
 #### Steps of the 4-way handshake
 
 **Step 0**
 
-At first the shared passphrase is used to generate the so-called PMK \(Pairwise Master Key\), which is 256bits long.
+At first the shared passphrase is used to generate the so-called PMK (Pairwise Master Key), which is 256bits long.
 
 Both the STA and AP independently calculate this value combining the PSK and SSID name.
 
 **Step 1/4**
 
-When the handshake starts, the AP sends the STA a message containing a `nonce` , a security cryptographic random number. In the WPA specification, this number is called `Anonce` \(as Authenticator Nonce\).
+When the handshake starts, the AP sends the STA a message containing a `nonce` , a security cryptographic random number. In the WPA specification, this number is called `Anonce` (as Authenticator Nonce).
 
 **Step 2/4**
 
-STA generates another nonce, called `SNonce` \(Supplicant Nonce\), and builds the PTK containing the PMK, both nonces, the MAC addresses of AP and STA and processing this product through a cryptographic hash function called `PBKDF2-SAH1`.
+STA generates another nonce, called `SNonce` (Supplicant Nonce), and builds the PTK containing the PMK, both nonces, the MAC addresses of AP and STA and processing this product through a cryptographic hash function called `PBKDF2-SAH1`.
 
 **Step 3/4**
 
-STA then sends its `SNonce` to the AP that can now build the PTK. As it uses the same information, both PTKs will be the same without the original PSK ever being transmitted over the air. This third message also contains a MIC \(Message Integrity Code\) which is used to authenticate the sending STA. 
+STA then sends its `SNonce` to the AP that can now build the PTK. As it uses the same information, both PTKs will be the same without the original PSK ever being transmitted over the air. This third message also contains a MIC (Message Integrity Code) which is used to authenticate the sending STA.&#x20;
 
 **Step 4/4**
 
-Finally, the AP replies back with a message containing the GTK \(Group Temporal Key\) used to decrypt multicast and broadcast traffic. This message is also authenticated by means of MIC. An acknowledgment concludes the process.
+Finally, the AP replies back with a message containing the GTK (Group Temporal Key) used to decrypt multicast and broadcast traffic. This message is also authenticated by means of MIC. An acknowledgment concludes the process.
 
 #### Perform an attack
 
 #### Capturing the Handshake
 
-**Setup LAB** 
+**Setup LAB**&#x20;
 
 * AP SSID: LabNetwork, channel 11, WPA enabled.
 * 1 vicitim STA associated to the AP
@@ -426,7 +431,7 @@ Write down the client MAC address and launch the _deauth_ attack against it:
 aireplay-ng -0 1 -a <BSSID> -c <client_mac> <iface>
 ```
 
-If the victim STA is inside the reachable area of your wireless card, it will be forced to rejoin the network and you should be able to get a new 4-way handshake \(`airodump-ng` notifies when the handshake reception happens\).
+If the victim STA is inside the reachable area of your wireless card, it will be forced to rejoin the network and you should be able to get a new 4-way handshake (`airodump-ng` notifies when the handshake reception happens).
 
 Now that we have captured the handshake and it is stored into a file, it's time to crack it!
 
@@ -434,11 +439,11 @@ Now that we have captured the handshake and it is stored into a file, it's time 
 
 `aircrack-ng` has two cracking options when it comes to WPA/WPA2 keys:
 
-1. Dictionary Attack \(also available for WEP\)
+1. Dictionary Attack (also available for WEP)
 2. Pure brute force attack
 
 {% hint style="info" %}
-Before using brute force, it is always recommended to at least try a dictionary attack, this is because it may be possible to recover the password \(even if long or complex\) with a fraction of the time if compared with a brute force attempt.
+Before using brute force, it is always recommended to at least try a dictionary attack, this is because it may be possible to recover the password (even if long or complex) with a fraction of the time if compared with a brute force attempt.
 {% endhint %}
 
 ```bash
@@ -448,11 +453,11 @@ aircrack-ng -w <wordlist(s)> <.cap file>
 aircrack-ng -w /usr/share/wordlists/nmap.st wpa-file.cap
 ```
 
-The syntax is very simple, you only have to provide a wordlist file \(or comma-separated list\) and the path to your `.cap` file containing the captured handshake. This is the file saved by `airodump-ng` at the previous step.
+The syntax is very simple, you only have to provide a wordlist file (or comma-separated list) and the path to your `.cap` file containing the captured handshake. This is the file saved by `airodump-ng` at the previous step.
 
 #### Build a wordlist with crunch
 
-`crunch` will generate all of the possible combination of words between the two length values. 
+`crunch` will generate all of the possible combination of words between the two length values.&#x20;
 
 ```bash
 crunch <min_length> <max_length>
@@ -474,7 +479,7 @@ crunch 8 8 | aircrack-ng -e LabNetwork file.cap -w -
 
 * If you want to compare your computing power, you can run a simple test with `aircrack-ng` itself: `aircrack-ng -S`
 * Exploiting GPU power tools
-  * `oclHascat`: supports many hashing functions and cryptographic algorithms but if you want to be able to discover the key from a WPA/WPA2 handshake, you'll need to transform the `.cap` file to a format understandable by the program \(`.hccap`\). There's an [online tool](https://hashcat.net/cap2hccap/) for this purpose. You can also use `aircrack-ng` with the `-J` option.
+  * `oclHascat`: supports many hashing functions and cryptographic algorithms but if you want to be able to discover the key from a WPA/WPA2 handshake, you'll need to transform the `.cap` file to a format understandable by the program (`.hccap`). There's an [online tool](https://hashcat.net/cap2hccap/) for this purpose. You can also use `aircrack-ng` with the `-J` option.
   * `Pyrit`
   * `John the Ripper`
 
@@ -483,7 +488,7 @@ oclHashCat -m 2500 <.hccap file> <wordlist_file>
 # -m 2500 crack a WPA/WPA2 handshake
 ```
 
-"Cracking as a Service" can be an option for those without a powerful GPU. These services only require you to upload the `.cap` file containing the 4-way handshake and specify the target SSID. Once you have uploaded the file, you often choose between a series of different dictionaries so if you have a clue of the key, you can better restrict the search. Please note that most powerful services need you to pay a small fee. 
+"Cracking as a Service" can be an option for those without a powerful GPU. These services only require you to upload the `.cap` file containing the 4-way handshake and specify the target SSID. Once you have uploaded the file, you often choose between a series of different dictionaries so if you have a clue of the key, you can better restrict the search. Please note that most powerful services need you to pay a small fee.&#x20;
 
 * CloudCracker
 {% endhint %}
@@ -491,7 +496,7 @@ oclHashCat -m 2500 <.hccap file> <wordlist_file>
 {% hint style="info" %}
 **Space-time tradeoff**
 
-As _the last option available in your toolbox_, we will present you an alternative bruteforce method that can be particularly useful in some occasions. 
+As _the last option available in your toolbox_, we will present you an alternative bruteforce method that can be particularly useful in some occasions.&#x20;
 
 A recent trend in the password cracking field make use of the time-space tradeoff to pre-calculate large amount of hashes and store them in so-called **rainbow-tables.**
 
@@ -537,7 +542,7 @@ Let's import some passwords from our wordlist:
 > pyrit -i <wordlist_file> import_passwords
 ```
 
-`pyrit` will process the input file and automatically discard all duplicates and all the words that are not suitable for a PSK \(also short\). Will also remove all the unusable passwords.
+`pyrit` will process the input file and automatically discard all duplicates and all the words that are not suitable for a PSK (also short). Will also remove all the unusable passwords.
 
 > **Note** you will need large wordlists to have any success while cracking WPA.
 
@@ -587,9 +592,9 @@ On the internet you can find pre-built PMKs databases for the most common SSID n
 
 #### WPS: Wireless Protected Setup
 
-In 2011, Stefan Viehbock published a paper describing a new attack against WPS \(Wireless Protected Setup\).
+In 2011, Stefan Viehbock published a paper describing a new attack against WPS (Wireless Protected Setup).
 
-{% embed url="https://sviehb.files.wordpress.com/2011/12/viehboeck\_wps.pdf" %}
+{% embed url="https://sviehb.files.wordpress.com/2011/12/viehboeck_wps.pdf" %}
 
 WPS was designed a simple and secure way to setup a protected wireless network.
 
@@ -601,15 +606,15 @@ WPS provides 3 different setup alternative methods:
 * Internal-Registrar
 * External-Registrar
 
-While the former two methods require stronger authentication procedures \(physical access or web interface access\) the External-Registrar method only requires the client to provide a PIN \(8 digits\).
+While the former two methods require stronger authentication procedures (physical access or web interface access) the External-Registrar method only requires the client to provide a PIN (8 digits).
 
-> Normally, bruteforcing a 8 digits number will require testing for 10^8 \(=1000000000\) combinations but the actual form of authentication used by WPS highly reduces this number.
+> Normally, bruteforcing a 8 digits number will require testing for 10^8 (=1000000000) combinations but the actual form of authentication used by WPS highly reduces this number.
 
 This is the representation of the WPS PIN number:
 
-| 1st half of PIN \(4 bits\) | 2nd half of PIN \(4 bits\) |
-| :--- | :--- |
-| 0, 1, 2, 3 | 4, 5, 6, 7 \(7 = checksum digit\) |
+| 1st half of PIN (4 bits) | 2nd half of PIN (4 bits)        |
+| ------------------------ | ------------------------------- |
+| 0, 1, 2, 3               | 4, 5, 6, 7 (7 = checksum digit) |
 
 It's divided into two halves of 4 digits each. The last digit of the 2nd half is a checksum meaning it is always calculated from the other digits.
 
@@ -624,11 +629,11 @@ At every step, if the client is sending wrong data the AP terminates the process
 
 This behavior, combined with the split PIN allows us to build a quite optimized brute force attack.
 
-![](../../.gitbook/assets/image%20%2879%29.png)
+![](<../../.gitbook/assets/image (79).png>)
 
 > **How many combinations do we need to try?**
 >
-> Splitting the PIN get us from 10^8 to 10^4 + 10^4 \(=20000\) while having a checksum digit reduces the number of guesses for the 2nd half and we get the final result of only **10^4 + 10^3 \(=11000\)** combinations.
+> Splitting the PIN get us from 10^8 to 10^4 + 10^4 (=20000) while having a checksum digit reduces the number of guesses for the 2nd half and we get the final result of only **10^4 + 10^3 (=11000)** combinations.
 
 There are two tools that can help to exploit this vulnerability:
 
@@ -636,7 +641,7 @@ There are two tools that can help to exploit this vulnerability:
 * Bully
 
 {% hint style="info" %}
-**Reaver \(& wash\)**
+**Reaver (& wash)**
 
 Developed by Tactical Network Solutions. It has both an open-source and a paid version that features a friendlier GUI and other goodies.
 
@@ -652,7 +657,7 @@ With your monitor interface up and running, launch:
 
 `wash` will start hopping through the wireless channels and will list discovered APs that support WPS.
 
-`wash` output offers other useful information apart from signal level \(`RSSI` column\) you can find `WPS Locked` column. If the value is `YES` you will find the corresponding AP disabled WPS due to internal anti-bruteforce protection mechanisms, being a major hurdle for the WPS attacks.
+`wash` output offers other useful information apart from signal level (`RSSI` column) you can find `WPS Locked` column. If the value is `YES` you will find the corresponding AP disabled WPS due to internal anti-bruteforce protection mechanisms, being a major hurdle for the WPS attacks.
 {% endhint %}
 
 {% hint style="info" %}
@@ -660,7 +665,7 @@ With your monitor interface up and running, launch:
 
 `bully` is opensourced on GitHub. It has some advantages over `reaver` such as fewer dependencies and a build process optimized for embedded devices. It also has features to handle anomalous scenarios.
 
-Once you are sure your target AP is vulnerable to the attack \(with `bash`\) you can launch `bully` with the following command:
+Once you are sure your target AP is vulnerable to the attack (with `bash`) you can launch `bully` with the following command:
 
 ```bash
 > bully -b <BSSID> <interface>
@@ -685,7 +690,7 @@ If `bully` detects a lockout, it will normally display the following output and 
 
 The `-L` switch is used to disable lockdown detection.
 
-A better option to avoid being locked out is to add a certain delay after every PIN attempt. By adding a pause between each try, you could bypass the attack detection system and get a smoother bruteforce attack. 
+A better option to avoid being locked out is to add a certain delay after every PIN attempt. By adding a pause between each try, you could bypass the attack detection system and get a smoother bruteforce attack.&#x20;
 
 This will increase the needed time to test each PIN; most of the time, this will be the only viable solution given that newer firmware disables WPS registration for hours after multiple authentication attempts are detected in a few seconds.
 
@@ -695,17 +700,17 @@ The syntax to use to enable delay for the bully command goes as follows:
 > bully -b <BSSID> -1 <seconds> -2 <seconds> <interface>
 ```
 
-Where the `-1` option controls the delay in the first phase of the attack \(first half of the PIN\) and `-2` options sets the delay value for the second phase. Values of 60 seconds or more are recommended for most APs.
+Where the `-1` option controls the delay in the first phase of the attack (first half of the PIN) and `-2` options sets the delay value for the second phase. Values of 60 seconds or more are recommended for most APs.
 
 {% embed url="https://www.aircrack-ng.org/" %}
 
-{% embed url="https://www.aircrack-ng.org/doku.php?id=arp-request\_reinjection" %}
+{% embed url="https://www.aircrack-ng.org/doku.php?id=arp-request_reinjection" %}
 
 {% embed url="https://www.aircrack-ng.org/doku.php?id=packetforge-ng" %}
 
 {% embed url="https://www.slideshare.net/AirTightWIPS/toorcon-caffe-latte-attack" %}
 
-{% embed url="http://www.tcpipguide.com/free/t\_TCPIPAddressResolutionProtocolARP.htm" %}
+{% embed url="http://www.tcpipguide.com/free/t_TCPIPAddressResolutionProtocolARP.htm" %}
 
 {% embed url="https://eprint.iacr.org/2007/120.pdf" %}
 
@@ -713,11 +718,10 @@ Where the `-1` option controls the delay in the first phase of the attack \(firs
 
 {% embed url="https://www.aircrack-ng.org/doku.php?id=airbase-ng" %}
 
-{% embed url="http://www.tcpipguide.com/free/t\_TCPIPAddressResolutionProtocolARP.htm" %}
+{% embed url="http://www.tcpipguide.com/free/t_TCPIPAddressResolutionProtocolARP.htm" %}
 
 
 
-### ▶ WEP Cracking
+### :arrow\_forward: WEP Cracking
 
-### ▶ WPA Capture Attacks
-
+### :arrow\_forward: WPA Capture Attacks

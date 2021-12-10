@@ -187,13 +187,13 @@ $_        # last string reads by gets
 
 {% tab title="instance /  class" %}
 * Instance and class variables can be defined within a class definition.
-* **Class variables** begin with `@@` ****and they are visible by all instances of a class.
+* **Class variables** begin with `@@` **** and they are visible by all instances of a class.
 * **Instance variables** begin with `@` and they are local to specific instances of a class.
 {% endtab %}
 
 {% tab title="constants" %}
-* Constants begin with **uppercase letters**. 
-* Ruby allows you to change uppercased variables but a _warning is raised_. 
+* Constants begin with **uppercase letters**.&#x20;
+* Ruby allows you to change uppercased variables but a _warning is raised_.&#x20;
 * Constants belong to their namespace in their scope:
 
 ```ruby
@@ -229,4 +229,3 @@ end
 
 one, two, three = ret_value
 ```
-

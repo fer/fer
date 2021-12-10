@@ -10,7 +10,7 @@ As a penetration tester, you should know that Wi-Fi networks are not only intere
 
 In some situations it's simpler to get a wireless client to connect to our attacking system instead of recovering the network WEP or WPA key.
 
-> Caffe-Latte attack consisted in tricking a wireless client into connecting to a fake AP with the purpose of collecting a sufficient long keystream. 
+> Caffe-Latte attack consisted in tricking a wireless client into connecting to a fake AP with the purpose of collecting a sufficient long keystream.&#x20;
 >
 > With that keystream, we are able to forge our packets and flood the client itself with ARP requests, collecting a lot of IVs.
 
@@ -44,14 +44,14 @@ Imagine this simple situation:
 >
 > The objective of the attack is getting Sam's notebook to connect to the fake AP.
 >
-> Since Shared Key Authentication is enabled, you will be able to recover a good amount of keystream \(generally 140 bytes\) which is more than what you need to forge your own ARP requests with packetforge-ng.
+> Since Shared Key Authentication is enabled, you will be able to recover a good amount of keystream (generally 140 bytes) which is more than what you need to forge your own ARP requests with packetforge-ng.
 
 > **Recover PRGA with a rogue AP**
 >
 > Here's our setup:
 >
 > * A victim client unassociated from any AP
-> * Our attacking machine \("fake" AP\)
+> * Our attacking machine ("fake" AP)
 >
 > ```bash
 > > airmon-ng start <interface>
@@ -131,9 +131,9 @@ Imagine this simple situation:
 > > echo 1 > /proc/sys/net/ipv4/ip_forward
 > ```
 >
-> All of the Internet directed traffic from the victim client is already being forwarded through the attack machine. To confirm everything is working fine, you can try to browse a website from your victim client. You should be able to load it correctly. 
+> All of the Internet directed traffic from the victim client is already being forwarded through the attack machine. To confirm everything is working fine, you can try to browse a website from your victim client. You should be able to load it correctly.&#x20;
 >
-> Now that you are controlling all of the traffic flowing from and towards the client, you can try to steal confidential data such as website credentials as in the classic MitM attack. 
+> Now that you are controlling all of the traffic flowing from and towards the client, you can try to steal confidential data such as website credentials as in the classic MitM attack.&#x20;
 >
 > Fire up your favorite sniffing tool and start listening on your virtual wireless interface
 >
@@ -154,7 +154,7 @@ Imagine this simple situation:
 
 > **Rogue AP: an alternative definition**
 >
-> The following is an alternative definition of rogue AP: it's an unmanaged and unauthorized wireless AP attached to an enterprise wireless network. 
+> The following is an alternative definition of rogue AP: it's an unmanaged and unauthorized wireless AP attached to an enterprise wireless network.&#x20;
 >
 > A rogue AP could have been installed by a legitimate user unaware of the security implications or on purpose for an insider attack. An outsider can also install the AP inside the enterprise premises if insufficient physical security measures are used.
 >
@@ -170,7 +170,7 @@ Imagine this simple situation:
 >
 > In the simplest case, the attacker can passively scan the wireless medium to collect information about network configuration, hostnames and IPs.
 >
-> Sensitive information could also be disclosed such as usernames, passwords or emails \(especially if the wireless network uses no encryption\).
+> Sensitive information could also be disclosed such as usernames, passwords or emails (especially if the wireless network uses no encryption).
 
 > **Rogue AP: Evil Twin Attack**
 >
@@ -188,30 +188,30 @@ Imagine this simple situation:
 >
 > Mana allows us to quickly spin up a rogue access point, configure the necessary DHCP settings and with some modifications to the default configuration, we can host our own web page to be served to a connected station.
 >
-> **Important!** The attacker AP should be in close proximity to a station already connected to the legitimate AP. This way, upon de-authentication of the client, the client should auto-reconnect to the AP with the stronger signal \(the attacker-controlled AP\).
+> **Important!** The attacker AP should be in close proximity to a station already connected to the legitimate AP. This way, upon de-authentication of the client, the client should auto-reconnect to the AP with the stronger signal (the attacker-controlled AP).
 
 > **Attacks against WPA2-Enterprise**
 >
 > WPA2-Enterprise introduced several improvements to the WPA2-PSK model in regards to security, primarily with the support of 802.1x authentication, and therefore, requires its own set of tools and changes to the way we traditionally perform attacks against wireless networks.
 >
-> In the traditional WPA2-PSK model, we typically have a client \(supplicant\) that connects to an access point \(authenticator\), the usual "two-party" scenario.
+> In the traditional WPA2-PSK model, we typically have a client (supplicant) that connects to an access point (authenticator), the usual "two-party" scenario.
 >
-> With WPA2-Enterprise, we introduce a third-party "Authentication Server", which is usually a system that supports the RADIUS and Extensible Authentication \(EAP\) protocols.
+> With WPA2-Enterprise, we introduce a third-party "Authentication Server", which is usually a system that supports the RADIUS and Extensible Authentication (EAP) protocols.
 >
-> * **Initialization:** On detection of a new supplicant, the port on the switch \(authenticator\) is enabled and set to the "unauthorized" state. In this state, only 802.1X traffic is allowed; other traffic such as the Internet Protocol \(and with that TCP and UDP\) is dropped.
-> * **Initiation:** to initiate authentication will periodically transmit EAP-Request Identity frames to a special Layer 2 address \(01:80:C2:00:00:03\) on the local network segment. The supplicant listens on this address and on receipt of the EAP-Request Identity frame it responds with an EAP-Response Identity frame containing an identifier for the supplicant such as a User ID. The authenticator then encapsulates this Identity response in RADIUS Access-Request packet and forwards it on to the authentication server. The supplicant may also initiate or restart authentication by sending an EAPOL-Start frame to the authenticator, which will then reply with an EAP-Request Identity frame.
-> * **Negotiation:** technically EAP negotiation, the authentication server sends a reply \(encapsulated in a RADIUS Access-Challenge packet\) to the authenticator, containing an EAP Request specifying the EAP Method \(the type of EAP based authentication it wishes the supplicant to perform\). The authenticator encapsulates the EAP Request in an EAPOL frame and transmits it to the  supplicant. At this point, the supplicant can start using the requested EAP method, or do a NAK \(negative acknowledgement\) and respond with the EAP methods it is willing to perform.
-> * **Authentication:** if the authentication server and supplicant agree on an EAP Method, EAP Requests and Responses are sent between the supplicant and the authentication server \(translated by the authenticator\) until the authentication server responds with either an EAP-Success message \(encapsulated in a RADIUS Access-Accept packet\), or an EAP-Failure message \(encapsulated in a RADIUS Access-Reject packet\). If authentication is successful, the authenticator sets the port to the "authorized" state and normal traffic is allowed; if it's unsuccessful, the port remains in the "unauthorized" state. When the supplicant logs off, it sends an EAPOL-logoff message to the authenticator, the authenticator then sets the port to the "unauthorized" state, once again blocking all non-EAP traffic.
+> * **Initialization:** On detection of a new supplicant, the port on the switch (authenticator) is enabled and set to the "unauthorized" state. In this state, only 802.1X traffic is allowed; other traffic such as the Internet Protocol (and with that TCP and UDP) is dropped.
+> * **Initiation:** to initiate authentication will periodically transmit EAP-Request Identity frames to a special Layer 2 address (01:80:C2:00:00:03) on the local network segment. The supplicant listens on this address and on receipt of the EAP-Request Identity frame it responds with an EAP-Response Identity frame containing an identifier for the supplicant such as a User ID. The authenticator then encapsulates this Identity response in RADIUS Access-Request packet and forwards it on to the authentication server. The supplicant may also initiate or restart authentication by sending an EAPOL-Start frame to the authenticator, which will then reply with an EAP-Request Identity frame.
+> * **Negotiation:** technically EAP negotiation, the authentication server sends a reply (encapsulated in a RADIUS Access-Challenge packet) to the authenticator, containing an EAP Request specifying the EAP Method (the type of EAP based authentication it wishes the supplicant to perform). The authenticator encapsulates the EAP Request in an EAPOL frame and transmits it to the  supplicant. At this point, the supplicant can start using the requested EAP method, or do a NAK (negative acknowledgement) and respond with the EAP methods it is willing to perform.
+> * **Authentication:** if the authentication server and supplicant agree on an EAP Method, EAP Requests and Responses are sent between the supplicant and the authentication server (translated by the authenticator) until the authentication server responds with either an EAP-Success message (encapsulated in a RADIUS Access-Accept packet), or an EAP-Failure message (encapsulated in a RADIUS Access-Reject packet). If authentication is successful, the authenticator sets the port to the "authorized" state and normal traffic is allowed; if it's unsuccessful, the port remains in the "unauthorized" state. When the supplicant logs off, it sends an EAPOL-logoff message to the authenticator, the authenticator then sets the port to the "unauthorized" state, once again blocking all non-EAP traffic.
 
 > **Eaphammer: Attacking WPA2-Enterprise neworks**
 >
-> Aside from being able to automate Evil Twin attacks similar to the previously mentioned Mana toolkit, eaphammer allows us to steal RADIUS credentials, conduct hostile portal attacks to steal Active Directory credentials \(through Responder-type attacks\), and includes a host of other features we'll find useful during Wireless Penetration testing engagements:
+> Aside from being able to automate Evil Twin attacks similar to the previously mentioned Mana toolkit, eaphammer allows us to steal RADIUS credentials, conduct hostile portal attacks to steal Active Directory credentials (through Responder-type attacks), and includes a host of other features we'll find useful during Wireless Penetration testing engagements:
 >
 > * Built-in Responder Integration
 > * Support for Open networks and WPA-EAP/WPA2-EAP
 > * No manual configuration necessary for most attacks
 > * No manual configuration necessary for installation and setup process
-> * Leverages latest version of hostapd \(2.6\)
+> * Leverages latest version of hostapd (2.6)
 > * Support for evil twin and karma attacks
 > * Generate timed Powershell payloads for indirect wireless pivots
 > * Integrated HTTP server for Hostile Portal attacks
@@ -219,13 +219,13 @@ Imagine this simple situation:
 
 #### Wardriving
 
-It's the act of searching for Wi-Fi networks by a person on a moving vehicle \(like a car\) using a portable computer, a smartphone or any other Wi-Fi enabled device.
+It's the act of searching for Wi-Fi networks by a person on a moving vehicle (like a car) using a portable computer, a smartphone or any other Wi-Fi enabled device.
 
 The word originated from WarDialing, a practice that consisted of using a modem to automatically scan a list of telephone numbers searching for equipment as fax machines, modems or other systems.
 
 The main objective of wardriving is creating a map of Wi-Fi access points in a specific area.
 
-The map can then be used to observe AP distribution and characteristics like SSID names or encryption type \(if used\).
+The map can then be used to observe AP distribution and characteristics like SSID names or encryption type (if used).
 
 To start wardriving, all you need is a good GPS receiver, a Wi-Fi enabled device and, obviously a vehicle.
 
@@ -237,9 +237,9 @@ After the drive, we use an app functionality which allows one to export the data
 
 {% embed url="https://github.com/sensepost/mana" %}
 
-{% embed url="https://en.wikipedia.org/wiki/IEEE\_802.1X" %}
+{% embed url="https://en.wikipedia.org/wiki/IEEE_802.1X" %}
 
-{% embed url="https://en.wikipedia.org/wiki/Evil\_twin\_\(wireless\_networks\)" %}
+{% embed url="https://en.wikipedia.org/wiki/Evil_twin_(wireless_networks)" %}
 
 {% embed url="https://wigle.net/" %}
 
@@ -247,9 +247,8 @@ After the drive, we use an app functionality which allows one to export the data
 
 {% embed url="https://github.com/s0lst1c3/eaphammer" %}
 
-### ▶ Rogue Access Point
+### :arrow\_forward: Rogue Access Point
 
-### ▶ Evil Twin Attack with Mana Toolkit Pt. 1
+### :arrow\_forward: Evil Twin Attack with Mana Toolkit Pt. 1
 
-### ▶ Evil Twin Attack with Mana Toolkit Pt. 2
-
+### :arrow\_forward: Evil Twin Attack with Mana Toolkit Pt. 2

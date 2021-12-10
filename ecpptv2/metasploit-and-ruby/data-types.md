@@ -1,5 +1,5 @@
 ---
-description: 'Numbers, Strings, Arrays, Ranges & Hashes.'
+description: Numbers, Strings, Arrays, Ranges & Hashes.
 ---
 
 # Data Types
@@ -10,7 +10,7 @@ description: 'Numbers, Strings, Arrays, Ranges & Hashes.'
 
 {% tabs %}
 {% tab title="Integer" %}
-```text
+```
 >> 2**5
 => 32
 >> 10/2
@@ -48,7 +48,7 @@ description: 'Numbers, Strings, Arrays, Ranges & Hashes.'
 {% endtab %}
 
 {% tab title="Anticipation" %}
-{% code title="ip\_upto.rb" %}
+{% code title="ip_upto.rb" %}
 ```bash
 # $ ruby ip_upto.rb 192.168.1 10 20
 # 192.168.1.10
@@ -92,17 +92,17 @@ description: 'Numbers, Strings, Arrays, Ranges & Hashes.'
 Double quotes support escape sequences. Some of the are:
 
 | Syntax | Escape sequence description |
-| :--- | :--- |
-| `\"` | Double quote |
-| `\r` | Carriage return |
-| `\s` | Space |
-| `\t` | Tab |
-| `\n` | New Line |
-| `\\` | Single backslash |
+| ------ | --------------------------- |
+| `\"`   | Double quote                |
+| `\r`   | Carriage return             |
+| `\s`   | Space                       |
+| `\t`   | Tab                         |
+| `\n`   | New Line                    |
+| `\\`   | Single backslash            |
 {% endtab %}
 
 {% tab title="Alternative quotes" %}
-You can add your custom string delimiter after the first `%q`character to instruct Ruby where the quoted string begins: 
+You can add your custom string delimiter after the first `%q`character to instruct Ruby where the quoted string begins:&#x20;
 
 ```bash
 >> print %q!my string! 
@@ -120,7 +120,7 @@ You can make full use of:
 * Brackets
 * Braces
 * Parenthesis
-* &lt;&gt; signs
+* <> signs
 
 ```bash
 >> print %q[my string]
@@ -233,7 +233,7 @@ st.insert(st.size, " FIN")
 
 ## **Array**
 
-> An Array is an Object containing other Objects \(including other Arrays\) accessible through an Index.
+> An Array is an Object containing other Objects (including other Arrays) accessible through an Index.
 
 {% tabs %}
 {% tab title="Creation" %}
@@ -401,4 +401,3 @@ st.insert(st.size, " FIN")
 ```
 {% endtab %}
 {% endtabs %}
-

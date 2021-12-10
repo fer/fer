@@ -2,7 +2,7 @@
 
 * [whoami](README.md)
 
-## eCPPTv2 - WIP! <a id="ecpptv2"></a>
+## eCPPTv2 - WIP! <a href="#ecpptv2" id="ecpptv2"></a>
 
 * [TBD - System Security](ecpptv2/system-security.md)
 * [⭐TBD - Network Security](ecpptv2/network-security.md)
@@ -23,40 +23,6 @@
   * [WIP - Classes, Modules and Exceptions](ecpptv2/metasploit-and-ruby/classes-modules-and-exceptions.md)
   * [Pentesters Prerequisites](ecpptv2/metasploit-and-ruby/pentesters-prerequisites.md)
   * [Input/Output](ecpptv2/metasploit-and-ruby/input-output.md)
-
-## Courses
-
-* [eJPT](courses/ejpt/README.md)
-  * [Penetration Testing Basics](courses/ejpt/basics/README.md)
-    * [Information Gathering](courses/ejpt/basics/information-gathering.md)
-    * [Footprinting & Scanning](courses/ejpt/basics/footprinting-and-scanning.md)
-    * [Vulnerability Assessment](courses/ejpt/basics/vulnerability-assessment.md)
-    * [Web Attacks](courses/ejpt/basics/web-attacks.md)
-    * [System Attacks](courses/ejpt/basics/system-attacks.md)
-    * [Network Attacks](courses/ejpt/basics/network-attacks.md)
-  * [Preliminary Skills & Programming](courses/ejpt/preliminary-skills-and-programming/README.md)
-    * [C++](courses/ejpt/preliminary-skills-and-programming/c++.md)
-    * [Python](courses/ejpt/preliminary-skills-and-programming/python.md)
-    * [Bash Shell](courses/ejpt/preliminary-skills-and-programming/bash-shell.md)
-    * [Windows Shell](courses/ejpt/preliminary-skills-and-programming/windows-shell.md)
-  * [Penetration Testing Prerequisites](courses/ejpt/prerequisites/README.md)
-    * [Introduction](courses/ejpt/prerequisites/differences-between-clear-text-cryptography-protocols-and-vpn.md)
-    * [Networking](courses/ejpt/prerequisites/networking.md)
-    * [Web Applications](courses/ejpt/prerequisites/web-appliations.md)
-  * [Annex A: Glossary](courses/ejpt/glossary.md)
-  * [Annex B: Black Box Tests](courses/ejpt/black-box-tests/README.md)
-    * [Black Box Test \#1](courses/ejpt/black-box-tests/bb1.md)
-    * [Black Box Test \#2](courses/ejpt/black-box-tests/bb2.md)
-    * [Black Box Test \#3](courses/ejpt/black-box-tests/bb3.md)
-  * [Annex C: References](courses/ejpt/references.md)
-* [CEHv11 \(Mod 1 to 7\)](courses/cehv11-mod-1-to7/README.md)
-  * [Module 01: Introduction to Ethical Hacking](courses/cehv11-mod-1-to7/module-01-introduction-to-ethical-hacking.md)
-  * [Module 02: Footprinting and Reconnaissance](courses/cehv11-mod-1-to7/module-02-footprinting-and-reconnaissance.md)
-  * [Module 03: Scanning Networks](courses/cehv11-mod-1-to7/module-03-scanning-networks.md)
-  * [Module 04: Enumeration](courses/cehv11-mod-1-to7/module-04-enumeration.md)
-  * [Module 05: Vulnerability Analysis](courses/cehv11-mod-1-to7/module-05-vulnerability-analysis.md)
-  * [Module 06: System Hacking](courses/cehv11-mod-1-to7/module-06-system-hacking.md)
-  * [Module 07: Malware Threats](courses/cehv11-mod-1-to7/module-07-malware-threats.md)
 
 ## Linux
 
@@ -113,4 +79,3 @@
 ## Other
 
 * [To Do](other/to-do.md)
-

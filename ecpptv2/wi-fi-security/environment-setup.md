@@ -1,6 +1,6 @@
 # Environment Setup
 
-> **Consideration \#1**
+> **Consideration #1**
 >
 > * The Linux 802.11 subsystem is fragmented. Available tools and commands depend on the driver you are using.
 
@@ -13,13 +13,13 @@ mac80211    1378841    1    rtl8187
 
 Modules listed on the right side are mac80211 drivers. In this particular example `rtl8187` is the driver of our Wi-Fi Dongle, based on a Realtek chip.
 
-> **Consideration \#2**
+> **Consideration #2**
 >
 > another difference to note between the various Linux wireless drivers is the naming scheme for the network interface; older drivers use different prefixes like `eth`, `wifi` or `ath`.
 
-The mac80211 framework set a standard prefix, `wlan`. 
+The mac80211 framework set a standard prefix, `wlan`.&#x20;
 
-{% embed url="https://www.aircrack-ng.org/doku.php?id=install\_drivers" %}
+{% embed url="https://www.aircrack-ng.org/doku.php?id=install_drivers" %}
 
 ### Adapter configuration
 
@@ -50,19 +50,19 @@ It's worth noting that the `iwconfig` utility can be used to set various paramet
 >
 > **Please not that using a high transmission power may be illegal in your country!**
 
-By default, many wireless adpaters are configured to work with regdomain set to 0. When running with this configuration, most adpaters will not deliver their maximum performance. However you can change internal regdomain setting with command line utilities. 
+By default, many wireless adpaters are configured to work with regdomain set to 0. When running with this configuration, most adpaters will not deliver their maximum performance. However you can change internal regdomain setting with command line utilities.&#x20;
 
 {% hint style="info" %}
 **Bolivia**
 
-A trick that is often used to increase maximum transmit power of a wireless adapter consists in setting the country code to match Bolivia's. 
+A trick that is often used to increase maximum transmit power of a wireless adapter consists in setting the country code to match Bolivia's.&#x20;
 
 ```bash
 > iw reg set BO
 > iw dev wlan0 set txpower fixed 30dbm
 ```
 
-This commands se the maximum transmission power to 30dBm which as we know, corresponds to 1000mW. 
+This commands se the maximum transmission power to 30dBm which as we know, corresponds to 1000mW.&#x20;
 
 You can confirm everything worked by launching `iwconfig`.
 {% endhint %}
@@ -87,19 +87,17 @@ The next step is to setup a **monitor interface**_,_ a virtual interface that ca
 
 #### 3rd step
 
-The last thing we should do is to check if everything is working fine with `aireplay-ng` tool, in this way we can test whether packet injection is working. 
+The last thing we should do is to check if everything is working fine with `aireplay-ng` tool, in this way we can test whether packet injection is working.&#x20;
 
 `-9` is 'test-mode'. Upon execution, `aireplay-ng` will send out broadcast probe requests. If any AP responds, `arieplay-ng` will print a message informing you that your card can successfully inject.
 
 > Remember to start your monitor interface first and set the card to the desired channel.
 
-Every AP in the respondents list is the directly probed 30 times and a percentage of responses received is given for each one. 
+Every AP in the respondents list is the directly probed 30 times and a percentage of responses received is given for each one.&#x20;
 
 This percentage is an excellent indication of the link quality for the specified AP.
 
 {% embed url="https://www.aircrack-ng.org/doku.php?id=aireplay-ng" %}
 
 {% embed url="https://www.aircrack-ng.org/doku.php?id=airmon-ng" %}
-
-
 

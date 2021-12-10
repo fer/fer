@@ -7,7 +7,7 @@ description: >-
 # ⭐TBD - Network Security
 
 {% hint style="danger" %}
-**This document is still in progress...** 
+**This document is still in progress...**&#x20;
 {% endhint %}
 
 ## Information Gathering
@@ -22,41 +22,41 @@ description: >-
 
 ### Infrastructures - Study Guide
 
-### ▶ Whois Lookup
+### :arrow\_forward: Whois Lookup
 
-### ▶ Information Gathering DNS
+### :arrow\_forward: Information Gathering DNS
 
-### ▶ Host Discovery with Fping Hping Nmap
+### :arrow\_forward: Host Discovery with Fping Hping Nmap
 
-### ▶ Maltego
+### :arrow\_forward: Maltego
 
 ### Tools - Study Guide
 
-### ▶ Foca Shodan
+### :arrow\_forward: Foca Shodan
 
 ## Scanning
 
 ### Introduction - Study Guide
 
-### ▶ Wireshark Introduction
+### :arrow\_forward: Wireshark Introduction
 
-### ▶ Hping Basics
+### :arrow\_forward: Hping Basics
 
 ### Detect Live Hosts and Port - Study Guide
 
-### ▶ Nmap Basics
+### :arrow\_forward: Nmap Basics
 
-### ▶ Nmap NSE
+### :arrow\_forward: Nmap NSE
 
-### ▶ Idle Scan Hping Nmap
+### :arrow\_forward: Idle Scan Hping Nmap
 
 ### Service and OS Detection - Study Guide
 
-### 🧪 Scanning
+### :test\_tube: Scanning
 
 ### Firewall IDS Evasion - Study Guide
 
-### ▶ Advanced Port Scanning
+### :arrow\_forward: Advanced Port Scanning
 
 ## Enumeration
 
@@ -64,15 +64,15 @@ description: >-
 
 ### NetBIOS - Study Guide
 
-### ▶ NetBIOS and Null Session
+### :arrow\_forward: NetBIOS and Null Session
 
 ### SNMP - Study Guide
 
-### ▶ SNMP Enumeration
+### :arrow\_forward: SNMP Enumeration
 
-### 🧪 NetBIOS Hacking
+### :test\_tube: NetBIOS Hacking
 
-### 🧪 SNMP Analysis
+### :test\_tube: SNMP Analysis
 
 ## Sniffing & MitM Attacks
 
@@ -84,57 +84,57 @@ description: >-
 
 ### Sniffing Tools - Study Guide
 
-### ▶ Traffic Sniffing with TCPdump
+### :arrow\_forward: Traffic Sniffing with TCPdump
 
 ### MiTM Attacks - Study Guide
 
 ### Attacking Tools - Study Guide
 
-### ▶ Man in the Middle
+### :arrow\_forward: Man in the Middle
 
 ### Intercepting SSL Traffic - Study Guide
 
-### 🧪 Cain and Abel
+### :test\_tube: Cain and Abel
 
-### 🧪 Poisoning and Sniffing
+### :test\_tube: Poisoning and Sniffing
 
-### 🧪 NBT-NS Poisoning and Exploitation with Responder
+### :test\_tube: NBT-NS Poisoning and Exploitation with Responder
 
-### 🧪 ICMP Redirect Attack
+### :test\_tube: ICMP Redirect Attack
 
 ## Exploitation
 
 ### Vulnerability Assessment - Study Guide
 
-### ▶ Nessus
+### :arrow\_forward: Nessus
 
 ### Low Hanging Fruits - Study Guide
 
-### ▶ Authentication Bruteforcing
+### :arrow\_forward: Authentication Bruteforcing
 
 ### Exploitation - Study Guide
 
-### ▶ Metasploit Basic Usage
+### :arrow\_forward: Metasploit Basic Usage
 
-### ▶ LM NTLM Cracking
+### :arrow\_forward: LM NTLM Cracking
 
-### ▶ EternalBlue & Metasploit
+### :arrow\_forward: EternalBlue & Metasploit
 
-### ▶ Client Side Exploitation
+### :arrow\_forward: Client Side Exploitation
 
-### ▶ Remote Exploitation
+### :arrow\_forward: Remote Exploitation
 
-### ▶ Metasploit Usage
+### :arrow\_forward: Metasploit Usage
 
-### ▶ Responder & Multirelay
+### :arrow\_forward: Responder & Multirelay
 
-### 🧪 VA and Exploitation
+### :test\_tube: VA and Exploitation
 
-### 🧪 Nessus
+### :test\_tube: Nessus
 
-### 🧪 Client-Side Exploitation
+### :test\_tube: Client-Side Exploitation
 
-### 🧪 DNS and SMB Relay Attack
+### :test\_tube: DNS and SMB Relay Attack
 
 ## ⭐ Post Exploitation
 
@@ -142,45 +142,45 @@ description: >-
 
 ### Privilege Escalation and Maintaining Access - Study Guide
 
-### ▶ Privilege Escalation
+### :arrow\_forward: Privilege Escalation
 
-### ▶ Exploiting Unquoted Service Paths
+### :arrow\_forward: Exploiting Unquoted Service Paths
 
-### ▶ Maintaining Access
+### :arrow\_forward: Maintaining Access
 
-### ▶ DLL Hijacking
+### :arrow\_forward: DLL Hijacking
 
 ### Pillaging - Study Guide
 
-### ▶ ⭐Pillaging
+### :arrow\_forward: ⭐Pillaging
 
-### ▶ Bypassing Firewalls and Data Exfiltration with DNS Tunneling
+### :arrow\_forward: Bypassing Firewalls and Data Exfiltration with DNS Tunneling
 
 ### Mapping the Internal Network - Study Guide
 
-### ▶ Mapping the Network
+### :arrow\_forward: Mapping the Network
 
 ### ⭐ Exploitation Through Pivoting - Study Guide
 
-### ▶ ⭐ Exploiting via Pivoting
+### :arrow\_forward: ⭐ Exploiting via Pivoting
 
-### ▶ Meterpreter SSL Certificate Impersonation and Detection Evasion
+### :arrow\_forward: Meterpreter SSL Certificate Impersonation and Detection Evasion
 
-### ▶ Obtaining Stored Credentials with SessionGopher
+### :arrow\_forward: Obtaining Stored Credentials with SessionGopher
 
-### 🧪 Post-Exploitation
+### :test\_tube: Post-Exploitation
 
-### 🧪 Blind Penetration Test
+### :test\_tube: Blind Penetration Test
 
-### 🧪 Privilege Escalation
+### :test\_tube: Privilege Escalation
 
-### 🧪 Privilege Escalation Via Services
+### :test\_tube: Privilege Escalation Via Services
 
-### 🧪 Finding and Exploiting DLL Hijacking Vulnerabilities
+### :test\_tube: Finding and Exploiting DLL Hijacking Vulnerabilities
 
-### 🧪 Bypassing AV
+### :test\_tube: Bypassing AV
 
-### 🧪 From XSS to Domain Admin
+### :test\_tube: From XSS to Domain Admin
 
 ## Anonymity
 
@@ -202,5 +202,4 @@ description: >-
 
 ### Tools - Study Guide
 
-### ▶ Social Engineering Linux Targets
-
+### :arrow\_forward: Social Engineering Linux Targets
