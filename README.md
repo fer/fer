@@ -5,7 +5,7 @@ coverY: 0
 
 # whoami
 
-I'm [**fer**](https://github.com/fer), another human being stuck to screens since 1988.
+I'm [**fer**](https://ferqwerty.com), another human being glued to screens since 1988.
 
 I develop stuff sometimes. This is the philosophy I usually follow:
 
