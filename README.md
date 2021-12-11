@@ -1,8 +1,3 @@
----
-cover: .gitbook/assets/1622580239612.jpeg
-coverY: 0
----
-
 # whoami
 
 I'm [**fer**](https://ferqwerty.com), another human being glued to screens since 1988.
