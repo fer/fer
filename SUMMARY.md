@@ -1,6 +1,6 @@
 # Table of contents
 
-* [🙋♂ whoami](README.md)
+* [🐭 whoami](README.md)
   * [🔗 Personal Website](https://ferqwerty.com)
   * [👨⚕ LinkedIn](https://www.linkedin.com/in/ferqwerty)
   * [👨💻 GitHub](https://github.com/fer)
