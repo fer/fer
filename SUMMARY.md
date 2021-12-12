@@ -1,6 +1,6 @@
 # Table of contents
 
-* [👋 hi!](README.md)
+* [👋 Hello!](README.md)
   * [🔗 Personal Website](https://ferqwerty.com)
   * [👨⚕ LinkedIn](https://www.linkedin.com/in/ferqwerty)
   * [👨💻 GitHub](https://github.com/fer)
