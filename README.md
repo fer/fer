@@ -1,4 +1,4 @@
-# 🙋♂ whoami
+# 🐭 hi!
 
 ![](.gitbook/assets/1622580239612.jpeg)
 
