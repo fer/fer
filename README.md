@@ -1,8 +1,8 @@
-# 👋 Hello!
+# 👋 Hi!
 
 ![](.gitbook/assets/1622580239612.jpeg)
 
-I'm [**fer**](https://ferqwerty.com), another human being glued to screens since 1988.
+I'm **fer**, another human being glued to screens since 1988.
 
 I develop stuff sometimes. This is the philosophy I usually follow:
 
