@@ -2,76 +2,11 @@
 
 ## 2. Cyber Kill Chain Concepts
 
-* It is a component of intelligence-driven defense for the identification and _prevention of malicious intrusion activities_.
-* It provides greater insight into attack phases which helps security professionals to understand the adversary's tactics, techniques and procedures beforehand.
-* **Reconnaisance**: gather data on the target to prove for weak points/
-* **Weaponization**: create a deliverable malicious payload using an exploit and a backdoor.
-* **Exploitation**: exploit a vulnerability by executing code on the victim system.
-* **Installation**: install malware on the target system.
-* **Command & Control**: create a command and control channel to communicate and pass data back and forth.
-* **Actions on Objectives**: perform actions to achieve intended objectives.
 
-### Tactics, Techniques and Procedures
 
-Patterns of activities and methods assoiciated with specific threat actors or groups of threat actors.
 
-**Tactics**
 
-* Guidelines that describe their _way an attacker performs the attack_ \(from beginning to end\).
-* This guideline consist of date various tactics for information gathering to perform initial exploitation, privilege escalation and lateral movement and to deploy mesaures for persistent access to the system and other purposes.
 
-**Techniques**
-
-* Techniques are the _technical methods used by an attacker_ to achieve intermediate results during the attack.
-* These techniques include initial exploitation, setting up and maintaining command and control channels, accessing the target infrastructure and covering the tracks of data exfiltration among others. 
-
-**Procedures**
-
-* Step by step. 
-* Organizational approaches that threat actors follow to launch an attack.
-* Mumber for actions usuarlly differs depending on the objectives of theprocedure and thread after group.
-
-### Adversary Behavioral Identification
-
-* It involves the identification of the common methods or techniques followed by an adversary to launch attacks on or to penetrate an organisation's network.
-* it gives the security professionals insight into upcoming threats and exploits.
-
-Adversary Behaviors:
-
-1. Internal Reconnaisance
-2. Use of PowerShell
-3. Unspecified Proxy Activities
-4. Use of Command-Line Interface
-5. HTTP User Agent
-6. Command and Control Server
-7. Use of DNS Tunneling
-8. Use of Web Shell
-9. Data Staging
-
-### Indicators of Compromise \(IoCs\)
-
-* IoCs are the _clues, artifacts and pieces of forensic data_ found on the network or operating system of an organization that indicate a potential intrusion or malicious activity in the organization's infrastructure.
-* IoCs are not intelligence although the do _act as a good source of information_ regarding the threats that serve as data points in the intelligence process.
-* Security professionals need to _perform continuous monitoring_ of IoCs to effectively and efficiently detect and _respond to ever been cyberthreats_.
-
-#### IoCs Categories
-
-Undestanding IoCs helps security professionals to quickly detect the threats and protect the organization from evolving threats.
-
-4 categories:
-
-* **Email indicators**
-  * They are used to send malicious data to the target organization or individual.
-  * Examples: sender's email address, email subject and attachments or links.
-* **Network indicators**
-  * Useful for command and control, malware delivery, identifying the operating system and other tasks.
-  * Examples: URLs, domain names, IP addresses.
-* **Host-Based indicators**
-  * Found by performing an analysis of the infected system within the organizational network.
-  * Examples: filenames, file hashes, registry keys, DLLs and mutex.
-* **Behavioral Indicators**
-  * Identify specific behavior related to malicious activities.
-  * Examples: document executing PowerShell script and remote command execution.
 
 ## 3. Hacking Concepts
 
