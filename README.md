@@ -1,6 +1,6 @@
 # 👋 Hi!
 
-![](.gitbook/assets/1622580239612.jpeg)
+![](<.gitbook/assets/1622580239612 (1).jpeg>)
 
 I'm **fer**, another human being glued to screens since 1988.
 
