@@ -1,7 +1,5 @@
 # 👋 Hi!
 
-![](<.gitbook/assets/1622580239612 (1).jpeg>)
-
 I'm **fer**, another human being glued to screens since 1988.
 
 I develop stuff sometimes. This is the philosophy I usually follow:
